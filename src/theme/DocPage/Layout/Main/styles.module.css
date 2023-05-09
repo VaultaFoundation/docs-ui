@@ -1,0 +1,38 @@
+.docMainContainer {
+  display: flex;
+  width: 100%;
+}
+
+@media (min-width: 997px) {
+  .docMainContainer {
+    flex-grow: 1;
+  }
+
+  .docMainContainerEnhanced {
+    max-width: 1600px;
+    transition: width 0.5s ease;
+    margin: 0 auto;
+  }
+
+  .docItemWrapperEnhanced {
+    max-width: 1600px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .docMainContainer {
+    max-width: 73%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .docMainContainer {
+    max-width: 78%;
+  }
+}
+
+@media (min-width: 1600px) {
+  .docMainContainer {
+    max-width: 76%;
+  }
+}
