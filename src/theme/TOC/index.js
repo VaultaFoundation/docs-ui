@@ -76,7 +76,6 @@ export default function TOC({className, ...props}) {
   const history = useHistory();
   const {pathname} = location;
 
-  console.log(doc);
   const isVirtual = !!doc.frontMatter.virtual;
   const isDocs = doc.metadata.source.includes('/docs/');
   const canEditOrSuggest = isDocs && !isVirtual;
