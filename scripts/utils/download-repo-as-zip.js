@@ -2,12 +2,33 @@ const fs = require("fs-extra");
 const yauzl = require("yauzl");
 const path = require("path");
 
+const _exec = require("child_process").exec;
+const exec = (cmd) => {
+    return new Promise((resolve, reject) => {
+        _exec(cmd, (err, stdout, stderr) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(stdout);
+        });
+    });
+}
+
+const isLinux = process.platform === "linux";
+
 
 const unzip = async (zipPath, unzipDir) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         // make unzip dir
         if(!fs.existsSync(unzipDir)) {
             fs.mkdirSync(unzipDir);
+        }
+
+        if(isLinux) {
+            await exec(`unzip ${zipPath} -d ${unzipDir}`);
+
+            return;
         }
 
         yauzl.open(zipPath, {lazyEntries: true}, function(err, zipfile) {
