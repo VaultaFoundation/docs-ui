@@ -31,7 +31,6 @@ const downloadDocs = async (branch) => {
 
     fs.readdirSync(docsPath).forEach(file => {
         fs.moveSync(path.join(docsPath, file), path.join("docs", file), { overwrite: true|false })
-        // fs.copyFileSync(path.join(docsPath, file), path.join("docs", file));
     });
 }
 
