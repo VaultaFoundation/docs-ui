@@ -29,8 +29,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Create zip
+        run: zip -r ${{ github.event.inputs.branch }}-docs.zip ./build/
+
       - name: Cache
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.event.inputs.branch }}-docs
-          path: ./build/*.zip
+          path: ${{ github.event.inputs.branch }}-docs.zip
