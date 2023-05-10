@@ -1,41 +1,29 @@
-# Website
+# EOS Docs
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+## Installation
 
-### Installation
-
-```
-$ yarn
+```shell
+npm install
 ```
 
-### Local Development
+## Preparing the docs
 
-```
-$ yarn start
-```
+Before you can build or run the docs you need to populate the content directories.
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ yarn build
+```shell
+node scripts/prepare-docs [--docs-branch=<branch>] [--skip-docs] [--skip-apis] [--skip-manuals]
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+This will pull down all repositories and do some massaging to make them fit into docusaurus.
 
-### Deployment
+## Running
 
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
+```shell
+npm start
 ```
 
-Not using SSH:
+## Building
 
+```shell
+npm run build
 ```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
