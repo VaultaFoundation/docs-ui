@@ -22,6 +22,14 @@ This will pull down all repositories and do some massaging to make them fit into
 npm start
 ```
 
+### Watch changes to local docs repository
+
+You can watch your local `docs` repository to work directly against the docs UI when you write EOS documentation:
+
+```shell
+node scripts/pull-docs-locally.js <path-to-docs-repo>
+```
+
 ## Building
 
 ```shell
