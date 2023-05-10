@@ -48,3 +48,4 @@ ${repo.versions.map(version => {
 }
 
 module.exports = downloadApis;
+// downloadApis();

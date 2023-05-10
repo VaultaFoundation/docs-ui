@@ -123,6 +123,10 @@ const config = {
             to: '/docs/latest/node-operation/migration-guides/v1-history-alternatives',
             from: '/leapforward/',
           },
+          {
+            to: '/docs/latest/eos-evm/',
+            from: '/docs/latest/eos-evm/getting_started/',
+          },
           // Redirect from multiple old paths to the new path
           // {
           //   to: '/docs/new/path',
@@ -131,6 +135,11 @@ const config = {
         ],
       },
     ]
+  ],
+
+  staticDirectories: [
+      "openapi",
+      "static"
   ],
 
   // custom fields for nav bar
@@ -332,7 +341,7 @@ const config = {
               ],
             },
           ],
-          copyright: `Copyright © ${new Date().getFullYear()} EOS Network.`,
+          copyright: `Copyright © ${new Date().getFullYear()} EOS Network Foundation.`,
         },
         prism: {
           theme: require('prism-react-renderer/themes/oceanicNext'),

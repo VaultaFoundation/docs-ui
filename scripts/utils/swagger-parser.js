@@ -57,7 +57,14 @@ const parse = async (repo, branch = "main", isLatest = true) => {
         // Fix lingering issue with old swagger files
         let content = fs.readFileSync(destination, 'utf8');
         content = content.replace(/#\/component\/schema\/Error/g, "#/components/schemas/Error");
+
+        // get the relative from this file's destination path to the `openapi` folder
+        const relativePath = path.relative(path.dirname(destination), path.join(__dirname, '../../static/openapi/v2.0/')).replace(/\\/g, '/') + '/';
+
+        // Fix absolute pathing for schemas
+        content = content.replace(/https:\/\/docs.eosnetwork.com\/openapi\/v2.0\//g, relativePath);
         fs.writeFileSync(destination, content);
+
 
         const fileName = path.basename(file);
 
