@@ -20,7 +20,7 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             if [ "${{ github.event.inputs.is_production }}" == "true" ]; then
-              ./ENF-Build-Docs-Staging.sh
-            else
               ./ENF-Build-Docs-Production.sh
+            else
+              ./ENF-Build-Docs-Staging.sh
             fi
