@@ -1390,9 +1390,9 @@ aside {
 
 blockquote {
   padding:10px 20px;
-  background: var(--color-yellow);
+  background: rgba(210, 118, 81, 0.15);
   border-radius: 10px;
-  border-left: 4px solid var(--color-yellow-dark);
+  border-left: 4px solid #d27651;
 
 }
 

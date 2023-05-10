@@ -115,6 +115,22 @@ const config = {
         // ... other options
       },
     ],
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            to: '/docs/latest/node-operation/migration-guides/v1-history-alternatives',
+            from: '/leapforward/',
+          },
+          // Redirect from multiple old paths to the new path
+          // {
+          //   to: '/docs/new/path',
+          //   from: ['/docs/old/path', '/docs/older/path'],
+          // },
+        ],
+      },
+    ]
   ],
 
   // custom fields for nav bar
