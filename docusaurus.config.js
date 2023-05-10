@@ -3,9 +3,9 @@
 
 // include(./redocly-versions.m4)
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const redocusaurusSpecs = require('./redocusaurus.specs.js');
 
+// @ts-ignore
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'EOS Developer Documentation',
@@ -57,7 +57,6 @@ const config = {
   presets: [
     [
       'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
           // id: 'docs', // omitted => default instance
@@ -83,147 +82,39 @@ const config = {
         },
       }),
     ],
-    // [
-    //   'redocusaurus',
-    //   {
-    //     // Plugin Options for loading OpenAPI files
-    //     specs: [
-    //       // M4RedoclySpecsPlaceHolder()
-    //       {
-    //         spec: 'openapi/leap-plugins/latest/chain.swagger.yaml',
-    //         route: '/leap-plugins/latest/chain.api/',
-    //       },
-    //       {
-    //         spec: 'openapi/leap-plugins/latest/db_size.swagger.yaml',
-    //         route: '/leap-plugins/latest/db_size.api/',
-    //       },
-    //       {
-    //         spec: 'openapi/leap-plugins/latest/net.swagger.yaml',
-    //         route: '/leap-plugins/latest/net.api/',
-    //       },
-    //       {
-    //         spec: 'openapi/leap-plugins/latest/producer.swagger.yaml',
-    //         route: '/leap-plugins/latest/producer.api/',
-    //       },
-    //       {
-    //         spec: 'openapi/leap-plugins/latest/test_control.swagger.yaml',
-    //         route: '/leap-plugins/latest/test_control.api/',
-    //       },
-    //       {
-    //         spec: 'openapi/leap-plugins/latest/trace_api.swagger.yaml',
-    //         route: '/leap-plugins/latest/trace.api/',
-    //       },
-    //     ],
-    //     // Theme Options for modifying how redoc renders them
-    //     theme: {
-    //       // Change with your site colors
-    //       primaryColor: '#1890ff',
-    //     },
-    //   },
-    // ],
+    [
+      'redocusaurus',
+      {
+        specs: redocusaurusSpecs,
+        // Theme Options for modifying how redoc renders them
+        theme: {
+          // Change with your site colors
+          primaryColor: '#1890ff',
+        },
+      },
+    ],
   ],
   plugins: [
-    // [
-    //   '@docusaurus/plugin-content-docs',
-    //   {
-    //     id: 'cdt',
-    //     lastVersion: 'current',
-    //     path: 'eosdocs/cdt',
-    //     routeBasePath: 'cdt',
-    //     sidebarPath: require.resolve('./sidebarsCdt.js'),
-    //     versions: {
-    //       current: {
-    //         label: '3.1',
-    //         path: 'latest',
-    //       },
-    //     },
-    //     // ... other options
-    //   },
-    // ],
-    // [
-    //   '@docusaurus/plugin-content-docs',
-    //   {
-    //     id: 'system-contracts',
-    //     lastVersion: 'current',
-    //     path: 'eosdocs/system-contracts',
-    //     routeBasePath: 'system-contracts',
-    //     sidebarPath: require.resolve('./sidebarsSystemContracts.js'),
-    //     versions: {
-    //       current: {
-    //         label: '3.1',
-    //         path: 'latest',
-    //       },
-    //     },
-    //     // ... other options
-    //   },
-    // ],
-    // [
-    //   '@docusaurus/plugin-content-docs',
-    //   {
-    //     id: 'leap',
-    //     lastVersion: 'current',
-    //     path: 'eosdocs/leap',
-    //     routeBasePath: 'leap',
-    //     sidebarPath: require.resolve('./sidebarsLeap.js'),
-    //     versions: {
-    //       current: {
-    //         label: '4.0',
-    //         path: 'latest',
-    //         banner: 'none',
-    //       },
-    //       '3.2' : {
-    //         label: '3.2',
-    //         path: '3.2',
-    //         banner: 'none',
-    //       }
-    //     },
-    //     // ... other options
-    //   },
-    // ],
-    // [
-    //   '@docusaurus/plugin-content-docs',
-    //   {
-    //     id: 'dune',
-    //     lastVersion: 'current',
-    //     path: 'eosdocs/DUNE',
-    //     routeBasePath: 'DUNE',
-    //     sidebarPath: require.resolve('./sidebarsDUNE.js'),
-    //     versions: {
-    //       current: {
-    //         label: '1.1',
-    //         path: 'latest',
-    //       },
-    //     },
-    //     // ... other options
-    //   },
-    // ],
-    //
-    // [
-    //   '@docusaurus/plugin-content-docs',
-    //   {
-    //     id: 'eosjs',
-    //     lastVersion: 'current',
-    //     path: 'eosdocs/eosjs',
-    //     routeBasePath: 'eosjs',
-    //     sidebarPath: require.resolve('./sidebars_eosjs_sdk.js'),
-    //     versions: {
-    //       current: { label: 'latest', path: 'latest', },
-    //     },
-    //   },
-    // ],
-    // [
-    //   '@docusaurus/plugin-content-docs',
-    //   {
-    //     id: 'swift-sdk',
-    //     lastVersion: 'current',
-    //     path: 'eosdocs/swift-sdk',
-    //     routeBasePath: 'swift-sdk',
-    //     sidebarPath: require.resolve('./sidebars_swift_sdk.js'),
-    //     versions: {
-    //       current: { label: 'latest', path: 'latest', },
-    //     },
-    //   },
-    // ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'apis',
+        path: 'apis',
+        routeBasePath: 'apis',
+        sidebarPath: require.resolve('./src/sidebars.js'),
+        // ... other options
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'manuals',
+        path: 'manuals',
+        routeBasePath: 'manuals',
+        sidebarPath: require.resolve('./src/sidebars.js'),
+        // ... other options
+      },
+    ],
   ],
 
   // custom fields for nav bar
@@ -269,55 +160,12 @@ const config = {
             }
           ],
         },
-        // {
-        //   docId: 'api-listing',
-        //   position: 'left',
-        //   label: 'APIs',
-        //   to: '/docs/latest/api-listing/',
-        // },
         {
           docId: 'courses',
           position: 'left',
           label: 'Courses',
           to: 'https://learn.eosnetwork.com/',
         },
-        // hidden as per task description
-        // {
-        //   type: 'dropdown',
-        //   label: 'Courses',
-        //   position: 'left',
-        //   items: [
-        //     {
-        //       label: 'Smart Contracts',
-        //       icon: '/icons/brief-case-icon.svg',
-        //       title: 'Smart contracts',
-        //       subtitle: 'Start here to build and deploy basic smart contract',
-        //       href: '/system-contracts/latest/',
-        //     },
-        //     {
-        //       label: 'Smart Contracts',
-        //       icon: '/icons/db-icon.svg',
-        //       title: 'Smart contracts',
-        //       subtitle: 'Start here to build and deploy basic smart contract',
-        //       href: '/system-contracts/latest/',
-        //     },
-        //     {
-        //       label: 'Smart Contracts',
-        //       icon: '/icons/box-icon.svg',
-        //       title: 'Smart contracts',
-        //       subtitle: 'Start here to build and deploy basic smart contract',
-        //       href: '/system-contracts/latest/',
-        //     },
-        //     {
-        //       label: 'Smart Contracts',
-        //       icon: '/icons/globe-icon.svg',
-        //       title: 'Smart contracts',
-        //       subtitle: 'Start here to build and deploy basic smart contract',
-        //       href: '/system-contracts/latest/',
-        //     },
-        //     // ... more items
-        //   ],
-        // },
         {
           type: 'localeDropdown',
           position: 'right',
@@ -443,14 +291,6 @@ const config = {
             srcDark: 'img/eosn_logo.svg',
           },
           links: [
-            // {
-            //   title: 'Websites',
-            //   items: [
-            //     { label: 'EOS Network',
-            //       href: 'https://eosnetwork.com/',
-            //     },
-            //   ],
-            // },
             {
               title: 'Terms',
               items: [
@@ -473,22 +313,6 @@ const config = {
                   href: 'https://discord.gg/XjVqej4uT5',
                   logo: '/icons/discord-icon.svg',
                 },
-                // UNCOMMENT LATES WHEN WE HAVE ICONS
-                // {
-                //   label: 'Telegram',
-                //   href: 'https://t.me/EOSNetworkFoundation',
-                //   logo: '/icons/telegram-icon.svg',
-                // },
-                // {
-                //   label: 'Twitter',
-                //   href: 'https://twitter.com/eosnfoundation',
-                //   logo: '/icons/twitter-icon.svg',
-                // },
-                // {
-                //   label: 'Youtube',
-                //   href: 'https://www.youtube.com/c/everythingeos',
-                //   logo: '/icons/youtube-icon.svg',
-                // },
               ],
             },
           ],

@@ -122,50 +122,7 @@ export default function CustomTOC({ doc, onClick }) {
 
   return (
     <div className={clsx(styles.customTableOfContents)}>
-      {/*<Select*/}
-      {/*  options={options}*/}
-      {/*  value={currentVersion}*/}
-      {/*  className={styles.select}*/}
-      {/*  onChange={handleOnChange}*/}
-      {/*  isSearchable={false}*/}
-      {/*  styles={{*/}
-      {/*    control: (provided, state) => ({*/}
-      {/*      ...provided,*/}
-      {/*      background: '#F4F5F6',*/}
-      {/*      borderRadius: '6px',*/}
-      {/*      height: '60px',*/}
-      {/*      width: '100%',*/}
-      {/*      margin: 'auto',*/}
-      {/*      outline: 'none',*/}
-      {/*      padding: '10px 24px'*/}
-      {/*    }),*/}
-      {/*    indicatorSeparator: (provided, state) => ({*/}
-      {/*      ...provided,*/}
-      {/*      display: 'none'*/}
-      {/*    }),*/}
-      {/*    dropdownIndicator: (provided, state) => ({*/}
-      {/*      ...provided,*/}
-      {/*      color: '#000000',*/}
-      {/*      padding: '0px 10px'*/}
-      {/*    }),*/}
-      {/*    menu: (provided, state) => ({*/}
-      {/*      ...provided,*/}
-      {/*      background: '#F4F5F6',*/}
-      {/*      borderRadius: '6px',*/}
-      {/*      width: '310px',*/}
-      {/*      margin: 'auto',*/}
-      {/*      outline: 'none',*/}
-      {/*    }),*/}
-      {/*    menuList: (provided, state) => ({*/}
-      {/*      ...provided,*/}
-      {/*      padding: '0px'*/}
-      {/*    }),*/}
-      {/*  }}*/}
-      {/*  />*/}
-      <div className={clsx(styles.linkContainer, doc.toc.length && styles.linkContainerWithTOC)}>
-        {tags.length > 0 && <a className={styles.link} href={`https://github.com/${suggestLink}`} target="_blank">Suggest Edits</a>}
-        <a className={styles.link} href={`https://github.com/eosnetworkfoundation/docs/issues/new?body=${suggestBody}&title=${suggestTitle}`} target="_blank">Request Changes</a>
-      </div>
+
       {doc.toc && doc.toc.length > 0 && (
         <TOCItems
         {...doc}

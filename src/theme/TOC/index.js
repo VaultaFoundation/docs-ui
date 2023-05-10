@@ -76,7 +76,10 @@ export default function TOC({className, ...props}) {
   const history = useHistory();
   const {pathname} = location;
 
-  const { tags } = doc.metadata;
+  console.log(doc);
+  const isVirtual = !!doc.frontMatter.virtual;
+  const isDocs = doc.metadata.source.includes('/docs/');
+  const canEditOrSuggest = isDocs && !isVirtual;
   const suggestLink = doc.metadata.permalink;
   const sourceFile = doc.metadata.source.replace('@site','');
   const suggestBody = encodeURIComponent(`
@@ -161,14 +164,14 @@ export default function TOC({className, ...props}) {
       {/*    }),*/}
       {/*  }}*/}
       {/*  />*/}
-      <div className={clsx(styles.linkContainer, props.toc.length && styles.linkContainerWithTOC)}>
+      {canEditOrSuggest && <div className={clsx(styles.linkContainer, props.toc.length && styles.linkContainerWithTOC)}>
         <a className={styles.link} href={suggestEditsLink} target="_blank">
           <FontAwesomeIcon icon={faBug} />&nbsp; Suggest Edits
         </a>
         <a className={styles.link} href={`https://github.com/eosnetworkfoundation/docs/issues/new?body=${suggestBody}&title=${suggestTitle}`} target="_blank">
           <FontAwesomeIcon icon={faCodePullRequest} />&nbsp; Request Changes
         </a>
-      </div>
+      </div>}
       <TOCItems
         {...props}
         linkClassName={LINK_CLASS_NAME}

@@ -32,6 +32,7 @@
   --eos-color-gray: #F4F5F6;
   --color-blue: #D1DAF0;
   --color-yellow: #F0E9D8;
+  --color-yellow-dark: #ccc1ab;
   --color-black: #B6B4B4;
 
 
@@ -146,6 +147,8 @@ main {
 p {
   margin: 0;
 }
+
+
 
 h1,
 h2,
@@ -699,7 +702,7 @@ aside {
   width: 370px !important;
   max-height: 90vh !important;
   position: sticky !important;
-  top: 84px !important; 
+  top: 84px !important;
 }
 
 .row {
@@ -779,7 +782,7 @@ aside {
     max-width: unset;
     padding: 0;
   }
-  
+
   .desktop-sidebar-custom {
     width: 320px !important;
   }
@@ -797,61 +800,61 @@ aside {
     font-size: var(--font-size-desktop-3xlarge);
     line-height: 98px;
     letter-spacing: 0.5px;
-  
+
     color: var(--eos-color-darkest);
     margin: 0 !important;
     padding: 0 !important;
   }
-  
+
   article h2 {
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-desktop-xlarge);
     line-height: 68px;
-  
+
     color: var(--eos-color-darkest);
     margin: 0 !important;
     padding: 0 !important;
   }
-  
+
   article h3 {
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-3xlarge);
     line-height: 60px;
     letter-spacing: 0.5px;
-  
+
     color: var(--eos-color-darkest);
     margin: 0 !important;
     padding: 0 !important;
   }
-  
+
   article h4 {
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-2xlarge);
     line-height: 50px;
     letter-spacing: 0.5px;
-  
+
     color: var(--eos-color-darkest);
     margin: 0 !important;
     padding: 0 !important;
   }
-  
+
   article h5 {
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-xlarge);
     line-height: 40px;
     letter-spacing: 0.5px;
-  
+
     color: var(--eos-color-darkest);
     margin: 0 !important;
     padding: 0 !important;
   }
-  
+
   article h6 {
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-large);
     line-height: 30px;
     letter-spacing: 0.5px;
-  
+
     color: var(--eos-color-darkest);
     margin: 0 !important;
     padding: 0 !important;
@@ -966,7 +969,7 @@ aside {
     list-style: none;
     display: block;
   }
-  
+
   .menu__list-item path {
     transform: scale(1.15);
   }
@@ -1087,7 +1090,7 @@ aside {
     transition: all 0.2s ease;
     background: var(--eos-color-white);
     border: 1px solid #E1E5F0;
-    
+
     box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
   }
@@ -1356,7 +1359,7 @@ aside {
   .navbar__toggle {
     margin: 0;
   }
-  
+
   article table {
     overflow: auto;
     display: block;
@@ -1383,4 +1386,26 @@ aside {
 
 .sidebarhidden {
   display: none !important;
+}
+
+blockquote {
+  padding:10px 20px;
+  background: var(--color-yellow);
+  border-radius: 10px;
+  border-left: 4px solid var(--color-yellow-dark);
+
+}
+
+blockquote p:first-child:not(:last-child) {
+  padding-bottom: 10px !important;
+  font-size: var(--font-size-medium);
+}
+
+blockquote p {
+  margin-top:10px;
+  font-size: var(--font-size-standard);
+}
+
+blockquote a {
+  font-size: var(--font-size-standard);
 }
