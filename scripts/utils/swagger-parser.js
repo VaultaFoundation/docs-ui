@@ -54,6 +54,11 @@ const parse = async (repo, branch = "main", isLatest = true) => {
         const destination = path.join(basePath, path.basename(file));
         fs.moveSync(file, destination, { overwrite: true });
 
+        // Fix lingering issue with old swagger files
+        let content = fs.readFileSync(destination, 'utf8');
+        content = content.replace(/#\/component\/schema\/Error/g, "#/components/schemas/Error");
+        fs.writeFileSync(destination, content);
+
         const fileName = path.basename(file);
 
         specs.push({
