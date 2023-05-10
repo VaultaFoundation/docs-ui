@@ -52,20 +52,18 @@ const unzip = async (zipPath, unzipDir) => {
 }
 
 const downloadZip = async (repo, zipPath, branch = "main") => {
-    const downloadZip = async (repo, zipPath, branch = "main") => {
-        try { fs.mkdirSync(path.dirname(zipPath), { recursive: true }); } catch (err) {}
-        const res = await fetch(`http://github.com/${repo}/zipball/${branch}/`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/zip'
-            }
-        }).then(response => {
-            return response.arrayBuffer();
-        }).then(arrayBuffer => {
-            const buffer = Buffer.from(arrayBuffer);
-            fs.writeFileSync(zipPath, buffer);
-        });
-    }
+    try { fs.mkdirSync(path.dirname(zipPath), { recursive: true }); } catch (err) {}
+    const res = await fetch(`http://github.com/${repo}/zipball/${branch}/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/zip'
+        }
+    }).then(response => {
+        return response.arrayBuffer();
+    }).then(arrayBuffer => {
+        const buffer = Buffer.from(arrayBuffer);
+        fs.writeFileSync(zipPath, buffer);
+    });
 }
 
 module.exports = {
