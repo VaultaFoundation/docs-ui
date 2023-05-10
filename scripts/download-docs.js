@@ -12,9 +12,11 @@ const unzipDir = path.join("tmp/unpacked/");
 
 
 const downloadDocs = async (branch) => {
+    try { fs.rmSync("docs", { recursive: true }); } catch (e) { }
+    fs.mkdirSync("docs");
+
     console.log(`Preparing docs: eosnetworkfoundation/docs (${branch})`);
-    await removeTmpDir();
-    await createTmpDir();
+
     await downloadZip("eosnetworkfoundation/docs", zipPath, branch);
     await unzip(zipPath, unzipDir);
 
@@ -28,7 +30,6 @@ const downloadDocs = async (branch) => {
     fs.mkdirSync("docs");
 
     fs.readdirSync(docsPath).forEach(file => {
-        console.log(`Copying ${path.join("docs", file)}`)
         fs.moveSync(path.join(docsPath, file), path.join("docs", file), { overwrite: true|false })
         // fs.copyFileSync(path.join(docsPath, file), path.join("docs", file));
     });

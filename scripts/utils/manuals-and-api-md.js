@@ -47,10 +47,7 @@ ${manualVersions.map(manual => {
 
 `;
 
-    // save to docs/999_apis-and-manuals.md
     fs.writeFileSync('./docs/999_apis-and-manuals.md', content);
-
-    console.log(content);
 }
 
-generateMd();
+module.exports = generateMd;

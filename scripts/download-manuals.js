@@ -4,7 +4,8 @@ const path = require("path");
 const fs = require("fs-extra");
 
 const downloadManuals = async () => {
-    await createTmpDir();
+    try { fs.rmSync("manuals", { recursive: true }); } catch (e) { }
+    fs.mkdirSync("manuals");
 
     const repos = [
         // Don't enable leap, lots of malformed docs
@@ -38,13 +39,11 @@ const downloadManuals = async () => {
         const repoName = repo.repo.split('/')[1];
 
         for (const version of repo.versions) {
-            const swaggerFiles = await manualParser(repo.repo, version, version === repo.versions[0]);
+            await manualParser(repo.repo, version, version === repo.versions[0]);
         }
     }
 
-
-    await removeTmpDir();
 }
 
-// module.exports = downloadManuals;
-downloadManuals();
+module.exports = downloadManuals;
+// downloadManuals();

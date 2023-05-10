@@ -35,9 +35,6 @@ function removeFromAllFiles(basePath, regexToRemove = /<hr>/g) {
 const parse = async (repo, branch = "main", isLatest = true) => {
     console.log(`Preparing manual: ${repo} (${branch})`);
 
-    await removeTmpDir();
-    await createTmpDir();
-
     const repoName = repo.split('/')[1];
     const tmpDir = `./tmp/${repo.replace(/\//, '-').replace(/\\/, '-')}`;
     if(!fs.existsSync(tmpDir)) {
@@ -58,9 +55,12 @@ const parse = async (repo, branch = "main", isLatest = true) => {
 
     // find all .swagger files recursively
     const docsDir = `${tmpDir}/${fs.readdirSync(tmpDir)[0]}/docs`;
+    try { fs.mkdirSync(basePath); } catch(e) {}
+
+    await new Promise(r => setTimeout(r, 100));
 
     // move docs dir to manuals/<repo>/<branch>
-    fs.moveSync(docsDir, basePath, { overwrite: true });
+    fs.moveSync(path.normalize(docsDir), path.normalize(basePath), { overwrite: true });
 
     // some files have a <hr> tag which docusaurus doesn't like
     removeFromAllFiles(basePath, /<hr>/g);
@@ -75,6 +75,8 @@ title: ${capitalizedTitle} (${branch})
 `;
         fs.writeFileSync(indexMdPath, indexMdContent);
     }
+
+    await new Promise(r => setTimeout(r, 100));
 
 //     const indexMdPath = `${basePath}/index.md`;
 //     const capitalizedTitle = repo.split('/')[1].charAt(0).toUpperCase() + repo.split('/')[1].slice(1);

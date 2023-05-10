@@ -28,9 +28,6 @@ const parse = async (repo, branch = "main", isLatest = true) => {
     console.log(`Preparing API: ${repo} (${branch})`);
     let specs = [];
 
-    await removeTmpDir();
-    await createTmpDir();
-    //
     const repoName = repo.split('/')[1];
     const tmpDir = `./tmp/${repo.replace(/\//, '-').replace(/\\/, '-')}`;
     if(!fs.existsSync(tmpDir)) {

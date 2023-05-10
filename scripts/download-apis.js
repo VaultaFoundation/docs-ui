@@ -4,7 +4,9 @@ const path = require("path");
 const fs = require("fs-extra");
 
 const downloadApis = async () => {
-    await createTmpDir();
+    try { fs.rmSync("apis", { recursive: true }); } catch (e) { }
+    fs.mkdirSync("apis");
+
     const repos = [
         {
             repo:'antelopeIO/leap',
@@ -43,7 +45,6 @@ ${repo.versions.map(version => {
 
     fs.writeFileSync('./redocusaurus.specs.js', `module.exports = ${JSON.stringify(redocusaurusSpecs, null, 4)};`);
 
-    await removeTmpDir();
 }
 
 module.exports = downloadApis;
