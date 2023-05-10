@@ -20,4 +20,4 @@ const generateHealthChecks = async () => {
 </html>`);
 }
 
-generateHealthChecks();
+module.exports = generateHealthChecks;

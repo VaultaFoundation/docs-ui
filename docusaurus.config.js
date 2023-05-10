@@ -115,6 +115,16 @@ const config = {
         // ... other options
       },
     ],
+    // [
+    //   '@docusaurus/plugin-content-docs',
+    //   {
+    //     id: 'openapi',
+    //     path: 'openapi',
+    //     routeBasePath: 'openapi',
+    //     sidebarPath: require.resolve('./src/sidebars.js'),
+    //     // ... other options
+    //   },
+    // ],
     [
       '@docusaurus/plugin-client-redirects',
       {
@@ -135,6 +145,11 @@ const config = {
         ],
       },
     ]
+  ],
+
+  staticDirectories: [
+      "openapi",
+      "static"
   ],
 
   // custom fields for nav bar
