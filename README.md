@@ -27,3 +27,11 @@ npm start
 ```shell
 npm run build
 ```
+
+## Changing the content repo versions
+
+- For APIs (leap) you need to change the version in `scripts/prepare-apis.js`.
+- For software manuals, you need to change the version in `scripts/prepare-manuals.js`.
+- For docs, you specify the version as an option to the `prepare-docs` script (see above).
+
+Everything else is automated, so you don't need to worry about it.
