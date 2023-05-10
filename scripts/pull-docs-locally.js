@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const chokidar = require('chokidar');
+const manualsAndApiMd = require("./utils/manuals-and-api-md");
 
 const docsFolderPath = process.argv.slice(2)[0];
 
@@ -14,18 +15,20 @@ const absolutePath = path.resolve(docsFolderPath);
 let timeout;
 let locked = false;
 const copyFiles = (file = null) => {
+    // If locked, possible file is overwritten, need to redo
     if(locked) return;
     locked = true;
 
     console.log('----file', file);
 
     clearTimeout(timeout);
-    timeout = setTimeout(() => {
+    timeout = setTimeout(async () => {
 
         if(file === null) {
             fs.rmSync("docs", {recursive: true});
             fs.mkdirSync("docs");
             fs.copySync(absolutePath, "docs", { overwrite: true });
+            await manualsAndApiMd();
         } else {
             console.log(file);
             // file path is absolute, need to make it relative in the docs folder
