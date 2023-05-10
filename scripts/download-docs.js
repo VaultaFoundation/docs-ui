@@ -7,7 +7,7 @@ const fs = require("fs-extra");
 const yauzl = require('yauzl');
 const path = require('path');
 
-const zipPath = "./tmp/repo.zip";
+const zipPath = "./tmp/docs.zip";
 const unzipDir = path.join("tmp/unpacked/");
 
 

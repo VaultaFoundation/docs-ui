@@ -2,33 +2,12 @@ const fs = require("fs-extra");
 const yauzl = require("yauzl");
 const path = require("path");
 
-const _exec = require("child_process").exec;
-const exec = (cmd) => {
-    return new Promise((resolve, reject) => {
-        _exec(cmd, (err, stdout, stderr) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve(stdout);
-        });
-    });
-}
-
-const isLinux = process.platform === "linux";
-
 
 const unzip = async (zipPath, unzipDir) => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         // make unzip dir
         if(!fs.existsSync(unzipDir)) {
             fs.mkdirSync(unzipDir);
-        }
-
-        if(isLinux) {
-            await exec(`unzip ${zipPath} -d ${unzipDir}`);
-
-            return;
         }
 
         yauzl.open(zipPath, {lazyEntries: true}, function(err, zipfile) {
@@ -73,19 +52,20 @@ const unzip = async (zipPath, unzipDir) => {
 }
 
 const downloadZip = async (repo, zipPath, branch = "main") => {
-    // create dir recursivelyu
-    try { fs.mkdirSync(path.dirname(zipPath), { recursive: true }); } catch (err) {}
-    const res = await fetch(`http://github.com/${repo}/zipball/${branch}/`);
-    await new Promise((resolve, reject) => {
-        const fileStream = fs.createWriteStream(zipPath);
-        res.body.pipe(fileStream);
-        res.body.on("error", (err) => {
-            reject(err);
+    const downloadZip = async (repo, zipPath, branch = "main") => {
+        try { fs.mkdirSync(path.dirname(zipPath), { recursive: true }); } catch (err) {}
+        const res = await fetch(`http://github.com/${repo}/zipball/${branch}/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/zip'
+            }
+        }).then(response => {
+            return response.arrayBuffer();
+        }).then(arrayBuffer => {
+            const buffer = Buffer.from(arrayBuffer);
+            fs.writeFileSync(zipPath, buffer);
         });
-        fileStream.on("finish", function() {
-            resolve();
-        });
-    });
+    }
 }
 
 module.exports = {
