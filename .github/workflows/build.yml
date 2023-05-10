@@ -3,7 +3,7 @@ name: Build docs
 on:
   workflow_dispatch:
     inputs:
-      staging:
+      branch:
         description: 'Which branch of the docs repo to build'
         required: true
         default: 'staging'
