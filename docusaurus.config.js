@@ -326,9 +326,9 @@ const config = {
       }),
   scripts: [
     {
-        src: 'https://kit.fontawesome.com/d47eba6dcd.js',
-        crossorigin: 'anonymous',
-        async: true,
+      src: 'https://kit.fontawesome.com/d47eba6dcd.js',
+      crossorigin: 'anonymous',
+      async: true,
     }
   ],
   stylesheets: [
