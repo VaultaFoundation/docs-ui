@@ -22,6 +22,7 @@ const generateMd = async () => {
 
     const content = `---
 title: APIs and Manuals
+virtual: true
 ---
 
 Below is a list of API references and manuals for various EOS software.
