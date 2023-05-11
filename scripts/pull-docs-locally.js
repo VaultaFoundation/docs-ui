@@ -10,7 +10,11 @@ if(!docsFolderPath){
     process.exit(1);
 }
 
-const absolutePath = path.resolve(docsFolderPath);
+let absolutePath = path.resolve(docsFolderPath);
+
+if(fs.readdirSync(absolutePath).includes("docs")){
+    absolutePath = path.join(absolutePath, "docs");
+}
 
 let timeout;
 let locked = false;
