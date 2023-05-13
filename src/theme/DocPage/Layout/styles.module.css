@@ -4,6 +4,18 @@
   padding-bottom:60px;
 }
 
+.docPage::after {
+    content: "";
+    display: block;
+    clear: both;
+  height:1px;
+  width:100%;
+  background:rgba(0,0,0,0.1);
+  position: fixed;
+  top:103px;
+  z-index:999;
+}
+
 .docContainer {
   max-width: 1800px;
   margin: 0 auto;
@@ -16,6 +28,12 @@
 
 .collapseSidebarContainer {
   display: none;
+}
+
+@media (max-width: 996px) {
+  .docPage::after {
+    top:53px;
+  }
 }
 
 @media (min-width: 996px) {

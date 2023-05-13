@@ -14,26 +14,26 @@ export default function Home(): JSX.Element {
   const { firstCards, secondCards } = siteConfig.customFields.main;
   
   return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      wrapperClassName="index-page"
-      description="Description will go into a meta tag in <head />">
-      <div id="long-line-bg" />
-      <HomepageHeader />
-      <main>
+    <Layout>
+
+      {/*<HomepageHeader />*/}
+      <section>
         <WideCard />
-        <CardWrapper>
-          {firstCards.map((item, index) => (
-            <Card key={index} icon={item.icon} title={item.title} subtitle={item.subtitle} link={item.link} />
-          ))}
-        </CardWrapper>
-        <SignUp />
-        <CardWrapper>
-            {secondCards.map((item, index) => (
-              <Card key={index} icon={item.icon} title={item.title} subtitle={item.subtitle} link={item.link} color={item.color} />
+
+        <section className="limiter">
+          <CardWrapper>
+            {firstCards.map((item, index) => (
+                <Card key={index} icon={item.icon} title={item.title} subtitle={item.subtitle} link={item.link} />
             ))}
-        </CardWrapper>
-      </main>
+          </CardWrapper>
+          <SignUp />
+          <CardWrapper>
+            {secondCards.map((item, index) => (
+                <Card key={index} icon={item.icon} title={item.title} subtitle={item.subtitle} link={item.link} color={item.color} />
+            ))}
+          </CardWrapper>
+        </section>
+      </section>
     </Layout>
   );
 }

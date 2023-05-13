@@ -200,16 +200,16 @@ const config = {
     main: {
       firstCards: [
         {
-          icon: 'icons/ethereum-logo.svg', // docs
-          title: 'EOS EVM',
-          subtitle: 'Take advantage of the world\'s fastest EVM',
-          link: '/docs/latest/eos-evm/',
-        },
-        {
           icon: '/icons/docs-icon.svg',
           title: 'Learn The Basics',
           subtitle: 'Everything you need to know about blockchain to get you started',
           link: '/docs/latest/blockchain-basics/',
+        },
+        {
+          icon: 'icons/ethereum-logo.svg', // docs
+          title: 'EOS EVM',
+          subtitle: 'Take advantage of the world\'s fastest EVM',
+          link: '/docs/latest/eos-evm/',
         }
       ],
       secondCards: [
@@ -241,10 +241,12 @@ const config = {
         }
       ],
       wideCard: {
-        title: 'Smart Contracts',
-        subtitle: 'Learn how to build Smart Contracts on EOS',
-        icon: '/icons/emerald-icon.svg',
-        href: '/docs/latest/smart-contracts/',
+        title: 'EOS EVM',
+        tagline:'A brand new home for EVM developers',
+        subtitle: `Migrate your apps to the world's fastest and cheapest EVM using tools and frameworks you're already familiar with.`,
+        buttonText:'MIGRATE NOW',
+        icon: '/icons/brief-case-icon.svg', //replace with required icon
+        href: '/docs/latest/eos-evm/smart_contracts/migrate_your_smart_contract/',
       },
       signUp: {
         title: 'Sign up for developer alerts',
