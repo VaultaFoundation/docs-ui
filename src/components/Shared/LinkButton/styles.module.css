@@ -16,8 +16,12 @@
 }
 
 .linkButton:hover {
-  background-color: var(--eos-color-darker);
-  text-decoration: none;
+  transform:scale(1.05);
+  color: var(--eos-color-white);
+}
+
+.linkButton:active {
+  transform:scale(.98);
   color: var(--eos-color-white);
 }
 
