@@ -94,18 +94,6 @@
   }
 }
 
-@media (min-width: 500px) {
-  .h4Regular {
-    font-size: var(--font-size-xlarge);
-    line-height: 40px;
-  }
-
-  .pXSregular {
-    font-size: var(--font-size-standard);
-    line-height: 20px;
-    color: var(--eos-color-light);
-  }
-}
 
 @media (min-width: 996px) {
   .h1Bold {
