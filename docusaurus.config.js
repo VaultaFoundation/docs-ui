@@ -246,7 +246,7 @@ const config = {
         subtitle: `Migrate your apps to the world's fastest and cheapest EVM using tools and frameworks you're already familiar with.`,
         buttonText:'MIGRATE NOW',
         icon: '/icons/brief-case-icon.svg', //replace with required icon
-        href: '/docs/latest/eos-evm/smart-contracts/migrate_your_smart_contract/',
+        href: '/docs/latest/eos-evm/smart-contracts/migrate-your-smart-contract/',
       },
       signUp: {
         title: 'Sign up for developer alerts',
