@@ -989,6 +989,7 @@ aside {
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
     border: 0;
     width: 100vw;
+    height:54px;
   }
 
   .navbar-sidebar__item.menu {
@@ -1173,6 +1174,11 @@ aside {
   .breadcrumbs__link svg {
     top: 0px !important;
   }
+}
+
+.navbar__toggle {
+  margin:0;
+  margin-top:4px;
 }
 
 /* under 500px here */
