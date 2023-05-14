@@ -254,10 +254,9 @@ article nav {
 }
 
 article h1 {
-  font-weight: var(--font-weight-light);
+  font-weight: bold;
   font-size: var(--font-size-desktop-heading);
   line-height: var(--font-size-desktop-heading);
-  letter-spacing: 0.5px;
 
   color: var(--eos-color-darkest);
   padding: 0 !important;
@@ -265,7 +264,7 @@ article h1 {
 }
 
 article h2 {
-  font-weight: var(--font-weight-light);
+  font-weight: bold;
   font-size: var(--font-size-desktop-3xlarge);
   line-height: var(--font-size-desktop-3xlarge);
 
@@ -275,7 +274,7 @@ article h2 {
 }
 
 article h3 {
-  font-weight: var(--font-weight-light);
+  font-weight: bold;
   font-size: var(--font-size-desktop-xlarge);
   line-height: var(--font-size-desktop-xlarge);
   letter-spacing: 0.5px;
@@ -286,9 +285,9 @@ article h3 {
 }
 
 article h4 {
-  font-weight: var(--font-weight-light);
-  font-size: var(--font-size-3xlarge);
-  line-height: var(--font-size-3xlarge);
+  font-weight: bold;
+  font-size: var(--font-size-xlarge);
+  line-height: var(--font-size-xlarge);
   letter-spacing: 0.5px;
 
   color: var(--eos-color-darkest);
@@ -297,9 +296,9 @@ article h4 {
 }
 
 article h5 {
-  font-weight: var(--font-weight-light);
-  font-size: var(--font-size-2xlarge);
-  line-height: var(--font-size-2xlarge);
+  font-weight: bold;
+  font-size: var(--font-size-large);
+  line-height: var(--font-size-large);
   letter-spacing: 0.5px;
 
   color: var(--eos-color-darkest);
@@ -308,9 +307,9 @@ article h5 {
 }
 
 article h6 {
-  font-weight: var(--font-weight-light);
-  font-size: var(--font-size-xlarge);
-  line-height: var(--font-size-xlarge);
+  font-weight: bold;
+  font-size: var(--font-size-medium);
+  line-height: var(--font-size-medium);
   letter-spacing: 0.5px;
 
   color: var(--eos-color-darkest);
