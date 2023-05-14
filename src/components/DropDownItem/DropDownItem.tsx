@@ -14,8 +14,7 @@ interface DropDownItemProps {
 
 export const DropDownItem = ({ title, subtitle, icon, href, onClick }: DropDownItemProps) => {
   return (
-    <li className={styles.container} onClick={onClick}>
-      <Link href={href} className={styles.wrapper}>
+      <Link href={href} className={styles.wrapper} onClick={onClick}>
         <div className={styles.icon}>
           <img src={icon} alt={title} />
         </div>
@@ -24,6 +23,5 @@ export const DropDownItem = ({ title, subtitle, icon, href, onClick }: DropDownI
           <P_XS>{subtitle}</P_XS>
         </div>
       </Link>
-    </li>
   )
 }

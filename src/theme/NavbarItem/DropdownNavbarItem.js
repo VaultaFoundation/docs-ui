@@ -104,11 +104,11 @@ function DropdownNavbarItemDesktop({
             />
           ))}
         </ul>) : (
-        <ul className="dropdown__menu custom">
+        <section className="dropdown__menu custom">
           {items.map((childItemProps, i) => (
             <DropDownItem key={i} {...childItemProps} />
           ))}
-        </ul>
+        </section>
       )}
     </div>
   );

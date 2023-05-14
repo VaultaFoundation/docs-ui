@@ -235,25 +235,17 @@ h6 {
 
   border: 1px solid #E1E5F0;
 
-  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
 }
 
 .dropdown__menu.custom {
-  width: max-content;
-  max-width: 688px;
-  display: flex;
+  display:flex;
   flex-wrap: wrap;
+  width:600px;
   justify-content: space-between;
   align-items: center;
-  padding: 24px;
-  transition: all 0.2s ease;
-
-  z-index:999;
-}
-
-.dropdown__menu.custom li:nth-child(n+3) {
-  margin-top: 20px;
+  gap: 5px;
 }
 /* Overriding article styles */
 
