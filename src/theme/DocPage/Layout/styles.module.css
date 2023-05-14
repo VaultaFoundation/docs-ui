@@ -5,15 +5,15 @@
 }
 
 .docPage::after {
-    content: "";
-    display: block;
-    clear: both;
+  content: "";
+  display: block;
+  clear: both;
   height:1px;
   width:100%;
   background:rgba(0,0,0,0.1);
   position: fixed;
-  top:103px;
-  z-index:999;
+  top:104px;
+  z-index:1;
 }
 
 .docContainer {

@@ -248,6 +248,8 @@ h6 {
   align-items: center;
   padding: 24px;
   transition: all 0.2s ease;
+
+  z-index:999;
 }
 
 .dropdown__menu.custom li:nth-child(n+3) {
