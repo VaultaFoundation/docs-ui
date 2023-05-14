@@ -53,7 +53,7 @@ const unzip = async (zipPath, unzipDir) => {
 
 const downloadZip = async (repo, zipPath, branch = "main") => {
     try { fs.mkdirSync(path.dirname(zipPath), { recursive: true }); } catch (err) {}
-    const res = await fetch(`http://github.com/${repo}/zipball/${branch}/`, {
+    const res = await fetch(`http://github.com/${repo}/zipball/${encodeURIComponent(branch)}/`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/zip'
