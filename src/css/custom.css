@@ -850,10 +850,8 @@ aside {
   }
 
   article h1 {
-    font-weight: var(--font-weight-light);
+    font-weight: bold;
     font-size: var(--font-size-desktop-3xlarge);
-    line-height: 98px;
-    letter-spacing: 0.5px;
 
     color: var(--eos-color-darkest);
     margin: 0 !important;
@@ -861,9 +859,8 @@ aside {
   }
 
   article h2 {
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-desktop-xlarge);
-    line-height: 68px;
+    font-weight: bold;
+    font-size: var(--font-size-2xlarge);
 
     color: var(--eos-color-darkest);
     margin: 0 !important;
@@ -871,10 +868,8 @@ aside {
   }
 
   article h3 {
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-3xlarge);
-    line-height: 60px;
-    letter-spacing: 0.5px;
+    font-weight: bold;
+    font-size: var(--font-size-xlarge);
 
     color: var(--eos-color-darkest);
     margin: 0 !important;
@@ -882,10 +877,8 @@ aside {
   }
 
   article h4 {
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-2xlarge);
-    line-height: 50px;
-    letter-spacing: 0.5px;
+    font-weight: bold;
+    font-size: var(--font-size-large);
 
     color: var(--eos-color-darkest);
     margin: 0 !important;
@@ -893,10 +886,8 @@ aside {
   }
 
   article h5 {
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-xlarge);
-    line-height: 40px;
-    letter-spacing: 0.5px;
+    font-weight: bold;
+    font-size: var(--font-size-medium);
 
     color: var(--eos-color-darkest);
     margin: 0 !important;
@@ -904,10 +895,8 @@ aside {
   }
 
   article h6 {
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-large);
-    line-height: 30px;
-    letter-spacing: 0.5px;
+    font-weight: bold;
+    font-size: var(--font-size-standard);
 
     color: var(--eos-color-darkest);
     margin: 0 !important;
@@ -1211,25 +1200,19 @@ aside {
   }
 
   article h1 {
-    font-size: 50px;
-    line-height: 50px;
+    line-height: 26px;
   }
 
   article h2 {
-    font-size: var(--font-size-desktop-xlarge);
-    line-height: 40px;
+    line-height: 26px;
   }
 
   article h3 {
-    font-size: var(--font-size-3xlarge);
-    line-height: 36px;
+    line-height: 26px;
   }
 
   article h4 {
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-3xlarge);
-    line-height: 50px;
-    letter-spacing: 0.5px;
+    line-height: 26px;
 
     color: var(--eos-color-darkest);
     margin: 0 !important;
@@ -1237,10 +1220,7 @@ aside {
   }
 
   article h5 {
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-2xlarge);
-    line-height: 40px;
-    letter-spacing: 0.5px;
+    line-height: 20px;
 
     color: var(--eos-color-darkest);
     margin: 0 !important;
@@ -1248,10 +1228,7 @@ aside {
   }
 
   article h6 {
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-xlarge);
-    line-height: 30px;
-    letter-spacing: 0.5px;
+    line-height: 20px;
 
     color: var(--eos-color-darkest);
     margin: 0 !important;
