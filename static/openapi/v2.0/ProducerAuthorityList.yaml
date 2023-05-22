@@ -1,5 +1,5 @@
 type: array
-description: Array that has as first element the version of the authority json objects and then the objects themselves.
+description: Array with the version of the authority JSON objects as first element, then the objects themselves.
 items:
   type: object
   properties:

@@ -1,5 +1,5 @@
 type: object
-description: A json object that describes a producer.
+description: A JSON object that describes a producer.
 properties:
   owner:
     type: string

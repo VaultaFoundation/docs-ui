@@ -1,5 +1,5 @@
 type: object
-description: A json object that encapsulates the list of producers schedule and its version.
+description: A JSON object that encapsulates the list of the producers schedule and its version.
 properties:
   version:
     type: integer
