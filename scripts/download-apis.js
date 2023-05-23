@@ -22,7 +22,8 @@ const downloadApis = async () => {
         for (const version of repo.versions) {
             let verMajorMinor = version.match(/\d+\.\d+/);
             let branch = (verMajorMinor === null) ? 'main' : ('release/' + verMajorMinor[0]);
-            redocusaurusSpecs = redocusaurusSpecs.concat(await swaggerParser(repo.repo, branch, repo.versions[0] === version));
+            let tagMajorMinor = (verMajorMinor === null) ? 'main' : ('v' + verMajorMinor[0]);
+            redocusaurusSpecs = redocusaurusSpecs.concat(await swaggerParser(repo.repo, tagMajorMinor, branch, repo.versions[0] === version));
         }
 
 
