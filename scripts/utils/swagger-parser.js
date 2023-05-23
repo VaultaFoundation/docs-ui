@@ -25,7 +25,7 @@ const normalizePath = (_path) => {
 }
 
 const parse = async (repo, tagMajorMinor, branch = 'main', isLatest = true) => {
-    console.log(`Preparing API: ${repo} (${branch}) [${tagMajorMinor}]`);
+    console.log(`Preparing API: ${repo} (${tagMajorMinor}) [${branch}]`);
     let specs = [];
 
     const repoName = repo.split('/')[1];
