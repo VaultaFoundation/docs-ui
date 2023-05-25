@@ -1,36 +1,11 @@
 require("isomorphic-fetch");
+const { findFiles } = require("./find-files");
 
 /***
  * This script checks all the content for broken links.
  */
 
 const fs = require("fs-extra");
-const path = require("path");
-
-const findFiles = (directoryPath, extension) => {
-    let fileList = [];
-
-    const traverseDirectory = (currentPath) => {
-        const files = fs.readdirSync(currentPath);
-
-        files.forEach((file) => {
-            const filePath = path.join(currentPath, file);
-            const stats = fs.statSync(filePath);
-
-            if (stats.isFile()) {
-                if(filePath.indexOf(extension) > -1){
-                    fileList.push(filePath);
-                }
-            } else if (stats.isDirectory()) {
-                traverseDirectory(filePath);
-            }
-        });
-    }
-
-    traverseDirectory(directoryPath);
-    return fileList;
-}
-
 
 const checkLinks = async () => {
     let links = [
@@ -103,6 +78,17 @@ const checkLinks = async () => {
     console.log(`Found ${links.length} links to check`);
 
 
+    let brokenLinks = [
+        /*
+        {
+            url:'example',
+            file: 'example.md',
+            status: 404,
+            error: null,
+        }
+         */
+    ];
+
     const testLinks = async (_links) => {
         for (const link of _links) {
             try {
@@ -111,10 +97,20 @@ const checkLinks = async () => {
                 });
 
                 if(response.status !== 200) {
-                    console.log(`Broken link: ${link.url} (${link.file}) [${response.status}]`);
+                    brokenLinks.push({
+                        url: link.url,
+                        file: link.file,
+                        status: response.status,
+                        error: null,
+                    });
                 }
             } catch(e) {
-                console.log(`Broken link: ${link.url} (${link.file}) [NO STATUS] ${e}`);
+                brokenLinks.push({
+                    url: link.url,
+                    file: link.file,
+                    status: 'NO STATUS',
+                    error: e,
+                });
             }
         }
     }
@@ -133,6 +129,20 @@ const checkLinks = async () => {
 
     // test links in chunks
     await Promise.all(chunks.map(chunk => testLinks(chunk)));
+
+    // sort errors by code
+    brokenLinks.sort((a, b) => {
+        if(a.status === b.status) return 0;
+        if(a.status === 'NO STATUS') return 1;
+        if(b.status === 'NO STATUS') return -1;
+        return a.status - b.status;
+    });
+
+    for(const link of brokenLinks) {
+        console.log(`[${link.status}] ${link.url} -- ${link.file} ${link.error ? ' -- ' + link.error : ''}`);
+    }
+
+    console.log(`Found ${brokenLinks.length} broken links`);
 
 }
 

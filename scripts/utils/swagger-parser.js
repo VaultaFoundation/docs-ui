@@ -1,24 +1,9 @@
 require('isomorphic-fetch');
 const {createTmpDir, removeTmpDir} = require("./create-temp-dir");
 const { downloadZip, unzip } = require("./download-repo-as-zip");
+const { findFiles } = require("./find-files");
 const fs = require("fs-extra");
 const path = require("path");
-
-const findSwaggerFiles = (dir, filelist = []) => {
-    const files = fs.readdirSync(dir);
-    filelist = filelist || [];
-    files.forEach(function(file) {
-        const filepath = path.join(dir, file);
-        if (fs.statSync(filepath).isDirectory()) {
-            filelist = findSwaggerFiles(filepath, filelist);
-        } else {
-            if (filepath.indexOf('.swagger.yaml') > -1) {
-                filelist.push(filepath);
-            }
-        }
-    });
-    return filelist;
-}
 
 const normalizePath = (_path) => {
     return path.normalize(_path).replace(/\/\//g, "/").replace(/\\\\/g, '/').replace(/\\/g, '/');
@@ -48,7 +33,7 @@ const parse = async (repo, versionBranch) => {
     await unzip(zipPath, tmpDir);
 
     // find all .swagger files recursively
-    const swaggerFiles = findSwaggerFiles(tmpDir);
+    const swaggerFiles = findFiles(tmpDir, '.swagger.yaml');
 
 
     swaggerFiles.forEach(file => {

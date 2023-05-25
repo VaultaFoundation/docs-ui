@@ -15,15 +15,15 @@ const downloadManuals = async () => {
         // },
         {
             repo: 'antelopeio/cdt',
-            versions: ['main'],
+            versions: ['v4.0.0'],
         },
         {
             repo: 'antelopeio/dune',
-            versions: ['main'],
+            versions: ['v1.1.1'],
         },
         {
             repo: 'eosnetworkfoundation/eos-system-contracts',
-            versions: ['main'],
+            versions: ['v3.1.1'],
         },
         {
             repo: 'eosnetworkfoundation/mandel-eosjs',
