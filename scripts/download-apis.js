@@ -10,7 +10,14 @@ const downloadApis = async () => {
     const repos = [
         {
             repo:'antelopeIO/leap',
-            versions: ['v4.0.0', 'v3.2.3']
+            versions: [{
+                latest:true,
+                version:'v4.0.0',
+                branch:'release/4.0'
+            },{
+                version:'v3.2.3',
+                branch:'release/3.2'
+            }]
         }
     ];
 
@@ -19,8 +26,11 @@ const downloadApis = async () => {
     for (const repo of repos) {
         const repoName = repo.repo.split('/')[1];
 
-        for (const version of repo.versions) {
-            redocusaurusSpecs = redocusaurusSpecs.concat(await swaggerParser(repo.repo, version, repo.versions[0] === version));
+        for (const versionBranch of repo.versions) {
+            redocusaurusSpecs = redocusaurusSpecs.concat(await swaggerParser(
+                repo.repo,
+                versionBranch
+            ));
         }
 
 
