@@ -27,4 +27,4 @@ jobs:
         run: node scripts/prepare-docs --docs-branch=${{ github.event.inputs.branch }}
 
       - name: Run links check
-        run: node scripts/check-links
+        run: node scripts/utils/check-links
