@@ -24,8 +24,9 @@ const normalizePath = (_path) => {
     return path.normalize(_path).replace(/\/\//g, "/").replace(/\\\\/g, '/').replace(/\\/g, '/');
 }
 
-const parse = async (repo, branch = "main", isLatest = true) => {
-    console.log(`Preparing API: ${repo} (${branch})`);
+const parse = async (repo, versionBranch) => {
+    const { version, branch, latest = false } = versionBranch;
+    console.log(`Preparing API: ${repo} (${version})`);
     let specs = [];
 
     const repoName = repo.split('/')[1];
@@ -39,7 +40,7 @@ const parse = async (repo, branch = "main", isLatest = true) => {
         fs.mkdirsSync(apisDir);
     }
 
-    const basePath = `${apisDir}/${repo.split('/')[1]}/${isLatest ? 'latest' : branch}`;
+    const basePath = `${apisDir}/${repo.split('/')[1]}/${latest ? 'latest' : version}`;
 
     // download repo as zip
     const zipPath = `${tmpDir}.zip`;
@@ -70,20 +71,20 @@ const parse = async (repo, branch = "main", isLatest = true) => {
 
         specs.push({
             spec: normalizePath(destination.replace(/\/\//g, "/")),
-            route: normalizePath(`/apis/${repoName}/${isLatest ? 'latest' : branch}/${fileName.split('.swagger')[0]}.api/`),
+            route: normalizePath(`/apis/${repoName}/${latest ? 'latest' : version}/${fileName.split('.swagger')[0]}.api/`),
         });
     });
 
     const indexMdPath = `${basePath}/index.md`;
     const capitalizedTitle = repo.split('/')[1].charAt(0).toUpperCase() + repo.split('/')[1].slice(1);
     const indexMdContent = `---
-title: ${capitalizedTitle} (${branch})
+title: ${capitalizedTitle} (${version})
 ---
 
 ${swaggerFiles.map(file => {
     const fileName = path.basename(file);
     const fileNameWithoutExtension = fileName.replace('.swagger.yaml', '');
-    return `- [${fileNameWithoutExtension}](/apis/${repoName}/${isLatest ? 'latest' : branch}/${fileNameWithoutExtension}.api)`;
+    return `- [${fileNameWithoutExtension}](/apis/${repoName}/${latest ? 'latest' : version}/${fileNameWithoutExtension}.api)`;
 }).join('\n')
     }
 `;
