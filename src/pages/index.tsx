@@ -7,6 +7,7 @@ import { Card } from '../components/Card/Card';
 import { CardWrapper } from '../components/CardWrapper/CardWrapper';
 
 import { SignUp } from '../components/SignUp/SignUp';
+import { IntakeForm } from '../components/IntakeForm/IntakeForm';
 
 export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
@@ -26,12 +27,13 @@ export default function Home(): JSX.Element {
                 <Card key={index} icon={item.icon} title={item.title} subtitle={item.subtitle} link={item.link} />
             ))}
           </CardWrapper>
-          <SignUp />
+          <IntakeForm />
           <CardWrapper>
             {secondCards.map((item, index) => (
                 <Card key={index} icon={item.icon} title={item.title} subtitle={item.subtitle} link={item.link} color={item.color} />
             ))}
           </CardWrapper>
+          <SignUp />
         </section>
       </section>
     </Layout>

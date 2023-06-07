@@ -256,6 +256,14 @@ const config = {
         action: 'https://eosnetwork.us8.list-manage.com/subscribe/post',
         buttonText: 'ALERT ME',
       },
+      intakeForm: {
+        title: "Boost Your App's Success!",
+        subtitle: `
+          Submit your app to our ecosystem page and reach a wider audience, gain exposure, and attract new users to your already built application.
+        `,
+        action: 'https://eosnetwork.com/#ecosystem-intake',
+        buttonText: 'INTAKE FORM',
+      },
     },
     featureFlags: {
       lang: true,

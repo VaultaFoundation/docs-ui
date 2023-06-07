@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /**
  * Any CSS included here will be global. The classic template
@@ -326,6 +329,10 @@ article li {
   color: var(--eos-color-dark);
   margin: 0 !important;
   padding: 0 !important;
+}
+
+a {
+    text-decoration: none !important;
 }
 
 article a {
