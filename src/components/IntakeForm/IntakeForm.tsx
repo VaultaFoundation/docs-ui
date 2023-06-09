@@ -8,7 +8,8 @@ import styles from './styles.module.css';
 export const IntakeForm = () => {
   const { siteConfig } = useDocusaurusContext();
 
-  const { title, subtitle, action, buttonText } = siteConfig.customFields.main.intakeForm;
+  // @ts-ignore
+    const { title, subtitle, action, buttonText } = siteConfig.customFields.main.intakeForm;
 
   const handleClick = () => {
     window.location.replace(action);
@@ -19,7 +20,7 @@ export const IntakeForm = () => {
           <H1>{title}</H1>
           <P_XLarge className="max-w-[600px] mb-10">{subtitle}</P_XLarge>
           <a href={action} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
-            <Button>{buttonText}</Button>
+            <Button type="button">{buttonText}</Button>
           </a>
       </div>
   )

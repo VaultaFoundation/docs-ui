@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 export const SignUp = () => {
   const { siteConfig } = useDocusaurusContext();
 
+  // @ts-ignore
   const { title, subtitle, action, buttonText } = siteConfig.customFields.main.signUp;
 
   return (

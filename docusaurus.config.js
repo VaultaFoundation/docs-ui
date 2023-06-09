@@ -27,7 +27,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'], // , 'zh', 'ko'
+    locales: ['en', 'zh', 'ko'], // , 'zh', 'ko'
     path: 'i18n',
     localeConfigs: {
       en: {
@@ -159,28 +159,28 @@ const config = {
               label: 'Smart Contracts', // This label is used for mobile view
               title: 'Smart Contracts',
               subtitle: 'Learn to develop EOS smart contracts',
-              icon: '/icons/brief-case-icon.svg', //replace with required icon
+              icon: 'icons/brief-case-icon.svg', //replace with required icon
               href: '/docs/latest/smart-contracts/',
             },
             {
               label: 'Node Operation',
               title: 'Node Operation',
               subtitle: 'Learn how to operate an EOS node',
-              icon: '/icons/db-icon.svg',
+              icon: 'icons/db-icon.svg',
               href: '/docs/latest/node-operation/',
             },
             {
               label: 'Web Development',
               title: 'Web Development',
               subtitle: 'Learn to integrate EOS into your web app',
-              icon: '/icons/globe-icon.svg',
+              icon: 'icons/globe-icon.svg',
               href: '/docs/latest/web-applications/',
             },
             {
               label: 'EOS EVM',
               title: 'EOS EVM',
               subtitle: 'Learn to develop on EOS EVM',
-              icon: '/icons/box-icon.svg',
+              icon: 'icons/box-icon.svg',
               href: '/docs/latest/eos-evm/',
             }
           ],
@@ -200,7 +200,7 @@ const config = {
     main: {
       firstCards: [
         {
-          icon: '/icons/docs-icon.svg',
+          icon: 'icons/docs-icon.svg',
           title: 'Learn The Basics',
           subtitle: 'Everything you need to know about blockchain to get you started',
           link: '/docs/latest/blockchain-basics/',
@@ -221,20 +221,20 @@ const config = {
           color: 'yellow',
         },
         {
-          icon: '/icons/chat-icon.svg',
+          icon: 'icons/chat-icon.svg',
           title: 'Create an NFT',
           subtitle: 'Learn how to develop non-fungible tokens',
           link: '/docs/latest/smart-contracts/tutorials/create-an-nft',
           color: 'yellow',
         },
         {
-          icon: '/icons/ref-icon.svg',
+          icon: 'icons/ref-icon.svg',
           title: 'Reference',
           subtitle: "Consult the API references explore the EOS RPC",
           link: '/docs/latest/api-listing/',
         },
         {
-          icon: '/icons/docs-icon.svg',
+          icon: 'icons/docs-icon.svg',
           title: 'Glossary',
           subtitle: 'Confused with some terms? Read them all here',
           link: '/docs/latest/glossary',
@@ -245,7 +245,7 @@ const config = {
         tagline:'A brand new home for EVM developers',
         subtitle: `Migrate your apps to the world's fastest and cheapest EVM using tools and frameworks you're already familiar with.`,
         buttonText:'MIGRATE NOW',
-        icon: '/icons/brief-case-icon.svg', //replace with required icon
+        icon: 'icons/brief-case-icon.svg', //replace with required icon
         href: '/docs/latest/eos-evm/smart-contracts/migrate-your-smart-contract/',
       },
       signUp: {
@@ -278,13 +278,14 @@ const config = {
             alt: 'EOS Network',
             src: 'img/eosn_logo_light.png',
           },
-          // keep this items array as is, this is used just to let docosaurus know that something is there
+          // DO NOT REMOVE! You will break the mobile menu.
+          // But if you want to edit the links, edit the customFields.navbar.items array above
           items: [
             {
               type: 'doc',
               docId: 'index',
               position: 'left',
-              label: 'Welcome',
+              label: 'XXX',
             },
           ]
         },
@@ -341,12 +342,12 @@ const config = {
                 {
                   label: 'GitHub',
                   href: 'https://github.com/eosnetworkfoundation',
-                  logo: '/icons/github-icon.svg',
+                  logo: 'icons/github-icon.svg',
                 },
                 {
                   label: 'Discord',
                   href: 'https://discord.gg/XjVqej4uT5',
-                  logo: '/icons/discord-icon.svg',
+                  logo: 'icons/discord-icon.svg',
                 },
               ],
             },

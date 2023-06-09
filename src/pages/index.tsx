@@ -12,6 +12,7 @@ import { IntakeForm } from '../components/IntakeForm/IntakeForm';
 export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
 
+  // @ts-ignore
   const { firstCards, secondCards } = siteConfig.customFields.main;
   
   return (
