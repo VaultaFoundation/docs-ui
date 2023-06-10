@@ -1,0 +1,90 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.welcomeSidebar.category.cdt": {
+    "message": "cdt",
+    "description": "The label for category cdt in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.CDT (Contract Development Toolkit)": {
+    "message": "CDT (Contract Development Toolkit)",
+    "description": "The label for category CDT (Contract Development Toolkit) in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.command-reference": {
+    "message": "command-reference",
+    "description": "The label for category command-reference in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.upgrading": {
+    "message": "upgrading",
+    "description": "The label for category upgrading in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.features": {
+    "message": "features",
+    "description": "The label for category features in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.how-to-guides": {
+    "message": "how-to-guides",
+    "description": "The label for category how-to-guides in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.compile": {
+    "message": "compile",
+    "description": "The label for category compile in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.authorization": {
+    "message": "authorization",
+    "description": "The label for category authorization in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.multi-index": {
+    "message": "multi-index",
+    "description": "The label for category multi-index in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.best-practices": {
+    "message": "best-practices",
+    "description": "The label for category best-practices in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.index": {
+    "message": "index",
+    "description": "The label for category index in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.man": {
+    "message": "man",
+    "description": "The label for category man in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.dune": {
+    "message": "dune",
+    "description": "The label for category dune in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.Dune (v1.1.1)": {
+    "message": "Dune (v1.1.1)",
+    "description": "The label for category Dune (v1.1.1) in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.eos-system-contracts": {
+    "message": "eos-system-contracts",
+    "description": "The label for category eos-system-contracts in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.key-concepts": {
+    "message": "key-concepts",
+    "description": "The label for category key-concepts in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.guides": {
+    "message": "guides",
+    "description": "The label for category guides in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.mandel-eosjs": {
+    "message": "mandel-eosjs",
+    "description": "The label for category mandel-eosjs in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.Mandel-eosjs (main)": {
+    "message": "Mandel-eosjs (main)",
+    "description": "The label for category Mandel-eosjs (main) in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.design": {
+    "message": "design",
+    "description": "The label for category design in sidebar welcomeSidebar"
+  },
+  "sidebar.welcomeSidebar.category.mandel-swift": {
+    "message": "mandel-swift",
+    "description": "The label for category mandel-swift in sidebar welcomeSidebar"
+  }
+}

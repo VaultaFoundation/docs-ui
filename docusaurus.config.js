@@ -144,59 +144,6 @@ const config = {
 
   // custom fields for nav bar
   customFields: {
-    navbar: {
-      logo: {
-        alt: 'EOS Network',
-        src: 'img/eosn_logo_light.png',
-      },
-      items: [
-        {
-          type: 'dropdown',
-          label: 'Learn',
-          position: 'left',
-          items: [
-            {
-              label: 'Smart Contracts', // This label is used for mobile view
-              title: 'Smart Contracts',
-              subtitle: 'Learn to develop EOS smart contracts',
-              icon: 'icons/brief-case-icon.svg', //replace with required icon
-              href: '/docs/latest/smart-contracts/',
-            },
-            {
-              label: 'Node Operation',
-              title: 'Node Operation',
-              subtitle: 'Learn how to operate an EOS node',
-              icon: 'icons/db-icon.svg',
-              href: '/docs/latest/node-operation/',
-            },
-            {
-              label: 'Web Development',
-              title: 'Web Development',
-              subtitle: 'Learn to integrate EOS into your web app',
-              icon: 'icons/globe-icon.svg',
-              href: '/docs/latest/web-applications/',
-            },
-            {
-              label: 'EOS EVM',
-              title: 'EOS EVM',
-              subtitle: 'Learn to develop on EOS EVM',
-              icon: 'icons/box-icon.svg',
-              href: '/docs/latest/eos-evm/',
-            }
-          ],
-        },
-        {
-          docId: 'courses',
-          position: 'left',
-          label: 'Courses',
-          to: 'https://learn.eosnetwork.com/',
-        },
-        {
-          type: 'localeDropdown',
-          position: 'right',
-        },
-      ],
-    },
     main: {
       firstCards: [
         {
@@ -240,30 +187,6 @@ const config = {
           link: '/docs/latest/glossary',
         }
       ],
-      wideCard: {
-        title: 'EOS EVM',
-        tagline:'A brand new home for EVM developers',
-        subtitle: `Migrate your apps to the world's fastest and cheapest EVM using tools and frameworks you're already familiar with.`,
-        buttonText:'MIGRATE NOW',
-        icon: 'icons/brief-case-icon.svg', //replace with required icon
-        href: '/docs/latest/eos-evm/smart-contracts/migrate-your-smart-contract/',
-      },
-      signUp: {
-        title: 'Sign up for developer alerts',
-        subtitle: `
-          Don't be caught with your pants down. Breaking changes will happen. If you want to stay on top of things when they do make sure to sign up for developer alerts emails.
-        `,
-        action: 'https://eosnetwork.us8.list-manage.com/subscribe/post',
-        buttonText: 'ALERT ME',
-      },
-      intakeForm: {
-        title: "Boost Your App's Success!",
-        subtitle: `
-          Submit your app to our ecosystem page and reach a wider audience, gain exposure, and attract new users to your already built application.
-        `,
-        action: 'https://eosnetwork.com/#ecosystem-intake',
-        buttonText: 'INTAKE FORM',
-      },
     },
     featureFlags: {
       lang: true,
@@ -278,14 +201,22 @@ const config = {
             alt: 'EOS Network',
             src: 'img/eosn_logo_light.png',
           },
-          // DO NOT REMOVE! You will break the mobile menu.
-          // But if you want to edit the links, edit the customFields.navbar.items array above
           items: [
             {
-              type: 'doc',
-              docId: 'index',
+              type: 'dropdown',
+              label: 'Learn',
               position: 'left',
-              label: 'XXX',
+              items: [],
+            },
+            {
+              docId: 'courses',
+              position: 'left',
+              label: 'Courses',
+              to: 'https://learn.eosnetwork.com/',
+            },
+            {
+              type: 'localeDropdown',
+              position: 'right',
             },
           ]
         },

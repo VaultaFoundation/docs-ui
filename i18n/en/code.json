@@ -409,87 +409,84 @@
     "message": "EOS EVM"
   },
   "A brand new home for EVM developers": {
-    "message": "EVM开发者的全新家园"
+    "message": "A brand new home for EVM developers"
   },
   "Migrate your apps to the world's fastest and cheapest EVM using tools and frameworks you're already familiar with.": {
-    "message": "使用你已经熟悉的工具和框架，将你的应用迁移到全球最快且最便宜的EVM。"
+    "message": "Migrate your apps to the world's fastest and cheapest EVM using tools and frameworks you're already familiar with."
   },
   "MIGRATE NOW": {
-    "message": "立即迁移"
+    "message": "MIGRATE NOW"
   },
   "Boost Your App! 🚀": {
-    "message": "提升你的应用！🚀"
+    "message": "Boost Your App! 🚀"
   },
   "Submit your app to our ecosystem page and reach a wider audience, gain exposure, and attract new users to your already built application.": {
-    "message": "将你的应用提交到我们的生态系统页面，吸引更广泛的观众，获得曝光，并吸引新用户使用你已经构建的应用。"
+    "message": "Submit your app to our ecosystem page and reach a wider audience, gain exposure, and attract new users to your already built application."
   },
   "INTAKE FORM": {
-    "message": "提交表格"
+    "message": "INTAKE FORM"
   },
   "Developer Alerts! 🚨": {
-    "message": "开发者警报！🚨"
+    "message": "Developer Alerts! 🚨"
   },
   "Don't be caught with your pants down. Breaking changes will happen. If you want to stay on top of things when they do make sure to sign up for developer alerts emails.": {
-    "message": "不要被突如其来的变化措手不及。如果你想掌握最新的动态，一定要注册接收开发者警报邮件。"
+    "message": "Don't be caught with your pants down. Breaking changes will happen. If you want to stay on top of things when they do make sure to sign up for developer alerts emails."
   },
   "ALERT ME": {
-    "message": "提醒我"
+    "message": "ALERT ME"
   },
   "Smart Contracts": {
-    "message": "智能合约"
+    "message": "Smart Contracts"
   },
   "Learn to develop EOS smart contracts": {
-    "message": "学习开发EOS智能合约"
+    "message": "Learn to develop EOS smart contracts"
   },
   "Node Operation": {
-    "message": "节点操作"
+    "message": "Node Operation"
   },
   "Learn how to operate an EOS node": {
-    "message": "学习如何操作EOS节点"
+    "message": "Learn how to operate an EOS node"
   },
   "Web Development": {
-    "message": "网页开发"
+    "message": "Web Development"
   },
   "Learn to integrate EOS into your web app": {
-    "message": "学习将EOS集成到你的网页应用中"
+    "message": "Learn to integrate EOS into your web app"
   },
   "Learn to develop on EOS EVM": {
-    "message": "学习在EOS EVM上开发"
+    "message": "Learn to develop on EOS EVM"
   },
   "Learn The Basics": {
-    "message": "学习基础知识"
+    "message": "Learn The Basics"
   },
   "Everything you need to know about blockchain to get you started": {
-    "message": "让你开始需要知道的关于区块链的一切"
+    "message": "Everything you need to know about blockchain to get you started"
   },
   "Take advantage of the world's fastest EVM": {
-    "message": "利用世界上最快的EVM"
+    "message": "Take advantage of the world's fastest EVM"
   },
   "Create a Token": {
-    "message": "创建一个代币"
+    "message": "Create a Token"
   },
   "Learn how to develop fungible tokens": {
-    "message": "学习如何开发可替代代币"
+    "message": "Learn how to develop fungible tokens"
   },
   "Create an NFT": {
-    "message": "创建一个NFT"
+    "message": "Create an NFT"
   },
   "Learn how to develop non-fungible tokens": {
-    "message": "学习如何开发非替代代币"
+    "message": "Learn how to develop non-fungible tokens"
   },
   "Reference": {
-    "message": "参考"
+    "message": "Reference"
   },
   "Consult the API references explore the EOS RPC": {
-    "message": "查阅API参考，探索EOS RPC"
+    "message": "Consult the API references explore the EOS RPC"
   },
   "Glossary": {
-    "message": "词汇表"
+    "message": "Glossary"
   },
   "Confused with some terms? Read them all here": {
-    "message": "对某些术语感到困惑？在这里阅读所有的解释"
-  },
-  "Enter your email": {
-    "message": "输入你的邮箱"
+    "message": "Confused with some terms? Read them all here"
   }
 }

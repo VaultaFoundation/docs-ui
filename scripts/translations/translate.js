@@ -4,7 +4,6 @@ const path = require('path');
 
 // translate file using AWS Translate
 const { TranslateClient, CreateParallelDataCommand } = require("@aws-sdk/client-translate");
-// const { fromCognitoIdentity } = require("@aws-sdk/credential-providers");
 
 // ENV VAR REQUIREMENTS (automatically detected by AWS SDK)
 // AWS_ACCESS_KEY_ID

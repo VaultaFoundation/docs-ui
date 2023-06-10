@@ -1,0 +1,34 @@
+{
+  "logo.alt": {
+    "message": "EOS Network",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Learn": {
+    "message": "学习",
+    "description": "Navbar item with label Learn"
+  },
+  "item.label.Courses": {
+    "message": "课程",
+    "description": "Navbar item with label Courses"
+  },
+  "item.label.Smart Contracts": {
+    "message": "智能合约",
+    "description": "Navbar item with label Smart Contracts"
+  },
+  "item.label.Node Operation": {
+    "message": "节点操作",
+    "description": "Navbar item with label Node Operation"
+  },
+  "item.label.Web Development": {
+    "message": "网页开发",
+    "description": "Navbar item with label Web Development"
+  },
+  "item.label.EOS EVM": {
+    "message": "EOS EVM",
+    "description": "Navbar item with label EOS EVM"
+  },
+  "Learn to develop on EOS EVM": {
+    "message": "asdfsadfsadf",
+    "description": "Navbar item with subtitle Learn to develop on EOS EVM"
+  }
+}
