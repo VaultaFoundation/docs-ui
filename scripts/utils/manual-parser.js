@@ -4,30 +4,18 @@ const { downloadZip, unzip } = require("./download-repo-as-zip");
 const fs = require("fs-extra");
 const path = require("path");
 
-function removeFromAllFiles(basePath, regexToRemove = /<hr>/g) {
-    fs.readdir(basePath, (err, files) => {
-        if (err) throw err;
+function replaceInAllFiles(basePath, regexToReplace, replaceWith) {
+    const files = fs.readdirSync(basePath);
 
-        files.forEach(file => {
-            const filePath = path.join(basePath, file);
-
-            fs.stat(filePath, (err, stats) => {
-                if (err) throw err;
-
-                if (stats.isDirectory()) {
-                    removeFromAllFiles(filePath); // recurse into subdirectory
-                } else if (stats.isFile()) {
-                    fs.readFile(filePath, 'utf8', (err, data) => {
-                        if (err) throw err;
-
-                        const newData = data.replace(regexToRemove, '');
-                        fs.writeFile(filePath, newData, 'utf8', err => {
-                            if (err) throw err;
-                        });
-                    });
-                }
-            });
-        });
+    files.forEach((file) => {
+        const filePath = path.join(basePath, file);
+        if (fs.statSync(filePath).isDirectory()) {
+            replaceInAllFiles(filePath, regexToReplace, replaceWith);
+        } else {
+            let fileContents = fs.readFileSync(filePath, 'utf8');
+            fileContents = fileContents.replace(regexToReplace, replaceWith);
+            fs.writeFileSync(filePath, fileContents);
+        }
     });
 }
 
@@ -53,7 +41,6 @@ const parse = async (repo, branch = "main", isLatest = true) => {
     await downloadZip(repo, zipPath, branch);
     await unzip(zipPath, tmpDir);
 
-    // find all .swagger files recursively
     const docsDir = `${tmpDir}/${fs.readdirSync(tmpDir)[0]}/docs`;
     try { fs.mkdirSync(basePath); } catch(e) {}
 
@@ -63,7 +50,9 @@ const parse = async (repo, branch = "main", isLatest = true) => {
     fs.moveSync(path.normalize(docsDir), path.normalize(basePath), { overwrite: true });
 
     // some files have a <hr> tag which docusaurus doesn't like
-    removeFromAllFiles(basePath, /<hr>/g);
+    replaceInAllFiles(basePath, /<hr>/g, '');
+    // some files use content_title instead of title
+    replaceInAllFiles(basePath, /content_title:/g, 'title:');
 
     // if no base index.md exists, create one
     const indexMdPath = `${basePath}/index.md`;
@@ -77,25 +66,6 @@ title: ${capitalizedTitle} (${branch})
     }
 
     await new Promise(r => setTimeout(r, 100));
-
-//     const indexMdPath = `${basePath}/index.md`;
-//     const capitalizedTitle = repo.split('/')[1].charAt(0).toUpperCase() + repo.split('/')[1].slice(1);
-//     const indexMdContent = `---
-// title: ${capitalizedTitle} (${branch})
-// ---
-//
-// ${swaggerFiles.map(file => {
-//     const fileName = path.basename(file);
-//     const fileNameWithoutExtension = fileName.replace('.swagger.yaml', '');
-//     return `- [${fileNameWithoutExtension}](/apis/${repoName}/${isLatest ? 'latest' : branch}/${fileNameWithoutExtension}.api)`;
-// }).join('\n')
-//     }
-// `;
-//
-//     fs.writeFileSync(indexMdPath, indexMdContent);
-//
-//
-//     return specs;
 }
 
 module.exports = parse;

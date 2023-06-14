@@ -11,7 +11,18 @@ const generateMd = async () => {
         });
     }
 
-    const manuals = fs.readdirSync('./manuals');
+    const manualOrder = [
+        'leap',
+        'cdt',
+        'dune',
+        'eos-system-contracts'
+    ]
+
+    const manuals = fs.readdirSync('./manuals').sort((a, b) => {
+        if(!manualOrder.includes(a)) return 1;
+        if(!manualOrder.includes(b)) return -1;
+        return manualOrder.indexOf(a) - manualOrder.indexOf(b);
+    });
     let manualVersions = [];
     for (const manual of manuals) {
         manualVersions.push({
@@ -51,4 +62,5 @@ ${manualVersions.map(manual => {
     fs.writeFileSync('./docs/999_apis-and-manuals.md', content);
 }
 
+generateMd();
 module.exports = generateMd;
