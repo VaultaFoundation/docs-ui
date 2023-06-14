@@ -1,80 +1,78 @@
 ---
-title: "V1 History Alternatives"
+title: “V1历史选择”
 sidebar_position: 1
 ---
 
-# V1 History Alternatives
+最新的 EOS v3.1 版本正式结束了对旧版 V1 历史记录插件的支持。因此，依赖 V1 History 进行集成的区块生产者和节点运营者必须寻求替代解决方案。
 
-The latest EOS v3.1 release officially ends support for the legacy V1 History plugin. Therefore, block producers and node operators who have integrations that rely on V1 History must seek alternative solutions.
+## 生产就绪替代品
 
-## Production Ready Alternatives
+提供以下经过实战检验且符合 V1 标准的历史记录解决方案：
+- Hyperion 历史解决方案
+- Roborovski 历史 API
 
-The following battle tested and V1 compliant history solutions are available:
-- Hyperion History Solution
-- Roborovski History API
+# Roborovski 历史 API
 
-# Roborovski History API
+＃＃ 概述
 
-## Overview
+Roborovski History API 旨在替代 V1 历史 API。它依靠 Trace API Plugin 提取历史数据，然后将其打包为 V1 格式，然后再返回给客户端请求。
 
-Roborovski History API is designed as a drop-in replacement for the V1 history API. It relies on the Trace API Plugin to extract the history data and then packs it in V1 format before it gives it back to the client request.
+## 谁运行 Roborovski History API
 
-## Who Runs Roborovski History API
+Roborovski History API 由 [格雷玛斯公司](https://greymass.com/)
 
-Roborovski History API is implemented and ran by [Greymass Inc.](https://greymass.com/)
+## 是什么让 Roborovski History API 安全
 
-## What makes the Roborovski History API safe
+Roborovski History API 具有高度的安全性，因为它是由 [格雷玛斯公司](https://greymass.com/) 它一直是 EOS、WAX、TELOS、PROTON、FIO 和其他基于 EOS 的链的可靠和稳定的区块生产者和钱包开发商（Anchor）公司。
 
-Roborovski History API has a high degree of safety because it is created by [Greymass Inc.](https://greymass.com/) which has been a credible and stable block producer and wallet developer (Anchor) company for EOS, WAX, TELOS, PROTON, FIO and other EOS based chains.
+## 了解与托管解决方案相关的风险
 
-## Understanding the risks associated with hosted solutions
+如果您依赖托管解决方案，那么您依赖于您无法控制的数据和流程的正确性。因此，如果您的应用严重依赖链上数据，强烈建议您托管自己的历史记录解决方案。然而，由于 Roborovsky 目前是闭源的，如果你想运行你自己的节点，你将需要查看下面的 Hyperion。
 
-If you rely on a hosted solution, you are reliant on the correctness of data and processes that you do not control. Therefore, if your application critically relies on on-chain data, it is highly recommended that you host your own history solution. However, since Roborovsky is currently closed source, if you want to run your own node you will need to see Hyperion below.
+## Roborovski 历史 API 和 V1 历史标准
 
-## Roborovski History API and V1 History Standard
+Roborovski History API 符合 V1 历史 API 标准。它还在标准功能之上增加了两个功能。
 
-Roborovski History API is compliant with the V1 history API standard. It also adds two more functions on top of the standard ones.
+现有的 V1 历史插件集成商可以简单地将他们当前的 API url 替换为 Greymass 的 url，它将完美地工作。
 
-Existing V1 History Plugin integrators can simply replace their current API url with Greymass' one and it will work flawlessly.
+## API 参考
 
-## API Reference
+### 如何连接
 
-### How To Connect
+Roborovski History API 连接端点是 `https://eos.greymass.com`
 
-The Roborovski History API connection endpoint is `https://eos.greymass.com`
+### 函数列表
 
-### Functions List
+- 获取操作（兼容 V1）
+    - 邮政 `https://eos.greymass.com/v1/history/get_actions`
+- 获取交易（V1 兼容）
+    - 邮政 `https://eos.greymass.com/v1/history/get_transaction`
+- 获取交易（新方法，不在 V1 中）
+    - 得到 `https://eos.greymass.com/v1/history/get_transaction?id=<TXID>`
+- 获取操作（新方法，不在 V1 中）
+    - 得到 `https://eos.greymass.com/v1/history/get_actions?account_name=<NAME>`
 
-- Get Actions (V1 compatible)
-    - POST `https://eos.greymass.com/v1/history/get_actions`
-- Get Transaction (V1 compatible)
-    - POST `https://eos.greymass.com/v1/history/get_transaction`
-- Get Transaction (new method, not in V1)
-    - GET `https://eos.greymass.com/v1/history/get_transaction?id=<TXID>`
-- Get Actions (new method, not in V1)
-    - GET `https://eos.greymass.com/v1/history/get_actions?account_name=<NAME>`
+### 性能数据
 
-### Performance Numbers
-
-As it was observed and measured so far the Roborovski History API supports at least 50 requests per second; this limit is defined as a low load, the solution is capable of handling more, but no higher specific limits are known at the moment.
+正如目前观察和测量的那样，Roborovski History API 支持每秒至少 50 个请求；此限制被定义为低负载，该解决方案能够处理更多，但目前尚无更高的具体限制。
 
 
-Hyperion History Solution
-# Hyperion History Solution
+Hyperion 历史解决方案
+# Hyperion 历史解决方案
 
-## Overview
+＃＃ 概述
 
-Hyperion History is a full history solution for indexing, storing and retrieving EOS-based blockchain historical data. It can be deployed by node operators to provide data querying support for actions, transactions, and blocks stored on the blockchain.
+Hyperion History 是一个完整的历史解决方案，用于索引、存储和检索基于 EOS 的区块链历史数据。它可以由节点运营商部署，为存储在区块链上的动作、交易和区块提供数据查询支持。
 
-Hyperion History API provides both V2 and V1 (legacy history plugin) endpoints. Therefore, it is fully compliant with V1 history.
+Hyperion History API 提供 V2 和 V1（遗留历史插件）端点。因此，它完全符合 V1 历史。
 
-## What makes the Hyperion safe
+## 是什么让 Hyperion 安全
 
-Hyperion is developed and maintained by EOS Rio: https://eosrio.io/hyperion/ and has been battle tested on every Antelope public network (EOS, WAX, TELOS, PROTON, FIO, etc).
+Hyperion 由 EOS Rio 开发和维护：https://eosrio.io/hyperion/ 并且已经在每个 Antelope 公共网络（EOS、WAX、TELOS、PROTON、FIO 等）上进行了实战测试。
 
-* Github: https://github.com/eosrio/Hyperion-History-API
-* Documentation: https://hyperion.docs.eosrio.io/
+* Github：https://github.com/eosrio/Hyperion-History-API
+* 文档：https://hyperion.docs.eosrio.io/
 
-## Installation
+＃＃ 安装
 
-Head over to the [Hyperion Documentation](https://hyperion.docs.eosrio.io/) for installation instructions.
+前往 [Hyperion 文档](https://hyperion.docs.eosrio.io/) 安装说明。

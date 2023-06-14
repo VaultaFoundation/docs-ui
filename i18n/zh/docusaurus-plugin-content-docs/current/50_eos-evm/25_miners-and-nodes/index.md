@@ -1,7 +1,7 @@
 ---
-title: Running EOS EVM Nodes
+title: 运行 EOS EVM 节点
 ---
 
-This section will guide you through the process of setting up node operation for the EOS EVM.
+本节将指导您完成为 EOS EVM 设置节点操作的过程。
 
-* [Transaction Miner](./10_transaction-miner.md)
+* [交易矿工](./10_transaction-miner.md)

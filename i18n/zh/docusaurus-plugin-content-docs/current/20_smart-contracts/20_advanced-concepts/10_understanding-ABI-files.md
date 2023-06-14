@@ -1,17 +1,17 @@
 ---
-title: "Understanding ABI Files"
+title: “了解 ABI 文件”
 ---
 
-An `ABI` file (or Application Binary Interface) is a JSON file that describes how to integrators or users of your smart
-contracts can interact with them. It describes the actions and data structures of your smart contract, and how to convert them
-to and from JSON.
+一个 `ABI` 文件（或应用程序二进制接口）是一个 JSON 文件，描述了如何将智能的集成商或用户
+合同可以与他们互动。它描述了你的智能合约的动作和数据结构，以及如何转换它们
+往返于 JSON。
 
-ABI files are generated from the smart contract source code, but it is also possible to write them manually (though it's not recommended).
+ABI 文件是从智能合约源代码生成的，但也可以手动编写它们（尽管不推荐）。
 
-Understanding them will allow you to write better smart contracts, and to debug them more easily.
+了解它们将使您能够编写更好的智能合约，并更轻松地调试它们。
 
 
-## Example ABI
+## 示例 ABI
 
 ```cpp
 CONTRACT mycontract : public contract {
@@ -32,7 +32,7 @@ CONTRACT mycontract : public contract {
 };
 ```
 
-The code above will produce the following JSON ABI:
+上面的代码将生成以下 JSON ABI：
 
 ```json
 {
@@ -86,19 +86,19 @@ The code above will produce the following JSON ABI:
 }
 ```
 
-## ABI elements
+## ABI 元素
 
-### Version
+＃＃＃ 版本
 
-The version of the ABI is used to ensure compatibility. It is a string in the format `eosio::abi/X.Y`, where `X` and `Y` are integers.
+ABI 的版本用于确保兼容性。它是格式中的字符串 `eosio::abi/X.Y`， 在哪里 `X` 和 `Y` 是整数。
 
 ```json
 "version": "eosio::abi/1.2",
 ```
 
-### Types
+### 类型
 
-Types are custom types defined in the contract. They are often used to make contract development more readable and maintainable.
+类型是合同中定义的自定义类型。它们通常用于使合约开发更具可读性和可维护性。
 
 ```json
 "types": [{
@@ -107,12 +107,12 @@ Types are custom types defined in the contract. They are often used to make cont
 }],
 ```
 
-### Structs
+### 结构
 
-Structs are custom data structures defined in the contract. They are often used as a model to store within database tables.
+结构是合约中定义的自定义数据结构。它们通常用作存储在数据库表中的模型。
 
 
-#### Base structure
+#### 基本结构
 
 ```json
 {
@@ -122,7 +122,7 @@ Structs are custom data structures defined in the contract. They are often used 
 }
 ```
 
-#### Field structure
+#### 字段结构
 
 ```json
 {
@@ -131,7 +131,7 @@ Structs are custom data structures defined in the contract. They are often used 
 }
 ```
 
-#### Example struct
+#### 示例结构
 ```json
 {
   "name": "newuser",
@@ -145,10 +145,10 @@ Structs are custom data structures defined in the contract. They are often used 
 }
 ```
 
-### Actions
+### 动作
 
-Actions are the callable functions of the contract. They are what users of the contract interact with 
-when they want to perform operations on the blockchain.
+动作是合约的可调用函数。它们是合约用户与之交互的对象
+当他们想在区块链上执行操作时。
 
 ```json
 {
@@ -158,9 +158,9 @@ when they want to perform operations on the blockchain.
 }
 ```
 
-### Tables
+### 表
 
-Tables are the persistent data structures of the contract. They are the location of data stored within the blockchain.
+表是合约的持久数据结构。它们是存储在区块链中的数据的位置。
 
 ```json
 {
@@ -172,7 +172,7 @@ Tables are the persistent data structures of the contract. They are the location
 }
 ```
 
-An example of a filled out table:
+填写表格的示例：
 
 ```json
 {
@@ -184,9 +184,9 @@ An example of a filled out table:
 }
 ```
 
-### Comments
+＃＃＃ 评论
 
-You may add a comment to your ABI file which will be ignored by tooling.
+您可以在 ABI 文件中添加注释，工具会忽略该注释。
 
 ```json
 "___comment" : "Your comment here"

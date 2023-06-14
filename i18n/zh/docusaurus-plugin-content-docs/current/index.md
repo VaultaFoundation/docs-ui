@@ -1,14 +1,14 @@
 ---
-title: Welcome
+title: 欢迎
 sidebar_class_name: sidebarhidden
 ---
 
-Welcome to the EOS Documentation. You can learn about a variety of topics related to EOS blockchain development and operations.
+欢迎使用 EOS 文档。您可以了解与 EOS 区块链开发和运营相关的各种主题。
 
-Select a journey below to get started:
+选择下面的旅程开始：
 
-- [**Basics**](./10_blockchain-basics/index.md): Learn about blockchain technology and the EOS.
-- [**Smart Contracts**](./20_smart-contracts/index.md): Learn how to develop, deploy, and use smart contracts for the EOS blockchain.
-- [**Web Applications**](./30_web-applications/index.md): Learn how to design and implement web applications for the EOS blockchain.
-- [**Node Operation**](./40_node-operation/index.md): Learn how to configure and deploy Leap nodes for the EOS blockchain.
+- [**基本**](./10_blockchain-basics/index.md)：了解区块链技术和 EOS。
+- [**智能合约**](./20_smart-contracts/index.md)：了解如何为 EOS 区块链开发、部署和使用智能合约。
+- [**网络应用程序**](./30_web-applications/index.md)：了解如何为 EOS 区块链设计和实施 Web 应用程序。
+- [**节点操作**](./40_node-operation/index.md)：了解如何为 EOS 区块链配置和部署 Leap 节点。
 

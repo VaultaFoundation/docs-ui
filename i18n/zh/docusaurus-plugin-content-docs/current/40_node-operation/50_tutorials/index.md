@@ -1,7 +1,7 @@
 ---
-title: Tutorials
+title: 教程
 ---
 
-Learn how to accomplish various goals.
+了解如何实现各种目标。
 
-- [Watching transfers](./10_watching-transfers.md) - Learn how to watch for transfers, including inline transfers.
+- [观看转会](./10_watching-transfers.md) - 了解如何监视传输，包括内联传输。

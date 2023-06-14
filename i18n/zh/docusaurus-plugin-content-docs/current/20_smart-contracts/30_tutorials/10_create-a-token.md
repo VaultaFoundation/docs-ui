@@ -1,32 +1,32 @@
 ---
-title: "Create a Token"
+title: “创建令牌”
 ---
 
 
-A token is an own-able digital asset such as a virtual collectible or in-game currency. It is nothing more than a data structure
-that is stored on the blockchain.
+代币是一种可拥有的数字资产，例如虚拟收藏品或游戏内货币。无非就是一个数据结构
+存储在区块链上。
 
-A token contract defines the data structures that make up a token, the storage of those structures, 
-and the actions that can be taken to manipulate the tokens.
+代币合约定义了构成代币的数据结构，这些结构的存储，
+以及可以采取的操作令牌的操作。
 
-There are two widely used types of blockchain tokens: 
-- **Fungible tokens** are interchangeable and every token is equal to every other, like gold in a game 
-- **Non-fungible tokens** are unique, like a collectible card or a piece of land
+有两种广泛使用的区块链代币类型：
+- **可替代代币**是可以互换的，每个代币都等同于其他代币，就像游戏中的黄金一样
+- **不可替代的代币**是独一无二的，就像一张收藏卡或一块土地
 
-In this tutorial you will create an in-game currency called **GOLD**, which is a *fungible token*. 
+在本教程中，您将创建一种名为 **GOLD** 的游戏内货币，它是一种*可替代代币*。
 
-## Your development environment
+## 你的开发环境
 
-Make sure you have [DUNE](../10_getting-started/10_dune-guide.md) installed
-and understand how to build contracts.
+确保你有 [沙丘](../10_getting-started/10_dune-guide.md) 安装
+并了解如何建立合同。
 
-After each step, you should try to compile your contract and check if there are any errors.
+在每一步之后，你应该尝试编译你的合约并检查是否有任何错误。
 
-## Create a new contract
+## 创建一个新合约
 
-To get started, let's set up a basic contract scaffold.
+首先，让我们建立一个基本的契约脚手架。
 
-Create a `token.cpp` file and add the following code:
+创建一个 `token.cpp` 文件并添加以下代码：
 
 ```cpp
 #include <eosio/eosio.hpp>
@@ -43,9 +43,9 @@ CONTRACT token : public contract {
 };
 ```
 
-## Creating the actions
+## 创建动作
 
-Our token contract will have three actions: 
+我们的代币合约将执行三个操作：
 
 ```cpp
     ACTION issue(name to, asset quantity){
@@ -61,42 +61,42 @@ Our token contract will have three actions:
     }
 ```
 
-Add them to your contract and then let's dig into each action and see what they do, and what parameters they take.
+将它们添加到您的合同中，然后让我们深入研究每个操作并查看它们的作用以及它们采用的参数。
 
-### Issue
+＃＃＃ 问题
 
-The `issue` action creates new tokens and adds them to an account's balance and to the total supply. 
+这 `issue` action 创建新代币并将它们添加到帐户余额和总供应量中。
 
-It takes two parameters:
-- **to**: The account to which the tokens will be issued
-- **quantity**: The amount of tokens to issue
+它需要两个参数：
+- **to**：代币将被发行到的账户
+- **数量**：要发行的代币数量
 
-### Burn
+### 燃烧
 
-The `burn` action removes tokens from an account's balance and the total supply. 
+这 `burn` action 从账户余额和总供应量中移除代币。
 
-It takes two parameters:
-- **owner**: The account that will be burning the tokens
-- **quantity**: The amount of tokens to burn
+它需要两个参数：
+- **所有者**：将销毁代币的账户
+- **数量**：要销毁的代币数量
 
-### Transfer
+＃＃＃ 转移
 
-The `transfer` action transfers tokens from one account to another. 
+这 `transfer` action 将令牌从一个帐户转移到另一个帐户。
 
-It takes four parameters:
-- **from**: The account sending the tokens
-- **to**: The account receiving the tokens
-- **quantity**: The amount of tokens to transfer
-- **memo**: A memo to include with the transfer
+它需要四个参数：
+- **from**：发送代币的账户
+- **to**：接收代币的账户
+- **数量**：要转移的代币数量
+- **备忘录**：包含在转账中的备忘录
 
-## Setting the symbol and precision
+## 设置符号和精度
 
-Every fungible token has a **symbol** and a **precision**.
+每个可替代代币都有一个**符号**和一个**精度**。
 
-The **symbol** is an identifier for the token (like EOS, BTC, or in our case GOLD), and the **precision** is the number of decimal places that the token supports.
-We are going to add a constant variable to our contract to define the `symbol` and `precision` of our token.
+**symbol** 是令牌的标识符（如 EOS、BTC，或者在我们的例子中是 GOLD），**precision** 是令牌支持的小数位数。
+我们将在合约中添加一个常量变量来定义 `symbol` 和 `precision` 我们的代币。
 
-Add this above the `issue` action:
+在上面添加这个 `issue` 行动：
 
 ```cpp
     const symbol TOKEN_SYMBOL = symbol(symbol_code("GOLD"), 4);
@@ -104,15 +104,15 @@ Add this above the `issue` action:
     ACTION issue ...
 ```
 
-The above lines means that we are going to create a token with the symbol `GOLD` and a precision of `4`.
+上面几行意味着我们将创建一个带有符号的令牌 `GOLD` 和精度 `4`.
 
-It will look like `100.0000 GOLD` or `0.0001 GOLD`.
+它看起来像 `100.0000 GOLD` 或者 `0.0001 GOLD`.
 
-## Adding the data structures
+## 添加数据结构
 
-Now that you have your actions defined, let's add the data structures that will be used to store the token's data.
+现在您已经定义了操作，让我们添加将用于存储令牌数据的数据结构。
 
-Put this below the `TOKEN_SYMBOL` you just added.
+把这个放在下面 `TOKEN_SYMBOL` 你刚刚添加。
 
 ```cpp
     const symbol TOKEN_SYMBOL = symbol(symbol_code("GOLD"), 4);
@@ -127,49 +127,48 @@ Put this below the `TOKEN_SYMBOL` you just added.
     };
     
     using balances_table = multi_index<"balances"_n, balance>;
-    
 ```
 
-You just created a `balance` structure which defines the data that will be stored in the `balances` table.
-Then, you defined the `balances_table` type which is the definition of a table that will store rows of the `balance` model.
+你刚刚创建了一个 `balance` 定义将存储在中的数据的结构 `balances` 桌子。
+然后，您定义了 `balances_table` 类型，它是将存储行的表的定义 `balance` 模型。
 
-Later you will use the `balances_table` type to instantiate a reference to the `balances` table, and use that reference to 
-store and retrieve data to/from the blockchain.
+稍后您将使用 `balances_table` 类型以实例化对 `balances` 表，并将该引用用于
+在区块链中存储和检索数据。
 
-The `owner` property is of type `name` (EOS account name) and will be used to identify the account that owns the tokens.
-The `name` type is a way to pack a string into a 64-bit integer efficiently. It is limited to a-z, 1-5, and a period, and can 
-be up to 12 characters long.
+这 `owner` 属性是类型 `name` （EOS 账户名），将用于识别拥有代币的账户。
+这 `name` type 是一种有效地将字符串打包为 64 位整数的方法。限于 a-z、1-5 和一个句点，并且可以
+最多 12 个字符。
 
-The `balance` property is of type `asset` and will be used to store the amount of tokens that the account owns.
-The `asset` type is a special type that includes a symbol, a precision, and an amount. It has the `asset.symbol` property
-and the `asset.amount` property (which is of type `int64_t`).
+这 `balance` 属性是类型 `asset` 并将用于存储帐户拥有的代币数量。
+这 `asset` 类型是一种特殊类型，包括符号、精度和数量。它有 `asset.symbol` 财产
+和 `asset.amount` 属性（属于 `int64_t`).
 
-The `primary_key` function in the structure is used to uniquely identify each row for indexing purposes. In this case, 
-we are using the `owner` field as the primary key, but using the `uint64_t` representation instead for efficiency.
+这 `primary_key` 结构中的函数用于唯一标识每一行以用于索引目的。在这种情况下，
+我们正在使用 `owner` 字段作为主键，但使用 `uint64_t` 表示而不是为了效率。
 
-Next, you need another table to store the total supply of the token. Add this below the `balances_table` you just added:
+接下来，您需要另一个表来存储代币的总供应量。在下面添加这个 `balances_table` 你刚刚添加：
 
 ```cpp
     using supply_table = singleton<"supply"_n, asset>;
 ```
 
-We're using a different type of table here, a `singleton`. A `singleton` is a table that only has one row per-scope. 
-This is perfect for storing things like configurations. We will use it to store the total supply of the token as you 
-only have the one token in your contract.
+我们在这里使用不同类型的表，a `singleton`. A `singleton` 是每个范围只有一行的表。
+这非常适合存储配置之类的东西。我们将使用它来存储代币的总供应量
+您的合同中只有一个令牌。
 
-You can see that we also didn't define a custom structure to store as we only needed the `asset` type to store 
-the total supply.
+您可以看到我们也没有定义要存储的自定义结构，因为我们只需要 `asset` 类型存储
+总供应量。
 
-## Filling in the actions
+## 填写动作
 
-Now that you have your data structures defined, let's fill in the actions.
+现在您已经定义了数据结构，让我们填写操作。
 
-### Issue
+＃＃＃ 问题
 
-First we'll start with the `issue` action, which will create new tokens and add them to an account's balance.
+首先，我们将从 `issue` 操作，这将创建新的令牌并将它们添加到帐户的余额中。
 
-We want only the account that the contract is deployed on to be able to call the `issue` action, so we will add 
-an assertion to make sure that the account calling the action is the same as the account that the contract is deployed on.
+我们只希望部署合约的帐户能够调用 `issue` 行动，所以我们将添加
+一个断言，以确保调用该操作的帐户与部署合约的帐户相同。
 
 ```cpp
     ACTION issue(name to, asset quantity){
@@ -177,16 +176,16 @@ an assertion to make sure that the account calling the action is the same as the
     }
 ```
 
-Next, we want to make sure that the account we will issue the tokens to exists on the blockchain. We don't want that
-sweet in-game GOLD to go to waste!
+接下来，我们要确保我们将发行令牌的帐户存在于区块链上。我们不想要那个
+甜蜜的游戏内黄金去浪费！
 
 ```cpp
     ...
     check(is_account(to), "the account you are trying to issue GOLD to does not exist");
 ```
 
-Next, we want to make sure that the `quantity` parameter is a positive number, and has the correct 
-`symbol` and `precision`.
+接下来，我们要确保 `quantity` 参数是一个正数，并且有正确的
+`symbol` 和 `precision`.
 
 ```cpp
     ...
@@ -195,39 +194,39 @@ Next, we want to make sure that the `quantity` parameter is a positive number, a
     check(quantity.symbol == TOKEN_SYMBOL, "symbol precision and/or ticker mismatch");
 ```
 
-Shwew! That's a lot of checks, but it's important to make sure that we are protecting our in-game GOLD!
+嘘！这是很多检查，但重要的是要确保我们保护我们的游戏内黄金！
 
-Now let's start dealing with the balances table.
+现在让我们开始处理余额表。
 
 ```cpp
     ...
     balances_table balances(get_self(), get_self().value);
 ```
 
-We took the `balances_table` type we defined earlier and instantiated a new `balances_table` object. We passed in the 
-`get_self()` function as the first parameter (the `code` parameter), which returns the contract account's name. We passed in the `get_self().value`
-as the second parameter (the `scope` parameter), which returns the `uint64_t` representation of the contract account's name.
+我们采取了 `balances_table` 我们之前定义的类型并实例化了一个新的 `balances_table` 目的。我们通过了
+`get_self()` 函数作为第一个参数（ `code` 参数），它返回合约账户的名称。我们通过了 `get_self().value`
+作为第二个参数（ `scope` 参数），它返回 `uint64_t` 合约账户名称的表示。
 
-> ❔ **Scopes**: Scopes are a way to group rows in a table together. You can think of it as a folder that
-> contains all the rows in the table. In this case, we are using the contract account's name as the scope, so all the
-> rows in the `balances` table will be grouped together under the contract account's name. If you'd
-> like to learn more about scopes, check out the [Getting Started with Smart Contracts Guide](../10_getting-started/40_smart-contract-basics.md#multi-index-instantiate-with-code-and-scope).
+> ❔ **作用域**：作用域是一种将表中的行分组在一起的方法。你可以把它想象成一个文件夹
+> 包含表中的所有行。在这种情况下，我们使用合约账户的名称作为范围，所以所有
+> 中的行 `balances` 表格将在合约账户名称下组合在一起。如果你愿意
+> 想了解更多有关范围的信息，请查看 [智能合约入门指南](../10_getting-started/40_smart-contract-basics.md#multi-index-instantiate-with-code-and-scope).
 
-Next, we need to check if the `to` account already has a balance. We can do this by using the `find` function on the
-`balances` table.
+接下来，我们需要检查是否 `to` 账户已有余额。我们可以通过使用 `find` 上的功能
+`balances` 桌子。
 
 ```cpp
     ...
     auto to_balance = balances.find(to.value);
 ```
 
-The `find` function returns an iterator to the row in the table that matches the primary key. If the `to` account does
-not have a balance, then the `find` function will return an iterator to the end of the table. Remember that the primary key
-for the table is a `uint64_t`, so we need to use the `to.value` to get the `uint64_t` representation of the `to` account.
+这 `find` 函数返回一个迭代器到表中与主键匹配的行。如果 `to` 帐户确实
+没有平衡，那么 `find` 函数将返回一个指向表末尾的迭代器。记住主键
+因为桌子是 `uint64_t`，所以我们需要使用 `to.value` 得到 `uint64_t` 代表的 `to` 帐户。
 
-If there is already a balance, then we need to add the new tokens to the existing balance. We can do this by using the
-`modify` function on the `balances` table. We will check to see if the `to_balance` iterator is not equal to the end of
-the table, and if it is not, then we will modify the row.
+如果已经有余额，那么我们需要将新代币添加到现有余额中。我们可以通过使用
+`modify` 上的功能 `balances` 桌子。我们将检查是否 `to_balance` 迭代器不等于结束
+表，如果不是，那么我们将修改该行。
 
 ```cpp
     ...
@@ -238,16 +237,16 @@ the table, and if it is not, then we will modify the row.
     }
 ```
 
-The `modify` function takes three parameters:
-- **iterator**: The iterator to the row that you want to modify
-- **payer**: The account that will pay for the RAM to store the modified row
-- **lambda**: A lambda function that gives a reference to the row that you want to modify
+这 `modify` 函数接受三个参数：
+- **迭代器**：要修改的行的迭代器
+- **payer**: 支付 RAM 以存储修改行的帐户
+- **lambda**：提供对要修改的行的引用的 lambda 函数
 
-The lambda function is where you actually modify the row. In this case, we are adding the new tokens to the existing
-balance.
+lambda 函数是您实际修改行的地方。在这种情况下，我们将新令牌添加到现有的
+平衡。
 
-If there is not already a balance, then we need to create a new balance for the `to` account. We can do this by using
-the `emplace` function on the `balances` table.
+如果还没有余额，那么我们需要为 `to` 帐户。我们可以通过使用
+这 `emplace` 上的功能 `balances` 桌子。
 
 ```cpp
     ...
@@ -259,14 +258,14 @@ the `emplace` function on the `balances` table.
     }
 ```
 
-The `emplace` function takes two parameters:
-- **payer**: The account that will pay for the RAM to store the new row
-- **lambda**: A lambda function that gives a reference to the new row
+这 `emplace` 函数有两个参数：
+- **payer**: 支付 RAM 以存储新行的帐户
+- **lambda**：提供对新行的引用的 lambda 函数
 
-The lambda function is where you actually initialize the new row. In this case, we are setting the `owner` to the `to`
-account, and the `balance` to the `quantity`.
+lambda 函数是您实际初始化新行的地方。在这种情况下，我们设置 `owner` 到 `to`
+帐户，以及 `balance` 到 `quantity`.
 
-Finally, we need to update the total supply of the token. We can do this by getting the `supply` table.
+最后，我们需要更新代币的总供应量。我们可以通过获取 `supply` 桌子。
 
 ```cpp
     ...
@@ -274,22 +273,22 @@ Finally, we need to update the total supply of the token. We can do this by gett
     auto current_supply = supply.get_or_default(asset(0, TOKEN_SYMBOL));
 ``` 
 
-We took the `supply_table` we defined earlier and instantiated a new `supply_table` object. Just like before, we passed
-in the `get_self()` function for both the first and second parameters (respectively: `code`, and `scope`). 
+我们采取了 `supply_table` 我们之前定义并实例化了一个新的 `supply_table` 目的。和以前一样，我们过去了
+在里面 `get_self()` 第一个和第二个参数的函数（分别是： `code`， 和 `scope`).
 
-Next, we used the `get_or_default` function on the singleton to get the current supply of the token, or create a new one 
-if this is the first tokens that are being issued in this contract. The `get_or_default` function takes one parameter, 
-which is the value to create if no value already exists. In our case, that default value is a new `asset` that we 
-initialized with a value of `0` and the `TOKEN_SYMBOL` constant we defined earlier. This would look like `0.0000 GOLD`.
+接下来，我们使用了 `get_or_default` 在单例上运行以获取令牌的当前供应，或创建一个新的
+如果这是本合同中发行的第一个代币。这 `get_or_default` 函数接受一个参数，
+如果不存在任何值，则这是要创建的值。在我们的例子中，默认值是一个新的 `asset` 我们
+初始化值为 `0` 和 `TOKEN_SYMBOL` 我们之前定义的常量。这看起来像 `0.0000 GOLD`.
 
-Now that we have the current supply, we can add the new tokens to the current supply and save the value to the blockchain.
-Since both the `current_supply` and `quantity` are of type `asset`, we can use the `+` operator to add them together.
+现在我们有了当前供应量，我们可以将新代币添加到当前供应量并将价值保存到区块链中。
+由于两者 `current_supply` 和 `quantity` 属于类型 `asset`，我们可以使用 `+` 运算符将它们加在一起。
 
-> ✔ **Automatic overflow protection**
-> 
-> The `asset` class handles overflows/underflows automatically. If there is an overflow
-> it will throw an error and abort the transaction automatically. You do not have to do any 
-> special checks when using `asset`. You do however if using `uint64_t` or any other base type. 
+> ✔ **自动溢出保护**
+>
+> 的 `asset` 类自动处理上溢/下溢。如果有溢出
+> 它会抛出错误并自动中止交易。你不必做任何事
+> 使用时的特殊检查 `asset`.但是，如果使用 `uint64_t` 或任何其他基本类型。
 
 ```cpp
     ...
@@ -297,18 +296,18 @@ Since both the `current_supply` and `quantity` are of type `asset`, we can use t
     supply.set(new_supply, get_self());
 ```
 
-We used the `set` function on the singleton to save the new supply to the blockchain. 
+我们使用了 `set` 在单例上运行以将新供应保存到区块链。
 
-The `set` function takes two parameters:
-- **value**: The new value to save to the blockchain
-- **payer**: The account that will pay for the RAM to store the new value
+这 `set` 函数有两个参数：
+- **value**：保存到区块链的新值
+- **payer**：支付 RAM 以存储新值的帐户
 
-### Burn
+### 燃烧
 
-The `burn` action is very similar to the `issue` action. The only difference is that we are subtracting the tokens from
-the `owner` account and the supply instead of increasing them.
+这 `burn` 行动是非常相似的 `issue` 行动。唯一的区别是我们从
+这 `owner` 帐户和供应而不是增加它们。
 
-Let's start with the checks like before, and then get into the logic.
+让我们像以前一样从检查开始，然后进入逻辑。
 
 ```cpp
     ACTION burn(name owner, asset quantity){
@@ -319,8 +318,8 @@ Let's start with the checks like before, and then get into the logic.
     }
 ```
 
-We're doing the same checks we did in the `issue` action, except for the `is_account` check because we will already be 
-testing to see if the `owner` has a balance in the `balances` table.
+我们正在做我们在 `issue` 行动，除了 `is_account` 检查，因为我们已经
+测试看是否 `owner` 有一个平衡 `balances` 桌子。
 
 ```cpp
     ...
@@ -329,25 +328,25 @@ testing to see if the `owner` has a balance in the `balances` table.
     check(owner_balance != balances.end(), "account does not have any GOLD");
 ```
 
-Now let's check if the `owner` account has enough tokens to burn.
+现在让我们检查一下 `owner` 帐户有足够的代币可以燃烧。
 
 ```cpp
     ...
     check(owner_balance->balance.amount >= quantity.amount, "owner doesn't have enough GOLD to burn");
 ```
 
-Let's calculate a new balance for the `owner` account.
+让我们计算一个新的余额 `owner` 帐户。
 
 ```cpp
     ...
     auto new_balance = owner_balance->balance - quantity;
 ```
 
-We don't need to check if the `new_balance` is below zero because we already checked if the `owner` account has enough tokens
-to burn.
+我们不需要检查是否 `new_balance` 低于零，因为我们已经检查过 `owner` 账户有足够的代币
+燃烧。
 
-Let's subtract the tokens from the `owner` account. If the `new_balance` is zero, then we can just erase the
-row from the `balances` table to save **RAM**.
+让我们从中减去标记 `owner` 帐户。如果 `new_balance` 为零，那么我们就可以擦除
+行从 `balances` 表来保存 **RAM**。
 
 ```cpp
     ...
@@ -356,7 +355,7 @@ row from the `balances` table to save **RAM**.
     }
 ```
 
-If the `new_balance` is not zero, then we need to modify the row in the `balances` table.
+如果 `new_balance` 不为零，那么我们需要修改 `balances` 桌子。
 
 ```cpp
     ...
@@ -367,7 +366,7 @@ If the `new_balance` is not zero, then we need to modify the row in the `balance
     }
 ```
 
-We also need to remove the tokens from the total supply.
+我们还需要从总供应量中移除代币。
 
 ```cpp
     ...
@@ -375,17 +374,17 @@ We also need to remove the tokens from the total supply.
     supply.set(supply.get() - quantity, get_self());
 ```
 
-Voilà, now we can burn virtual GOLD.
+瞧，现在我们可以燃烧虚拟黄金了。
 
-### Transfer
+＃＃＃ 转移
 
-The `transfer` action is a little more complicated than the `issue` and `burn` actions. We need to transfer tokens from
-one account to another account and make sure that the `from` account has enough tokens to transfer.
+这 `transfer` 动作比 `issue` 和 `burn` 动作。我们需要从
+一个帐户到另一个帐户，并确保 `from` 账户有足够的代币可以转账。
 
-On top of that, we want to make it so that other contracts can interact with our token so that they can 
-build things on top of it. 
+最重要的是，我们想让其他合约可以与我们的代币交互，这样他们就可以
+在它之上构建东西。
 
-Again let's start with the checks and then get into the logic.
+让我们再次从检查开始，然后进入逻辑。
 
 ```cpp
     ACTION transfer(name from, name to, asset quantity, string memo){
@@ -397,10 +396,10 @@ Again let's start with the checks and then get into the logic.
     }
 ```
 
-We're doing mostly the same checks as before but this time we're making sure the `from` account (the sender) is the one 
-that is authorizing the transfer, and we're making sure that the `to` account exists.
+我们所做的检查与以前基本相同，但这次我们要确保 `from` 帐户（发件人）是一个
+授权转移，我们确保 `to` 帐户存在。
 
-Next, we need to get the `balances` table and check if the `from` account has a balance.
+接下来，我们需要得到 `balances` 表并检查是否 `from` 账户有余额。
 
 ```cpp
     ...
@@ -409,21 +408,21 @@ Next, we need to get the `balances` table and check if the `from` account has a 
     check(from_balance != balances.end(), "account does not have any GOLD");
 ```
 
-Let's check if the `from` account has enough tokens to transfer.
+让我们检查一下 `from` 账户有足够的代币可以转账。
 
 ```cpp
     ...
     check(from_balance->balance.amount >= quantity.amount, "owner doesn't have enough GOLD to transfer");
 ```
 
-We need to check if the `to` account has a balance in the `balances` table.
+我们需要检查是否 `to` 帐户中有余额 `balances` 桌子。
 
 ```cpp
     ...
     auto to_balance = balances.find(to.value);
 ```
 
-If the `to` account does not have a balance, then we need to create a new row in the `balances` table.
+如果 `to` 帐户没有余额，那么我们需要在 `balances` 桌子。
 
 ```cpp
     ...
@@ -435,7 +434,7 @@ If the `to` account does not have a balance, then we need to create a new row in
     }
 ```
 
-If the `to` account _does_ have a balance, then we need to modify the row in the `balances` table.
+如果 `to` 帐户_确实_有余额，那么我们需要修改 `balances` 桌子。
 
 ```cpp
     ...
@@ -446,8 +445,8 @@ If the `to` account _does_ have a balance, then we need to modify the row in the
     }
 ```
 
-Now we need to check if the `from` account has a balance of the same amount as the `quantity` we are transferring. If
-it does, then we can just erase the row from the `balances` table, and once again, save **RAM**.
+现在我们需要检查是否 `from` 账户余额与 `quantity` 我们正在转移。如果
+确实如此，那么我们就可以从 `balances` 表，并再次保存 **RAM**。
 
 ```cpp
     ...
@@ -456,8 +455,8 @@ it does, then we can just erase the row from the `balances` table, and once agai
     }
 ```
 
-If the `from` account has a balance that is greater than the `quantity` we are transferring, then we need to
-modify the row in the `balances` table.
+如果 `from` 账户余额大于 `quantity` 我们正在转移，那么我们需要
+修改行中的 `balances` 桌子。
 
 ```cpp
     ...
@@ -468,9 +467,9 @@ modify the row in the `balances` table.
     }
 ```
 
-Finally, we need to emit an event that other contracts can listen to. We will emit two events, one which has the `from` 
-account as the recipient, and another which has the `to` account as the recipient. This allows either party to listen
-to the event and do something with it if they have a contract deployed to that account.
+最后，我们需要发出一个其他合约可以监听的事件。我们将发出两个事件，其中一个具有 `from` 
+帐户作为收件人，另一个具有 `to` 作为收件人的帐户。这允许任何一方收听
+如果他们已将合同部署到该帐户，则可以对事件进行处理。
 
 ```cpp
     ...
@@ -479,12 +478,12 @@ to the event and do something with it if they have a contract deployed to that a
 ```
 
 
-## The full contract
+## 完整的合同
 
-If you want to copy the full contract, and match it against yours, you can find it below.
+如果你想复制完整的合同，并将其与你的合同相匹配，你可以在下面找到它。
 
-<details>
-    <summary>Click here to view full code</summary>
+<详情>
+    <summary>点此查看完整代码</summary>
 
 ```cpp
 #include <eosio/eosio.hpp>
@@ -610,24 +609,24 @@ CONTRACT token : public contract {
    }
 };
 ```
-</details>
+</详情>
 
 
-## Grab battle tested source code
+## 抢战测试源码
 
-If you'd like to simply use the source code which is used in most fungible tokens on the EOS Network, you can head over to the
+如果您只想使用 EOS 网络上大多数可替代代币中使用的源代码，您可以前往
 [eosio.token](https://github.com/eosnetworkfoundation/eos-system-contracts/tree/4702c8f2d95dd06f0924688560b8457962522216/contracts/eosio.token)
-repository to grab it. Not only is this code battle tested, but it powers the underlying EOS token.
+存储库来获取它。此代码战不仅经过测试，而且为底层 EOS 代币提供支持。
 
-Please note that the standard `eosio.token` contract differs considerably from this tutorial. It is a more complex
-contract which allows for more advanced features such as allowing users interacting with the contract to pay for their own RAM, 
-or creating multiple tokens within a single contract. 
+请注意，标准 `eosio.token` 合同与本教程有很大不同。这是一个更复杂的
+允许更多高级功能的合约，例如允许与合约交互的用户为他们自己的 RAM 付费，
+或在单个合约中创建多个代币。
 
-You will need to `create` a new token with it, and then `issue` those tokens to an account before they can be transferred. 
-You will also need to `open` a balance for an account before you can transfer tokens over to it.
+你将需要 `create` 一个新的令牌，然后 `issue` 这些代币在转移之前先存入一个账户。
+您还需要 `open` 一个帐户的余额，然后才能将代币转移到该帐户。
 
 
-## Challenge
+＃＃ 挑战
 
-This token has no `MAXIMUM_SUPPLY`. How can you add a constant to the contract which defines the maximum supply of the
-token and make sure that the `issue` action does not exceed this maximum supply?
+这个令牌没有 `MAXIMUM_SUPPLY`.您如何向合约添加一个常量来定义最大供应量
+令牌并确保 `issue` 行动不超过这个最大供应量？

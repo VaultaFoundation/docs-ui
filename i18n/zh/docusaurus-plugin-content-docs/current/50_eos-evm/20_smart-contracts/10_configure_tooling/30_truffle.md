@@ -1,8 +1,8 @@
 ---
-title: Truffle
+title: 松露
 ---
 
-Modify your `truffle-config.js` to add the EOS EVM to [Truffle](https://www.trufflesuite.com/):
+修改你的 `truffle-config.js` 将 EOS EVM 添加到 [松露](https://www.trufflesuite.com/):
 
 ```javascript
 require('dotenv').config();
@@ -23,9 +23,9 @@ module.exports = {
     // ... other config
 ```
 
-### Installing dependencies
+### 安装依赖
 
-You may need to install `@truffle/hdwallet-provider` and `dotenv`:
+您可能需要安装 `@truffle/hdwallet-provider` 和 `dotenv`:
 
 ```bash
 npm install @truffle/hdwallet-provider dotenv

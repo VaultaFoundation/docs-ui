@@ -1,7 +1,7 @@
 ---
-title: Migration Guides
+title: 迁移指南
 ---
 
-Learn about EOS History Alternatives:
+了解 EOS 历史备选方案：
 
-- [V1 History Alternatives](01_v1-history-alternatives.md)
+- [V1 历史备选方案](01_v1-history-alternatives.md)

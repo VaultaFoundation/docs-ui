@@ -1,31 +1,31 @@
 ---
-title: Watching Transfers
+title: 观看转会
 ---
 
-You might want to watch for all transfers that happen within the EOS Network. This is useful for **exchanges** and 
-**wallets** that need to keep track of incoming/outgoing funds.
+您可能想要查看 EOS 网络内发生的所有传输。这对于**交换**和
+**钱包**需要跟踪进/出资金。
 
-In EOS, there are multiple ways that a transfer can occur. The most common way is through a `transfer` action on a transaction
-directly, but a transfer can also occur as an inline action on triggered by a non-transfer action. If you are only
-watching blocks, then you will miss the inline action transfers. This could impact your users' experience.
+在 EOS 中，可以通过多种方式进行转账。最常见的方式是通过一个 `transfer` 交易行动
+直接，但传输也可以作为由非传输操作触发的内联操作发生。如果你只是
+watching blocks，那么你会错过内联动作传输。这可能会影响您的用户体验。
 
-> ❔ **What is an inline action?**
+> ❔ **什么是内联动作？**
 >
-> Inline actions are actions that are triggered by another action. For example, when withdrawing from a decentralized 
-> exchange, the exchange will trigger a transfer action to send the tokens to the user. This transfer action is an inline
-> action, as it occurred from a `exchange::withdraw` action. It was a non-root-level action.
+> 内联动作是由另一个动作触发的动作。例如，当从分散的退出时
+> exchange，交易所会触发转账动作，将代币发送给用户。此传输操作是内联的
+> 动作，因为它发生在 `exchange::withdraw` 行动。这是一个非根级别的操作。
 
-Though this tutorial centers around watching for transfers, you can use the same method to watch for any action that
-occurs on the EOS Network, from any contract.
+虽然本教程以监视传输为中心，但您可以使用相同的方法来监视任何操作
+发生在 EOS 网络上，来自任何合约。
 
-## Download the token ABI
+## 下载令牌 ABI
 
-In order to watch for transfers, you will need to download the ABI for the token contract. You can either compile the 
-contract yourself, or you can download the ABI directly.
+为了观察转账，您需要下载代币合约的 ABI。您可以编译
+自己签约，也可以直接下载ABI。
 
-### Using curl
+### 使用卷曲
 
-You can use `curl` to fetch the ABI directly from the EOS Mainnet.
+您可以使用 `curl` 直接从 EOS 主网获取 ABI。
 
 ```shell
 curl -X POST \
@@ -34,16 +34,16 @@ curl -X POST \
   https://eos.greymass.com/v1/chain/get_abi | jq -r '.abi' > ./eosio.token.abi
 ```
 
-The command above will fetch the ABI for the `eosio.token` contract's ABI and save it to a file called `eosio.token.abi`.
+上面的命令将为 `eosio.token` 合约的 ABI 并将其保存到一个名为 `eosio.token.abi`.
 
-### Copy the ABI from the docs
+### 从文档中复制 ABI
 
-Below is the ABI for the `eosio.token` contract. You can copy this directly into your application.
-This was pulled directly from the mainnet, but there is no guarantee that it will be the same when you
-read this.
+以下是 ABI `eosio.token` 合同。您可以将其直接复制到您的应用程序中。
+这是直接从主网拉取的，但不能保证当你使用时它会是一样的
+读这个。
 
-<details>
-    <summary>See JSON ABI</summary>
+<详情>
+    <summary>参见 JSON ABI</summary>
 
 ```json
 {
@@ -235,18 +235,18 @@ read this.
 }
 ```
 
-</details>
+</详情>
 
-### Compiling the contract yourself
+### 自己编译合约
 
-You can clone the [EOS System Contracts](https://github.com/eosnetworkfoundation/eos-system-contracts/) repository,
-and then compile the contracts using the `build.sh` script.
+你可以克隆 [EOS 系统合约](https://github.com/eosnetworkfoundation/eos-system-contracts/) 存储库，
+然后使用 `build.sh` 脚本。
 
-You will then have a `build/contracts` directory that contains the compiled contracts.
+然后你会有一个 `build/contracts` 包含已编译合约的目录。
 
-## Updating your configuration file
+## 更新你的配置文件
 
-You will need to update your `config.ini` file to include the following options:
+您将需要更新您的 `config.ini` 文件以包含以下选项：
 
 ```shell
 # Plugins required for the Trace API
@@ -261,26 +261,26 @@ trace-rpc-abi=eosio.token=<YOUR_PATH_to_eosio.token.abi>
 trace-dir=/path/to/traces
 ```
 
-## Should you replay?
+## 你应该重播吗？
 
-Once you enable the Trace API, you will only get traces for blocks that are produced after you enable the plugin. 
-If you want to get traces for blocks that were produced before you enabled the plugin, you will need to replay the chain
-from that block.
+启用 Trace API 后，您将只会获得启用插件后生成的块的跟踪。
+如果你想获得启用插件之前生成的块的踪迹，你将需要重放链
+从那个街区。
 
-> 🕔 **Want to replay from EOS EVM launch?**
-> 
-> If your aim is to get traces for transfers that happen on the EOS EVM, you can use a snapshot that was taken on or before
-> 2023-04-05T02:18:09 UTC. That way you will be able to get traces for transfers that happened on the EOS EVM, but not 
-> waste time replaying blocks that were produced before the EOS EVM launch.
+> 🕔 **想从 EOS EVM 启动重播吗？**
+>
+> 如果您的目标是获取 EOS EVM 上发生的传输的踪迹，您可以使用拍摄于或之前的快照
+> 2023-04-05T02:18:09 UTC。这样您将能够获得在 EOS EVM 上发生的传输的跟踪，但不能
+> 浪费时间重播在 EOS EVM 启动之前生成的区块。
 
-## SSD considerations
+## SSD 注意事项
 
-The Trace API's persisted data grows at a rate similar to the `blocks.log`. You will need more SSD storage to store the
-traces which enable you to have a complete 
+Trace API 的持久数据增长速度与 `blocks.log`.您将需要更多 SSD 存储空间来存储
+使您能够拥有完整的交易历史记录的痕迹。
 
-You can optimize disk usage by removing old traces, and compressing log files.
+您可以通过删除旧痕迹和压缩日志文件来优化磁盘使用。
 
-Add these to your `config.ini` file:
+将这些添加到您的 `config.ini` 文件：
 ```shell
 # Remove old traces
 trace-minimum-irreversible-history-blocks=<number of blocks to keep>
@@ -289,13 +289,13 @@ trace-minimum-irreversible-history-blocks=<number of blocks to keep>
 trace-minimum-uncompressed-history-blocks=<number of blocks to keep uncompressed>
 ```
 
-## Watching blocks using the Trace API
+## 使用 Trace API 观察块
 
-Normally, you would use a `/v1/chain/get_block` request on every block, and then iterate the `actions` array within each
-transaction in the `transactions` array to scan for transfers.
+通常，您会使用 `/v1/chain/get_block` 请求每个块，然后迭代 `actions` 每个中的数组
+交易在 `transactions` 扫描传输的数组。
 
-<details>
-    <summary>See curl command to get chain block</summary>
+<详情>
+    <summary>查看curl命令获取链块</summary>
 
 ```shell
 curl -X POST \
@@ -304,14 +304,14 @@ curl -X POST \
    http://127.0.0.1:8888/v1/chain/get_block | jq
 ```
 
-</details>
+</详情>
 
-With the Trace API enabled, you will now use the `/v1/trace_api/get_block` instead, which will give you back almost the same result format, 
-except that the `actions` array will contain not only the root actions, but also the inline actions that were executed as well. 
-This paints a complete picture of what happened during the execution of the transaction, instead of just the root actions that were sent to the chain.
+启用 Trace API 后，您现在将使用 `/v1/trace_api/get_block` 相反，它会给你几乎相同的结果格式，
+除了 `actions` array 不仅包含根动作，还包含已执行的内联动作。
+这描绘了交易执行期间发生的事情的完整画面，而不仅仅是发送到链的根动作。
 
-<details>
-    <summary>See curl command to get trace block</summary>
+<详情>
+    <summary>查看curl命令获取跟踪块</summary>
 
 ```shell
 curl -X POST \
@@ -320,22 +320,22 @@ curl -X POST \
    http://127.0.0.1:8888/v1/trace_api/get_block | jq
 ```
 
-</details>
+</详情>
 
-There are some other important things to note about the Trace API's `get_block` endpoint:
-- An action's `name` property is now called `action`
-- An action's `data` property is now called `params`
-- The `block_num_or_id` POST data parameter is now just `block_num`
+关于 Trace API，还有一些其他重要事项需要注意 `get_block` 端点：
+- 一个动作 `name` 财产现在被称为 `action`
+- 一个动作 `data` 财产现在被称为 `params`
+- 这 `block_num_or_id` POST 数据参数现在只是 `block_num`
 
-> 📄 **API reference**
+> 📄 **API 参考**
 >
-> For more information about the Trace API, see the [API Reference](https://docs.eosnetwork.com/apis/leap/latest/trace_api.api).
+> 有关 Trace API 的更多信息，请参阅 [API参考](https://docs.eosnetwork.com/apis/leap/latest/trace_api.api).
 
 
-### Examples of both formats
+### 两种格式的例子
 
-<details>
-    <summary>See chain/get_block</summary>
+<详情>
+    <summary>查看链/get_block</summary>
 
 ```json
 {
@@ -398,10 +398,10 @@ There are some other important things to note about the Trace API's `get_block` 
   "ref_block_prefix": 2264432847
 }
 ```
-</details>
+</详情>
 
-<details>
-    <summary>See trace_api/get_block</summary>
+<详情>
+    <summary>查看 trace_api/get_block</summary>
 
 ```json
 {
@@ -547,38 +547,37 @@ There are some other important things to note about the Trace API's `get_block` 
     }
   ]
 }
-
 ```
-</details>
+</详情>
 
-As you can see, if you were using the `chain/get_block` endpoint to scan for incoming transfers, you would have missed 
-the token transfer action that was executed in the transaction, and potentially lost your user's funds.
+如您所见，如果您使用的是 `chain/get_block` 扫描传入传输的端点，你会错过
+在交易中执行的代币转移操作，可能会丢失用户的资金。
 
-### Listening for specific actions
+### 监听特定动作
 
-When listening for actions there are three primary fields you want to look for. 
+在侦听操作时，您需要查找三个主要字段。
 
-- **account** - tells you which contract is being executed
-- **action** - tells you which action was executed on the contract
-- **params** - contains the parameters that were passed to the action
-- **receiver** - tells you which contract is receiving the action
+- **account** - 告诉你哪个合​​约正在执行
+- **action** - 告诉你在合约上执行了哪个动作
+- **params** - 包含传递给操作的参数
+- **receiver** - 告诉您哪个合约正在接收操作
 
-If you were listening for token transfers of **EOS**, you would want to look for actions where the
-**account** field is `eosio.token` and the **action** field is `transfer`.
+如果您正在监听 **EOS** 的代币转移，您可能想要寻找
+**账户**字段是 `eosio.token` **action** 字段是 `transfer`.
 
-Then, you'll want to validate the information inside the `params` object.
+然后，您需要验证其中的信息 `params` 目的。
 
-For example, if you were the `someexchange` account, you would want to make sure that the `to` field matches your account 
-name, and possibly that the memo field matches some identifier that you're expecting.
+例如，如果你是 `someexchange` 帐户，您需要确保 `to` 字段匹配您的帐户
+名称，并且可能备忘录字段与您期望的某个标识符匹配。
 
-> ⚠ **Warning**
-> 
-> The `receiver` field is not always the same as the `account` field. If the `receiver` field is different than the 
-> `account` field, then this is a notification which allows other contracts to trigger side-effects, and not an action 
-> that you should be processing.
+> ⚠ **警告**
+>
+> 的 `receiver` 字段并不总是与 `account` 场地。如果 `receiver` 字段不同于
+> `account` 字段，那么这是一个允许其他合约触发副作用的通知，而不是一个动作
+> 你应该处理。
 
-<details>
-    <summary>JavaScript example of checking for transfers</summary>
+<详情>
+    <summary>检查传输的 JavaScript 示例</summary>
 
 ```javascript
 const CONTRACT = "eosio.token";
@@ -625,11 +624,11 @@ for(let transaction of result.transactions) {
 }
 ```
 
-</details>
+</详情>
 
-## Using a transaction ID instead of watching blocks
+## 使用交易 ID 而不是观察区块
 
-If you have a transaction ID, you can fetch the transaction directly from the Trace API instead.
+如果您有交易 ID，则可以直接从 Trace API 获取交易。
 
 ```shell
 curl -X POST -H "Content-Type: application/json" \
@@ -637,10 +636,15 @@ curl -X POST -H "Content-Type: application/json" \
    http://127.0.0.1:8888/v1/trace_api/get_transaction_trace | jq
 ```
 
-This will give you a single transaction trace in exactly the same format as the `get_block` endpoint.
+这将为您提供与 `get_block` 端点。
 
-<details>
-    <summary>See example result</summary>
+> ⚠ **警告**
+>
+> 的 `v1/trace_api/get_transaction_trace` API 将扫描跟踪日志文件中的每个块，直到找到事务。
+> 因此，此 API 效率低下，只能用于测试目的。
+
+<详情>
+    <summary>查看示例结果</summary>
 
 ```json
 {
@@ -720,9 +724,9 @@ This will give you a single transaction trace in exactly the same format as the 
   }
 }
 ```
-</details>
+</详情>
 
-> 📄 **API reference**
+> 📄 **API 参考**
 >
-> For more information about the Trace API, see the [API Reference](https://docs.eosnetwork.com/apis/leap/latest/trace_api.api).
+> 有关 Trace API 的更多信息，请参阅 [API参考](https://docs.eosnetwork.com/apis/leap/latest/trace_api.api).
 

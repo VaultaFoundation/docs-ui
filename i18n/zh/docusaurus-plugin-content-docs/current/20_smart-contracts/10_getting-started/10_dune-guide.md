@@ -1,117 +1,117 @@
 ---
-title: DUNE
+title: 沙丘
 ---
 
-[Docker Utilities for Node Execution (DUNE)](https://github.com/AntelopeIO/DUNE) is a client tool that allows blockchain developers and node operators to perform boilerplate tasks related to smart contract development and node management functions.
+[用于节点执行的 Docker 实用程序 (DUNE)](https://github.com/AntelopeIO/DUNE) 是一种客户端工具，允许区块链开发人员和节点运营商执行与智能合约开发和节点管理功能相关的样板任务。
 
-Before getting started with smart contract development, you need to learn about DUNE and how to install it on your platform.
+在开始智能合约开发之前，您需要了解 DUNE 以及如何在您的平台上安装它。
 
-### Installation
+＃＃＃ 安装
 
-DUNE can be installed and run on the following platforms:
+DUNE 可以在以下平台上安装和运行：
 * Linux
-* Windows
-* MacOS
+* 窗户
+* 苹果系统
 
-Installation instructions for each supported platform are available on the [DUNE's github project](https://github.com/AntelopeIO/DUNE) page.
+每个受支持平台的安装说明可在 [DUNE的github项目](https://github.com/AntelopeIO/DUNE) 页。
 
-Once you're done, you can run `dune --help` to see a list of all supported commands.
+完成后，您可以运行 `dune --help` 查看所有支持命令的列表。
 
-## Wallets
+## 钱包
 
-DUNE handles wallet management for you so that you don't have to. 
+DUNE 为您处理钱包管理，因此您不必这样做。
 
-If you need to import a new key into your wallet:
+如果您需要将新密钥导入您的钱包：
 
 ```shell
 dune --import-dev-key <PRIVATE_KEY>
 ```
 
-## Node Management
+## 节点管理
 
-Creating a new local EOS blockchain is easy with DUNE.
+使用 DUNE 可以轻松创建新的本地 EOS 区块链。
 
 ```shell
 dune --start <NODE_NAME>
 ```
 
-The command above creates a new node called `NODE_NAME` and starts it with default settings. 
-The node is configured to serve as an API/producer node that you can deploy smart contracts to, and perform tests on.
+上面的命令创建了一个名为 `NODE_NAME` 并以默认设置启动它。
+该节点被配置为充当 API/生产者节点，您可以将智能合约部署到该节点并对其执行测试。
 
-> ❔ **Errors**
+> ❔ **错误**
 >
-> You may see errors at the end of the node setup process.
-> If you do you can refer to this guide to troubleshoot common errors, or reach out to us on our
-> [Telegram channel](https://t.me/antelopedevs) for help.
+> 您可能会在节点设置过程结束时看到错误。
+> 如果您这样做，您可以参考本指南来解决常见错误，或通过我们的
+> [电报频道](https://t.me/antelopedevs) 求助。
 
-You can see a list of EOS nodes on your system:
+您可以在系统上看到 EOS 节点列表：
 
 ```shell
 dune --list
 ```
 
-You can also check if your active node's RPC API is live:
+您还可以检查您的活动节点的 RPC API 是否有效：
 
 ```shell
 dune -- cleos get info
 ```
 
-To shut down your node:
+要关闭您的节点：
 
 ```shell
 dune --stop <NODE_NAME>
 ```
 
-To remove a node entirely:
+要完全删除一个节点：
 
 ```shell
 dune --remove <NODE_NAME>
 ```
 
 
-### Bootstrapping your environment
+### 引导你的环境
 
-There are a few system contracts that your development environment might need to rely on such as:
-- `eosio.token` for **EOS** token transfers
-- `eosio.msig` for multisig transactions
-- `eosio.system` for system level actions such as resource management
+您的开发环境可能需要依赖一些系统契约，例如：
+- `eosio.token` 用于 **EOS** 代币转账
+- `eosio.msig` 用于多重签名交易
+- `eosio.system` 用于系统级操作，例如资源管理
 
-Bootstrapping your local node is easy, once you have an active node running, you can bootstrap it with:
+引导您的本地节点很容易，一旦您有一个活动节点正在运行，您就可以通过以下方式引导它：
 
 ```shell
 dune --bootstrap-system-full
 ```
 
 
-## Account management
+＃＃ 帐户管理
 
-You deploy contracts on top of accounts, and also use them to interact with your smart contracts. 
+您在账户之上部署合约，并使用它们与您的智能合约进行交互。
 
-To create a new account:
+要创建一个新帐户：
 
 ```shell
 dune --create-account <ACCOUNT_NAME>
 ```
 
-To get account info:
+获取账户信息：
 
 ```shell
 dune -- cleos get account <ACCOUNT_NAME>
 ```
 
-## Smart Contract Development
+## 智能合约开发
 
-Let's create a sample project so that we can learn how to compile, deploy, and interact with smart contracts using DUNE.
+让我们创建一个示例项目，以便我们可以学习如何使用 DUNE 编译、部署和与智能合约交互。
 
-Navigate to a directory you want to create a project in, and then run the following command:
+导航到要在其中创建项目的目录，然后运行以下命令：
 
 ```shell
 dune --create-cmake-app hello .
 ```
 
-This will create a `hello` directory with a cmake style EOS smart contract project.
+这将创建一个 `hello` 带有 cmake 风格 EOS 智能合约项目的目录。
 
-Replace the contents of `src/hello.cpp` with the following code:
+替换内容 `src/hello.cpp` 使用以下代码：
 
 ```cpp
 #include <eosio/eosio.hpp>
@@ -137,35 +137,35 @@ CONTRACT hello : public contract {
 };
 ```
 
-### Compile the contract
+### 编译合约
 
-From the root of your project, run the following command to compile your contract:
+从项目的根目录运行以下命令来编译合约：
 
 ```shell
 dune --cmake-build .
 ```
-You will see your contract being compiled. If there are any errors you will see them in the output.
+你会看到你的合约正在编译中。如果有任何错误，您将在输出中看到它们。
 
-### Deploy your contract
+### 部署你的合约
 
-We need to create an account for your contract, and then we can deploy it.
+我们需要为您的合约创建一个帐户，然后我们才能部署它。
 
 ```shell
 dune --create-account hello
 dune --deploy ./build/hello hello
 ```
 
-> 👀 **Code Permission**
-> 
-> By default, DUNE adds the `eosio.code` permission to an account when you deploy a contract to it. This allows the
-> contract to be able to trigger inline actions on other smart contracts.
+> 👀 **代码权限**
+>
+> 默认情况下，DUNE 添加 `eosio.code` 当您向其部署合同时对帐户的权限。这允许
+> 合约能够触发其他智能合约的内联操作。
 
-### Interacting with your contract
+### 与你的合约互动
 
-To interact with your contract you will send a transaction on your local EOS node. Transactions on EOS are made up of 
-`actions`, so we will send a single action to your contract.
+要与您的合约交互，您将在本地 EOS 节点上发送交易。 EOS 上的交易由
+`actions`，因此我们将向您的合约发送一个动作。
 
-We will also create a test account to send the action from.
+我们还将创建一个测试帐户来发送操作。
 
 ```shell
 dune --create-account testaccount
@@ -174,25 +174,25 @@ dune --create-account testaccount
 dune --send-action hello test '[bob]' testaccount
 ```
 
-You should see a transaction executed successfully on the first time, and if you try to repeat this command it will 
-fail because that row already exists in the contract's database.
+你应该看到一个事务在第一次成功执行，如果你尝试重复这个命令它会
+失败，因为该行已经存在于合同的数据库中。
 
-### Get data from your contract
+### 从你的合约中获取数据
 
-You just added a row to the contract's database, let's fetch that data from the chain:
+您刚刚在合约的数据库中添加了一行，让我们从链中获取该数据：
 
 ```shell
 # format: dune --get-table <CONTRACT> <SCOPE> <TABLE>
 dune --get-table hello hello users
 ```
 
-You should get a table result with one or more row. If you didn't make sure your interaction above was successful.
+您应该得到一个包含一行或多行的表结果。如果您不确定上面的交互是否成功。
 
-## Using raw programs with DUNE
+## 在 DUNE 中使用原始程序
 
-If you want to tap into the raw EOS stack you can use the `DUNE -- <COMMAND>` format to access anything within the container.
+如果你想利用原始 EOS 堆栈，你可以使用 `DUNE -- <COMMAND>` 格式以访问容器内的任何内容。
 
-Examples:
+例子：
     
 ```shell
 dune -- cleos get info

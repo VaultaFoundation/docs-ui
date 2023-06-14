@@ -1,9 +1,9 @@
 ---
-title: Audits
+title: 审计
 ---
 
-Here you can find a list of the audits that have been completed on various EOS software.
+在这里，您可以找到已在各种 EOS 软件上完成的审核列表。
 
-| Date       | Audit                                                                      | Auditor             |
-|------------|----------------------------------------------------------------------------|---------------------|
-| 05-03-2023 | [EOS EVM Fuzzing Audit](./05_03_2023_eos_evm_fuzzing_audit_sentnl.pdf) | [sentnl.io](https://sentnl.io/) |
+|日期 |审计 |审计员 |
+|------------|------------------------------------ --------------------------------------|-------- ----------|
+| 05-03-2023 | [EOS EVM 模糊审计](./05_03_2023_eos_evm_fuzzing_audit_sentnl.pdf) | [sentnl.io](https://sentnl.io/) |

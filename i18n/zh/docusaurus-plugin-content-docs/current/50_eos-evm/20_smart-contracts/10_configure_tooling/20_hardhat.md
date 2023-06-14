@@ -1,11 +1,11 @@
 ---
-title: Hardhat
+title: 安全帽
 ---
 
-[Hardhat](https://hardhat.org/) is the most widely used development environment for Ethereum smart contracts.
+[安全帽](https://hardhat.org/) 是以太坊智能合约使用最广泛的开发环境。
 
-If you want to deploy your smart contracts to the EOS EVM using hardhat, update your `hardhat.config.js` file 
-with the following network configuration:
+如果您想使用 hardhat 将智能合约部署到 EOS EVM，请更新您的 `hardhat.config.js` 文件
+使用以下网络配置：
 
 ```javascript
 // mainnet
@@ -25,7 +25,7 @@ const config: HardhatUserConfig = {
 };
 ```
 
-Now you can deploy your contract to either the mainnet or the testnet using:
+现在您可以使用以下方法将合约部署到主网或测试网：
 
 ```bash
 npx hardhat run scripts/deploy.js --network eosevm

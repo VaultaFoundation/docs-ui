@@ -1,38 +1,38 @@
 ---
-title: Endpoints
+title: 端点
 ---
 
-<head><title>EOS EVM Endpoints</title></head>
+<head><title>EOS EVM 端点</title></head>
 
-| Network | RPC URL  | Chain ID | 
-| --- |--------------------|----------|
-| Mainnet | [api.evm.eosnetwork.com](https://api.evm.eosnetwork.com)                 |  17777   | 
-| Testnet | [api.testnet.evm.eosnetwork.com](https://api.testnet.evm.eosnetwork.com) | 15557    | 
+|网络 | RPC 网址 |链号 |
+| --- |--------------------|------------|
+|主网 | [api.evm.eosnetwork.com](https://api.evm.eosnetwork.com)                 | 17777 |
+|测试网 | [api.testnet.evm.eosnetwork.com](https://api.testnet.evm.eosnetwork.com) | 15557 |
 
-> 💰 **Premium APIs:**
-> 
-> If you're looking for premium API services you can join the 
-> [EOS Servers](https://t.me/eosservers) Telegram group where you can find premium API providers.
+> 💰 **高级 API：**
+>
+> 如果您正在寻找高级 API 服务，您可以加入
+> [EOS服务器](https://t.me/eosservers) Telegram 群组，您可以在其中找到高级 API 提供商。
 
-## Explorers
+## 探索者
 
-| Network | Explorer URL  |
+|网络 |浏览器网址 |
 | --- |--------------------|
-| Mainnet | [explorer.evm.eosnetwork.com](https://explorer.evm.eosnetwork.com)                 |
-| Testnet | [explorer.testnet.evm.eosnetwork.com](https://explorer.testnet.evm.eosnetwork.com) |
+|主网 | [explorer.evm.eosnetwork.com 网站](https://explorer.evm.eosnetwork.com)                 |
+|测试网 | [explorer.testnet.evm.eosnetwork.com](https://explorer.testnet.evm.eosnetwork.com) |
 
-## Bridges
+## 桥梁
 
-| Network | Bridge URL  |
+|网络 |桥接网址 |
 | --- |--------------------|
-| Mainnet | [bridge.evm.eosnetwork.com](https://bridge.evm.eosnetwork.com)                 |
-| Testnet | [bridge.testnet.evm.eosnetwork.com](https://bridge.testnet.evm.eosnetwork.com) |
+|主网 | [bridge.evm.eosnetwork.com 网站](https://bridge.evm.eosnetwork.com)                 |
+|测试网 | [bridge.testnet.evm.eosnetwork.com](https://bridge.testnet.evm.eosnetwork.com) |
 
-## Faucets
+## 水龙头
 
-| Network | Faucet URL  |
+|网络 |水龙头网址 |
 | --- |--------------------|
-| Testnet | [faucet.testnet.evm.eosnetwork.com](https://faucet.testnet.evm.eosnetwork.com) |
+|测试网 | [水龙头.testnet.evm.eosnetwork.com](https://faucet.testnet.evm.eosnetwork.com) |
 
 
 

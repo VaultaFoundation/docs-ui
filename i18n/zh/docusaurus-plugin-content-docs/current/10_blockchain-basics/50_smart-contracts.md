@@ -1,42 +1,42 @@
 ---
-title: Smart Contracts
+title: 智能合约
 ---
 
-A smart contract is simply an application that lives on the blockchain. It includes access to the blockchain's
-state and all the other smart contracts that are deployed on the blockchain. It can read and write data to the blockchain, 
-and it can call other smart contracts to perform the actions that they expose.
+智能合约只是一个存在于区块链上的应用程序。它包括访问区块链的
+状态和部署在区块链上的所有其他智能合约。它可以读取和写入数据到区块链，
+它可以调用其他智能合约来执行它们公开的操作。
 
-Each contract is deployed to a specific `account` on the blockchain. When you interact
-with that contract you do so by calling actions on that account.
+每个合约都部署到特定的 `account` 在区块链上。当你互动时
+使用该合同，您可以通过调用该帐户上的操作来做到这一点。
 
-## What can I do with a smart contract?
+## 我可以用智能合约做什么？
 
-Smart contracts can be used for a variety of purposes, such as creating and executing financial transactions, 
-verifying the authenticity or owner of a piece of data, or enforcing the terms of an agreement between two parties.
+智能合约可用于多种目的，例如创建和执行金融交易，
+验证数据的真实性或所有者，或执行两方之间的协议条款。
 
-For example, a smart contract could be used to automatically execute the transfer of a house from one person to another
-once the terms of the sale have been met. The smart contract would hold the funds from the buyer, and the title to the house
-from the seller. Once both the funds and the title have been transferred to the smart contract, the smart contract would
-automatically transfer the title to the buyer and the funds to the seller.
+例如，智能合约可用于自动执行房屋从一个人到另一个人的转让
+一旦满足销售条款。智能合约将持有买家的资金，以及房屋的所有权
+来自卖家。一旦资金和所有权都转移到智能合约中，智能合约将
+自动将所有权转移给买方，将资金转移给卖方。
 
-What a smart contract can do, is entirely up to your imagination.
+智能合约能做什么，完全取决于你的想象。
 
-## Are smart contracts immutable?
+## 智能合约是不可变的吗？
 
-In EOS, smart contracts have the _possibility_ of being immutable, but it is not the default.
+在 EOS 中，智能合约具有不可变的_可能性_，但这不是默认设置。
 
-As long as you retain control of the account that the smart contract is deployed to, you may update the smart contract
-at any time. This is useful for fixing bugs, or adding new features to your smart contract.
+只要您保留对部署智能合约的帐户的控制权，您就可以更新智能合约
+随时。这对于修复错误或向智能合约添加新功能很有用。
 
-If you want to make your smart contract immutable, you can give up ownership of that account. Once you do that, you will
-no longer be able to update the smart contract. This is useful for smart contracts that you want to ensure will never change,
-which provides extra security and peace of mind for your users.
+如果你想让你的智能合约不可变，你可以放弃该账户的所有权。一旦你这样做了，你就会
+不再能够更新智能合约。这对于您要确保永远不会更改的智能合约很有用，
+这为您的用户提供了额外的安全性和安心。
 
-## What is a dApp?
+## 什么是 dApp？
 
-A dApp is a decentralized application that runs on a blockchain. It is similar to a traditional application,
-but instead of running on a single server it runs on a distributed network of nodes that work together to maintain
-the application and ensure its security.
+dApp 是在区块链上运行的去中心化应用程序。它类似于传统的应用程序，
+但它不是在单个服务器上运行，而是在分布式节点网络上运行，这些节点协同工作以维护
+应用程序并确保其安全性。
 
 
 

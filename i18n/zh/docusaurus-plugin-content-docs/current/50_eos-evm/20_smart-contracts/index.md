@@ -1,20 +1,20 @@
 ---
-title: Smart Contracts
+title: 智能合约
 ---
 
 <head>
-  <title>Smart Contracts with EOS EVM</title>
+  <title>EOS EVM 智能合约</title>
 </head>
 
-Thanks to the high API compatibility of the EOS EVM, most popular wallets and IDEs should work on EOS EVM seamlessly.
+由于 EOS EVM 的高 API 兼容性，大多数流行的钱包和 IDE 应该可以在 EOS EVM 上无缝运行。
 
-- [Configure Tooling](./10_configure_tooling/index.md)
-- [Endpoints](./10_endpoints.md)
-- [Migrate your Smart Contract](./20_migrate-your-smart-contract.md)
-- [Verify a Smart Contract](./60_how-to-verify-a-smart-contract.md)
+- [配置工具](./10_configure_tooling/index.md)
+- [端点](./10_endpoints.md)
+- [迁移您的智能合约](./20_migrate-your-smart-contract.md)
+- [验证智能合约](./60_how-to-verify-a-smart-contract.md)
 
-## Join Our Community
+＃＃ 加入我们的社区
 
-Join the developer community to report bugs and for more technical support:
+加入开发者社区以报告错误并获得更多技术支持：
 
-- **Developer Community Telegram**: [`https://t.me/eosevm`](https://t.me/eosevm)
+- **开发者社区电报**：[`https://t.me/eosevm`](https://t.me/eosevm)

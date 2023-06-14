@@ -1,12 +1,12 @@
 ---
-title: Getting Started
+title: 入门
 ---
 
 <head>
-  <title>Getting Started with dApps</title>
+  <title>开始使用 dApp</title>
 </head>
 
-In this section, you will learn the basics you need to know in order to build decentralized web applications
-on the EOS Network.
+在本节中，您将学习构建去中心化 Web 应用程序所需的基础知识
+在 EOS 网络上。
 
-- [Beginner Concepts](./10_beginner-concepts.md)
+- [初学者概念](./10_beginner-concepts.md)

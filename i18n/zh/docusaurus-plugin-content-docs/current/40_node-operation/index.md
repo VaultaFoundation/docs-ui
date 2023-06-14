@@ -1,9 +1,9 @@
 ---
-title: Node Operation
+title: 节点运营
 ---
 
-Learn about running EOS nodes (coming soon!)
+了解运行 EOS 节点（即将推出！）
 
-* [Getting Started](./10_getting-started/index.md)
-* [Tutorials](./50_tutorials/index.md)
-* [Migration Guides](./100_migration-guides/index.md)
+* [入门](./10_getting-started/index.md)
+* [教程](./50_tutorials/index.md)
+* [迁移指南](./100_migration-guides/index.md)

@@ -1,48 +1,48 @@
 ---
-title: Decentralization
+title: 权力下放
 ---
 
-Decentralization means giving power to many people instead of just one group. For example, with blockchain technology, 
-there's no one person or group that controls everything. Instead, the network is looked after by many people 
-who work together to keep it safe and reliable.
+权力下放意味着将权力赋予许多人，而不仅仅是一个群体。例如，通过区块链技术，
+没有一个人或团体可以控制一切。反而网络被很多人看管
+谁共同努力以确保其安全可靠。
 
-### Decentralization is a spectrum
+### 去中心化是一个频谱
 
-Though the determination of something being centralized versus decentralized is binary,
-the degree of decentralization is not. Decentralization is a spectrum, and the degree of
-decentralization can be measured by the number of nodes in the network. The more nodes
-in the network, the more decentralized it is. 
+尽管确定事物是中心化还是去中心化是二元的，
+权力下放的程度不是。权力下放是一个范围，并且程度
+去中心化可以通过网络中的节点数量来衡量。更多的节点
+在网络中，它越去中心化。
 
-This does not mean that a network with more nodes is more secure than a network with fewer
-nodes. In most decentralized networks nodes group together to form a "pool" of nodes that
-work together to secure the network. In this case, the number of pools in the network is
-a better measure of decentralization than the number of nodes.
+这并不意味着拥有更多节点的网络比拥有更少节点的网络更安全
+节点。在大多数去中心化网络中，节点组合在一起形成一个节点“池”
+共同努力确保网络安全。在这种情况下，网络中的池数是
+比节点数量更好的去中心化度量。
 
-## Why it matters
+## 为什么重要
 
-Decentralized systems are typically more resilient, fault-tolerant, secure, and transparent than centralized systems. 
-Because there is no single entity running and controlling the network, there is also no single point of failure. 
-The network can continue to function to the standards that its users expect even if some nodes are compromised or go offline.
+分散式系统通常比集中式系统更具弹性、容错性、安全性和透明性。
+因为没有单一实体运行和控制网络，所以也不存在单点故障。
+即使某些节点受到损害或离线，网络也可以继续按照其用户期望的标准运行。
 
-This makes it much more difficult for bad actors to manipulate or corrupt the system.
+这使得坏人更难操纵或破坏系统。
 
-In addition, decentralization can enable greater innovation and collaboration. Because the network is open and 
-accessible to anyone, it can be used to develop new applications and services that would not be possible in a 
-centralized system.
+此外，权力下放可以促进更大的创新和协作。因为网络是开放的
+任何人都可以访问，它可以用来开发新的应用程序和服务，这在一个
+集中式系统。
 
-## What is blockchain
+## 什么是区块链
 
-Blockchain is a type of decentralized distributed ledger technology that is used to maintain a secure and tamper-proof 
-record of transactions. It consists of a chain of blocks, where each block contains a set of transactions that have 
-been verified and added to the chain.
+区块链是一种去中心化分布式账本技术，用于维护安全和防篡改
+交易记录。它由一系列块组成，其中每个块包含一组交易，这些交易具有
+已验证并添加到链中。
 
-In a blockchain network, the ledger is maintained by a distributed network of nodes that work together to validate 
-transactions and ensure the security of the network. Each node in the network has a copy of the ledger, and block producing 
-nodes must agree on the contents of new blocks being added to the ledger. 
+在区块链网络中，分类帐由分布式节点网络维护，这些节点协同工作以验证
+交易并确保网络安全。网络中的每个节点都有一个账本副本，并且出块
+节点必须就添加到分类帐中的新块的内容达成一致。
 
-One of the key features of blockchain technology is that it is immutable, meaning that once a transaction has been 
-added to the ledger, it cannot be modified or deleted. This provides a high degree of transparency and accountability, 
-as all transactions are recorded in a permanent and tamper-proof manner.
+区块链技术的一个关键特征是它是不可变的，这意味着一旦交易被
+添加到分类帐中，不能修改或删除。这提供了高度的透明度和问责制，
+因为所有交易都以永久和防篡改的方式记录。
 
-Blockchain technology has a wide range of potential applications, from financial services and supply chain management 
-to voting and identity verification.
+区块链技术具有广泛的潜在应用，从金融服务到供应链管理
+投票和身份验证。

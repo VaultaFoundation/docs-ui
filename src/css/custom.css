@@ -60,6 +60,10 @@
   font-weight: 700;
 }
 
+ol, ul, menu {
+  padding-left:25px;
+}
+
 .suisse-bold {
   font-family: 'SuisseIntl-Bold', sans-serif !important;
 }

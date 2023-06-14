@@ -1,10 +1,10 @@
 ---
-title: Configuration
+title: 配置
 sidebar_class_name: sidebarhidden
 ---
 
-## Config.ini
+## 配置.ini
 
-## Plugins
+## 插件
 
 ## CORS

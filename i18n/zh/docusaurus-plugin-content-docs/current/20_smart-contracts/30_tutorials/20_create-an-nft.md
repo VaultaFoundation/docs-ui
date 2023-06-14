@@ -1,47 +1,47 @@
 ---
-title: Create an NFT
+title: 创建 NFT
 ---
 
-An NFT is a **non-fungible token**. This means that it is a unique token that cannot be
-interchanged with another token. 
+NFT 是一种**不可替代的代币**。这意味着它是一个独特的令牌，不能
+与另一个令牌互换。
 
-Take a collectible item as an example (a pen owned by a celebrity, a game-winning ball, etc). Each of these
-items is unique and cannot be interchanged with another item because their value is
-in their uniqueness.
+以收藏品为例（名人拥有的钢笔、比赛获胜的球等）。这些中的每一个
+物品是独一无二的，不能与其他物品互换，因为它们的价值是
+在他们的独特性。
 
-> 👀 **Want to just create an NFT?**
-> 
-> In this tutorial we are going to discuss creating an NFT that follows Ethereum's ERC721
-> standard so that we can dig into some EOS development using a clear standard.
-> 
-> **However**, if you want to create an NFT that follows the [**Atomic Assets**](https://github.com/pinknetworkx/atomicassets-contract) standard which
-> is more common on the EOS Network, you can visit the [Atomic Assets NFT Creator](https://eos.atomichub.io/creator)
-> where you can easily create an NFT that will instantly be listed on the AtomicHub marketplace without deploying any code.
+> 👀 **只想创建一个 NFT？**
+>
+> 在本教程中，我们将讨论创建遵循以太坊 ERC721 的 NFT
+> 标准，以便我们可以使用明确的标准深入研究一些 EOS 开发。
+>
+> **但是**，如果你想创建一个遵循 [**原子资产**](https://github.com/pinknetworkx/atomicassets-contract) 标准哪个
+> 在 EOS Network 上比较常见，可以访问 [原子资产 NFT 创造者](https://eos.atomichub.io/creator)
+> 您可以在其中轻松创建 NFT，无需部署任何代码即可立即在 AtomicHub 市场上列出。
 
-## What is an NFT Standard?
+## 什么是 NFT 标准？
 
-An NFT standard is a set of rules that all NFTs must follow. This allows for NFTs to be
-interoperable with other NFTs and for applications like marketplaces and wallets to
-understand how to interact with them.
+NFT 标准是所有 NFT 必须遵循的一组规则。这允许 NFT 成为
+可与其他 NFT 互操作，并适用于市场和钱包等应用程序
+了解如何与他们互动。
 
-## What is the ERC721 Standard?
+## ERC721 标准是什么？
 
-The [ERC721 standard](https://eips.ethereum.org/EIPS/eip-721) is an NFT standard that was created by the Ethereum community. It
-is the most common NFT standard and is used by many NFTs on the Ethereum network. If you've
-ever seen a Bored Ape, they are ERC721 NFTs.
+这 [ERC721标准](https://eips.ethereum.org/EIPS/eip-721) 是由以太坊社区创建的 NFT 标准。它
+是最常见的 NFT 标准，被以太坊网络上的许多 NFT 使用。如果你有
+见过 Bored Ape，它们是 ERC721 NFT。
 
-![Bored Ape Club Examples](./images/boredapeclub.jpg)
+！[无聊猿俱乐部的例子](./images/boredapeclub.jpg)
 
-## Your development environment
+## 你的开发环境
 
-Make sure you have [DUNE](../../20_smart-contracts/10_getting-started/10_dune-guide.md) installed
-and understand how to build contracts.
+确保你有 [沙丘](../../20_smart-contracts/10_getting-started/10_dune-guide.md) 安装
+并了解如何建立合同。
 
-After each step, you should try to compile your contract and check if there are any errors.
+在每一步之后，你应该尝试编译你的合约并检查是否有任何错误。
 
-## Create a new contract
+## 创建一个新合约
 
-Create a new `nft.cpp` file and add the following code:
+创建一个新的 `nft.cpp` 文件并添加以下代码：
 
 ```cpp
 #include <eosio/eosio.hpp>
@@ -58,17 +58,17 @@ CONTRACT nft : public contract {
 };
 ```
 
-## Creating the actions
+## 创建动作
 
-If we look at the [ERC721 standard](https://eips.ethereum.org/EIPS/eip-721), we can see that
-there are a few actions that we need to implement. Overall the standard is quite simple, but
-some concepts are not necessarily EOS-native. For instance, there is no concept 
-of `approvals` on EOS since you can send tokens directly to another account (via `on_notify` events), unlike Ethereum.
+如果我们看一下 [ERC721标准](https://eips.ethereum.org/EIPS/eip-721), 我们可以看到
+我们需要采取一些行动。总的来说，标准很简单，但是
+有些概念不一定是 EOS 原生的。比如没有概念
+的 `approvals` 在 EOS 上，因为您可以将代币直接发送到另一个帐户（通过 `on_notify` 事件），不像以太坊。
 
-For the sake of keeping the standard as close to the original as possible, we will implement
-those non-native concepts in this tutorial.
+为了使标准尽可能接近原始标准，我们将实施
+本教程中的那些非本地概念。
 
-The actions we will be implementing are:
+我们将实施的行动是：
 
 ```cpp
     ACTION mint(name to, uint64_t token_id){
@@ -112,133 +112,134 @@ The actions we will be implementing are:
     }
 ```
 
-Add them to your contract and then let's dig into each action and see what they do, and what parameters they take.
+将它们添加到您的合同中，然后让我们深入研究每个操作并查看它们的作用以及它们采用的参数。
 
-You'll notice that actions with return values are marked with `[[eosio::action]]` instead
-of `ACTION`. 
+您会注意到带有返回值的操作标有 `[[eosio::action]]` 反而
+的 `ACTION`.
 
-> ❔ **ACTION Macro**
-> 
-> `ACTION` is something called a `MACRO`, which is a way to write code that will be replaced
-> with other code at compile time. In this case, the `ACTION` macro is replaced with:
+> ❔ **动作宏**
+>
+> `ACTION` 是一种叫做 `MACRO`，这是一种编写将被替换的代码的方法
+> 在编译时与其他代码。在这种情况下， `ACTION` 宏替换为：
 > ```cpp
 > [[eosio::action]] void
-> ```
-> The reason we cannot use the `ACTION` macro for actions that return values is because
-> it adds the `void` keyword to the function, which means it will not return anything.
+>
+```
+> 我们不能使用的原因 `ACTION` 用于返回值的操作的宏是因为
+> 它添加了 `void` 函数的关键字，这意味着它不会返回任何东西。
 
-## Digging into the action parameters
+## 深入研究动作参数
 
-If you want a deeper explanation of the parameters and a brief explanation of
-each action, expand the section below.
+如果你想要更深入的解释参数和简单的解释
+每个动作，展开下面的部分。
 
-<details>
-    <summary>Click here to view</summary>
+<详情>
+    <summary>点此查看</summary>
 
-### Mint
+＃＃＃ 薄荷
 
-The `mint` action is used to create a new NFT.
+这 `mint` action 用于创建一个新的 NFT。
 
-It takes two parameters:
-- **to** - The account that will own the NFT
-- **token_id** - The ID of the NFT
+它需要两个参数：
+- **to** - 将拥有 NFT 的账户
+- **token_id** - NFT 的 ID
 
-### Transfer
+＃＃＃ 转移
 
-The `transfer` action is used to transfer an NFT from one account to another.
+这 `transfer` action 用于将 NFT 从一个帐户转移到另一个帐户。
 
-It takes four parameters:
-- **from** - The account that currently owns the NFT
-- **to** - The account that will own the NFT
-- **token_id** - The ID of the NFT
-- **memo** - A memo that will be included in the transaction
+它需要四个参数：
+- **from** - 当前拥有 NFT 的账户
+- **to** - 将拥有 NFT 的账户
+- **token_id** - NFT 的 ID
+- **备忘录** - 将包含在交易中的备忘录
 
-### BalanceOf
+### 余额
 
-The `balanceof` action is used to get the balance of an account.
+这 `balanceof` action 用于获取帐户余额。
 
-It takes one parameter:
-- **owner** - The account that you want to get the balance of
+它需要一个参数：
+- **owner** - 您想要获取余额的帐户
 
-It returns a `uint64_t` which is the balance of the account.
+它返回一个 `uint64_t` 这是帐户的余额。
 
-### OwnerOf
+＃＃＃ 的主人
 
-The `ownerof` action is used to get the owner of an NFT.
+这 `ownerof` action 用于获取 NFT 的所有者。
 
-It takes one parameter:
-- **token_id** - The ID of the NFT
+它需要一个参数：
+- **token_id** - NFT 的 ID
 
-It returns a `name` which is the account that owns the NFT.
+它返回一个 `name` 这是拥有 NFT 的帐户。
 
-### Approve
+＃＃＃ 批准
 
-The `approve` action is used to approve an account to transfer an NFT on your behalf.
+这 `approve` action 用于批准一个账户代表你转账 NFT。
 
-It takes two parameters:
-- **to** - The account that will be approved to transfer the NFT
-- **token_id** - The ID of the NFT
+它需要两个参数：
+- **to** - 将被批准转移 NFT 的账户
+- **token_id** - NFT 的 ID
 
-### ApproveAll
+### 全部批准
 
-The `approveall` action is used to approve an account to transfer all of your NFTs on your behalf.
+这 `approveall` action 用于批准一个账户代表你转移你所有的 NFT。
 
-It takes three parameters:
-- **from** - The account that currently owns the NFTs
-- **to** - The account that will be approved to transfer the NFTs
-- **approved** - A boolean that determines if the account is approved or not
+它需要三个参数：
+- **from** - 当前拥有 NFT 的账户
+- **to** - 将被批准转移 NFT 的账户
+- **已批准** - 一个布尔值，用于确定帐户是否已获批准
 
-### GetApproved
+### 获得批准
 
-The `getapproved` action is used to get the account that is approved to transfer an NFT on your behalf.
+这 `getapproved` action 用于获取获准代为转账 NFT 的账户。
 
-It takes one parameter:
-- **token_id** - The ID of the NFT
+它需要一个参数：
+- **token_id** - NFT 的 ID
 
-It returns a `name` which is the account that is approved to transfer the NFT.
+它返回一个 `name` 这是被批准转移 NFT 的帐户。
 
 ### IsApprovedForAll
 
-The `approved4all` action is used to get if an account is approved to transfer all of your NFTs on your behalf.
+这 `approved4all` action 用于获取一个帐户是否被批准代表你转移所有 NFT。
 
-It takes two parameters:
-- **owner** - The account that currently owns the NFTs
-- **approved_account** - The account that you want to check if it is approved to transfer the NFTs
+它需要两个参数：
+- **owner** - 当前拥有 NFT 的账户
+- **approved_account** - 您要检查是否已批准转移 NFT 的帐户
 
-It returns a `bool` which is `true` if the account is approved to transfer the NFTs, and `false` if it is not.
+它返回一个 `bool` 这是 `true` 如果该帐户被批准转移 NFT，以及 `false` 如果不是。
 
-### TokenURI
+### 令牌URI
 
-The `gettokenuri` action is used to get the URI of the NFT's metadata.
+这 `gettokenuri` action 用于获取 NFT 元数据的 URI。
 
-It takes one parameter:
-- **token_id** - The ID of the NFT
+它需要一个参数：
+- **token_id** - NFT 的 ID
 
-It returns a `std::string` which is the URI of the NFT's metadata.
+它返回一个 `std::string` 这是 NFT 元数据的 URI。
 
-### SetBaseURI
+### 设置BaseURI
 
-The `setbaseuri` action is used to set the base URI of the NFT's metadata.
+这 `setbaseuri` action 用于设置 NFT 元数据的基础 URI。
 
-It takes one parameter:
-- **base_uri** - The base URI of the NFT's metadata
+它需要一个参数：
+- **base_uri** - NFT 元数据的基本 URI
     
-</details>
+</详情>
 
 
-## Adding the data structures
+## 添加数据结构
 
-Now that we have our actions, we need to add some data structures to store the NFTs.
+现在我们有了我们的动作，我们需要添加一些数据结构来存储 NFT。
 
-We will be using a `singleton` to store the NFTs. 
+我们将使用 `singleton` 存储 NFT。
 
-> ❔ **Singleton**
-> 
-> A `singleton` is a table that can only have one row per scope, unlike a `multi_index` which 
-> can have multiple rows per scope and uses a `primary_key` to identify each row.
-> Singletons are a little closer to Ethereum's storage model. 
+> ❔ **单身人士**
+>
+> 一个 `singleton` 是一个表，每个范围只能有一行，不像 `multi_index` 哪个
+> 每个范围可以有多行并使用 `primary_key` 来识别每一行。
+> 单例更接近以太坊的存储模型。
 
-Add the following code to your contract above the actions:
+将以下代码添加到您的合同中的操作上方：
 
 ```cpp
     using _owners = singleton<"owners"_n, name>;
@@ -250,29 +251,29 @@ Add the following code to your contract above the actions:
     ACTION mint...
 ```
 
-We've created singleton tables for the following:
-- **_owners** - A mapping from token ID to the owner of the NFT
-- **_balances** - A mapping from owner to the amount of NFTs they own
-- **_approvals** - A mapping from token ID to an account approved to transfer that NFT
-- **_approvealls** - A mapping from owner to an account approved to transfer all their NFTs
-- **_base_uris** - A configuration table that stores the base URI of the NFT's metadata
+我们为以下内容创建了单例表：
+- **_owners** - 从令牌 ID 到 NFT 所有者的映射
+- **_balances** - 从所有者到他们拥有的 NFT 数量的映射
+- **_approvals** - 从令牌 ID 到批准转移该 NFT 的帐户的映射
+- **_approvealls** - 从所有者到批准转移其所有 NFT 的帐户的映射
+- **_base_uris** - 存储 NFT 元数据的基本 URI 的配置表
 
-> ❔ **Table Naming**
-> 
+> ❔ **表命名**
+>
 > `singleton<"<TABLE NAME>"_n, <ROW TYPE>>`
-> 
-> If we look at the singleton definition, inside the double quotes we have the table name.
-> Names in EOS tables must also follow the Account Name rules, which means they must be
-> 12 characters or less and can only contain the characters `a-z`, `1-5`, and `.`.
+>
+> 如果我们查看单例定义，在双引号内我们有表名。
+> EOS 表中的名称也必须遵循帐户名称规则，这意味着它们必须是
+> 12 个字符或更少且只能包含字符 `a-z`, `1-5`， 和 `.`.
 
-Now that we've created the tables and structures that will store data about the NFTs,
-we can start filling in the logic for each action.
+现在我们已经创建了存储 NFT 数据的表和结构，
+我们可以开始为每个动作填充逻辑。
 
 
-## Adding some helper functions
+## 添加一些辅助函数
 
-We want some helper functions to make our code more readable and easier to
-use. Add the following code to your contract right below the table definitions:
+我们需要一些辅助函数来使我们的代码更具可读性和更容易
+使用。在表格定义下方的合同中添加以下代码：
 
 ```cpp
     using _base_uris = singleton<"baseuris"_n, std::string>;
@@ -313,22 +314,22 @@ use. Add the following code to your contract right below the table definitions:
     }
 ```
 
-The helper functions will make it easier to get data from the tables we created earlier.
-We will use these functions in the actions we will implement next.
+辅助函数将使从我们之前创建的表中获取数据变得更加容易。
+我们将在接下来要实现的操作中使用这些函数。
 
-In particular, some functions are used in multiple places so it makes sense to
-create a helper function for them. For example, the `get_owner` function is used
-in the `mint`, `transfer`, and `approve` actions. If we didn't create a helper function
-for it, we would have to write the same code in each action.
+特别是，某些功能在多个地方使用，因此有必要
+为他们创建一个辅助函数。例如， `get_owner` 使用函数
+在里面 `mint`, `transfer`， 和 `approve` 动作。如果我们没有创建辅助函数
+为此，我们必须在每个操作中编写相同的代码。
 
-## Filling in the actions
+## 填写动作
 
-We will go through each action and implement the logic for it. Pay close attention to
-the comments as they will explain what each line of code does.
+我们将完成每个操作并为其实现逻辑。密切关注
+注释，因为它们将解释每一行代码的作用。
 
-### Mint
+＃＃＃ 薄荷
 
-The `mint` action is used to create a new NFT.
+这 `mint` action 用于创建一个新的 NFT。
 
 ```cpp
     ACTION mint(name to, uint64_t token_id){
@@ -352,13 +353,13 @@ The `mint` action is used to create a new NFT.
         
         // Set the new balances of the account
         balances.set(balances.get_or_default(0) + 1, get_self());
-    }    
+    }
 ```
 
 
-### Transfer
+＃＃＃ 转移
 
-The `transfer` action is used to transfer an NFT from one account to another.
+这 `transfer` action 用于将 NFT 从一个帐户转移到另一个帐户。
 
 ```cpp
     ACTION transfer(name from, name to, uint64_t token_id, std::string memo){
@@ -398,9 +399,9 @@ The `transfer` action is used to transfer an NFT from one account to another.
     }
 ```
 
-### BalanceOf
+### 余额
 
-The `balanceof` action is used to get the balance of an account.
+这 `balanceof` action 用于获取帐户余额。
 
 ```cpp
     [[eosio::action]] uint64_t balanceof(name owner){
@@ -408,15 +409,15 @@ The `balanceof` action is used to get the balance of an account.
     }
 ```
 
-> ⚠ **Return values & Composability**
-> 
-> Return values are only usable from outside the blockchain, and cannot currently be used
-> in EOS for smart contract composability. EOS supports [**inline actions**](../10_getting-started/40_smart-contract-basics.md#inline-actions) which can be used
-> to call other smart contracts, but they cannot return values.
+> ⚠ **返回值和可组合性**
+>
+> 返回值只能从区块链外部使用，目前不能使用
+> 在 EOS 中实现智能合约的可组合性。 EOS支持 [**内联动作**](../10_getting-started/40_smart-contract-basics.md#inline-actions) 哪个可以用
+> 调用其他智能合约，但它们不能返回值。
 
-### OwnerOf
+＃＃＃ 的主人
 
-The `ownerof` action is used to get the owner of an NFT.
+这 `ownerof` action 用于获取 NFT 的所有者。
 
 ```cpp
     [[eosio::action]] name ownerof(uint64_t token_id){
@@ -424,9 +425,9 @@ The `ownerof` action is used to get the owner of an NFT.
     }
 ```
 
-### Approve
+＃＃＃ 批准
 
-The `approve` action is used to approve an account to transfer an NFT on your behalf.
+这 `approve` action 用于批准一个账户代表你转账 NFT。
 
 ```cpp
     ACTION approve(name to, uint64_t token_id){
@@ -447,10 +448,10 @@ The `approve` action is used to approve an account to transfer an NFT on your be
     }
 ```
 
-### ApproveAll
+### 全部批准
 
-The `approveall` action is used to approve an account to transfer all of your
-NFTs on your behalf.
+这 `approveall` 操作用于批准一个帐户转移您的所有
+代表你的 NFT。
 
 ```cpp
     ACTION approveall(name from, name to, bool approved){
@@ -473,10 +474,10 @@ NFTs on your behalf.
     }
 ```
 
-### GetApproved
+### 获得批准
 
-The `getapproved` action is used to get the account that is approved to transfer an
-NFT on your behalf.
+这 `getapproved` action 用于获取获准转账的账户
+代表你的 NFT。
 
 ```cpp
     [[eosio::action]] name getapproved(uint64_t token_id){
@@ -484,10 +485,10 @@ NFT on your behalf.
     }
 ```
 
-### Approved4All
+### 批准4全部
 
-The `approved4all` action is used to check if an account is approved to transfer
-all of your NFTs on your behalf.
+这 `approved4all` action 用于检查帐户是否被批准转移
+代表你所有的 NFT。
 
 ```cpp
     [[eosio::action]] bool approved4all(name owner, name approved_account){
@@ -495,15 +496,15 @@ all of your NFTs on your behalf.
    }
 ```
 
-> ⚠ **ACTION name limitations**
-> 
-> Account names also have the same limitations as table names, so they can only contain
-> the characters `a-z`, `1-5`, and `.`. Because of this, we cannot use the standard `isApprovedForAll`
-> name for the action, so we are using `approved4all` instead.
+> ⚠ **动作名称限制**
+>
+> 账户名也有和表名一样的限制，只能包含
+> 人物 `a-z`, `1-5`， 和 `.`.因此，我们不能使用标准 `isApprovedForAll`
+> 动作名称，所以我们使用 `approved4all` 反而。
 
-### TokenURI
+### 令牌URI
 
-The `tokenuri` action is used to get the URI of an NFT.
+这 `tokenuri` action 用于获取 NFT 的 URI。
 
 ```cpp
     [[eosio::action]] std::string tokenuri(uint64_t token_id){
@@ -511,9 +512,9 @@ The `tokenuri` action is used to get the URI of an NFT.
     }
 ```
 
-### SetBaseURI
+### 设置BaseURI
 
-The `setbaseuri` action is used to set the base URI of the NFTs.
+这 `setbaseuri` action 用于设置 NFT 的基础 URI。
 
 ```cpp
     ACTION setbaseuri(std::string base_uri){
@@ -530,18 +531,18 @@ The `setbaseuri` action is used to set the base URI of the NFTs.
 
 
 
-## Putting it all together
+## 把它们放在一起
 
-Now that we have all the actions laid out, we can put them all together in the `nft.cpp` file.
+现在我们已经列出了所有的动作，我们可以把它们放在一起 `nft.cpp` 文件。
 
-You should try to build, deploy, and interact with the contract on your own before looking at the full contract below.
-First you'll need to mint some NFTs to an account you control, then you can try transferring them to another account.
+在查看下面的完整合约之前，您应该尝试自己构建、部署合约并与之交互。
+首先你需要铸造一些 NFT 到你控制的账户，然后你可以尝试将它们转移到另一个账户。
 
-You can also test out the approval mechanisms by approving another account to transfer your NFTs on your behalf, 
-and then transferring them to another account using the approved account.
+您还可以通过批准另一个帐户代表您转移您的 NFT 来测试批准机制，
+然后使用批准的帐户将它们转移到另一个帐户。
 
-<details>
-    <summary>Click here to see full contract</summary>
+<详情>
+    <summary>点击此处查看完整合同</summary>
 
 ```cpp
 #include <eosio/eosio.hpp>
@@ -726,13 +727,13 @@ CONTRACT nft : public contract {
    }
 };
 ```
-</details>
+</详情>
 
-## This is for education purposes
+## 这是出于教育目的
 
-Keep in mind, that if you deployed this contract on the EOS Network and minted tokens, there
-would be no supported marketplaces to sell them (at the time of writing this guide). This is just for education purposes.
+请记住，如果您在 EOS 网络上部署此合约并铸造代币，则
+将没有支持的市场来出售它们（在撰写本指南时）。这仅用于教育目的。
 
-## Challenge
+＃＃ 挑战
 
-This NFT contract has no way to burn NFTs. Add a `burn` action that allows the token owner to burn their own NFTs.
+这个 NFT 合约是没有办法销毁 NFT 的。添加一个 `burn` 允许令牌所有者销毁自己的 NFT 的操作。

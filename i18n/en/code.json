@@ -488,5 +488,11 @@
   },
   "Confused with some terms? Read them all here": {
     "message": "Confused with some terms? Read them all here"
+  },
+  "Enter your email": {
+    "message": "Enter your email"
+  },
+  "This page is translated from English. Please note that errors or differences compared to the original page may occur. The documentation source of truth should always be the English version.": {
+    "message": "This page is translated from English. Please note that errors or differences compared to the original page may occur. The documentation source of truth should always be the English version."
   }
 }

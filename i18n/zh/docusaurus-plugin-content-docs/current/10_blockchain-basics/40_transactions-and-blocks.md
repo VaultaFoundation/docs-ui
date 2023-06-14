@@ -1,26 +1,26 @@
 ---
-title: Transactions and Blocks
+title: 交易和区块
 ---
 
-Transactions and blocks are fundamental pieces of a blockchain. Understanding how they work is essential to
-understanding how a blockchain functions.
+交易和区块是区块链的基本部分。了解它们的工作原理对于
+了解区块链如何运作。
 
-## What are transactions?
+## 什么是交易？
 
-When you want to interact with a blockchain you submit a transaction to the network, which is then processed by the network
-and added to the blockchain via blocks. Transactions are made up of **actions**.
+当你想与区块链交互时，你向网络提交交易，然后由网络处理
+并通过块添加到区块链中。交易由**动作**组成。
 
-## What are actions?
+## 什么是动作？
 
-Actions are the smallest unit of work in EOS. Each transaction include one or more actions within it. The ability to include
-multiple actions within a transactions allows you to perform atomic operations across multiple smart contracts. 
-Actions are executed in the order they are included in the transaction, and if any action fails the entire transaction is rolled back.
+操作是 EOS 中最小的工作单元。每个事务都包含一个或多个操作。包含的能力
+事务中的多个操作允许您跨多个智能合约执行原子操作。
+操作按照它们包含在事务中的顺序执行，如果任何操作失败，则回滚整个事务。
 
-## What are blocks?
+## 什么是块？
 
-Blocks are a collection of transactions that are grouped together and added to the blockchain. Each block contains a 
-unique fingerprint, or hash, which is created using the transactions contained within the block, as well other information
-that links the current block and the previous blocks together. 
+块是组合在一起并添加到区块链的事务的集合。每个块包含一个
+使用块中包含的事务以及其他信息创建的唯一指纹或哈希
+将当前块和之前的块链接在一起。
 
-This creates a chain of blocks, or a blockchain, that cannot be altered or tampered with. Any change to a block would change
-its hash, which would break the chain of blocks and make it clear that the data has been tampered with.
+这创建了一个无法更改或篡改的块链或区块链。对块的任何更改都会更改
+它的哈希值，这将打破区块链并明确表明数据已被篡改。

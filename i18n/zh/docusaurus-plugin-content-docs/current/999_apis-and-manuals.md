@@ -1,21 +1,21 @@
 ---
-title: APIs and Manuals
+title: API 和手册
 virtual: true
 ---
 
-Below is a list of API references and manuals for various EOS software.
+以下是各种 EOS 软件的 API 参考和手册列表。
 
-## APIs
+## API
 
-- [Leap (latest)](/apis/leap/latest/)
-- [Leap (v3.2.3)](/apis/leap/v3.2.3/)
+- [飞跃（最新）](/apis/leap/latest/)
+- [飞跃 (v3.2.3)](/apis/leap/v3.2.3/)
 
-## Manuals 
+## 手册
 
-- [Cdt (latest)](/manuals/cdt/latest/)
-- [Dune (latest)](/manuals/dune/latest/)
-- [Eos-system-contracts (latest)](/manuals/eos-system-contracts/latest/)
-- [Mandel-eosjs (latest)](/manuals/mandel-eosjs/latest/)
-- [Mandel-swift (latest)](/manuals/mandel-swift/latest/)
+- [Cdt（最新）](/manuals/cdt/latest/)
+- [沙丘（最新）](/manuals/dune/latest/)
+- [Eos-system-contracts（最新）](/manuals/eos-system-contracts/latest/)
+- [Mandel-eosjs（最新）](/manuals/mandel-eosjs/latest/)
+- [Mandel-swift（最新）](/manuals/mandel-swift/latest/)
 
 

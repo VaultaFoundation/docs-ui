@@ -1,10 +1,10 @@
 ---
-title: Basics
+title: 基本
 ---
 
-<head><title>Basic Setup for EOS EVM</title></head>
+<head><title>EOS EVM 的基本设置</title></head>
 
-- [Connect MetaMask](../10_basic-setup/10_connect-metamask.md)
-- [Supported Tokens](./50_supported-tokens.md)
-- [Withdraw EOS from Exchanges to EVM Address](./70_withdraw-to-evm.md)
-- [Transfer EOS from EVM Address to Exchanges](./80_transfer-to-exchanges.md)
+- [连接 MetaMask](../10_basic-setup/10_connect-metamask.md)
+- [支持的代币](./50_supported-tokens.md)
+- [从交易所提取 EOS 到 EVM 地址](./70_withdraw-to-evm.md)
+- [将 EOS 从 EVM 地址转移到交易所](./80_transfer-to-exchanges.md)

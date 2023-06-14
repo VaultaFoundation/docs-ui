@@ -1,28 +1,27 @@
 ---
-title: Verify A Smart Contract
+title: 验证智能合约
 ---
 
-In order to verify your smart contract, you must know your:
+为了验证您的智能合约，您必须知道您的：
 
-- Smart contract address
-- The compiler version that the deployed contract was compiled with
-- The EVM version
-- The solidity flattened source code for your smart contract
+- 智能合约地址
+- 编译部署合约的编译器版本
+- EVM 版本
+- 智能合约的可靠扁平化源代码
 
-## Go to the verification page
+## 进入验证页面
 
-Copy this URL and replace the `SMART_CONTRACT_ADDRESS` with your smart contract address:
+复制此 URL 并替换 `SMART_CONTRACT_ADDRESS` 使用您的智能合约地址：
 
+```https://explorer.evm.eosnetwork.com/address/SMART_CONTRACT_ADDRESS/verify-via-flattened-code/new
 ```
-https://explorer.evm.eosnetwork.com/address/SMART_CONTRACT_ADDRESS/verify-via-flattened-code/new
-```
 
-Paste that into your browser and you should see the following page:
+将其粘贴到您的浏览器中，您应该会看到以下页面：
 
-![verify smart contract](./images/verify_contract.png)
+！[验证智能合约](./images/verify_contract.png)
 
-## Complete the verification process
+## 完成验证过程
 
-1. Fill out all the fields
-3. Copy & paste the solidity contract (flattened; meaning a single file with no imports) source code
-4. Click `Verify & Push` button
+1.填写所有字段
+3. 复制并粘贴 solidity 合约（扁平化；意思是没有导入的单个文件）源代码
+4.点击 `Verify & Push` 按钮

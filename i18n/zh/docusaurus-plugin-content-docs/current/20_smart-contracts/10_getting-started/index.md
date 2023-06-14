@@ -1,14 +1,14 @@
 ---
-title: Getting Started
+title: 入门
 ---
 
 <head>
-  <title>Getting Started with Smart Contracts</title>
+  <title>智能合约入门</title>
 </head>
 
-Get started with EOS Smart Contracts:
+开始使用 EOS 智能合约：
 
-- [DUNE](./10_dune-guide.md)
-- [Accounts](./20_accounts.md)
-- [Resources](./30_resources.md)
-- [Smart Contract Basics](./40_smart-contract-basics.md)
+- [沙丘](./10_dune-guide.md)
+- [帐户](./20_accounts.md)
+- [资源](./30_resources.md)
+- [智能合约基础](./40_smart-contract-basics.md)

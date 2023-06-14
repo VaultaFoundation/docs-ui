@@ -1,8 +1,8 @@
 ---
-title: Compatibility
+title: 兼容性
 ---
 
-Learn about the compatibility of the EOS EVM with Ethereum:
+了解 EOS EVM 与以太坊的兼容性：
 
-* [EVM Compatibility](./10_evm-compatibility.md)
-* [Json-RPC Compatibility](./20_json-rpc-compatibility.md)
+* [EVM 兼容性](./10_evm-compatibility.md)
+* [Json-RPC 兼容性](./20_json-rpc-compatibility.md)

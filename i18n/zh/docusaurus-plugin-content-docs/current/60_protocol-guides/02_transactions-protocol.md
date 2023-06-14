@@ -1,235 +1,235 @@
 ---
-title: Transactions Protocol
+title: 交易协议
 ---
 
 
-## 1. Overview
+## 1.概述
 
-Actions define atomic behaviors within a smart contract. At a higher level, transactions define groups of actions that execute atomically within a decentralized application. Analogously to a database transaction, the group of actions that form a blockchain transaction must all succeed, one by one, in a predefined order, or else the transaction will fail. To maintain transaction atomicity and integrity in case of a failed transaction, the blockchain state is restored to a state consistent with the state prior to processing the transaction. This guarantees that no side effects arise from any actions executed prior to the point of failure.
-
-
-### 1.1. Actions
-
-An action can be authorized by one or more actors previously created on the blockchain. Actions can be created explicitly within a smart contract, or generated implicitly by application code. For any given `actor:action` pair there is at most one explicit associated minimum permission. If there are no explicit minimum permissions set, the implicit default is `actor@active`. Each actor can independently set their personal minimum permission for a given action. Also, a complex but flexible authorization structure is in place within the EOS software to allow actors to push actions on behalf of other accounts. Thus, further checks are enforced to authorize an actor to send an action (see [3.4.2. Permission Check](#342-permission-check)).
-
-There are two types of actions involved in a transaction. They mainly differ in the way they are executed by the EOS software:
-
-1. Explicit actions, which are present in a signed transaction (see [2. Transaction Instance](#2-transaction-instance)).
-2. Implicit (inline) actions, which are created as a side effect of processing a transaction.
-
-Implicit (inline) actions are also defined in smart contract code, just like explicit actions. The key difference is that inline actions are not included in the actual transactions propagated through the network and eventually included in a block; they are implicit.
+动作定义智能合约中的原子行为。在更高层次上，交易定义了在去中心化应用程序中以原子方式执行的动作组。类似于数据库事务，构成区块链事务的一组操作必须按照预定义的顺序一个接一个地全部成功，否则事务将失败。为了在交易失败的情况下保持交易的原子性和完整性，区块链状态将恢复到与处理交易之前的状态一致的状态。这保证了在故障点之前执行的任何操作都不会产生副作用。
 
 
-#### 1.1.1. Explicit Actions
+### 1.1。动作
 
-Regular or explicit actions, as their name implies, are included in the actual list of actions that form a transaction. Explicit actions are encoded as action instances (see [3.4.3. Action Instance](#343-action-instance)) before being pushed into the transaction. Explicit actions also contain the actual payload data, if any, associated with the action to be executed as part of the transaction.
+一个动作可以由先前在区块链上创建的一个或多个参与者授权。动作可以在智能合约中显式创建，或由应用程序代码隐式生成。对于任何给定 `actor:action` 一对最多有一个显式关联的最小权限。如果没有显式设置最小权限，则隐式默认为 `actor@active`.每个演员都可以独立设置他们对给定动作的个人最低许可。此外，EOS 软件中采用了复杂但灵活的授权结构，以允许参与者代表其他帐户推送操作。因此，将强制执行进一步检查以授权参与者发送动作（请参阅 [3.4.2.权限检查](#342-permission-check)).
 
+事务中涉及两种类型的操作。它们的主要区别在于 EOS 软件执行它们的方式：
 
-#### 1.1.2. Implicit Actions
+1. 显式操作，出现在已签名的交易中（参见 [2.交易实例](#2-transaction-instance)).
+2. 隐式（内联）动作，作为处理事务的副作用而创建。
 
-An implicit (inline) action is generated as a result of an explicit caller action within a transaction (or another inline action, if nested) that requires that implicit action to perform an operation for the caller action to continue. As such, inline actions work within the same scope and permissions of the caller action. Therefore, inline actions are guaranteed to execute within the same transaction.
-
-
-### 1.2. Smart Contracts
-
-In EOS, smart contracts consist of a set of actions, usually grouped by functionality, and a set of type definitions which those actions depend on. Therefore, actions specify and define the actual behaviors of the contract. Several actions are implemented in the standard EOS contracts for account creation, producer voting, token operations, etc. Application developers can extend, replace, or disable this functionality altogether by creating custom actions within their own smart contracts and applications. Transactions, on the other hand, are typically created at the application level. Smart contracts are agnostic to them.
+隐式（内联）动作也在智能合约代码中定义，就像显式动作一样。关键区别在于，内联操作不包含在通过网络传播并最终包含在块中的实际交易中；它们是隐含的。
 
 
-#### 1.2.1. Implementation
+#### 1.1.1。明确的行动
 
-An EOS smart contract is implemented as a C++ class that derives from `eosio::contract`. Actions are implemented as C++ methods within the derived class. Transactions, on the other hand, are generated dynamically (as transaction instances) within an EOS application. The EOS software processes each transaction instance and keeps track of its state as it evolves from creation, signing, validation, and execution.
-
-
-## 2. Transaction Instance
-
-A transaction instance consists of a transaction header and the list of action instances and transaction extensions that make the actual transaction. The transaction header includes information necessary to assess the inclusion of the transaction in a block based on its expiration time, which is computed when the transaction is pushed for execution. Other fields include the block number that includes the transaction, a block ID prefix used to prevent "cross chain" or "cross fork" attacks, upper limits for CPU and network usage, and the number of seconds to delay the transaction, if applicable. The diagram below depicts a transaction instance.
-
-![](../images/protocol-xacts_instance.png "Transaction Instance")
-
-The action instances may consist of regular actions or context free actions. Signatures are created and validated at the transaction level. Accounts and permissions are handled on a per action basis. Each action instance contains information to validate whether it is authorized to be executed based on the permission levels of the actors specified in the action and the actual authorizations defined in the smart contract for that action (see [3.4.2. Permission Check](#342-permission-check)).
+顾名思义，常规或显式操作包含在构成事务的实际操作列表中。显式动作被编码为动作实例（见 [3.4.3.动作实例](#343-action-instance)) 在被推入交易之前。显式操作还包含实际有效载荷数据（如果有）与作为事务的一部分执行的操作相关联。
 
 
-### 2.1. Transaction ID
+#### 1.1.2。隐式动作
 
-A transaction instance contains the minimum set of fields that distinguish one transaction from another. Consequently, a transaction ID consists of a cryptographic hash of the basic fields included in a transaction instance. Therefore, the transaction ID is solely determined by the list of actions encapsulated within the transaction, the transaction header, and any embedded transaction extensions, which are optional. The transaction instance can be further specialized into a signed transaction instance or a packed transaction instance.
+隐式（内联）操作是作为事务（或另一个内联操作，如果嵌套）中的显式调用者操作的结果而生成的，该操作需要隐式操作来执行调用者操作才能继续的操作。因此，内联操作在调用方操作的相同范围和权限内工作。因此，内联操作保证在同一个事务中执行。
 
 
-### 2.2. Signed Transaction Instance
+### 1.2。智能合约
 
-A signed transaction extends the basic contents of the transaction schema to include the signature(s) generated by the account(s) that signed the transaction. It also includes any data associated with the context free actions, if any, that were included in the transaction instance (see `signed_transaction` schema below). A transaction is not ready for execution and validation unless it is signed by the applicable actors.
+在 EOS 中，智能合约由一组通常按功能分组的动作和一组这些动作所依赖的类型定义组成。因此，动作指定并定义了合约的实际行为。在标准 EOS 合约中实施了几个用于帐户创建、生产者投票、令牌操作等的操作。应用程序开发人员可以通过在他们自己的智能合约和应用程序中创建自定义操作来扩展、替换或完全禁用此功能。另一方面，事务通常是在应用程序级别创建的。智能合约对他们来说是不可知的。
 
-#### signed_transaction schema
 
-Name | Type | Description
+#### 1.2.1。执行
+
+EOS 智能合约是作为派生自的 C++ 类实现的 `eosio::contract`.动作在派生类中作为 C++ 方法实现。另一方面，交易是在 EOS 应用程序中动态生成的（作为交易实例）。 EOS 软件处理每个交易实例并跟踪其状态，因为它从创建、签名、验证和执行演变而来。
+
+
+## 2.交易实例
+
+事务实例由事务标头和进行实际事务的操作实例和事务扩展列表组成。交易标头包括根据到期时间评估交易是否包含在区块中所需的信息，该时间是在交易被推送执行时计算的。其他字段包括包含交易的区块编号、用于防止“跨链”或“交叉分叉”攻击的区块 ID 前缀、CPU 和网络使用上限以及延迟交易的秒数（如果适用）。下图描述了一个事务实例。
+
+！[](../images/protocol-xacts_instance.png "Transaction Instance")
+
+动作实例可能包括常规动作或上下文无关动作。签名是在交易级别创建和验证的。帐户和权限是在每个操作的基础上处理的。每个动作实例都包含根据动作中指定的参与者的权限级别和智能合约中为该动作定义的实际授权来验证它是否被授权执行的信息（请参阅 [3.4.2.权限检查](#342-permission-check)).
+
+
+### 2.1。交易编号
+
+事务实例包含将一个事务与另一个事务区分开来的最小字段集。因此，交易 ID 由交易实例中包含的基本字段的加密散列组成。因此，事务 ID 仅由封装在事务中的操作列表、事务标头和任何嵌入式事务扩展来确定，这些都是可选的。交易实例可以进一步特化为签名交易实例或打包交易实例。
+
+
+### 2.2。签名交易实例
+
+已签名的交易扩展了交易模式的基本内容，以包括由签署交易的账户生成的签名。它还包括与事务实例中包含的上下文无关操作相关联的任何数据（如果有的话）（请参阅 `signed_transaction` 下面的架构）。除非由适用的参与者签名，否则交易还没有准备好执行和验证。
+
+#### signed_transaction 模式
+
+名称 |类型 |描述
 -|-|-
-`expiration` | `time_point_sec` | the time the transaction must be confirmed by before it expires
-`ref_block_num` | `uint16_t` | lower 16 bits of a block number in the last $2^{16}$ blocks
-`ref_block_prefix` | `uint32_t` | lower 32 bits of block id referred by `ref_block_num'
-`max_net_usage_words` | `unsigned_int` | upper limit on total network bandwidth billed (in 64-bit words)
-`max_cpu_usage_ms` | `uint8_t` | upper limit on total CPU time billed (in milliseconds)
-`delay_sec` | `unsigned_int` | number of seconds to delay transaction for
-`context_free_actions` | array of `action` | list of context-free actions if any
-`actions` | array of `action` | list of [action instances](#343-action-instance)
-`transaction_extensions` | `extensions_type` | extends fields to support additional features
-`signatures` | array of `signature_type` | digital signatures after transaction is signed
-`context_free_data` | array of `bytes` | context-free action data to send if any
+`expiration` | `time_point_sec` |交易必须在到期前确认的时间
+`ref_block_num` | `uint16_t` |最后 $2^{16}$ 块中块号的低 16 位
+`ref_block_prefix` | `uint32_t` |引用的块 ID 的低 32 位 ref_block_num'
+`max_net_usage_words` | `unsigned_int` |计费的总网络带宽上限（64 位字）
+`max_cpu_usage_ms` | `uint8_t` |计费的总 CPU 时间上限（以毫秒为单位）
+`delay_sec` | `unsigned_int` |延迟交易的秒数
+`context_free_actions` |数组 `action` |上下文无关操作列表（如果有）
+`actions` |数组 `action` |列表 [动作实例](#343-action-instance)
+`transaction_extensions` | `extensions_type` |扩展字段以支持其他功能
+`signatures` |数组 `signature_type` |交易签署后的数字签名
+`context_free_data` |数组 `bytes` |要发送的无上下文操作数据（如果有）
 
 
-### 2.3. Packed Transaction Instance
+### 2.3。打包事务实例
 
-A packed transaction is an optionally compressed signed transaction with additional housekeeping fields to allow for decompression and quick validation. Packed transactions minimize space footprint and block size in the long run (see `packed_transaction` schema below). A packed transaction forms the most generic type of transaction in the EOS blockchain. Consequently, when transactions are pushed to a block, they are actually packed transactions whether compressed or not.
+打包交易是一个可选的压缩签名交易，带有额外的管理字段以允许解压缩和快速验证。从长远来看，打包交易最大限度地减少了空间占用和块大小（请参阅 `packed_transaction` 下面的架构）。打包交易构成了 EOS 区块链中最通用的交易类型。因此，当交易被推送到一个区块时，它们实际上是打包的交易，无论是否压缩。
 
-#### packed_transaction schema
+#### packed_transaction 模式
 
-Name | Type | Description
+名称 |类型 |描述
 -|-|-
-`signatures` | `signature_type` | digital signatures after transaction is signed
-`compression` | `compression_type` | compression method used
-`packed_context_free_data` | `bytes` | compressed context-free data (if transaction compressed)
-`packed_trx` | `bytes` | compressed transaction (if compressed)
-`unpacked_trx` | `signed_transaction` | cached decompressed transaction
-`trx_id` | `transaction_id_type` | transaction ID
+`signatures` | `signature_type` |交易签署后的数字签名
+`compression` | `compression_type` |使用的压缩方法
+`packed_context_free_data` | `bytes` |压缩的上下文无关数据（如果事务压缩）
+`packed_trx` | `bytes` |压缩事务（如果压缩）
+`unpacked_trx` | `signed_transaction` |缓存解压事务
+`trx_id` | `transaction_id_type` |交易编号
 
-The `unpacked_trx` field holds the cached unpacked transaction after the transaction instance is constructed. If the signed transaction was previously compressed, it is decompressed from the `packed_trx` field and cached to `unpacked_trx`. If the signed transaction was stored uncompressed, it is simply copied verbatim to `unpacked_trx`. The `signatures` field allows a quick signature validation of the transaction without requiring a full decompression of the transaction.
-
-
-## 3. Transaction Lifecycle
-
-Transactions go through various stages during their lifespan. First, a transaction is created in an application or an EOS client such as cleos by pushing the associated actions into the transaction. Next, the transaction is sent to the locally connected node, which in turn relays it to the active producing nodes for validation and execution via the peer-to-peer network. Next, the validated transaction is pushed to a block by the active producer on schedule along with other transactions. Finally the block that contains the transaction is pushed to all other nodes for validation. When a supermajority of producers have validated the block, and the block becomes irreversible, the transaction gets permanently recorded in the blockchain and it is considered immutable.
+这 `unpacked_trx` 构造交易实例后，字段保存缓存的解包交易。如果签名的交易之前被压缩过，它会从 `packed_trx` 字段并缓存到 `unpacked_trx`.如果已签名的交易未压缩存储，则只需将其逐字复制到 `unpacked_trx`.这 `signatures` 字段允许对交易进行快速签名验证，而无需对交易进行完全解压。
 
 
-### 3.1. Create Transaction
+## 3.交易生命周期
 
-Transactions are created within an application by instantiating a transaction object and pushing the related action instances into a list within the transaction instance. An action instance contains the actual details about the receiver account to whom the action is intended, the name of the action, the list of actors and permission levels that must authorize the transaction via signatures and delays, and the actual message to be sent, if any (see `action` schema below).
+事务在其生命周期中经历不同的阶段。首先，通过将关联的操作推送到事务中，在应用程序或 EOS 客户端（例如 cleos）中创建事务。接下来，交易被发送到本地连接的节点，该节点又将其中继到活跃的生产节点，以通过对等网络进行验证和执行。接下来，经过验证的交易与其他交易一起由活跃的生产者按计划推送到一个区块。最后，包含交易的区块被推送到所有其他节点进行验证。当绝大多数生产者验证了该块，并且该块变得不可逆时，交易将永久记录在区块链中并且被认为是不可变的。
 
-#### action schema
 
-Name | Type | Description
+### 3.1。创建交易
+
+通过实例化事务对象并将相关操作实例推送到事务实例中的列表中，在应用程序中创建事务。一个动作实例包含有关该动作的目标接收者帐户的实际详细信息、动作的名称、必须通过签名和延迟授权交易的参与者和权限级别的列表，以及要发送的实际消息，如果任何（见 `action` 下面的架构）。
+
+#### 动作模式
+
+名称 |类型 |描述
 -|-|-
-`account` | `name` | encoded 13-char account name
-`action_name` | `name` | encoded 13-char action name
-`authorization` | array of `permission_level` | list of `actor:permission` authorizations
-`data` | `bytes` | action data to send
+`account` | `name` |编码的 13 个字符的帐户名
+`action_name` | `name` |编码的 13 个字符的操作名称
+`authorization` |数组 `permission_level` |列表 `actor:permission` 授权
+`data` | `bytes` |要发送的动作数据
 
-After the transaction instance is created at the application level, the transaction is arranged for processing. This involves two main steps: signing the transaction and pushing the signed transaction to the local node for actual propagation and execution of the transaction. These steps are typically performed within the EOS application.
-
-
-### 3.2. Sign Transaction
-
-The transaction must be signed by a set of keys sufficient to satisfy the accumulated set of explicit `actor:permission` pairs specified in all the actions enclosed within the transaction. This linkage is done through the authority table for the given permission. The actual signing key is obtained by querying the wallet associated with the signing account on the client where the application is run.
-
-The transaction signing process takes three parameters: the transaction instance to sign, the set of public keys from which the associated private keys within the application wallet are retrieved, and the chain ID. The chain ID identifies the actual EOS blockchain and consists of a hash of its genesis state, which depends on the blockchain’s initial configuration parameters. Before signing the transaction, the EOS software first computes a digest of the transaction. The digest value is a SHA-256 hash of the chain ID, the transaction instance, and the context free data if the transaction has any context free actions. Any instance fields get serialized before computing any cryptographic hashes to avoid including reference fields (memory addresses) in the hash computation. The transaction digest computation and the signing process are depicted below.
-
-![](../images/protocol-xact_sign.png "Transaction Signing")
-
-After the transaction digest is computed, the digest is finally signed with the private key associated with the signing account’s public key. The public-private key pair is usually stored within the local machine that connects to the local node. The signing process is performed within the wallet manager associated with the signing account, which is typically the same user that deploys the application. The wallet manager provides a virtual secure enclave to perform the digital signing, so a message signature is generated without the private key ever leaving the wallet. After the signature is generated, it is finally added to the signed transaction instance.
+在应用层创建事务实例后，安排事务进行处理。这涉及两个主要步骤：签署交易并将签署的交易推送到本地节点以实际传播和执行交易。这些步骤通常在 EOS 应用程序中执行。
 
 
-### 3.3. Push Transaction
+### 3.2。签署交易
 
-After the transaction is signed, a packed transaction instance is created from the signed transaction instance and pushed from the application to the local node, which in turn relays the transaction to the active producing nodes for signature verification, execution, and validation. Every producing node that receives a transaction will attempt to execute and validate it in their local context before relaying it to the next producing node. Hence, valid transactions are relayed while invalid ones are dropped. The idea behind this is to prevent bad actors from spamming the network with bogus transactions. The expectation is for bad transactions to get filtered and dropped before reaching the active producer on schedule. When a transaction is received, no assumption is made on its validity. All transactions are validated again by the next producing node, regardless of whether it is producing blocks. The only difference is that the producer on schedule attempts to produce blocks by pushing the transactions it validates into a pending block before pushing the finalized block to its own local chain and relaying it to other nodes.
+交易必须由一组足以满足显式累积集的密钥签名 `actor:permission` 交易中包含的所有操作中指定的对。此链接是通过给定权限的权限表完成的。实际的签名密钥是通过在运行应用程序的客户端上查询与签名帐户关联的钱包来获得的。
 
+交易签名过程采用三个参数：要签名的交易实例、从中检索应用程序钱包内相关私钥的公钥集以及链 ID。链 ID 标识实际的 EOS 区块链，由其创世状态的哈希值组成，这取决于区块链的初始配置参数。在签署交易之前，EOS 软件首先计算交易的摘要。摘要值是链 ID、事务实例和上下文无关数据的 SHA-256 散列（如果事务具有任何上下文无关操作）。任何实例字段在计算任何加密哈希之前都会被序列化，以避免在哈希计算中包含参考字段（内存地址）。交易摘要计算和签名过程如下所示。
 
-### 3.4. Verify Transaction
+！[](../images/protocol-xact_sign.png "Transaction Signing")
 
-The process to verify a transaction is twofold. First, the public keys associated with the accounts that signed the transaction are recovered from the set of signatures provided in the transaction. Such a recovery is cryptographically possible for ECDSA, the elliptic curve digital signature algorithm used in EOS. Second, the public key of each actor specified in the list of action authorizations (actor:permission) from each action included in the transaction is checked against the set of recovered keys to see if it is satisfied. Third, each satisfied `actor:permission` is checked against the associated minimum permission required for that `actor:contract::action` pair to see if it meets or exceeds that minimum. This last check is performed at the action level before any action is executed (see [3.4.2. Permission Check](#342-permission-check)).
-
-
-#### 3.4.1. Transaction Context
-
-Once the public keys are recovered, a transaction context is created from the transaction instance. The transaction context keeps track of the trace of actions and the action receipt generated as each action is dispatched and executed. All state generated is kept within a transaction trace instance and a list of action receipts. The transaction trace consists of a list of action traces. Each action trace contains information about the executed action, which includes the action receipt, the action instance, whether it is a context-free action, and the transaction ID that generated the action. The action receipt is generated later during transaction execution and finalization.
+在计算出交易摘要后，最后使用与签名账户的公钥关联的私钥对摘要进行签名。公私密钥对通常存储在连接到本地节点的本地机器中。签名过程在与签名帐户关联的钱包管理器中执行，该帐户通常是部署应用程序的同一用户。钱包管理器提供了一个虚拟安全飞地来执行数字签名，因此在私钥永远不会离开钱包的情况下生成消息签名。签名生成后，最终添加到已签名的交易实例中。
 
 
-#### 3.4.2. Permission Check
+### 3.3。推送交易
 
-Since the sequence of actions contained in the transaction must be executed atomically as a whole, the EOS software first checks that the actors specified in each action have the minimum permission required to execute it. To that end, the software checks the following for each action:
-
-*   The named permission of each actor specified in each action instance.
-*   The named permission of the corresponding `actor:contract::action` pair specified in the smart contract.
-
-If there is at least one actor whose set of named permissions fail to meet the minimum permission level required by the corresponding `actor:contract::action` pair in the smart contract, the transaction fails. The reason why action permissions are checked before any action is executed is due to performance. It is more efficient to cancel a transaction with all actions unexecuted, than doing so after a few actions executed, but later were rolled back as a result of a failed action or authorization. Any state changes incurred during a failed action must be undone to preserve data integrity. Database sessions are expensive in terms of memory usage and computing resources. Therefore, undo operations must be minimized as possible.
+交易签署后，打包的交易实例从已签署的交易实例创建，并从应用程序推送到本地节点，本地节点又将交易中继到活动生产节点以进行签名验证、执行和验证。每个接收交易的生产节点将尝试在其本地上下文中执行并验证它，然后再将其中继到下一个生产节点。因此，有效的交易被中继，而无效的交易被丢弃。这背后的想法是防止不良行为者通过虚假交易向网络发送垃圾邮件。期望不良交易在按计划到达活跃的生产者之前被过滤掉。收到交易时，不会对其有效性做出任何假设。所有交易都由下一个生产节点再次验证，无论它是否正在生产区块。唯一的区别是，生产者按计划尝试通过将其验证的事务推送到待处理块中来生成块，然后再将最终确定的块推送到其自己的本地链并将其中继到其他节点。
 
 
-#### 3.4.3. Action Instance
+### 3.4。验证交易
 
-The diagram below depicts an action instance. It consists of the receiver account, the action name, the list of actors and their permissions, and the action data containing the message to be sent, if any, to the receiver account.
-
-![](../images/protocol-xacts_act_instance.png "Action Instance")
-
-#### 3.4.4. Authority Check
-
-After the minimum permission levels are checked, the authority table for the receiver account’s permission that matches each actor’s permission within the action instance is checked.
+验证交易的过程是双重的。首先，从交易中提供的签名集中恢复与签署交易的账户相关联的公钥。对于 ECDSA（EOS 中使用的椭圆曲线数字签名算法），这种恢复在密码学上是可能的。其次，针对交易中包含的每个动作的动作授权列表 (actor:permission) 中指定的每个演员的公钥与恢复的密钥集进行检查，以查看是否满足要求。三、各满意 `actor:permission` 针对该要求的相关最低权限进行检查 `actor:contract::action` 配对以查看它是否达到或超过该最小值。最后一次检查是在执行任何操作之前在操作级别执行的（请参阅 [3.4.2.权限检查](#342-permission-check)).
 
 
-### 3.5. Execute Transaction
+#### 3.4.1。事务上下文
 
-To execute the transaction, a chain database session is started and a snapshot is taken. This allows to roll back any changes made to the chain state in case any of the transaction actions fails. A corresponding transaction context keeps the transaction state during execution. To execute the transaction, each action associated with the corresponding transaction instance is dispatched for execution. Context free actions, if any, are dispatched first, followed by regular actions.
-
-
-#### 3.5.1. Apply Context
-
-To prepare for action execution, an apply context instance is created locally for each action. The apply context, as its name implies, contains references to the necessary resources to apply the action, such as an instance to the chain controller (see [Network Peer Protocol: 2.2. Chain Controller](03_network-peer-protocol.md#22-chain-controller)), the chain database where state is kept, the transaction context where the transaction is running, the actual action instance, and the receiver account to whom the action is intended.
+一旦恢复了公钥，就会从交易实例创建交易上下文。事务上下文跟踪动作的踪迹和在每个动作被调度和执行时生成的动作收据。生成的所有状态都保存在事务跟踪实例和操作收据列表中。事务跟踪由一系列操作跟踪组成。每个动作跟踪都包含有关已执行动作的信息，其中包括动作接收、动作实例、是否为上下文无关动作以及生成动作的事务 ID。操作收据稍后在交易执行和完成期间生成。
 
 
-#### 3.5.2. Action Trace
+#### 3.4.2。权限检查
 
-To prepare each action for execution, both action receipt and action trace instances are initialized. First, a hash of the action instance itself is computed and stored in the action receipt. Next, the action trace is initialized with statistics about the pending block where the transaction that includes the action will be pushed to. Therefore, an action trace allows an action to be traced to the actual block and transaction that includes the action, including the actual node that produced the block. Finally, the action handler is located by matching the handler name, receiver account, and actor account with the list of action handlers maintained by the chain controller within the producing node. These action handlers are applied in the controller when the system contracts and the client application are loaded. The handlers take the receiver account name, the contract name, the action name, and the action handler.
+由于交易中包含的一系列动作必须作为一个整体以原子方式执行，因此 EOS 软件首先检查每个动作中指定的参与者是否具有执行它所需的最低权限。为此，软件会针对每个操作检查以下内容：
 
+* 每个动作实例中指定的每个参与者的命名权限。
+* 对应的named权限 `actor:contract::action` 智能合约中指定的对。
 
-#### 3.5.3. Action Execution
-
-Once the proper action handler is located, the appropriate whitelists and blacklists are checked. If the node is currently producing blocks, the receiver account is checked against the account whitelist and blacklist, if any. The action blacklist is checked next, if any. If the receiver account or the action name are in a blacklist, the action is aborted. If the receiver account is already on the whitelist, the blacklist check is skipped. If all checks pass, the action is finally executed by invoking the corresponding action handler, passing the actor account in the `from` parameter and the receiving account in the `to` parameter.
-
-
-### 3.6. Finalize Transaction
-
-After all actions included in the transaction are executed, the transaction enters the finalization stage. In this step, a corresponding action receipt is produced for each action. The action receipt contains a hash of the corresponding action instance, a few counters used for analytics, and the receiver account to which the action is intended to, if applicable.
+如果至少有一个参与者的命名权限集不满足相应的最低权限级别要求 `actor:contract::action` pair 在智能合约中，交易失败。在执行任何操作之前检查操作权限的原因是性能。在所有操作都未执行的情况下取消事务比在执行了一些操作之后取消事务更有效，但后来由于操作或授权失败而被回滚。必须撤消在失败操作期间发生的任何状态更改，以保持数据完整性。数据库会话在内存使用和计算资源方面非常昂贵。因此，必须尽可能减少撤销操作。
 
 
-#### 3.6.1. Transaction Receipt
+#### 3.4.3。动作实例
 
-After all action receipts are generated for the transaction, a transaction receipt is finally created and pushed into the signed block, along with other transaction receipts included in the block. The transaction receipt summarizes the result of the transaction (executed, unexecuted, failed, deferred, expired, etc.), including the actual amount of CPU billed in microseconds, and the total NET storage used (see `transaction_receipt` schema below).
+下图描述了一个动作实例。它由接收方帐户、操作名称、参与者列表及其权限以及包含要发送到接收方帐户的消息（如果有）的操作数据组成。
 
-##### transaction_receipt schema
+！[](../images/protocol-xacts_act_instance.png "Action Instance")
 
-Name | Type | Description
+#### 3.4.4。权限检查
+
+检查最低权限级别后，检查与操作实例中每个参与者的权限相匹配的接收者帐户权限的权限表。
+
+
+### 3.5。执行交易
+
+为了执行交易，启动链数据库会话并拍摄快照。这允许在任何交易操作失败的情况下回滚对链状态所做的任何更改。相应的事务上下文在执行期间保持事务状态。为了执行事务，与相应事务实例相关联的每个动作都被调度执行。上下文无关的动作（如果有的话）首先被调度，然后是常规动作。
+
+
+#### 3.5.1。应用上下文
+
+为了准备动作执行，在本地为每个动作创建一个应用上下文实例。应用上下文，顾名思义，包含对应用操作所需资源的引用，例如链控制器的实例（请参阅 [网络对等协议：2.2。链控制器](03_network-peer-protocol.md#22-chain-controller))，保存状态的链数据库，运行交易的交易上下文，实际的动作实例，以及动作的目标接收者账户。
+
+
+#### 3.5.2。动作轨迹
+
+为了准备执行每个动作，动作接收和动作跟踪实例都被初始化。首先，计算操作实例本身的哈希值并将其存储在操作收据中。接下来，使用有关待处理块的统计信息初始化操作跟踪，其中包含操作的事务将被推送到该块。因此，action trace 允许将 action 追溯到实际的块和包含该 action 的交易，包括产生该块的实际节点。最后，通过将处理程序名称、接收方帐户和参与者帐户与生产节点内的链控制器维护的操作处理程序列表进行匹配来定位操作处理程序。当加载系统合同和客户端应用程序时，这些操作处理程序将在控制器中应用。处理程序采用接收方帐户名称、合约名称、操作名称和操作处理程序。
+
+
+#### 3.5.3。动作执行
+
+一旦找到正确的操作处理程序，就会检查适当的白名单和黑名单。如果节点当前正在生成块，则根据帐户白名单和黑名单检查接收者帐户（如果有）。接下来检查操作黑名单（如果有）。如果接收方账户或操作名称在黑名单中，则操作中止。如果接收方账户已经在白名单中，则跳过黑名单检查。如果所有检查都通过，则最终通过调用相应的操作处理程序来执行操作，将 actor 帐户传递给 `from` 中的参数和收款账户 `to` 范围。
+
+
+### 3.6。完成交易
+
+交易包含的所有动作执行完毕后，交易进入敲定阶段。在该步骤中，为每个动作产生对应的动作回执。操作收据包含相应操作实例的哈希值、一些用于分析的计数器以及操作所针对的接收方帐户（如果适用）。
+
+
+#### 3.6.1。交易收据
+
+在为交易生成所有操作收据之后，最终创建交易收据并将其与包含在该块中的其他交易收据一起推入已签名的块。交易收据总结了交易的结果（已执行、未执行、失败、延迟、过期等），包括以微秒为单位的实际 CPU 计费量，以及使用的总 NET 存储量（请参阅 `transaction_receipt` 下面的架构）。
+
+##### transaction_receipt 架构
+
+名称 |类型 |描述
 -|-|-
-`status` | `uint8_t` | result of transaction execution attempt
-`cpu_usage_us` | `uint32_t` | total CPU used in microseconds
-`net_usage_words` | `unsigned int` | total NET used in 64-bit words
-`trx` | `variant` | holds transaction ID or packed transaction
+`status` | `uint8_t` |事务执行尝试的结果
+`cpu_usage_us` | `uint32_t` |以微秒为单位使用的总 CPU
+`net_usage_words` | `unsigned int` | 64 位字中使用的总 NET
+`trx` | `variant` |持有交易ID或打包交易
 
-The `status` field is an 8-bit enumeration type that can hold one of the following results:
+这 `status` field 是一个 8 位枚举类型，可以保存以下结果之一：
 
-* `executed` - transaction succeeded, no error handler executed.
-* `soft_fail` - transaction failed, error handler succeeded.
-* `hard_fail` - transaction failed, error handler failed.
-* `delayed` - transaction delayed by user for future execution.
-* `expired` - transaction expired, CPU/NET refunded to user.
+* `executed` - 事务成功，没有执行错误处理程序。
+* `soft_fail` - 事务失败，错误处理程序成功。
+* `hard_fail` - 事务失败，错误处理程序失败。
+* `delayed` - 用户为将来执行而延迟的交易。
+* `expired` - 交易过期，CPU/NET 退还给用户。
 
-[[info | 'delayed' status]]
-| The `delayed` status only applies to **delayed user transactions**, that is, explicit user-created transactions that have a delay to satisfy authorizations (see [3.6.3. Delayed User Transactions](#363-delayed-user-transactions) for more information).
+[[信息 | '延迟'状态]]
+|这 `delayed` status 仅适用于**延迟的用户交易**，即明确的用户创建的交易有延迟以满足授权（见 [3.6.3.延迟的用户交易](#363-delayed-user-transactions) 了解更多信息）。
 
-The `trx` field holds the transaction ID or the packed transaction itself. The actual choice depends on the transaction type. Receipts generated from Deferred Transactions and Delayed User Transactions are stored by transaction ID; all other types are stored as packed transactions.
-
-
-#### 3.6.2. Deferred Transactions
-
-Deferred transactions are generated as a side effect of processing the blockchain, so their state is stored in the chain database, not within a block. Therefore, there is no need to explicitly include their contents in the transaction receipt. All in-sync nodes should be aware of the form of a deferred transaction as a matter of consensus. Deferred transactions issued by a smart contract have no role or effect on the `delayed` status field of the transaction receipt.
-
-[[caution | Deprecation Notice]]
-| Deferred transactions are deprecated as of EOS 2.0. 
-
-#### 3.6.3. Delayed User Transactions
-
-Delayed user transactions contain the packed transactions when they are pushed to the network (at the start of the delay timer). However, unlike regular transactions, they bear a "delayed" status so their execution and validation can be postponed. Later on when they execute/fail/expire (at the end of the delay timer), they only contain the transaction ID. This is because any in-sync node will have the transaction content from a previously broadcast block.
+这 `trx` 字段包含交易 ID 或打包交易本身。实际选择取决于交易类型。 Deferred Transactions 和 Delayed User Transactions 生成的收据按交易 ID 存储；所有其他类型都存储为打包事务。
 
 
-### 3.7. Validate Transaction
+#### 3.6.2。延期交易
 
-A transaction is verified and validated at various stages during its lifecycle: first when it propagates on the peer-to-peer network as a loose transaction (see [3.4. Verify Transaction](#34-verify-transaction)), then during block validation as the block is confirmed among a supermajority of block producers, and optionally during a blockchain replay if nodeos is configured to fully re-validate transactions during replays. By default, recorded transactions are not completely re-validated during replays since it is assumed that the node operator has established trust in the local block log, either personally or through a side-channel so it is no longer considered a potential source of byzantine information.
+延迟交易是作为处理区块链的副作用而产生的，因此它们的状态存储在链数据库中，而不是块内。因此，无需在交易收据中明确包含它们的内容。作为共识，所有同步节点都应该知道延迟交易的形式。智能合约发出的延期交易对 `delayed` 交易收据的状态字段。
+
+[[警告 |弃用通知]]
+|从 EOS 2.0 开始，延迟交易已被弃用。
+
+#### 3.6.3。延迟的用户交易
+
+延迟的用户交易在被推送到网络时（在延迟计时器开始时）包含打包的交易。然而，与常规交易不同的是，它们具有“延迟”状态，因此可以推迟执行和验证。稍后当它们执行/失败/过期时（在延迟计时器结束时），它们只包含事务 ID。这是因为任何同步节点都将具有来自先前广播块的交易内容。
 
 
-#### 3.7.1. Validation Process
+### 3.7。验证交易
 
-When validating a transaction as part of a block, multiple validations occur at various levels. In full block validation, all transactions recorded in the block are replayed and the locally calculated merkle tree root hashes (generated from the transaction receipt data and the action receipt data, respectively) are compared against the `transaction_mroot` and `action_mroot` fields in the block header. Therefore, if a recorded transaction is tampered within a block, not only the merkle tree root hashes would cause a mismatch, but also the transaction signature(s) would fail to validate. If the tampering was not performed by a bona-fide block producer, the block signature would fail to validate as well (see [Consensus Protocol: 5.3. Block Validation](01_consensus-protocol.md#53-block-validation)).
+交易在其生命周期的不同阶段被验证和验证：首先，当它作为松散交易在对等网络上传播时（见 [3.4.验证交易](#34-verify-transaction))，然后在区块验证期间，因为区块在绝大多数区块生产者中得到确认，并且如果 nodeos 配置为在重播期间完全重新验证交易，则可以选择在区块链重放期间。默认情况下，记录的交易在回放期间不会完全重新验证，因为假设节点操作员已经亲自或通过侧通道建立了对本地块日志的信任，因此它不再被视为拜占庭信息的潜在来源.
+
+
+#### 3.7.1。验证过程
+
+当验证作为块的一部分的交易时，多个验证发生在不同的级别。在完整的区块验证中，记录在区块中的所有交易都会被重放，并将本地计算的默克尔树根哈希（分别从交易收据数据和动作收据数据生成）与 `transaction_mroot` 和 `action_mroot` 块头中的字段。因此，如果记录的交易在区块内被篡改，不仅默克尔树根哈希会导致不匹配，而且交易签名也将无法验证。如果篡改不是由真正的区块生产者执行的，区块签名也将无法验证（参见 [共识协议：5.3。区块验证](01_consensus-protocol.md#53-block-validation)).

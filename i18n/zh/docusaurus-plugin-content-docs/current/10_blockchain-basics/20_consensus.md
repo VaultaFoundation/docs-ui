@@ -1,46 +1,46 @@
 ---
-title: Consensus
+title: 共识
 ---
 
-Consensus is the fundamental process in blockchain technology by which a distributed network of 
-nodes reaches agreement on the state of the ledger. Every time a new block is added to the chain,
-the nodes must agree on the contents of the block. This is done by a consensus algorithm.
+共识是区块链技术的基本过程，通过该过程，分布式网络
+节点就分类帐的状态达成一致。每次将新区块添加到链中时，
+节点必须就区块的内容达成一致。这是通过共识算法完成的。
 
-## What is a consensus algorithm?
+## 什么是共识算法？
 
-A consensus algorithm is a rigid set of rules that are used to ensure that all nodes on the 
-network agree on the current state of the ledger. These rules must be deterministic, meaning
-that they will always produce the same result given the same input. This is important because
-it ensures that all nodes on the network will reach the same conclusion about the state of the
-blocks being applied to the blockchain.
+共识算法是一组严格的规则，用于确保所有节点在
+网络就分类帐的当前状态达成一致。这些规则必须是确定性的，这意味着
+给定相同的输入，它们将始终产生相同的结果。这很重要，因为
+它确保网络上的所有节点将就网络的状态得出相同的结论
+块被应用于区块链。
 
-There are different types of consensus algorithms used in blockchain networks, such as proof-of-work (PoW), 
-proof-of-stake (PoS), delegated proof-of-stake (DPoS), and more. Each algorithm has its own unique set of 
-rules and incentives for how nodes on the network participate in reaching consensus.
+区块链网络中使用了不同类型的共识算法，例如工作量证明 (PoW)、
+权益证明 (PoS)、委托权益证明 (DPoS) 等。每个算法都有自己独特的一组
+网络上的节点如何参与达成共识的规则和激励。
 
 
-## What consensus algorithms are used in EOS?
+## EOS 使用了哪些共识算法？
 
-EOS uses a delegated proof-of-stake (DPoS) consensus algorithm. 
+EOS 使用委托权益证明 (DPoS) 共识算法。
 
-Token holders elect a group of block producers who are responsible for maintaining the network and reaching consensus 
-on new blocks. These block producers are incentivized to act honestly, as they can be voted out if they don't perform 
-their duties properly. This system is designed to be more efficient than PoW, as it doesn't require as much computational 
-power to maintain the network.
+代币持有者选出一组负责维护网络并达成共识的区块生产者
+在新块上。这些区块生产者被激励诚实行事，因为如果他们不表现，他们可能会被投票淘汰
+他们的职责适当。该系统旨在比 PoW 更高效，因为它不需要那么多的计算
+维护网络的权力。
 
-This allows EOS to be more efficient and greener than other blockchains that use consensus algorithms like proof-of-work.
+这使得 EOS 比其他使用工作量证明等共识算法的区块链更高效、更环保。
 
-### Block producers
+### 区块生产者
 
-Block producers in EOS are the nodes on the network that are responsible for maintaining the network and reaching consensus
-on new blocks. There are 21 active block producers at any given time, and a long list of standby block producers who are
-ready to step in if one of the active block producers goes offline or is voted out.
+EOS中的区块生产者是网络上负责维护网络和达成共识的节点
+在新块上。在任何给定时间都有 21 个活跃的块生产者，以及一长串备用块生产者
+如果其中一位活跃的区块生产者脱机或被投票淘汰，则准备介入。
 
-### Voting
+###投票
 
-EOS token holders can vote for block producers using their EOS tokens. Every token holder can vote for up to 30 block producers,
-and the votes are weighted based on the number of tokens staked to voting. This means that the more tokens you have staked to voting,
-the more weight your vote has.
+EOS 代币持有者可以使用他们的 EOS 代币投票给区块生产者。每个代币持有者最多可以投票给 30 个区块生产者，
+并且根据用于投票的代币数量对选票进行加权。这意味着您投入投票的代币越多，
+您的投票越重要。
 
 
 

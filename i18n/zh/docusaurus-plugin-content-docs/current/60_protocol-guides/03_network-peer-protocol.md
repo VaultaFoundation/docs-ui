@@ -1,575 +1,575 @@
 ---
-title: Network Peer Protocol
+title: 网络对等协议
 ---
 
 
-## 1. Overview
+## 1.概述
 
-Nodes on the EOS blockchain must be able to communicate with each other for relaying transactions, pushing blocks, and syncing state between peers. The peer-to-peer (p2p) protocol, part of the `nodeos` service that runs on every node, serves this purpose. The ability to sync state is crucial for each block to eventually reach finality within the global state of the blockchain and allow each node to advance the last irreversible block (LIB). In this regard, the fundamental goal of the p2p protocol is to sync blocks and propagate transactions between nodes to reach consensus and advance the blockchain state.
-
-
-### 1.1. Goals
-
-In order to add multiple transactions into a block and fit them within the specified production time of 0.5 seconds, the p2p protocol must be designed with speed and efficiency in mind. These two goals translate into maximizing transaction throughput within the effective bandwidth and reducing both network and operational latency. Some strategies to achieve this include:
-
-*   Fit more transactions within a block for better economy of scale.
-*   Minimize redundant information among blocks and transactions.
-*   Allow more efficient broadcasting and syncing of node states.
-*   Minimize payload footprint with data compression and binary encoding.
-
-Most of these strategies are fully or partially implemented in the EOS software. Data compression, which is optional, is implemented at the transaction level. Binary encoding is implemented by the net serializer when sending object instances and protocol messages over the network.
+EOS 区块链上的节点必须能够相互通信，以在对等方之间中继交易、推送区块和同步状态。点对点 (p2p) 协议的一部分 `nodeos` 在每个节点上运行的服务就是为了这个目的。同步状态的能力对于每个块最终在区块链的全局状态内达到最终状态并允许每个节点推进最后一个不可逆块（LIB）至关重要。在这方面，p2p 协议的根本目标是同步块并在节点之间传播事务以达成共识并推进区块链状态。
 
 
-## 2. Architecture
+### 1.1。目标
 
-The main goal of the p2p protocol is to synchronize nodes securely and efficiently. To achieve this overarching goal, the system delegates functionality into four main components:
+为了将多个交易添加到一个块中并在指定的 0.5 秒生产时间内完成它们，p2p 协议的设计必须考虑到速度和效率。这两个目标转化为在有效带宽内最大化交易吞吐量并减少网络和操作延迟。实现这一目标的一些策略包括：
 
-*   **Net Plugin**: defines the protocol to sync blocks and forward transactions between peers.
-*   **Chain Controller**: dispatches/manages blocks and transactions received, within the node.
-*   **Net Serializer**: serializes messages, blocks, and transactions for network transmission.
-*   **Local Chain**: holds the node’s local copy of the blockchain, including reversible blocks.
+* 在一个区块中容纳更多交易以获得更好的规模经济。
+* 尽量减少区块和交易之间的冗余信息。
+* 允许更有效地广播和同步节点状态。
+* 通过数据压缩和二进制编码最大限度地减少负载足迹。
 
-The interaction between the above components is depicted in the diagram below:
-
-![](../images/protocol-p2p_system_arch.png "Peer-to-peer Architecture")
-
-At the highest level sits the Net Plugin, which exchanges messages between the node and its peers to sync blocks and transactions. A typical message flow goes as follows:
-
-1. Node A sends a message to Node B through the Net Plugin (refer to diagram above).
-    1. Node A’s Net Serializer packs the message and sends it to Node B.
-    2. Node B’s Net Serializer unpacks the message and relays it to its Net Plugin.
-2. The message is processed by Node B’s Net Plugin, dispatching the proper actions.
-3. The Net Plugin accesses the local chain via the Chain Controller if necessary to push or retrieve blocks.
+这些策略中的大多数都在 EOS 软件中全部或部分实现。可选的数据压缩是在事务级别实现的。当通过网络发送对象实例和协议消息时，二进制编码由网络序列化程序实现。
 
 
-### 2.1. Local Chain
+## 2.架构
 
-The local chain is the node’s local copy of the blockchain. It consists of both irreversible and reversible blocks received by the node, each block being cryptographically linked to the previous one. The list of irreversible blocks contains the actual copy of the immutable blockchain. The list of reversible blocks is typically shorter in length and it is managed by the Fork Database as the Chain Controller pushes blocks to it. The local chain is depicted below.
+p2p 协议的主要目标是安全高效地同步节点。为了实现这一总体目标，系统将功能委托给四个主要组件：
 
-![](../images/protocol-p2p_local_chain.png "Local Chain (before pruning)")
+* **Net Plugin**：定义同步块和在对等点之间转发交易的协议。
+* **链控制器**：在节点内调度/管理接收到的块和交易。
+* **Net Serializer**：序列化消息、块和交易以进行网络传输。
+* **本地链**：保存节点的区块链本地副本，包括可逆块。
 
-Each node constructs its own local copy of the blockchain as it receives blocks and transactions and syncs their state with other peers. The reversible blocks are those new blocks received that have not yet reached finality. As such, they are likely to form branches that stem from a main common ancestor, which is the LIB (last irreversible block). Other common ancestors different from the LIB are also possible for reversible blocks. In fact, any two sibling branches always have a nearest common ancestor. For instance, in the diagram above, block 52b is the nearest common ancestor for the branches starting at block 53a and 53b that is different from the LIB. Every active branch in the local chain has the potential to become part of the blockchain.
+上述组件之间的交互如下图所示：
 
-#### 2.1.1. LIB Block
+！[](../images/protocol-p2p_system_arch.png "Peer-to-peer Architecture")
 
-All irreversible blocks constructed in a node are expected to match those from other nodes up to the last irreversible block (LIB) of each node. This is the distributed nature of the blockchain. Eventually, as the blocks that follow the LIB block reach finality, the LIB block moves up the chain through one of the branches as it catches up with the head block (HB). When the LIB block advances, the immutable blockchain effectively grows. In this process, the head block might switch branches multiple times depending on the potential head block numbers received and their timestamps, which is ultimately used as tiebreaker.
+最高层是 Net Plugin，它在节点和它的对等点之间交换消息以同步块和事务。典型的消息流如下：
 
-### 2.2. Chain Controller
+1. 节点 A 通过 Net Plugin 向节点 B 发送消息（参见上图）。
+    1. 节点A的NetSerializer将消息打包发送给节点B。
+    2. Node B 的 Net Serializer 解压消息并将其转发给它的 Net Plugin。
+2. 消息由 Node B 的 Net Plugin 处理，调度适当的动作。
+3. Net Plugin 在必要时通过Chain Controller 访问本地链以推送或检索区块。
 
-The Chain Controller manages the basic operations on blocks and transactions that change the local chain state, such as validating and executing transactions, pushing blocks, etc. The Chain Controller receives commands from the Net Plugin and dispatches the proper operation on a block or a transaction based on the network message received by the Net Plugin. The network messages are exchanged continuously between the EOS nodes as they communicate with each other to sync the state of blocks and transactions.
 
-#### 2.2.1. Signals' Producer and Consumer
+### 2.1。本地连锁
 
-The producer and consumer of the signals defined in the controller and their life cycle during normal operation, fork, and replay are as follows:
+本地链是节点的区块链本地副本。它由节点接收到的不可逆和可逆块组成，每个块都与前一个块进行加密链接。不可逆块列表包含不可变区块链的实际副本。可逆块列表的长度通常较短，并且在链控制器向其推送块时由分叉数据库管理。本地链如下所示。
 
-##### pre_accepted_block (carry signed_block_ptr)
+！[](../images/protocol-p2p_local_chain.png "Local Chain (before pruning)")
 
-- Produced by
+每个节点在接收块和交易并将其状态与其他节点同步时构建自己的区块链本地副本。可逆块是那些收到但尚未最终确定的新块。因此，它们很可能形成源自一个主要共同祖先的分支，即 LIB（最后一个不可逆区块）。与 LIB 不同的其他共同祖先对于可逆块也是可能的。事实上，任何两个兄弟分支总是有一个最近的共同祖先。例如，在上图中，块 52b 是从块 53a 和 53b 开始的与 LIB 不同的分支的最近共同祖先。本地链中的每个活跃分支都有可能成为区块链的一部分。
 
-| Module | Function | Condition |
+#### 2.1.1。库块
+
+在一个节点中构造的所有不可逆块都应与来自其他节点的不可逆块匹配，直到每个节点的最后一个不可逆块（LIB）。这就是区块链的分布式特性。最终，随着 LIB 块之后的块达到最终确定性，LIB 块在追上头块 (HB) 时通过其中一个分支向上移动。当 LIB 区块前进时，不可变区块链有效增长。在此过程中，头块可能会根据收到的潜在头块编号及其时间戳多次切换分支，最终用作决胜局。
+
+### 2.2。链控制器
+
+Chain Controller 管理改变本地链状态的区块和交易的基本操作，例如验证和执行交易、推送区块等。Chain Controller 从 Net Plugin 接收命令并在区块或交易上调度适当的操作基于 Net Plugin 收到的网络消息。网络消息在 EOS 节点之间不断交换，因为它们相互通信以同步块和事务的状态。
+
+#### 2.2.1。信号的生产者和消费者
+
+controller中定义的信号的生产者和消费者及其在正常运行、fork、replay时的生命周期如下：
+
+##### pre_accepted_block（携带signed_block_ptr）
+
+- 由。。。生产
+
+|模组 |函数 |条件 |
 | --- | --- | --- |
-| controller | push_block | before the block is added to the fork db |
-| | replay_push_block | before the replayed block is added to the fork db (only if the replayed block is not irreversible since irreversible block is not added to fork db during replay) |
+|控制器 |推块 |在块被添加到分叉数据库之前 |
+| |重播推送块 |在将重放块添加到分叉数据库之前（仅当重放块不是不可逆的，因为在重放期间不会将不可逆块添加到分叉数据库）|
 
-- Consumed by
+- 被消耗
 
-| Module | Usage |
+|模组 |用法 |
 | --- | --- |
-| chain_plugin | checkpoint validation |
-| | forward data to pre_accepted_block_channel |
+|链插件 |检查点验证 |
+| |转发数据到 pre_accepted_block_channel |
 
-##### accepted_block_header (carry block_state_ptr)
+##### accepted_block_header（携带block_state_ptr）
 
-- Produced by
+- 由。。。生产
 
-| Module | Function | Condition |
+|模组 |函数 |条件 |
 | --- | --- | --- |
-| controller | push_block| after the block is added to fork db |
-| | commit_block | after the block is added to fork db (only if you are the one who produce the block, in other words, this is not applicable to the block received from others) |
-| | replay_push_block | after the replayed block is added to fork db | (only if the replayed block is not irreversible since irreversible block is not added to fork db during replay) |
+|控制器 |推块|在区块被添加到 fork db 之后 |
+| |提交块 |区块添加到fork db后（仅当你是出块者时，换句话说，这不适用于从别人那里收到的区块）|
+| |重播推送块 |在将重播块添加到 fork db 之后 | （仅当重放的块不是不可逆的，因为不可逆的块在重放期间不会添加到 fork db）|
 
-- Consumed by
+- 被消耗
 
-| Module | Usage |
+|模组 |用法 |
 | --- | --- |
-| chain_plugin | forward data to accepted_block_header_channel |
+|链插件 |将数据转发到 accepted_block_header_channel |
 
-##### accepted_block (carry block_state_ptr)
+##### accepted_block（携带block_state_ptr）
 
-- Produced by
+- 由。。。生产
 
-| Module | Function | Condition |
+|模组 |函数 |条件 |
 | --- | --- | --- |
-| controller | commit_block | when the block is finalized |
+|控制器 |提交块 |当区块完成时 |
 
-- Consumed by
+- 被消耗
 
-| Module | Usage |
+|模组 |用法 |
 | --- | --- |
-| net_plugin | broadcast block to other peers |
+|网络插件 |向其他同行广播块 |
 
-##### irreversible_block (carry block_state_ptr)
+##### irreversible_block（携带block_state_ptr）
 
-- Produced by
+- 由。。。生产
 
-| Module | Function | Condition |
+|模组 |函数 |条件 |
 | --- | --- | --- |
-| controller | log_irreversible | before it's appended to the block log and before the chainbase db is committed |
-| | replay_push_block | when replaying an irreversible block |
+|控制器 | log_irreversible |在将其附加到块日志之前和提交 chainbase 数据库之前 |
+| |重播推送块 |重放不可逆块时 |
 
-- Consumed by
+- 被消耗
 
-| Module | Usage |
+|模组 |用法 |
 | --- | --- |
-| controller | setting the current lib of wasm_interface |
-| chain_plugin | forward data to irreversible_block_channel |
+|控制器 |设置 wasm_interface 的当前库 |
+|链插件 |转发数据到 irreversible_block_channel |
 
-##### accepted_transaction (carry transaction_metadata_ptr)
+##### accepted_transaction（携带transaction_metadata_ptr）
 
-- Produced by
+- 由。。。生产
 
-| Module | Function | Condition |
+|模组 |函数 |条件 |
 | --- | --- | --- |
-| controller | push_transaction | when the transaction executes succesfully (only once, i.e. when it's unapplied and reapplied the signal won't be emitted) |
-| | push_scheduled_transaction | when the scheduled transaction executes succesfully |
-| | | when the scheduled transaction fails (subjective/ soft/ hard) |
-| | | when the scheduled transaction expires |
-| | | after applying onerror |
+|控制器 |推送交易 |当事务成功执行时（仅一次，即未应用和重新应用时不会发出信号）|
+| | push_scheduled_transaction |当计划的交易成功执行时 |
+| | |当预定交易失败时（主观/软/硬）|
+| | |预定交易何时到期 |
+| | |应用 onerror 之后 |
 
-- Consumed by
+- 被消耗
 
-| Module | Usage |
+|模组 |用法 |
 | --- | --- |
-| chain_plugin | forward data to accepted_transaction_channel |
+|链插件 |将数据转发到 accepted_transaction_channel |
 
 ##### applied_transaction (carry std::tuple<const transaction_trace_ptr&, const signed_transaction&>)
 
-- Produced by
+- 由。。。生产
 
-| Module | Function | Condition |
+|模组 |函数 |条件 |
 | --- | --- | --- |
-| controller | push_transaction | when the transaction executes succesfully  |
-| | push_scheduled_transaction | when the scheduled transaction executes succesfully |
-| | | when the scheduled transaction fails (subjective/ soft/ hard) |
-| | | when the scheduled transaction expires |
-| | | after applying onerror |
+|控制器 |推送交易 |交易执行成功时 |
+| | push_scheduled_transaction |当计划的交易成功执行时 |
+| | |当预定交易失败时（主观/软/硬）|
+| | |预定交易何时到期 |
+| | |应用 onerror 之后 |
 
-- Consumed by
+- 被消耗
 
-| Module | Usage |
+|模组 |用法 |
 | --- | --- |
-| chain_plugin | forward data to applied_transaction_channel |
+|链插件 |将数据转发到 applied_transaction_channel |
 
-##### bad_alloc
-Not used.
+##### 坏分配
+不曾用过。
 
-#### 2.2.2. Signals' Life Cycle
+#### 2.2.2。信号的生命周期
 
-##### A. normal operation where blocks and transactions are input
+##### A.输入区块和交易的正常操作
 
-1. When a transaction is pushed to the blockchain (through RPC or broadcasted by peer)
-   1. Transaction is executed either succesfully/ fail the validation -> `accepted_transaction` is emitted by the controller
-   2. chain_plugin will react to the signal to forward the transaction_metadata to accepted_transaction_channel
-2. When a scheduled transaction is pushed to the blockchain
-   1. Transaction is executed either succesfully/ fail subjectively/ soft fail/ hard fail -> `accepted_transaction` is emitted by the controller
-   2. chain_plugin will react to the signal to forward the transaction_metadata to accepted_transaction_channel
-3. When a block is pushed to the blockchain (through RPC or broadcasted by peer)
-   1. Before the block is added to fork db -> `pre_accepted_block` will be emitted by the controller
-   2. chain_plugin will react to the signal to do validation of the block forward the block_state to accepted_block_header_channel and validate it with the checkpoint
-   3. After the block is added to fork db -> `accepted_block_header` will be emitted by the controller
-   4. chain_plugin will react to the signal to forward the block_state to accepted_block_header_channel
-   5. Then the block will be applied, at this time all the transactions and scheduled_transactions inside the block will be pushed. All signals related to push_transaction and push_scheduled_transaction (see point A.1 and A.2) will be emitted.
-   6. When committing the block -> `accepted_block` will be emitted by the controller
-   7. net_plugin will react to the signal and broadcast the block to the peers
-   8. If a new block becomes irreversible, signals related to irreversible block will be emitted (see point A.5)
-4. When a block is produced
-   1. For the block that is produced by you, the block will be added to the fork_db when it is committed -> `accepted_block_header` will be emitted by the controller
-   2. chain_plugin will react to the signal to forward the block_state to accepted_block_header_channel and validate it with the checkpoint
-   3. Immediately after that (during commiting the block) -> `accepted_block` will be emitted by the controller
-   4. net_plugin will react to the signal and broadcast the block to the peers
-   5. If a new block becomes irreversible, signals related to irreversible block will be emitted (see point A.5)
-5. When a block becomes irreversible
-   1. Once a block is deemed irreversible -> `irreversible_block` will be emitted by the controller before the block is appended to the block log and the chainbase db is committed
-   2. chain_plugin will react to the signal to forward the block_state to irreversible_block_channel and also set the lib of wasm_interface
+1. 当一笔交易被推送到区块链时（通过RPC或peer广播）
+   1.交易执行成功/验证失败-> `accepted_transaction` 由控制器发出
+   2. chain_plugin 将对信号做出反应，将 transaction_metadata 转发到 accepted_transaction_channel
+2. 预定交易推送到区块链时
+   1.交易执行成功/主观失败/软失败/硬失败-> `accepted_transaction` 由控制器发出
+   2. chain_plugin 将响应信号将transaction_metadata 转发到accepted_transaction_channel
+3.当一个块被推送到区块链时（通过RPC或者peer广播）
+   1. 区块添加到fork db之前-> `pre_accepted_block` 将由控制器发出
+   2. chain_plugin 将对信号作出反应以进行块验证将 block_state 转发到 accepted_block_header_channel 并使用检查点对其进行验证
+   3.区块加入fork db后-> `accepted_block_header` 将由控制器发出
+   4. chain_plugin 将响应信号将 block_state 转发到 accepted_block_header_channel
+   5. 然后应用区块，此时区块内的所有交易和scheduled_transactions都会被推送。所有与 push_transaction 和 push_scheduled_transaction 相关的信号（参见 A.1 和 A.2）都会被发射。
+   6.提交块时-> `accepted_block` 将由控制器发出
+   7. net_plugin 将对信号做出反应并将块广播给对等方
+   8. 如果一个新区块变得不可逆，将发出与不可逆区块相关的信号（见A.5点）
+4. 出块时
+   1. 对于你生产的区块，该区块将在提交时添加到fork_db -> `accepted_block_header` 将由控制器发出
+   2. chain_plugin 将响应信号将block_state 转发到accepted_block_header_channel 并使用检查点对其进行验证
+   3. 紧接着（在提交块期间）-> `accepted_block` 将由控制器发出
+   4. net_plugin 将对信号做出反应并将块广播给对等方
+   5. 如果一个新区块变得不可逆，将发出与不可逆区块相关的信号（见A.5点）
+5. 当区块变得不可逆时
+   1. 一旦一个区块被认为是不可逆的 -> `irreversible_block` 将在块被附加到块日志和提交 chainbase 数据库之前由控制器发出
+   2. chain_plugin 将响应信号将block_state 转发到irreversible_block_channel 并设置wasm_interface 的lib
 
-##### B. operation where forks are presented and resolved
+##### B. 分叉出现和解析的操作
 
-1. When forks are presented, the blockchain will pop all existing blocks up to the forking point and then apply all new blocks in the fork.
-2. When applying the new block, all the transactions and scheduled_transactions inside the block will be pushed. All signals related to push_transaction and push_scheduled_transaction (see point A.1 and A.2) will be emitted.
-3. And then when committing the new block -> `accepted_block` will be emitted by the controller
-4. net_plugin will react to the signal and broadcast the block to the peers
-5. If If a new block becomes irreversible, signals related to irreversible block will be emitted (see point A.5)
+1. 当出现分叉时，区块链会将所有现有区块弹出到分叉点，然后应用分叉中的所有新区块。
+2. 申请新区块时，会推送区块内的所有交易和scheduled_transactions。所有与 push_transaction 和 push_scheduled_transaction 相关的信号（参见 A.1 和 A.2）都会被发射。
+3.然后在提交新块时-> `accepted_block` 将由控制器发出
+4. net_plugin 将对信号做出反应并将块广播给对等方
+5. 如果一个新区块变得不可逆，将发出与不可逆区块相关的信号（见A.5点）
 
-##### C. normal replay (with or without replay optimization)
+##### C. 正常回放（有或没有回放优化）
 
-1. When replaying irreversible block -> `irreversible_block` will be emitted by the controller
-2. Refer to A.5 to see how `irreversible_block` signal is responded
-3. When replaying reversible block, before the block is added to fork_db -> `pre_accepted_block` will be emitted by the controller
-4. When replaying reversible block, after the block is added to fork db -> `accepted_block_header` will be emitted by the controller
-5. When replaying reversible block, when the block is committed -> `accepted_block` will be emitted by the controller
-6. Refer to A.3 to see how `pre_accepted_block`, `accepted_block_header` and `accepted_block` signal are responded
+1.重放不可逆块时-> `irreversible_block` 将由控制器发出
+2. 参考 A.5 看如何 `irreversible_block` 信号被响应
+3. 重放可逆区块时，在区块加入fork_db之前-> `pre_accepted_block` 将由控制器发出
+4. 重放可逆区块时，区块加入fork db后-> `accepted_block_header` 将由控制器发出
+5.重放可逆块时，当块被提交时-> `accepted_block` 将由控制器发出
+6. 参考 A.3 看看如何 `pre_accepted_block`, `accepted_block_header` 和 `accepted_block` 信号被响应
 
-#### 2.2.3. Fork Database
+#### 2.2.3。分叉数据库
 
-The Fork Database (Fork DB) provides an internal interface for the Chain Controller to perform operations on the node’s local chain. As new blocks are received from other peers, the Chain Controller pushes these blocks to the Fork DB. Each block is then cryptographically linked to a previous block. Since there might be more than one previous block, the process is likely to produce temporary branches called mini-forks. Thus, the Fork DB serves three main purposes:
+分叉数据库（Fork DB）为 Chain Controller 提供了一个内部接口，用于对节点的本地链进行操作。当从其他节点接收到新块时，链控制器将这些块推送到 Fork DB。然后每个块都以加密方式链接到前一个块。由于之前的区块可能不止一个，因此该过程可能会产生称为迷你分叉的临时分支。因此，Fork DB 服务于三个主要目的：
 
-*   Resolve which branch the pushed block (new head block) will build off from.
-*   Advance the head block, the root block, and the LIB block.
-*   Trim off invalid branches and purge orphaned blocks.
+* 解决推送块（新头块）将从哪个分支构建。
+* 推进头块、根块和 LIB 块。
+* 修剪无效分支并清除孤立块。
 
-In essence, the Fork DB contains all the candidate block branches within a node that may become the actual branch that continues to grow the blockchain. The root block always marks the beginning of the reversible block tree, and will match the LIB block, except when the LIB advances, in which case the root block must catch up. The calculation of the LIB block as it advances through the new blocks within the Fork DB will ultimately decide which branch gets selected. As the LIB block advances, the root block catches up with the new LIB, and any candidate branch whose ancestor node is behind the LIB gets pruned. This is depicted below.
+本质上，Fork DB 包含一个节点内的所有候选块分支，这些分支可能成为继续增长区块链的实际分支。根块始终标记可逆块树的开始，并将匹配 LIB 块，除非 LIB 前进，在这种情况下根块必须赶上。 LIB 块在通过 Fork DB 中的新块前进时的计算将最终决定选择哪个分支。随着 LIB 块的前进，根块会追上新的 LIB，并且其祖先节点位于 LIB 后面的任何候选分支都会被修剪。这在下面描述。
 
-![](../images/protocol-p2p_local_chain_prunning.png "Local Chain (after pruning)")
+！[](../images/protocol-p2p_local_chain_prunning.png "Local Chain (after pruning)")
 
-In the diagram above, the branch starting at block 52b gets pruned (blocks 52b, 53a, 53b are invalid) after the LIB advances from node 51 to block 52c then 53c. As the LIB moves through the reversible blocks, they are moved from the Fork DB to the local chain as they now become part of the immutable blockchain. Finally, block 54d is kept in the Fork DB since new blocks might still be built off from it.
-
-
-### 2.3. Net Plugin
-
-The Net Plugin defines the actual peer to peer communication messages between the EOS nodes. The main goal of the Net Plugin is to sync valid blocks upon request and to forward valid transactions invariably. To that end, the Net Plugin delegates functionality to the following components:
-
-*   **Sync Manager**: maintains the block syncing state of the node with respect to its peers.
-*   **Dispatch Manager**: maintains the list of blocks and transactions sent by the node.
-*   **Connection List**: list of active peers the node is currently connected to. 
-*   **Message Handler**: dispatches protocol messages to the corresponding handler. (see [4.2. Protocol Messages](#42-protocol-messages)).
+在上图中，在 LIB 从节点 51 前进到块 52c，然后是 53c 之后，从块 52b 开始的分支被修剪（块 52b、53a、53b 无效）。当 LIB 移动通过可逆块时，它们从 Fork DB 移动到本地链，因为它们现在成为不可变区块链的一部分。最后，块 54d 保留在 Fork DB 中，因为可能仍会从它构建新块。
 
 
-#### 2.3.1. Sync Manager
+### 2.3。网络插件
 
-The Sync Manager implements the functionality for syncing block state between the node and its peers. It processes the messages sent by each peer and performs the actual syncing of the blocks based on the status of the node’s LIB or head block with respect to that peer. At any point, the node can be in any of the following sync states:
+Net 插件定义了 EOS 节点之间实际的点对点通信消息。 Net Plugin 的主要目标是根据请求同步有效块并始终转发有效交易。为此，Net 插件将功能委托给以下组件：
 
-*   **LIB Catch-Up**: node is about to sync with another peer's LIB block.
-*   **Head Catch-Up**: node is about to sync with another peer's HEAD block.
-*   **In-Sync**: both LIB and HEAD blocks are in sync with the other peers.
-
-If the node’s LIB or head block is behind, the node will generate sync request messages to retrieve the missing blocks from the connected peer. Similarly, if a connected peer’s LIB or head block is behind, the node will send notice messages to notify the node about which blocks it needs to sync with. For more information about sync modes see [3. Operation Modes](#3-operation-modes).
-
-
-#### 2.3.2. Dispatch Manager
-
-The Dispatch Manager maintains the state of blocks and loose transactions received by the node. The state contains basic information to identify a block or a transaction and it is maintained within two indexed lists of block states and transaction states:
-
-*   **Block State List**: list of block states managed by node for all blocks received.
-*   **Transaction State List**: list of transaction states managed by node for all transactions received.
-
-This makes it possible to locate very quickly which peer has a given block or transaction.
+* **同步管理器**：维护节点相对于其对等节点的块同步状态。
+* **Dispatch Manager**：维护节点发送的区块和交易列表。
+* **连接列表**：节点当前连接到的活动对等点列表。
+* **Message Handler**：将协议消息分派给相应的处理程序。 （看 [4.2.协议消息](#42-protocol-messages)).
 
 
-##### 2.3.2.1. Block State
+#### 2.3.1。同步管理器
 
-The block state identifies a block and the peer it came from. It is transient in nature, so it is only valid while the node is active. The block state contains the following fields:
+同步管理器实现了在节点与其对等方之间同步块状态的功能。它处理每个对等方发送的消息，并根据节点的 LIB 或头块相对于该对等方的状态执行块的实际同步。在任何时候，节点都可以处于以下任何同步状态：
 
-Block State Fields | Description
+* **LIB Catch-Up**：节点即将与另一个节点的 LIB 块同步。
+* **Head Catch-Up**：节点即将与另一个节点的 HEAD 块同步。
+* **同步**：LIB 和 HEAD 块都与其他对等方同步。
+
+如果节点的 LIB 或头块落后，节点将生成同步请求消息以从连接的对等方检索丢失的块。类似地，如果连接的对等方的 LIB 或头块落后，节点将发送通知消息以通知节点它需要与哪些块同步。有关同步模式的更多信息，请参阅 [三、操作模式](#3-operation-modes).
+
+
+#### 2.3.2。调度经理
+
+调度管理器维护节点接收到的块和松散交易的状态。状态包含识别块或交易的基本信息，并在块状态和交易状态的两个索引列表中维护：
+
+* **块状态列表**：节点管理的块状态列表，用于接收到的所有块。
+* **交易状态列表**：节点管理的所有交易的交易状态列表。
+
+这使得可以非常快速地定位哪个节点具有给定的块或事务。
+
+
+##### 2.3.2.1。块状态
+
+块状态标识块及其来自的对等方。它本质上是瞬态的，因此仅在节点处于活动状态时才有效。块状态包含以下字段：
+
+块状态字段 |描述
 -|-
-`id` | 256-bit block identifier. A function of the block contents and the block number.
-`block_num` | 32-bit unsigned counter value that identifies the block sequentially since genesis.
-`connection_id` | 32-bit unsigned integer that identifies the connected peer the block came from.
-`have_block` | boolean value indicating whether the actual block has been received by the node.
+`id` | 256 位块标识符。块内容和块号的函数。
+`block_num` | 32 位无符号计数器值，自创世以来按顺序标识块。
+`connection_id` | 32 位无符号整数，标识块来自的连接对等方。
+`have_block` |布尔值，指示节点是否已接收到实际块。
 
-The list of block states is indexed by block ID, block number, and connection ID for faster lookup. This allows to query the list for any blocks given one or more of the indexed attributes.
+块状态列表按块 ID、块编号和连接 ID 进行索引，以便更快地查找。这允许在给定一个或多个索引属性的情况下查询任何块的列表。
 
 
-##### 2.3.2.2. Transaction State
+##### 2.3.2.2。交易状态
 
-The transaction state identifies a loose transaction and the peer it came from. It is also transient in nature, so it is only valid while the node is active. The transaction state contains the following fields:
+事务状态标识松散事务及其来源的对等方。它本质上也是瞬态的，因此仅在节点处于活动状态时才有效。交易状态包含以下字段：
 
-Transaction State Fields | Description
+交易状态字段 |描述
 -|-
-`id` | 256-bit hash of the transaction instance, used as transaction identifier.
-`expires` | expiration time since EOS block timestamp epoch (January 1, 2000).
-`block_num` | current head block number. Transaction drops when LIB catches up to it.
-`connection_id` | 32-bit integer that identifies the connected peer the transaction came from.
+`id` |交易实例的 256 位哈希，用作交易标识符。
+`expires` |自 EOS 块时间戳纪元（2000 年 1 月 1 日）以来的到期时间。
+`block_num` |当前头块号。当 LIB 赶上它时，交易下降。
+`connection_id` | 32 位整数，标识交易来自的连接对等方。
 
-The `block_num` stores the node's head block number when the transaction is received. It is used as a backup mechanism to drop the transaction when the LIB block number catches up with the head block number, regardless of expiration.
+这 `block_num` 收到交易时存储节点的头块号。它用作备份机制，当 LIB 块号赶上头块号时丢弃交易，而不管是否过期。
 
-The list of transaction states is indexed by transaction ID, expiration time, block number, and connection ID for faster lookup. This allows to query the list for any transactions given one or more of the indexed attributes.
+交易状态列表由交易 ID、过期时间、块号和连接 ID 索引，以便更快地查找。这允许在给定一个或多个索引属性的情况下查询列表中的任何事务。
 
 
-##### 2.3.2.3. State Recycling
+##### 2.3.2.3。状态回收
 
-As the LIB block advances (see [3.3.1. LIB Catch-Up Mode](#331-lib-catch-up-mode)), all blocks prior to the new LIB block are considered finalized, so their state is removed from the local list of block states, including the list of block states owned by each peer in the list of connections maintained by the node. Likewise, transaction states are removed from the list of transactions based on expiration time. Therefore, after a transaction expires, its state is removed from all lists of transaction states.
+随着 LIB 块的推进（见 [3.3.1. LIB 追赶模式](#331-lib-catch-up-mode))，新 LIB 块之前的所有块都被认为是最终确定的，因此它们的状态从本地块状态列表中删除，包括节点维护的连接列表中每个对等体拥有的块状态列表。同样，交易状态根据到期时间从交易列表中删除。因此，在交易到期后，其状态将从所有交易状态列表中删除。
 
-The lists of block states and transaction states have a light footprint and feature high rotation, so they are maintained in memory for faster access. The actual contents of the blocks and transactions received by a node are stored temporarily in the fork database and the various incoming queues for applied and unapplied transactions, respectively.
+区块状态和交易状态的列表具有轻量级和高循环的特点，因此它们被保存在内存中以便更快地访问。节点接收到的块和交易的实际内容分别临时存储在分叉数据库和各种传入队列中，分别用于已申请和未申请的交易。
 
 
-#### 2.3.3. Connection List
+#### 2.3.3。连接列表
 
-The Connection List contains the connection state of each peer. It keeps information about the p2p protocol version, the state of the blocks and transactions from the peer that the node knows about, whether it is currently syncing with that peer, the last handshake message sent and received, whether the peer has requested information from the node, the socket state, the node ID, etc. The connection state includes the following relevant fields:
+连接列表包含每个对等点的连接状态。它保留有关 p2p 协议版本的信息，该节点知道的来自对等方的块和事务的状态，它当前是否正在与该对等方同步，发送和接收的最后一次握手消息，对等方是否已向该对等方请求信息节点、套接字状态、节点ID等。连接状态包括以下相关字段：
 
-*   **Info requested**: whether the peer has requested information from the node.
-*   **Socket state**: a pointer to the socket structure holding the TCP connection state.
-*   **Node ID**: the actual node ID that distinguishes the peer’s node from the other peers.
-*   **Last Handshake Received**: last handshake message instance received from the peer.
-*   **Last Handshake Sent**: the last handshake message instance sent to the peer.
-*   **Handshake Sent Count**: the number of handshake messages sent to the peer.
-*   **Syncing**: whether or not the node is syncing with the peer.
-*   **Protocol Version**: the internal protocol version implemented by the peer’s Net Plugin.
+* **Info requested**：peer是否向节点请求了信息。
+* **套接字状态**：指向保存 TCP 连接状态的套接字结构的指针。
+* **Node ID**：实际的节点 ID，用于区分 peer 节点与其他 peer 节点。
+* **Last Handshake Received**：从对等端接收到的最后一次握手消息实例。
+* **Last Handshake Sent**：发送给对等方的最后一次握手消息实例。
+* **Handshake Sent Count**：发送给对端的握手消息数。
+* **正在同步**：节点是否正在与对等方同步。
+* **Protocol Version**：peer的Ne​​t Plugin实现的内部协议版本。
 
-The block state consists of the following fields:
+块状态由以下字段组成：
 
-*   **Block ID**: a hash of the serialized contents of the block.
-*   **Block number**: the actual block number since genesis.
+* **区块 ID**：区块序列化内容的哈希值。
+* **块号**：自创世以来的实际块号。
 
-The transaction state consists of the following fields:
+交易状态由以下字段组成：
 
-*   **Transaction ID**: a hash of the serialized contents of the transaction.
-*   **Block number**: the actual block number the transaction was included in.
-*   **Expiration time**: the time in seconds for the transaction to expire.
+* **交易ID**：交易序列化内容的哈希值。
+* **区块号**：交易所在的实际区块号。
+* **过期时间**：交易过期的时间，以秒为单位。
 
 
-### 2.4. Net Serializer
+### 2.4。网络序列化程序
 
-The Net Serializer has two main roles:
+Net Serializer 有两个主要角色：
 
-*   Serialize objects and messages that need to be transmitted over the network.
-*   Serialize objects and messages that need to be cryptographically hashed.
+* 序列化需要通过网络传输的对象和消息。
+* 序列化需要加密散列的对象和消息。
 
-In the first case, each serialized object or message needs to get deserialized at the other end upon receipt from the network for further processing. In the latter case, serialization of specific fields within an object instance is needed to generate cryptographic hashes of its contents. Most IDs generated for a given object type (action, transaction, block, etc.) consist of a cryptographic hash of the relevant fields from the object instance. 
+在第一种情况下，每个序列化的对象或消息需要在另一端从网络接收后进行反序列化以进行进一步处理。在后一种情况下，需要对对象实例中的特定字段进行序列化，以生成其内容的加密哈希值。大多数为给定对象类型（操作、事务、块等）生成的 ID 都包含来自对象实例的相关字段的加密哈希。
 
 
-## 3. Operation Modes
+## 3. 操作模式
 
-From an operational standpoint, a node can be in either one of three states with respect to a connected peer:
+从操作的角度来看，一个节点相对于一个连接的对等点可以处于三种状态之一：
 
-*   **In-Sync mode**: node is in sync with peer, so no blocks are required from that peer.
-*   **LIB Catch-Up mode**: node requires blocks since LIB block is behind that peer’s LIB.
-*   **HEAD Catch-Up mode**: node requires blocks since HEAD block is behind that peer’s Head.
+* **同步模式**：节点与对等方同步，因此不需要来自该对等方的块。
+* **LIB 追赶模式**：节点需要区块，因为 LIB 区块落后于该节点的 LIB。
+* **HEAD 追赶模式**：节点需要块，因为 HEAD 块位于该节点的 Head 后面。
 
-The operation mode for each node is stored in a sync manager context within the Net Plugin of the nodeos service. Therefore, a node is always in either in-sync mode or some variant of catchup mode with respect to its connected peers. This allows the node to switch back and forth between catchup mode and in-sync mode as the LIB and head blocks are updated and new fresh blocks are received from other peers.
+每个节点的操作模式存储在 nodeos 服务的 Net 插件内的同步管理器上下文中。因此，相对于其连接的对等节点，一个节点总是处于同步模式或追赶模式的某种变体。这允许节点在更新 LIB 和头块以及从其他对等方接收到新的新块时在追赶模式和同步模式之间来回切换。
 
 
-### 3.1. Block ID
+### 3.1。区块编号
 
-The EOS software checks whether two blocks match or hold the same content by comparing their block IDs. A block ID is a function that depends on the contents of the block header and the block number (see [Consensus Protocol: 5.1. Block Structure](01_consensus-protocol.md#51-block-structure)). Checking whether two blocks are equal is crucial for syncing a node’s local chain with that of its peers. To generate the block ID from the block contents, the block header is serialized and a SHA-256 digest is created. The most significant 32 bits are assigned the block number while the least significant 224 bits of the hash are retained. Note that the block header includes the root hash of both the transaction merkle tree and the action merkle tree. Therefore, the block ID depends on all transactions included in the block as well as all actions included in each transaction.
+EOS 软件通过比较它们的块 ID 来检查两个块是否匹配或包含相同的内容。区块 ID 是一个函数，它取决于区块头的内容和区块编号（参见 [共识协议：5.1。块结构](01_consensus-protocol.md#51-block-structure)).检查两个块是否相等对于同步节点的本地链与其对等节点的本地链至关重要。为了从块内容生成块 ID，块头被序列化并创建 SHA-256 摘要。最高有效的 32 位被分配了块号，而哈希的最低有效 224 位被保留。请注意，区块头包括交易 merkle 树和动作 merkle 树的根哈希。因此，区块 ID 取决于区块中包含的所有交易以及每个交易中包含的所有操作。
 
 
-### 3.2. In-Sync Mode
+### 3.2。同步模式
 
-During in-sync mode, the node's head block is caught up with the peer's head block, which means the node is in sync block-wise. When the node is in-sync mode, it does not request further blocks from peers, but continues to perform the other functions:
+在同步模式下，节点的头块追上对等方的头块，这意味着节点在块同步。当节点处于同步模式时，它不会向对等方请求更多块，但会继续执行其他功能：
 
-*   **Validate transactions**, drop them if invalid; forward them to other peers if valid.
-*   **Validate blocks**, drop them if invalid; forward them to other peers upon request if valid.
+* **验证交易**，无效则丢弃；如果有效，将它们转发给其他同行。
+* **验证块**，如果无效则丢弃它们；如果有效，则根据请求将它们转发给其他同行。
 
-Therefore, this mode trades bandwidth in favor of latency, being particularly useful for validating transactions that rely on TaPoS (transaction as proof of stake) due to lower processing overhead.
+因此，这种模式以带宽换取延迟，由于处理开销较低，对于验证依赖于 TaPoS（作为股权证明的交易）的交易特别有用。
 
-Note that loose transactions are always forwarded if valid and not expired. Blocks, on the other hand, are only forwarded if valid and if explicitly requested by a peer. This reduces network overhead.
+请注意，如果有效且未过期，则始终转发松散交易。另一方面，块只有在有效且对等方明确请求时才会转发。这减少了网络开销。
 
 
-### 3.3. Catch-Up Mode
+### 3.3。追赶模式
 
-A node is in catchup mode when its head block is behind the peer’s LIB or the peer’s head block. If syncing is needed, it is performed in two sequential steps:
+当一个节点的头块位于对等方的 LIB 或对等方的头块后面时，该节点处于追赶模式。如果需要同步，则分两个顺序步骤执行：
 
-1. Sync the node’s LIB from the nearest common ancestor + 1 up to the peer’s LIB.
-2. Sync the node’s head from the nearest common ancestor + 1 up to the peer’s head.
+1. 将节点的 LIB 从最近的共同祖先 + 1 同步到对等体的 LIB。
+2. 将最近的共同祖先+1 的节点头部同步到对等节点的头部。
 
-Therefore, the node’s LIB block is updated first, followed by the node’s head block. 
+因此，首先更新节点的 LIB 块，然后是节点的头块。
 
 
-#### 3.3.1. LIB Catch-Up Mode
+#### 3.3.1。 LIB 追赶模式
 
-Case 1 above, where the node’s LIB block needs to catch up with the peer’s LIB block, is depicted in the below diagram, before and after the sync (Note: inapplicable branches have been removed for clarity):
+上面的情况 1，节点的 LIB 块需要赶上对等方的 LIB 块，如下图所示，在同步之前和之后（注意：为清楚起见，已删除不适用的分支）：
 
-![](../images/protocol-p2p_lib_catchup.png "LIB Catch-Up Mode")
+！[](../images/protocol-p2p_lib_catchup.png "LIB Catch-Up Mode")
 
-In the above diagram, the node’s local chain syncs up with the peer’s local chain by appending finalized blocks 91 and 92 (the peer’s LIB) to the node’s LIB (block 90). Note that this discards the temporary fork consisting of blocks 91n, 92n, 93n. Also note that these nodes have an “n” suffix (short for node) to indicate that they are not finalized, and therefore, might be different from the peer’s. The same applies to unfinalized blocks on the peer; they end in “p” (short for peer). After syncing, note that both the LIB (lib) and the head block (hb) have the same block number on the node.
+在上图中，节点的本地链通过将最终确定的块 91 和 92（对等方的 LIB）附加到节点的 LIB（块 90）来与对等方的本地链同步。请注意，这会丢弃由块 91n、92n、93n 组成的临时分叉。另请注意，这些节点具有“n”后缀（节点的缩写），表示它们尚未最终确定，因此可能与对等节点不同。这同样适用于对等方的未最终区块；它们以“p”（peer 的缩写）结尾。同步后，请注意 LIB (lib) 和头块 (hb) 在节点上具有相同的块号。
 
 
-#### 3.3.2. Head Catch-Up Mode
+#### 3.3.2。头部追赶模式
 
-After the node’s LIB block is synced with the peer’s, there will be new blocks pushed to either chain. Case 2 above covers the case where the peer’s chain is longer than the node’s chain. This is depicted in the following diagram, which shows the node and the peer’s local chains before and after the sync:
+在节点的 LIB 块与对等方的同步后，将有新的块被推送到任何一条链。上面的情况 2 涵盖了对等方的链比节点的链长的情况。下图对此进行了描述，该图显示了同步前后节点和对等方的本地链：
 
-![](../images/protocol-p2p_head_catchup.png "Head Catch-Up Mode")
+！[](../images/protocol-p2p_head_catchup.png "Head Catch-Up Mode")
 
-In either case 1 or 2 above, the syncing process in the node involves locating the first common ancestor block starting from the node’s head block, traversing the chains back, and ending in the LIB blocks, which are now in sync (see [3.3.1. LIB Catch-Up Mode](#331-lib-catch-up-mode)). In the worst case scenario, the synced LIBs are the nearest common ancestor. In the above diagram, the node’s chain is traversed from head block 94n, 93n, etc. trying to match blocks 94p, 93p, etc. in the peer’s chain. The first block that matches is the nearest common ancestor (block 93n and 93p in the diagram). Therefore, the following blocks 94p and 95p are retrieved and appended to the node’s chain right after the nearest common ancestor, now re-labeled 93n,p (see [3.3.3. Block Retrieval](#333-block-retrieval) process). Finally, block 95p becomes the node’s head block and, since the node is fully synced with the peer, the node switches to in-sync mode.
+在上面的情况 1 或 2 中，节点中的同步过程涉及定位第一个公共祖先块，从节点的头块开始，向后遍历链，并以现在同步的 LIB 块结束（参见 [3.3.1. LIB 追赶模式](#331-lib-catch-up-mode)).在最坏的情况下，同步的 LIB 是最近的共同祖先。在上图中，节点的链从头块 94n、93n 等开始遍历，试图匹配对等链中的块 94p、93p 等。第一个匹配的块是最近的共同祖先（图中的块 93n 和 93p）。因此，以下块 94p 和 95p 被检索并附加到节点链中最近的共同祖先之后，现在重新标记为 93n,p（见 [3.3.3.块检索](#333-block-retrieval) 过程）。最后，块 95p 成为节点的头块，由于节点与对等方完全同步，节点切换到同步模式。
 
 
-#### 3.3.3. Block Retrieval
+#### 3.3.3。块检索
 
-After the common ancestor is found, a sync request message is sent to retrieve the blocks needed by the node, starting from the next block after the nearest common ancestor and ending in the peer’s head block.
+找到共同祖先后，发送同步请求消息以检索节点所需的块，从最近的共同祖先之后的下一个块开始，到对等体的头块结束。
 
-To make effective use of bandwidth, the required blocks are obtained from various peers, rather than just one, if necessary.  Depending on the number of blocks needed, the blocks are requested in chunks by specifying the start block number and the end block number to download from a given peer. The node uses the list of block states to keep track of which blocks each peer has, so this information is used to determine which connected peers to request block chunks from. This process is depicted in the diagram below:
+为了有效地利用带宽，必要时，所需的块是从不同的对等点获得的，而不仅仅是一个。根据所需块的数量，通过指定要从给定对等点下载的起始块号和结束块号，以块的形式请求块。该节点使用块状态列表来跟踪每个对等方拥有哪些块，因此此信息用于确定从哪些连接的对等方请求块块。这个过程如下图所示：
 
-![](../images/protocol-p2p-node-peer-sync.png "Node-peer syncing")
+！[](../images/protocol-p2p-node-peer-sync.png "Node-peer syncing")
 
-When both LIB and head blocks are caught up with respect to the peer, the operation mode in the Sync Manager is switched from catch-up mode to in-sync mode.
+当 LIB 和 head 块都相对于对等体赶上时，同步管理器中的操作模式从赶上模式切换到同步模式。
 
 
-### 3.4. Mode Switching
+### 3.4。模式切换
 
-Eventually, both the node and its peer receive new fresh blocks from other peers, which in turn push the blocks to their respective local chains. This causes the head blocks on each chain to advance. Depending on which chain grows first, one of the following actions occur:
+最终，节点及其对等方都从其他对等方接收到新的新块，这些新块又将这些块推送到各自的本地链。这导致每条链上的头部块前进。根据哪个链首先增长，将发生以下操作之一：
 
-*   The node sends a catch up request message to the peer with its head block info.
-*   The node sends a catch up notice message to inform the peer it needs to sync.
+* 节点向对等方发送一个追赶请求消息及其头块信息。
+* 节点发送一个catch up notice消息来通知peer它需要同步。
 
-In the first case, the node switches the mode from in-sync to head catchup mode. In the second case, the peer switches to head catchup mode after receiving the notice message from the node. In practice, in-sync mode is short-lived. When the EOS blockchain is very busy, nodes spend most of their time in catchup mode validating transactions and syncing their chains after catchup messages are received.
+在第一种情况下，节点将模式从同步切换到领先追赶模式。在第二种情况下，对端在收到来自节点的通知消息后切换到追赶模式。实际上，同步模式是短暂的。当 EOS 区块链非常繁忙时，节点大部分时间都处于追赶模式，在收到追赶消息后验证交易并同步它们的链。
 
 
-## 4. Protocol Algorithm
+## 4.协议算法
 
-The p2p protocol algorithm runs on every node, forwarding validated transactions and validated blocks. Starting EOS v2.0, a node also forwards block IDs of unvalidated blocks it has received. In general, the simplified process is as follows:
+p2p 协议算法在每个节点上运行，转发经过验证的交易和经过验证的块。从 EOS v2.0 开始，节点还会转发它收到的未验证块的块 ID。一般来说，简化的过程如下：
 
-1. A node requests data or sends a control message to a peer.
-2. If the request can be fulfilled, the peer executes the request; repeat 1. 
+1. 一个节点向对等节点请求数据或发送控制消息。
+2.如果请求可以完成，peer执行请求；重复 1。
 
-The data messages contain the block contents or the transaction contents. The control messages make possible the syncing of blocks and transactions between the node and its peers (see [Protocol Messages](#42-protocol-messages)). In order to allow such synchronization, each node must be able to retrieve information about its own state of blocks and transactions as well as that of its peers.
+数据消息包含区块内容或交易内容。控制消息使节点与其对等方之间的块和事务同步成为可能（请参阅 [协议消息](#42-protocol-messages)).为了允许这种同步，每个节点都必须能够检索有关其自身及其对等方的块和交易状态的信息。
 
 
-### 4.1. Node/Peers Status
+### 4.1。节点/对等状态
 
-Before attempting to sync state, each node needs to know the current status of its own blocks and transactions. It must also be able to query other peers to obtain the same information. In particular, nodes must be able to obtain the following on demand:
+在尝试同步状态之前，每个节点都需要知道自己的块和交易的当前状态。它还必须能够查询其他对等点以获得相同的信息。特别是，节点必须能够按需获取以下内容：
 
-*   Each node can find out which blocks and transactions it currently has.
-*   All nodes can find out which blocks and transactions their peers have.
-*   Each node can find out which blocks and transactions it has requested.
-*   All nodes can find out when each node has received a given transaction.
+* 每个节点都可以查到自己当前有哪些区块和交易。
+* 所有节点都可以找出他们的同行有哪些区块和交易。
+* 每个节点都可以找出它请求了哪些区块和交易。
+* 所有节点都可以查明每个节点何时收到给定的交易。
 
-To perform these queries, and thereafter when syncing state, the Net Plugin defines specific communication messages to be exchanged between the nodes. These messages are sent by the Net Plugin when transmitted and received over a TCP connection.
+为了执行这些查询，然后在同步状态时，Net 插件定义了要在节点之间交换的特定通信消息。这些消息在通过 TCP 连接传输和接收时由 Net 插件发送。
 
 
-### 4.2. Protocol Messages
+### 4.2。协议消息
 
-The p2p protocol defines the following control messages for peer to peer node communication:
+p2p 协议为对等节点通信定义了以下控制消息：
 
-Control Message | Description
+控制信息 |描述
 -|-
-`handshake_message` | initiates a connection to another peer and sends LIB/head status.
-`chain_size_message` | requests LIB/head status from peer. Not currently implemented.
-`go_away_message` | sends disconnection notification to a connecting or connected peer.
-`time_message` | transmits timestamps for peer synchronization and error detection.
-`notice_message` | informs peer which blocks and transactions node currently has.
-`request_message` | informs peer which blocks and transaction node currently needs.
-`sync_request_message` | requests peer a range of blocks given their start/end block numbers.
+`handshake_message` |启动与另一个对等点的连接并发送 LIB/head 状态。
+`chain_size_message` |从对等方请求 LIB/head 状态。目前未实施。
+`go_away_message` |向连接或已连接的对等方发送断开连接通知。
+`time_message` |传输用于对等同步和错误检测的时间戳。
+`notice_message` |通知 peer 节点当前拥有哪些块和交易。
+`request_message` |通知对等方当前需要哪些块和交易节点。
+`sync_request_message` |给定开始/结束块编号的请求对等一系列块。
 
-The protocol also defines the following data messages for exchanging the actual contents of a block or a loose transaction between peers on the p2p network:
+该协议还定义了以下数据消息，用于在 p2p 网络上的对等点之间交换块的实际内容或松散交易：
 
-Data Message | Description
+资料留言 |描述
 -|-
-`signed_block` | serialized contents of a signed block.
-`packed_transaction` | serialized contents of a packed transaction.
+`signed_block` |签名块的序列化内容。
+`packed_transaction` |打包事务的序列化内容。
 
 
-#### 4.2.1. Handshake Message
+#### 4.2.1。握手消息
 
-The handshake message is sent by a node when connecting to another peer. It is used by the connecting node to pass its chain state (LIB number/ID and head block number/ID) to the peer. It is also used by the peer to perform basic validation on the node the first time it connects, such as whether it belongs to the same blockchain, validating that fields are within range, detecting inconsistent block states on the node, such as whether its LIB is ahead of the head block, etc. The handshake message consists of the following fields:
+握手消息由节点在连接到另一个对等点时发送。连接节点使用它来将其链状态（LIB 编号/ID 和头块编号/ID）传递给对等节点。它也被对等方用来在第一次连接时对节点执行基本验证，例如它是否属于同一区块链，验证字段是否在范围内，检测节点上不一致的块状态，例如它的 LIB 是否位于head block之前等。握手消息由以下字段组成：
 
-Message Field | Description
+留言区 |描述
 -|-
-`network_version` | internal net plugin version to keep track of protocol updates.
-`chain_id` | hash value of the genesis state and config options. Used to identify chain.
-`node_id` | the actual node ID that distinguishes the peer’s node from the other peers.
-`key` | public key for peer to validate node; may be a producer or peer key, or empty.
-`time` | timestamp the handshake message was created since epoch (Jan 1, 2000).
-`token` | SHA-256 digest of timestamp to prove node owns private key of the key above.
-`sig` | signature for the digest above after node signs it with private key of the key above.
-`p2p_address` | IP address of node.
-`last_irreversible_block_num` | the actual block count of the LIB block since genesis.
-`last_irreversible_block_id` | a hash of the serialized contents of the LIB block.
-`head_num` | the actual block count of the head block since genesis.
-`head_id` | a hash of the serialized contents of the head block.
-`os` | operating system where node runs. This is detected automatically.
-`agent` | the name supplied by node to identify itself among its peers.
-`generation` | counts `handshake_message` invocations; detects first call for validation.
+`network_version` |用于跟踪协议更新的内部网络插件版本。
+`chain_id` |创世状态和配置选项的哈希值。用于识别链。
+`node_id` |将对等节点与其他对等节点区分开来的实际节点 ID。
+`key` |对等方验证节点的公钥；可能是生产者或对等密钥，或为空。
+`time` |自纪元（2000 年 1 月 1 日）以来创建握手消息的时间戳。
+`token` |时间戳的 SHA-256 摘要证明节点拥有上述密钥的私钥。
+`sig` |在节点使用上述密钥的私钥对其进行签名后，对上述摘要进行签名。
+`p2p_address` |节点的IP地址。
+`last_irreversible_block_num` |自创世以来 LIB 块的实际块数。
+`last_irreversible_block_id` | LIB 块的序列化内容的哈希值。
+`head_num` |自创世以来头块的实际块数。
+`head_id` |头块的序列化内容的散列。
+`os` |节点运行的操作系统。这是自动检测到的。
+`agent` |节点提供的名称，用于在其对等节点中标识自己。
+`generation` |计数 `handshake_message` 调用；检测第一次调用验证。
 
-If all checks succeed, the peer proceeds to authenticate the connecting node based on the `--allowed-connection` setting specified for that peer's net plugin when `nodeos` started:
+如果所有检查都成功，则对等方继续根据 `--allowed-connection` 为该对等方的网络插件指定的设置 `nodeos` 开始：
 
-*   **Any**: connections are allowed without authentication.
-*   **Producers**: peer key is obtained via p2p protocol.
-*   **Specified**: peer key is provided via settings.
-*   **None**: the node does not allow connection requests.
+* **任何**：无需身份验证即可允许连接。
+* **生产者**：对等密钥是通过 p2p 协议获得的。
+* **指定**：对等密钥通过设置提供。
+* **无**：节点不允许连接请求。
 
-The peer key corresponds to the public key of the node attempting to connect to the peer. If authentication succeeds, the receiving node acknowledges the connecting node by sending a handshake message back, which the connecting node validates in the same way as above. Finally, the receiving node checks whether the peer’s head block or its own needs syncing. This is done by checking the state of the head block and the LIB of the connecting node with respect to its own. From these checks, the receiving node determines which chain needs syncing.
+对等密钥对应于尝试连接到对等节点的节点的公钥。如果认证成功，接收节点通过发回握手消息确认连接节点，连接节点以与上述相同的方式验证。最后，接收节点检查对等方的头块或自己的头块是否需要同步。这是通过检查头块的状态和连接节点的 LIB 相对于自身的状态来完成的。从这些检查中，接收节点确定哪个链需要同步。
 
 
-#### 4.2.2. Chain Size Message
+#### 4.2.2。链条尺寸留言
 
-The chain size message was defined for future use, but it is currently not implemented. The idea was to send ad-hoc status notifications of the node’s chain state after a successful connection to another peer. The chain size message consists of the following fields:
+链大小消息是为将来使用而定义的，但目前尚未实现。这个想法是在成功连接到另一个对等点后发送节点链状态的临时状态通知。链大小消息由以下字段组成：
 
-Message Field | Description
+留言区 |描述
 -|-
-`last_irreversible_block_num` | the actual block count of the LIB block since genesis.
-`last_irreversible_block_id` | a hash of the serialized contents of the LIB block.
-`head_num` | the actual block count of the head block since genesis.
-`head_id` | a hash of the serialized contents of the head block.
+`last_irreversible_block_num` |自创世以来 LIB 块的实际块数。
+`last_irreversible_block_id` | LIB 块的序列化内容的哈希值。
+`head_num` |自创世以来头块的实际块数。
+`head_id` |头块的序列化内容的哈希值。
 
-The chain size message is superseded by the handshake message, which also sends the status of the LIB and head blocks, but includes additional information so it is preferred.
+链大小消息被握手消息取代，握手消息也发送 LIB 和头块的状态，但包含额外信息，因此它是首选。
 
 
-#### 4.2.3. Go Away Message
+#### 4.2.3。离开消息
 
-The go away message is sent to a peer before closing the connection. It is usually the result of an error that prevents the node from continuing the p2p protocol further. The go away message consists of the following fields:
+离开消息在关闭连接之前发送给对等方。通常是错误导致节点无法继续执行 p2p 协议。离开消息由以下字段组成：
 
-Message Field | Description
+留言区 |描述
 -|-
-`reason` | an error code signifying the reason to disconnect from peer.
-`node_id` | the node ID for the disconnecting node; used for duplicate notification.
+`reason` |一个错误代码，表示与对等方断开连接的原因。
+`node_id` |断开节点的节点 ID；用于重复通知。
 
-The current reason codes are defined as follows:
+目前的原因码定义如下：
 
-*   **No reason**: indicate no error actually; the default value.
-*   **Self**: node was attempting to self connect.
-*   **Duplicate**: redundant connection detected from peer.
-*   **Wrong chain**: the peer's chain ID does not match.
-*   **Wrong version**: the peer's network version does not match.
-*   **Forked**: the peer's irreversible blocks are different
-*   **Unlinkable**: the peer sent a block we couldn't use
-*   **Bad transaction**: the peer sent a transaction that failed verification.
-*   **Validation**: the peer sent a block that failed validation.
-*   **Benign other**: reasons such as a timeout. not fatal but warrant resetting.
-*   **Fatal other**: a catch all for fatal errors that have not been isolated yet.
-*   **Authentication**: peer failed authentication.
+* **No reason**：表示实际没有错误；默认值。
+* **自我**：节点正在尝试自我连接。
+* **重复**：从对等方检测到冗余连接。
+* **Wrong chain**：peer的链ID不匹配。
+* **Wrong version**：对端的网络版本不匹配。
+* **分叉**：对等方的不可逆区块不同
+* **Unlinkable**：对等方发送了一个我们无法使用的块
+* **Bad transaction**：peer 发送了一个验证失败的交易。
+* **验证**：对等方发送了一个验证失败的块。
+* **良性其他**：超时等原因。不是致命的，但需要重置。
+* **其他致命错误**：捕获所有尚未隔离的致命错误。
+* **身份验证**：对等身份验证失败。
 
-After the peer receives the go away message, the peer should also close the connection.
+对端收到离开消息后，对端也应该关闭连接。
 
 
-#### 4.2.4. Time Message
+#### 4.2.4。时间消息
 
-The time message is used to synchronize events among peers, measure time intervals, and detect network anomalies such as duplicate messages, invalid timestamps, broken nodes, etc. The time message consists of the following fields:
+时间消息用于节点间同步事件，测量时间间隔，检测网络异常，如重复消息、无效时间戳、节点损坏等。时间消息由以下字段组成：
 
-Message Field | Description
+留言区 |描述
 -|-
-`org` | origin timestamp; set when marking the beginning of a time interval.
-`rec` | receive timestamp; set when a message arrives from the network.
-`xmt` | transmit timestamp; set when a message is placed on the send queue.
-`dst` | destination timestamp; set when marking the end of a time interval.
+`org` |起源时间戳；在标记时间间隔的开始时设置。
+`rec` |接收时间戳；当消息从网络到达时设置。
+`xmt` |传输时间戳；将消息放入发送队列时设置。
+`dst` |目的地时间戳；在标记时间间隔结束时设置。
 
 
-#### 4.2.5. Notice Message
+#### 4.2.5。通知留言
 
-The notice message is sent to notify a peer which blocks and loose transactions the node currently has. The notice message consists of the following fields :
+发送通知消息以通知对等方节点当前拥有哪些块和松散交易。通知消息由以下字段组成：
 
-Message Field | Description
+留言区 |描述
 -|-
-`known_trx` | sorted list of known transaction IDs node has available.
-`known_blocks` | sorted list of known block IDs node has available.
+`known_trx` |已知交易 ID 节点的排序列表可用。
+`known_blocks` |已知块 ID 节点的排序列表可用。
 
-Notice messages are lightweight since they only contain block IDs and transaction IDs, not the actual block or transaction.
+注意消息是轻量级的，因为它们只包含块 ID 和交易 ID，而不是实际的块或交易。
 
 
-#### 4.2.6. Request Message
+#### 4.2.6。请求消息
 
-The request message is sent to notify a peer which blocks and loose transactions the node currently needs. The request message consists of the following fields:
+发送请求消息是为了通知节点当前需要哪些区块和松散交易。请求消息由以下字段组成：
 
-Message Field | Description
+留言区 |描述
 -|-
-`req_trx` | sorted list of requested transaction IDs required by node.
-`req_blocks` | sorted list of requested block IDs required by node.
+`req_trx` |节点所需的请求事务 ID 的排序列表。
+`req_blocks` |节点所需的请求块 ID 的排序列表。
 
 
-#### 4.2.7. Sync Request Message
+#### 4.2.7。同步请求消息
 
-The sync request message requests a range of blocks from peer. The sync request message consists of the following fields:
+同步请求消息向对等方请求一系列块。同步请求消息由以下字段组成：
 
-Message Field | Description
+留言区 |描述
 -|-
-`start_block` | start block number for the range of blocks to receive from peer.
-`end_block` | end block number for the range of blocks to receive from peer.
+`start_block` |从对等方接收的块范围的起始块号。
+`end_block` |从对等方接收的块范围的结束块号。
 
-Upon receipt of the sync request message, the peer sends back the actual blocks for the range of block numbers specified.
+收到同步请求消息后，对等方发回指定块编号范围内的实际块。
 
 
-### 4.3. Message Handler
+### 4.3。消息处理器
 
-The p2p protocol uses an event-driven model to process messages, so no polling or looping is involved when a message is received. Internally, each message is placed in a queue and the next message in line is dispatched to the corresponding message handler for processing. At a high level, the message handler can be defined as follows:
+p2p 协议使用事件驱动模型来处理消息，因此在收到消息时不涉及轮询或循环。在内部，每条消息都放在一个队列中，队列中的下一条消息被分派到相应的消息处理程序进行处理。在高层次上，消息处理程序可以定义如下：
 
 ```console
    receiver/read handler:
@@ -589,9 +589,9 @@ The p2p protocol uses an event-driven model to process messages, so no polling o
 ```
 
 
-### 4.4. Send Queue
+### 4.4。发送队列
 
-Protocol messages are placed in a buffer queue and sent to the appropriate connected peer. At a higher level, a node performs the following operations with each connected peer in a round-robin fashion:
+协议消息被放置在缓冲队列中并发送到适当的连接点。在更高级别，节点以循环方式对每个连接的对等方执行以下操作：
 
 ```console
    send/write loop:
@@ -611,6 +611,6 @@ Protocol messages are placed in a buffer queue and sent to the appropriate conne
 ```
 
 
-## 5. Protocol Improvements
+## 5.协议改进
 
-Any software updates to the p2p protocol must also scale progressively and consistently across all nodes. This translates into installing updates that reduce operation downtime and potentially minimize it altogether while deploying new functionality in a backward compatible manner, if possible. On the other hand, data throughput can be increased by taking measures that minimize message footprint, such as using data compression and binary encoding of the protocol messages.
+p2p 协议的任何软件更新还必须在所有节点上逐步且一致地扩展。这转化为安装更新，以减少操作停机时间并可能将其完全最小化，同时在可能的情况下以向后兼容的方式部署新功能。另一方面，可以通过采取最小化消息足迹的措施来增加数据吞吐量，例如使用协议消息的数据压缩和二进制编码。

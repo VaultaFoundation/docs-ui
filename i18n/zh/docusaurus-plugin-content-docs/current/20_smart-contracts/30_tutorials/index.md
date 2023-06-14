@@ -1,8 +1,8 @@
 ---
-title: Tutorials
+title: 教程
 ---
 
-Learn about Smart Contract Development on EOS by doing the following tutorials:
+通过以下教程了解 EOS 上的智能合约开发：
 
-- [Create a Token](10_create-a-token.md)
-- [Create an NFT](20_create-an-nft.md)
+- [创建令牌](10_create-a-token.md)
+- [创建 NFT](20_create-an-nft.md)

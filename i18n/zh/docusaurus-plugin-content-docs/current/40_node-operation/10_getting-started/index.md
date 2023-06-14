@@ -1,12 +1,12 @@
 ---
-title: Getting Started
+title: 入门
 ---
 
 <head>
-    <title>Getting Started with Node Operation</title>
+    <title>节点操作入门</title>
 </head>
 
-This section digs into the basic knowledge you need to run a node. All node operators (apis, producers, history nodes)
-should know the information in this section.
+本节深入探讨运行节点所需的基本知识。所有节点运营商（apis、生产者、历史节点）
+应了解本节中的信息。
 
-* [Snapshots](./50_snapshots.md) - Learn how to use snapshots to speed up the syncing process and create backups.
+* [快照](./50_snapshots.md) - 了解如何使用快照来加快同步过程和创建备份。

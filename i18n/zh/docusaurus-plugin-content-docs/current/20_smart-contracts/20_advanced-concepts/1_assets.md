@@ -1,25 +1,25 @@
 ---
-title: Assets
+title: 资产
 ---
 
-An `asset` is a special type made specifically for blockchain tokens.
+一个 `asset` 是专门为区块链令牌制作的特殊类型。
 
-The two primary components of an asset are the `symbol` and the `amount`.
+资产的两个主要组成部分是 `symbol` 和 `amount`.
 
-The `symbol` is a combination of a string and a number. The string is the
-name of the token and the number is the number of decimal places.
+这 `symbol` 是字符串和数字的组合。字符串是
+令牌的名称和数字是小数位数。
 
-The `amount` is a 64-bit signed integer.
+这 `amount` 是一个 64 位有符号整数。
 
-## Defining an Asset
+## 定义资产
 
-If you want to use assets in your contract, you need to include the `asset.hpp`:
+如果你想在你的合同中使用资产，你需要包括 `asset.hpp`:
 
 ```cpp
 #include <eosio/asset.hpp>
 ```
 
-Then you can use the asset type in your contract. Let's set up a symbol first:
+然后你可以在你的合同中使用资产类型。让我们先设置一个符号：
 
 ```cpp
 symbol TOKEN_SYMBOL = symbol("COOL", 8);
@@ -27,9 +27,9 @@ symbol TOKEN_SYMBOL = symbol("COOL", 8);
 symbol TOKEN_SYMBOL("COOL", 8);
 ```
 
-This creates a symbol with the name `COOL` and 8 decimal places. 
+这将创建一个名称为 `COOL` 和 8 位小数。
 
-Now we can create an asset:
+现在我们可以创建资产：
 
 ```cpp
 asset my_asset = asset(1'00000000, TOKEN_SYMBOL);
@@ -37,15 +37,15 @@ asset my_asset = asset(1'00000000, TOKEN_SYMBOL);
 asset my_asset(1'00000000, TOKEN_SYMBOL);
 ```
 
-The above declaration means that the string representation of the asset will look like this: `1.00000000 COOL`.
+上面的声明意味着资产的字符串表示形式如下所示： `1.00000000 COOL`.
 
-## Asset Operators
+## 资产运营商
 
-The asset type has a few operators that you can use to manipulate assets.
+资产类型有一些操作符可以用来操作资产。
 
-### Mathematical Operations
+### 数学运算
 
-You can add two assets together:
+您可以将两个资产加在一起：
 
 ```cpp
 asset a = asset(1'00000000, TOKEN_SYMBOL);
@@ -53,19 +53,19 @@ asset b = asset(2'00000000, TOKEN_SYMBOL);
 asset c = a + b;
 ```
 
-This will result in `c` being equal to `3.00000000 COOL`. You could alternatively also just 
-add the two assets' amounts together directly:
+这将导致 `c` 等于 `3.00000000 COOL`.你也可以选择
+直接将两项资产的金额相加：
 
 ```cpp
 uint64_t c = a.amount + b.amount;
 ```
 
-> ⚠ The two assets must have the same symbol.
-> 
-> Doing mathematical operations with different symbols will result in an error during execution. 
-> You should always make sure that the symbols match when working with assets inside your smart contracts.
+> ⚠ 两种资产必须具有相同的符号。
+>
+> 用不同的符号进行数学运算会导致执行时出错。
+> 在处理智能合约中的资产时，您应该始终确保符号匹配。
 
-Other mathematical operations are also available:
+其他数学运算也可用：
 
 ```cpp
 asset a = asset(1'00000000, TOKEN_SYMBOL);
@@ -79,9 +79,9 @@ e *= 2;
 e /= 2;
 ```
 
-## Comparison Operators
+## 比较运算符
 
-You can compare two assets with each other:
+您可以将两种资产相互比较：
 
 ```cpp
 asset a = asset(1'00000000, TOKEN_SYMBOL);
@@ -92,19 +92,19 @@ bool e = a == b;
 bool f = a != b;
 ```
 
-## Printing assets
+## 打印资产
 
-If you want to print assets in either an error message or console log, you can use the `to_string()` method.
+如果您想在错误消息或控制台日志中打印资产，您可以使用 `to_string()` 方法。
 
 ```cpp
 asset a = asset(1'00000000, TOKEN_SYMBOL);
 check(false, "You have " + a.to_string() + " tokens.");
 ```
 
-## Checking validity
+## 检查有效性
 
-You should always check if an asset is valid before using it. This is done with the `is_valid()` method.
-This checks if the asset is within the range of valid values and whether or not the symbol is valid.
+在使用资产之前，您应该始终检查资产是否有效。这是通过 `is_valid()` 方法。
+这将检查资产是否在有效值范围内以及符号是否有效。
 
 ```cpp
 asset a = asset(1'00000000, TOKEN_SYMBOL);
@@ -113,13 +113,13 @@ check(a.is_valid(), "Asset is not valid.");
 
 
 
-## Overflow considerations
+## 溢出注意事项
 
-The asset type comes with built-in overflow/underflow protection.
+资产类型带有内置的溢出/下溢保护。
 
-This means that if you try to add two assets together and the result is larger than the maximum value of a 64-bit integer, an error will be thrown.
+这意味着如果您尝试将两个资产相加并且结果大于 64 位整数的最大值，则会抛出错误。
 
-It will not allow you to create an asset with an amount that is not within the range of a signed 64-bit integer.
+它不允许您创建金额不在带符号 64 位整数范围内的资产。
 
 
 

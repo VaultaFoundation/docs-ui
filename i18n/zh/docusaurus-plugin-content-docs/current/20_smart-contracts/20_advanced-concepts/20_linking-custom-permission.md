@@ -1,55 +1,55 @@
 ---
-title: "Creating and Linking Custom Permissions"
+title: “创建和链接自定义权限”
 ---
 
-## Introduction
+＃＃ 介绍
 
-On the EOS blockchain, you can create various custom permissions for accounts.  A custom permission can later be linked to an action of a contract.  This permission system enables smart contracts to have a flexible authorization scheme.
+在 EOS 区块链上，您可以为账户创建各种自定义权限。自定义权限稍后可以链接到合同的操作。该权限系统使智能合约具有灵活的授权方案。
 
-This tutorial illustrates the creation of a custom permission, and subsequently, how to link the permission to an action. Upon completion of the steps, the contract's action will be prohibited from executing unless the authorization of the newly linked permission is provided. This allows you to have greater granularity of control over an account and its various actions.
+本教程说明了自定义权限的创建，以及随后如何将权限链接到操作。完成这些步骤后，除非提供新链接权限的授权，否则合约的动作将被禁止执行。这使您可以更精细地控制帐户及其各种操作。
 
-With great power comes great responsibility. This functionality poses some challenges to the security of your contract and its users. Ensure you understand the concepts and steps prior to putting them to use.
+拥有权利的同时也被赋予了重大的责任。此功能对您的合约及其用户的安全性提出了一些挑战。确保您在使用之前了解概念和步骤。
 
-[[info |Parent permission ]]
-| When you create a custom permission, the permission will always be created under a parent permission.
+[[信息|家长许可]]
+|当您创建自定义权限时，该权限将始终在父权限下创建。
 
-If you have the authority of a parent permission which a custom permission was created under, you can always execute an action which requires that custom permission.
+如果您拥有在其下创建自定义权限的父权限的权限，则您始终可以执行需要该自定义权限的操作。
 
-## Step 1. Create a Custom Permission
+## 步骤 1. 创建自定义权限
 
-Firstly, let's create a new permission level on the `alice` account:
+首先，让我们在 `alice` 帐户：
 
 ```shell
 dune -- cleos set account permission alice upsert YOUR_PUBLIC_KEY owner -p alice@owner
 ```
 
-A few things to note:
+有几点需要注意：
 
-1. A new permission called **upsert** was created
-2. The **upsert** permission uses the development public key as the proof of authority
-3. This permission was created on the `alice` account
+1. 创建了一个名为 **upsert** 的新权限
+2.**upsert**权限使用开发公钥作为权限证明
+3. 此权限创建于 `alice` 帐户
 
-You can also specify authorities other than a public key for this permission, for example, a set of other accounts. 
+您还可以为此权限指定公钥以外的权限，例如一组其他帐户。
 
-## Step 2. Link Authorization to Your Custom Permission
+## 第 2 步。将授权链接到您的自定义权限
 
-Link the authorization to invoke the `upsert` action with the newly created permission:
+链接授权调用 `upsert` 使用新创建的权限执行操作：
 
 ```shell
 dune -- cleos set action permission alice addressbook upsert upsert
 ```
 
-In this example, we link the authorization to the `upsert` action created earlier in the addressbook contract.
+在此示例中，我们将授权链接到 `upsert` 先前在地址簿合约中创建的操作。
 
-## Step 3. Test it
+## 第 3 步。测试它
 
-Let's try to invoke the action with an `active` permission:
+让我们尝试用 `active` 允许：
 
 ```shell
 dune -- cleos push action addressbook upsert '["alice", "alice", "liddel", 21, "Herengracht", "land", "dam"]' -p alice@active
 ```
 
-You should see an error like the one below:
+您应该会看到如下所示的错误：
 
 ```text
 Error 3090005: Irrelevant authority included
@@ -58,13 +58,13 @@ Error Details:
 action declares irrelevant authority '{"actor":"alice","permission":"active"}'; minimum authority is {"actor":"alice","permission":"upsert"}
 ```
 
-Now, try the **upsert** permission, this time, explicitly declaring the **upsert** permission we just created: (e.g. `-p alice@upsert`)
+现在，尝试 **upsert** 权限，这一次，显式声明我们刚刚创建的 **upsert** 权限：（例如 `-p alice@upsert`)
 
 ```text
 dune -- cleos push action addressbook upsert '["alice", "alice", "liddel", 21, "Herengracht", "land", "dam"]' -p alice@upsert
 ```
 
-Now it works:
+现在它起作用了：
 
 ```text
 dune -- cleos push action addressbook upsert '["alice", "alice", "liddel", 21, "Herengracht", "land", "dam"] -p alice@upsert

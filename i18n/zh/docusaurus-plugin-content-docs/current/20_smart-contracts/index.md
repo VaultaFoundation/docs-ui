@@ -1,9 +1,9 @@
 ---
-title: Smart Contracts
+title: 智能合约
 ---
 
-Take a journey through the world of smart contracts on the EOS blockchain.
+踏上 EOS 区块链智能合约世界之旅。
 
-- [Getting Started](10_getting-started/index.md)
-- [Advanced Concepts](20_advanced-concepts/index.md)
-- [Tutorials](30_tutorials/index.md)
+- [入门](10_getting-started/index.md)
+- [高级概念](20_advanced-concepts/index.md)
+- [教程](30_tutorials/index.md)

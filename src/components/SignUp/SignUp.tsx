@@ -2,7 +2,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import React from 'react';
 import { Button } from '../Shared/Button/Button';
 import {H3, H2, P_XLarge, H1} from '../Shared/Typography/Typography';
-import Translate from "@docusaurus/Translate";
+import Translate, {translate} from "@docusaurus/Translate";
 
 import styles from './styles.module.css';
 
@@ -19,8 +19,8 @@ export const SignUp = () => {
           <input type="hidden" name="u" value="d65a053d24b3cc087dfb925bb" />
           <input type="hidden" name="id" value="be3f545626" />
           <input type="hidden" name="orig-lang" value="1" />
-          <input className={styles.inputMobile} name="MERGE0" id="MERGE0" type="email" placeholder="Enter your email" pattern='' />
-          <input className={styles.inputDesktop} name="MERGE0" id="MERGE1" type="email" placeholder="Enter your email" />
+          <input className={styles.inputMobile} name="MERGE0" id="MERGE0" type="email" placeholder={translate({message:"Enter your email"})} pattern='' />
+          <input className={styles.inputDesktop} name="MERGE0" id="MERGE1" type="email" placeholder={translate({message:"Enter your email"})} />
           <Button type="submit"><Translate>ALERT ME</Translate></Button>
         </form>
       </div>

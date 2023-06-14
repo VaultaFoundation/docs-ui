@@ -1,56 +1,56 @@
 ---
-title: Action Types
+title: 动作类型
 ---
 
-An action is an entry point into a smart contract. It is a function that can be called by an account through 
-interacting with the blockchain's APIs, or by another smart contract through inline actions.
+动作是智能合约的入口点。这是一个可以通过帐户调用的功能
+与区块链的 API 交互，或通过内联操作由另一个智能合约进行交互。
 
-Transactions that are sent to the EOS Network include one or more actions within them. 
+发送到 EOS 网络的交易包括其中的一项或多项操作。
 
-In EOS there are a few different ways you can declare an action, which are used for different purposes.
-
-
-## Callable Actions
-
-Callable actions are the most common type of action. 
-They set up a custom entry point to the contract that can be called by any account.
-
-You can define a callable action in two different ways:
+在 EOS 中，有几种不同的方法可以声明一个动作，它们用于不同的目的。
 
 
-### Using the `[[eosio::action]]` attribute
+## 可调用操作
+
+可调用操作是最常见的操作类型。
+他们为合约设置了一个自定义入口点，可以被任何账户调用。
+
+您可以通过两种不同的方式定义可调用操作：
+
+
+＃＃＃ 使用 `[[eosio::action]]` 属性
 
 ```cpp
 [[eosio::action]] void youraction(){}
 ```
 
-This is the most versatile way to define an action. It allows you to specify the 
-return type of the action so that you can have your action return a value.
+这是定义动作的最通用的方法。它允许您指定
+操作的返回类型，以便您可以让您的操作返回一个值。
 
-> ⚠ **Return values & Composability**
+> ⚠ **返回值和可组合性**
 >
-> Return values are only usable from outside the blockchain, and cannot currently be used
-> in EOS for smart contract composability. 
+> 返回值只能从区块链外部使用，目前不能使用
+> 在 EOS 中实现智能合约的可组合性。
 
-### Using the `ACTION` macro
+＃＃＃ 使用 `ACTION` 宏观
 
 ```cpp
 ACTION youraction(){}
 ```
 
-This is a shorthand for the `[[eosio::action]]` attribute. However,
-it does not allow you to specify the return type of the action as it includes the `void`
-return type by default.
+这是 `[[eosio::action]]` 属性。然而，
+它不允许您指定操作的返回类型，因为它包括 `void`
+默认返回类型。
 
 
-## Event Receivers
+## 事件接收者
 
-Event Receivers are not actions, but rather functions that will be called when another action tags your contract
-as a recipient. This is useful for tracking other smart contracts, such as token transfers.
+事件接收器不是动作，而是当另一个动作标记您的合约时将调用的函数
+作为收件人。这对于跟踪其他智能合约很有用，例如令牌传输。
 
-Below are two contracts, one which is sending an event, and one which is catching it.
+下面是两个合约，一个发送事件，一个捕捉事件。
 
-### Sender Contract
+### 发件人合同
 
 ```cpp
 [[eosio::action]] 
@@ -59,16 +59,16 @@ void transfer(name from, name to, asset quantity, std::string memo) {
 }
 ```
 
-The `require_recipient` function will send an event to the `to` account. If the `to` account has
-a smart contract on it that listens to events, then it will be able to act upon the event.
+这 `require_recipient` 函数将发送一个事件到 `to` 帐户。如果 `to` 账户有
+它上面的智能合约可以侦听事件，然后它将能够对事件采取行动。
 
-> ❔ **Who can receive the event?**
-> 
-> Any account can receive an event, but only the account specified in the `require_recipient` function
-> will be notified. You cannot listen to events on contracts that have not required you as a recipient.
+> ❔ **谁可以收到活动？**
+>
+> 任何账户都可以接收事件，但仅限于指定的账户 `require_recipient` 功能
+> 会收到通知。您无法收听不需要您作为收件人的合同上的事件。
 
 
-### Receiver Contract
+### 接收方合约
 
 ```cpp
 [[eosio::on_notify("*::transfer")]] 
@@ -77,31 +77,31 @@ void catchevent(name from, name to, asset quantity, std::string memo) {
 }
 ```
 
-### Understanding the on_notify syntax
+### 了解 on_notify 语法
 
-The `on_notify` attribute takes a string as an argument. This string is a filter that will be used to determine
-which actions will trigger the `catchevent` action. The filter is in the form of `contract::action`, where `contract`
-is the name of the contract that is sending the event, and `action` is the name of the action within that contract that
-triggered the event.
+这 `on_notify` attribute 接受一个字符串作为参数。该字符串是一个过滤器，将用于确定
+哪些动作会触发 `catchevent` 行动。过滤器的形式为 `contract::action`， 在哪里 `contract`
+是发送事件的合约的名称，并且 `action` 是该合约中的动作名称
+触发事件。
 
-The `*` character is a wildcard that will match any contract or action. So in the example above, the `catchevent` action
-will be called whenever any contract sends a `transfer` action to the `receiver` contract.
+这 `*` character 是一个通配符，可以匹配任何合约或动作。所以在上面的例子中， `catchevent` 行动
+每当任何合约发送一个 `transfer` 行动到 `receiver` 合同。
 
-The wildcard is supported on both the contract and action side of the filter, so you can use it to match any contract, any action, or both.
+通配符在过滤器的合同和操作端均受支持，因此您可以使用它来匹配任何合同、任何操作或两者。
 
-Examples:
-- `*::*` - Match any contract and any action
-- `yourcontract::*` - Match any action on `yourcontract`
-- `*::transfer` - Match any `transfer` action on any contract
-- `yourcontract::transfer` - Match the `transfer` action on `yourcontract`
+例子：
+- `*::*` - 匹配任何合同和任何行动
+- `yourcontract::*` - 匹配任何动作 `yourcontract`
+- `*::transfer` - 匹配任何 `transfer` 对任何合同采取行动
+- `yourcontract::transfer` - 匹配 `transfer` 采取行动 `yourcontract`
 
-## Inline Actions
+## 内联动作
 
-Inline actions are a way to call another action from within an action. Let's demonstrate this
-below with two simple contracts. 
+内联动作是一种从一个动作中调用另一个动作的方法。让我们演示一下
+下面有两个简单的合同。
 
 
-### Caller Contract
+### 来电合约
 
 ```cpp
 // This contract is deployed to the account `contract1`
@@ -116,7 +116,7 @@ void callme(name user) {
 }
 ```
 
-### Callee Contract
+### 被调用者合约
 
 ```cpp
 // This contract is deployed to the account `contract2`
@@ -126,70 +126,70 @@ void inlined(name user) {
 }
 ```
 
-If you were to call the `callme` action on `contract1`, it would send an inline action to `contract2`, which would 
-then call the `inlined` action and print out the name of the user that was passed in as a parameter.
+如果你打电话给 `callme` 采取行动 `contract1`，它会发送一个内联动作到 `contract2`， 这将
+然后调用 `inlined` action 并打印出作为参数传入的用户的名称。
 
-Let's look at the structure of the `action` function call:
+让我们看看它的结构 `action` 函数调用：
 
 ```cpp
 action(permission_level, code, action, data).send();
 ```
 
-The `action` function takes four arguments:
+这 `action` 函数有四个参数：
 
-#### permission_level
+#### 权限级别
 
-The `permission_level` argument is used to specify the permission level that the action will be called with.
-The contract **must** have the authority to call the action, otherwise the inline action call will fail.
+这 `permission_level` 参数用于指定将调用操作的权限级别。
+合约**必须**有调用action的权限，否则内联action调用会失败。
 
-To construct a `permission_level`:
+构建一个 `permission_level`:
 ```cpp
 permission_level{name account, name permission}
 ```
 
-#### code
+＃＃＃＃ 代码
 
-The `code` argument is used to specify the account that the action will be called on.
+这 `code` 参数用于指定将调用操作的帐户。
 
-#### action
+＃＃＃＃ 行动
 
-The `action` argument is used to specify the name of the action that will be called.
+这 `action` 参数用于指定将调用的操作的名称。
 
-#### data
+＃＃＃＃ 数据
 
-The `data` argument is used to specify the data that will be passed to the action.
-You should use the `std::make_tuple` function to create a tuple of the arguments that will be passed to the action.
+这 `data` 参数用于指定将传递给操作的数据。
+你应该使用 `std::make_tuple` 函数来创建将传递给操作的参数的元组。
 
-The `tuple` is just a comma separated list of the arguments that will be passed to the action.
+这 `tuple` 只是将传递给操作的参数的逗号分隔列表。
 
-> ⚠ **The contract is the new sender**
+> ⚠ **合约是新的发送者**
 >
-> When you call an inline action, the contract that is calling the action becomes the new sender.
-> So if you sent the above action from `someaccount`, then `contract2` would see `contract1` as the sender
-> of the inline action, not `someaccount`.
-> 
-> This is important to note, as it means that the `require_auth` function in something like a token contract
-> will not allow you to send tokens on behalf of another account. 
+> 当你调用一个内联动作时，调用该动作的合约成为新的发送者。
+> 因此，如果您从 `someaccount`， 然后 `contract2` 会看到 `contract1` 作为发件人
+> 内联动作的，不是 `someaccount`.
+>
+> 这一点很重要，因为这意味着 `require_auth` 以类似代币合约的方式运作
+> 将不允许您代表另一个帐户发送代币。
 
-### The Code Permission
+### 代码权限
 
-The `eosio.code` permission is a special account permission that allows a contract to call inline actions.
-Without this permission your contract will not be able to call actions on other contracts.
+这 `eosio.code` 权限是一种特殊的帐户权限，允许合约调用内联操作。
+没有此许可，您的合约将无法调用其他合约的操作。
 
-This permission sits on the `active` permission level, so that other contract's using the `require_auth`
-function will be able to verify that your contract has the authority to call the action.
+此权限位于 `active` 许可级别，以便其他合约使用 `require_auth`
+功能将能够验证您的合同是否有权调用该操作。
 
-To add the code permission you need to update your account's active permission to be controlled by
-`<YOURACCOUNT>@eosio.code` **along with your current active permission**.
+要添加代码权限，您需要更新您帐户的活动权限以由其控制
+`<YOURACCOUNT>@eosio.code` **连同您当前的有效许可**。
 
-> ⚠ **Don't remove your current active permission controllers**
-> 
-> The `eosio.code` permission is meant to be added to your existing active permission, not replace it.
-> If you remove your current active permission controllers, then you will lose access to your account/contract.
+> ⚠ **不要删除您当前的活动权限控制器**
+>
+> 的 `eosio.code` 权限旨在添加到您现有的活动权限中，而不是替换它。
+> 如果您删除当前活动的权限控制器，那么您将无法访问您的帐户/合约。
 
-An example permission structure with a Code Permission on the account `yourcontract` would look like:
-- **owner**: `YOUR_PUBLIC_KEY`
-  - **active**: 
+具有帐户代码权限的示例权限结构 `yourcontract` 看起来像：
+- **所有者**： `YOUR_PUBLIC_KEY`
+  - **积极的**：
       - `YOUR_PUBLIC_KEY`
       - `yourcontract@eosio.code`
 

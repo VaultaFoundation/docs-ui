@@ -1,97 +1,97 @@
 ---
-title: Beginner Concepts
+title: 初学者概念
 ---
 
 <head>
-  <title>EOS dApps - Beginner Concepts</title>
+  <title>EOS dApps - 初学者概念</title>
 </head>
 
-A lot of tutorials for building decentralized web applications dive straight into the code but do not explain 
-the core conceptual differences between web2 development and web3 development. 
+许多构建去中心化 Web 应用程序的教程直接深入代码但不解释
+web2 开发和 web3 开发之间的核心概念差异。
 
-This guide will help you wrap your head around how decentralized applications work, what parts of the stack are
-different, and how to think about the architecture of your decentralized applications.
+本指南将帮助您全面了解去中心化应用程序的工作原理，堆栈的哪些部分是
+不同，以及如何考虑去中心化应用程序的架构。
 
-## The blockchain comes packed with features
+## 区块链充满了特性
 
-In traditional web2 development you need to roll your entire stack alone. Even if you use cloud providers like AWS, 
-you still need to pick and choose which services you want to use and how to integrate them together.
+在传统的 web2 开发中，您需要单独滚动整个堆栈。即使您使用像 AWS 这样的云提供商，
+您仍然需要挑选要使用的服务以及如何将它们集成在一起。
 
-In web3 development, the blockchain comes packed with every feature you need to build most applications.
+在 web3 开发中，区块链包含构建大多数应用程序所需的所有功能。
 
-| Feature | Description                                                                                                                                       |
-| --- |---------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Database** | The blockchain itself is just a massive database. **You** can also store data on the blockchain and query it.                                     |
-| **Data replication** | Because of how a blockchain works, you get data replication across the entire network for **free**.                                               |
-| **Authentication** | All blockchains come with built-in authentication and user management.                                                                            |
-| **Payments** | One of the core functionalities of a blockchain is decentralized finance, and payments are made very easy.                                        |
-| **Serverless Functions** | The blockchain has built-in serverless functions in the form of Smart Contracts.                                                                  |
-| **Event Notifications** | You can subscribe to events that happen on the blockchain, similar to a message-queue or pub-sub. |
+|专题 |说明 |
+| --- | --- |
+| **数据库** |区块链本身就是一个庞大的数据库。 **您**也可以将数据存储在区块链上并进行查询。 |
+| **数据复制** |由于区块链的工作原理，您可以**免费**在整个网络中复制数据。 |
+| **身份验证** |所有区块链都带有内置身份验证和用户管理。 |
+| **付款** |区块链的核心功能之一是去中心化金融，支付变得非常容易。 |
+| **无服务器功能** |区块链以智能合约的形式内置了无服务器功能。 |
+| **事件通知** |您可以订阅区块链上发生的事件，类似于消息队列或发布-订阅。 |
 
-## You don't need a backend
+## 你不需要后端
 
-In web2 development, you need to build a backend to store data and perform business logic. This might be a REST API or serverless functions.
+在 web2 开发中，你需要建立一个后端来存储数据和执行业务逻辑。这可能是 REST API 或无服务器函数。
 
-In web3 development, can interact directly with the blockchain. You don't need to run your own backend infrastructure, kube clusters, or serverless functions.
-It is very similar to serverless functions, except that the functions are run on a decentralized blockchain instead of a centralized cloud provider.
+在web3开发中，可以直接与区块链进行交互。您不需要运行自己的后端基础设施、kube 集群或无服务器功能。
+它与无服务器函数非常相似，不同之处在于这些函数运行在去中心化的区块链上，而不是在中心化的云提供商上。
 
-> ❔ **You might still want to run infrastructure**
-> 
-> Using publicly available nodes or API services is great, but you might want to run your own infrastructure for security or performance reasons.
-> Take an exchange as an example. They generally run their own infrastructure to ensure that they can handle the load and that their data is secure.
-> Though transactions **sent** to the chain are always backed by cryptography, the results you get from node APIs can be tampered with.
+> ❔ **您可能仍想运行基础设施**
+>
+> 使用公开可用的节点或 API 服务很好，但出于安全或性能原因，您可能希望运行自己的基础设施。
+> 以交易所为例。他们通常运行自己的基础设施，以确保他们能够处理负载并确保他们的数据安全。
+> 尽管**发送**到链上的交易始终由密码学支持，但您从节点 API 获得的结果可能会被篡改。
 
-### In some cases a backend helps
+### 在某些情况下，后端会有所帮助
 
-There are some cases where you might want to run your own backend. For example, if you want to store data that is not on the blockchain, or if you want to
-perform business logic that is either too expensive to run on the blockchain, or takes too long and exceeds the maximum time allowed for smart contract execution.
+在某些情况下，您可能希望运行自己的后端。例如，如果你想存储不在区块链上的数据，或者你想
+执行过于昂贵而无法在区块链上运行的业务逻辑，或者花费太长时间并超过允许智能合约执行的最长时间的业务逻辑。
 
-You might also want to provide your applications with different ways to access the data stored on the blockchain that is easier for you 
-to work with, like GraphQL or SQL queries. In that case you might want to build a backend that listens to the blockchain and stores the data you care about in a way that suits your needs. 
+您可能还想为您的应用程序提供不同的方式来访问存储在区块链上的数据，这对您来说更容易
+使用，比如 GraphQL 或 SQL 查询。在这种情况下，您可能希望构建一个后端来监听区块链并以适合您需要的方式存储您关心的数据。
 
-## Get comfortable with wallets
+## 熟悉钱包
 
-A blockchain wallet is a piece of software that manages private keys.
-Wallets do not store any blockchain data within them, instead they use the private keys they manage to sign transactions that manipulate the blockchain.
+区块链钱包是一种管理私钥的软件。
+钱包不在其中存储任何区块链数据，而是使用它们管理的私钥来签署操纵区块链的交易。
 
-In web2 development, you need to build your own authentication system. You might use a third-party service like Auth0, or you might roll your own.
-Once your user logs in, you rely on their session to prove that they are who they say they are. 
+在web2开发中，需要构建自己的认证系统。您可能会使用像 Auth0 这样的第三方服务，也可能会推出自己的服务。
+一旦您的用户登录，您就依靠他们的会话来证明他们是他们所说的人。
 
-You might add in additional security measures like 2FA, IP-user pairing, and a variety of other techniques. 
+您可以添加额外的安全措施，如 2FA、IP 用户配对和各种其他技术。
 
-In web3 development life is simpler, your users will log in with a wallet instead. There are no passwords you need to authenticate yourself. 
-You also don't need to rely on a session to prove that their interactions are coming from them, because every interaction (transaction) 
-they make will be signed with the private key that their wallet controls.
+在 web3 开发中生活更简单，您的用户将使用钱包登录。您无需密码即可验证自己的身份。
+您也不需要依赖会话来证明他们的交互来自他们，因为每次交互（交易）
+他们制作的将使用他们钱包控制的私钥进行签名。
 
-> ❕ **Proving logins**
-> 
-> Some applications want to prove that a user is who they say they are without requiring them to sign a transaction that gets
-> sent to the blockchain. In that case you can use a technique called **message signing**, where you ask the user to sign a message
-> with their private key, and then use that signature to prove their identity. 
+> ❕ **证明登录**
+>
+> 一些应用程序想要证明用户就是他们所说的那个人，而不需要他们签署一个获得的交易
+> 发送到区块链。在这种情况下，您可以使用一种称为**消息签名**的技术，您可以在其中要求用户签署消息
+> 使用他们的私钥，然后使用该签名来证明他们的身份。
 
-## Big data doesn't belong on the blockchain
+## 大数据不属于区块链
 
-The blockchain is a database, but it is not a database that is meant to store large amounts of data. You can store that data on 
-services specifically designed for that purpose, and then store the hash of that data on the blockchain. You will see this pattern
-repeated over and over again in decentralized applications.
+区块链是一个数据库，但它不是一个用来存储大量数据的数据库。您可以将该数据存储在
+专门为此目的设计的服务，然后将该数据的散列存储在区块链上。你会看到这个图案
+在分散的应用程序中一遍又一遍地重复。
 
-| Name                                    | Description                                                                                                                                     |
-|-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**IPFS**](https://ipfs.tech/)          | A peer-to-peer hypermedia protocol designed to preserve and grow humanity's knowledge by making the web upgradeable, resilient, and more open.  |
-| [**Arweave**](https://www.arweave.org/) | The Arweave network is like Bitcoin, but for data: A permanent and decentralized web inside an open ledger.                                     |
+|名称 |说明 |
+|----------------------------------------|------ ---------------------------------------------- ---------------------------------------------- --------------------------------------|
+| [**IPFS**](https://ipfs.tech/)          |一种点对点超媒体协议，旨在通过使网络可升级、有弹性和更开放来保存和增长人类的知识。 |
+| [**Arweave**](https://www.arweave.org/) | Arweave 网络就像比特币，但对于数据而言：开放分类账中的永久和去中心化网络。 |
 
 
-## Your frontend is just an experience
+## 你的前端只是一种体验
 
-Unlike web2 development, where your frontend is tightly coupled to your backend, in web3 development your frontend is just an experience layer.
+与前端与后端紧密耦合的 web2 开发不同，在 web3 开发中，前端只是一个体验层。
 
-Your frontend will interact with the blockchain directly, which means 100% of the security for your applications lives on the blockchain. It's 
-important to remember that, because it means that users have the ability to interact with your contracts directly, and 
-no matter what controls you build into the frontend, they can always bypass them.
+您的前端将直接与区块链交互，这意味着您的应用程序 100% 的安全性都在区块链上。它是
+记住这一点很重要，因为这意味着用户可以直接与您的合约进行交互，并且
+无论您在前端构建什么控件，它们总是可以绕过它们。
 
-> ❔ **Co-signing**
-> 
-> You can actually prevent people from interacting with your contracts directly by creating a backend that co-signs transactions
-> for every interaction the user takes. This is non-standard and usually indicative of a game theory design flaw, but it 
-> is used in some cases to prevent botting and other forms of cheating/abuse.
+> ❔ **联名**
+>
+> 你实际上可以通过创建一个共同签署交易的后端来阻止人们直接与你的合约进行交互
+> 对于用户进行的每次交互。这是非标准的，通常表示博弈论设计缺陷，但它
+> 在某些情况下用于防止机器人和其他形式的作弊/滥用。
 

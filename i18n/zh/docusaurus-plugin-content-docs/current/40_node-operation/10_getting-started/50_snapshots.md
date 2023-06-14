@@ -1,22 +1,22 @@
 ---
-title: Snapshots
+title: 快照
 ---
 
-A snapshot is a capture of the blockchain state at a specific point in time. It includes the sum of all changes that 
-have occurred up until that point from transaction executions. This means that it includes all created accounts, contract code,
-contract data, and anything else that was created or modified on the blockchain.
+快照是在特定时间点捕获区块链状态。它包括所有变化的总和
+从事务执行到那时已经发生。这意味着它包括所有创建的账户、合约代码、
+合同数据，以及在区块链上创建或修改的任何其他内容。
 
-It does not however include the blockchain history. This means that it does not include the transactions themselves. These
-are stored in the `blocks.log` file. 
+但是，它不包括区块链历史。这意味着它不包括交易本身。这些
+存储在 `blocks.log` 文件。
 
-## Syncing a fresh node
+## 同步新节点
 
-To speed up the syncing process, you can download a snapshot and import it into your node. This will allow you to skip
-parts of the process that would otherwise take longer.
+为了加快同步过程，您可以下载快照并将其导入您的节点。这将允许您跳过
+否则需要更长时间的流程部分。
 
-### Required configuration
+### 需要的配置
 
-You should have the following plugins enabled in your `config.ini` file:
+您应该在您的 `config.ini` 文件：
 
 ```ini
 plugin = eosio::chain_plugin
@@ -28,99 +28,99 @@ plugin = eosio::producer_api_plugin
 plugin = eosio::state_history_plugin
 ```
 
-### Getting a snapshot
+### 获取快照
 
-Below are some sites where you can download a recent snapshot:
+以下是一些可以下载最新快照的站点：
 
-- [EOS Nation](https://snapshots.eosnation.io/)
-- [EOS Sweden](https://snapshots-main.eossweden.org/)
+- [EOS国家](https://snapshots.eosnation.io/)
+- [EOS 瑞典](https://snapshots-main.eossweden.org/)
 
-### Before you start
+＃＃＃ 在你开始之前
 
-You should clear out your node's `data/state` directory. 
+你应该清除你的节点 `data/state` 目录。
 
-### Importing the snapshot
+### 导入快照
 
-Now you can import the snapshot into your node:
+现在您可以将快照导入您的节点：
 
 ```shell
 nodeos --snapshot /path/to/snapshot.bin
 ```
 
-> ⚠ **Warning**
-> 
-> Do not stop the node until it has received at least 1 block from the network, or it won't be able to restart.
+> ⚠ **警告**
+>
+> 在从网络收到至少 1 个区块之前不要停止节点，否则它将无法重新启动。
 
-### If your node fails to receive blocks
+### 如果你的节点接收块失败
 
-If nodeos fails to receive blocks from the network, then try using `cleos net disconnect` 
-and `cleos net connect` to reconnect nodes which timed out.
+如果 nodeos 无法从网络接收块，请尝试使用 `cleos net disconnect` 
+和 `cleos net connect` 重新连接超时的节点。
 
-> ⚠ **Warning**
-> 
-> Caution when using `net_api_plugin`. Either use a firewall to block access to your `http-server-address`, or change 
-> it to `localhost:8888` to disable remote access.
+> ⚠ **警告**
+>
+> 使用时注意 `net_api_plugin`.要么使用防火墙来阻止访问您的 `http-server-address`, 或改变
+> 它到 `localhost:8888` 禁用远程访问。
 
-### Using a database filler
+### 使用数据库填充器
 
-If you are using a database filler, you need to look for `Placing initial state in block <block_num>` in the log. 
+如果您使用的是数据库填充器，则需要查找 `Placing initial state in block <block_num>` 在日志中。
 
-Then you can start a filler with the following arguments:
+然后您可以使用以下参数启动填充程序：
 ```shell
 ... --fpg-create --fill-skip-to <block_num> --fill-trim
 ```
 
-**On subsequent runs, you should not use the `--fpg-create` and `--fill-skip-to` arguments.**
+**在后续运行中，您不应使用 `--fpg-create` 和 `--fill-skip-to` 参数。**
 
 
-## Creating a snapshot with full state history
+## 创建具有完整状态历史的快照
 
-Creating snapshots allows you to create a backup of your node's state. This can be useful if you want to create periodic 
-backups of your node, or if you want to create a snapshot to share with others.
+创建快照允许您创建节点状态的备份。如果你想创建周期性的，这会很有用
+备份您的节点，或者如果您想要创建快照以与他人共享。
 
-### Creating the snapshot
+### 创建快照
 
 ```shell
 curl http://127.0.0.1:8888/v1/producer/create_snapshot
 ```
 
-The command above taps into your `producer_api_plugin` and creates a snapshot. The snapshot will be saved in the
-`data/snapshots` directory.
+上面的命令进入你的 `producer_api_plugin` 并创建快照。快照将保存在
+`data/snapshots` 目录。
 
-Wait for `nodeos` to process several blocks after the snapshot completed. The goal is for the state-history files to 
-contain at least 1 more block than the portable snapshot has, and for the `blocks.log` file to contain the block after 
-it has become irreversible.
+等待 `nodeos` 在快照完成后处理几个块。目标是让状态历史文件
+包含至少比便携式快照多 1 个块，并且对于 `blocks.log` 包含块之后的文件
+它已变得不可逆转。
 
-> ⚠ **Warning**
-> 
-> If the block included in the portable snapshot is forked out, then the snapshot will be invalid. Repeat this process if this happens.
+> ⚠ **警告**
+>
+> 如果便携式快照中包含的块被分叉出来，则快照将无效。如果发生这种情况，请重复此过程。
 
-### Collecting the other files
+### 收集其他文件
 
-The snapshot created above only contains the state at the time of capture. It does not include the blockchain history.
+上面创建的快照只包含捕获时的状态。它不包括区块链历史。
 
-To create a full package that you can use to quickly sync a node, you need to collect the following files:
-- The contents of `data/state-history`
+要创建可用于快速同步节点的完整包，您需要收集以下文件：
+- 的内容 `data/state-history`
   - `chain_state_history.log`
   - `trace_history.log`
-  - `chain_state_history.index` - optional: Restoring will take longer without this file.
-  - `trace_history.index` - optional: Restoring will take longer without this file.
-- Optional: `data/blocks`, but excluding `data/blocks/reversible`
+  - `chain_state_history.index` - 可选：如果没有此文件，恢复将花费更长的时间。
+  - `trace_history.index` - 可选：如果没有此文件，恢复将花费更长的时间。
+- 选修的： `data/blocks`, 但不包括 `data/blocks/reversible`
 
 
-## Restoring a snapshot with full state history
+## 恢复具有完整状态历史的快照
 
-The process is almost identical to the process for syncing a fresh node. The only difference is that you need to copy
-the files from the previous section into the `data` directory before starting the node.
+该过程几乎与同步新节点的过程相同。唯一的区别是你需要复制
+将上一节中的文件放入 `data` 启动节点之前的目录。
 
-The more of the **optional** files you include, the faster the node will sync.
+您包含的**可选**文件越多，节点同步的速度就越快。
 
-## Replay / Resync with full state history
+## 重播/重新同步完整的状态历史
 
-Replaying or resyncing a node will ensure that the node is in sync with the network. This is useful if you want to 
-resync your node after a crash.
+重播或重新同步节点将确保该节点与网络同步。如果你想，这很有用
+崩溃后重新同步您的节点。
 
-You can either delete the `data/state` directory, or use the `--replay-blockchain` argument.
+您可以删除 `data/state` 目录，或使用 `--replay-blockchain` 争论。
 
 ```shell
 nodeos --replay-blockchain --snapshot /path/to/snapshot.bin

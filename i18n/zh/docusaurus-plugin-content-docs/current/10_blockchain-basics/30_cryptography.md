@@ -1,55 +1,55 @@
 ---
-title: Cryptography
+title: 密码学
 ---
 
-Cryptography is the practice of using mathematical algorithms to secure information and communications. 
-It is a fundamental part of modern technology and plays an integral role in blockchain technology.
+密码学是使用数学算法来保护信息和通信的实践。
+它是现代技术的基础部分，在区块链技术中发挥着不可或缺的作用。
 
-## How is cryptography used in a blockchain?
+## 如何在区块链中使用密码学？
 
-All interactions with a blockchain are secured using cryptography. This prevents the interactions from being tampered with or altered.
-Blocks that make up the blockchain are also signed by the nodes that produce them, which allows other nodes to verify
-that they came from a valid source.
+与区块链的所有交互都使用密码学进行保护。这可以防止交互被篡改或更改。
+组成区块链的区块也由产生它们的节点签名，这允许其他节点验证
+他们来自一个有效的来源。
 
-## What are hashes?
+## 什么是哈希？
 
-Hashes are unique digital fingerprints generated from input data using complex mathematical algorithms. 
-Hashes are one-way functions, which means that it's practically impossible to reverse-engineer the input data from the hash output.
+哈希是使用复杂的数学算法从输入数据生成的唯一数字指纹。
+散列是单向函数，这意味着实际上不可能从散列输出中对输入数据进行逆向工程。
 
-## What are keys?
+## 什么是键？
 
-There are two types of keys used in blockchain technology: public keys and private keys.
+区块链技术中使用了两种类型的密钥：公钥和私钥。
 
-The two keys are directly linked to each other, but you can only derive the public key from the private key, not the other way around.
-This means that you can share your public key with others safely, but should **never** share your private key with anyone.
+这两个密钥直接相互关联，但你只能从私钥中推导出公钥，而不是反过来。
+这意味着您可以安全地与他人共享您的公钥，但**切勿**与任何人共享您的私钥。
 
-### Public Keys
+### 公钥
 
-Public keys are like your digital address. They are used to identify you on a blockchain, and can be shared with others safely.
+公钥就像您的数字地址。它们用于在区块链上识别您的身份，并可以安全地与他人共享。
 
-### Private Keys
+### 私钥
 
-Private keys are like your digital pen. They can sign information to prove that it came from you, and the signature can be 
-traced back to your public key. Private keys should be kept secret at all times, as anyone who has access to your private key
-can sign transactions on your behalf, effectively stealing your identity (and everything you own on the blockchain).
+私钥就像您的数字笔。他们可以签署信息以证明它来自您，并且签名可以是
+追溯到您的公钥。私钥应始终保密，因为任何有权访问您的私钥的人
+可以代表你签署交易，有效地窃取你的身份（以及你在区块链上拥有的一切）。
 
 
-## What are signatures?
+## 什么是签名？
 
-Signatures are the backbone of blockchain security. They are used to prove that a transaction came from a specific account,
-and that the transaction has not been tampered with. If someone tried to alter the data of a transaction, the signature would
-become invalid and the transaction would be rejected by the network.
+签名是区块链安全的支柱。它们用于证明交易来自特定帐户，
+并且交易没有被篡改。如果有人试图更改交易数据，签名将
+变得无效，交易将被网络拒绝。
 
-## What is encryption?
+## 什么是加密？
 
-Encryption is the process of encoding information so that only authorized parties can access it. It is used to protect sensitive
-data which is stored on private networks. You use encryption every day without noticing it every time you visit a website. 
-Even this website uses encryption to protect your connection so that no one can intercept the data as it comes from the server to 
-your browser and vice versa.
+加密是对信息进行编码的过程，以便只有授权方才能访问它。它用于保护敏感
+存储在专用网络上的数据。您每天都在使用加密，但每次访问网站时都没有注意到它。
+甚至这个网站也使用加密来保护您的连接，这样就没有人可以拦截来自服务器的数据
+您的浏览器，反之亦然。
 
-> ⚠ **Warning:**
-> 
-> Never store encrypted data on a blockchain if it contains sensitive information. Blockchains are public by nature, and anyone
-> can view the contents of a transaction. This means that any encrypted data stored on a blockchain can be viewed by anyone.
-> Encryption algorithms become obsolete over time as computers become more powerful, so it is innevitable that the data will
-> eventually be decrypted and exposed to the public.
+> ⚠ **警告：**
+>
+> 如果加密数据包含敏感信息，切勿将其存储在区块链上。区块链本质上是公开的，任何人
+> 可以查看交易内容。这意味着任何人都可以查看存储在区块链上的任何加密数据。
+> 随着计算机变得越来越强大，加密算法会随着时间的推移而过时，因此数据不可避免地会丢失
+> 最终被解密并公之于众。

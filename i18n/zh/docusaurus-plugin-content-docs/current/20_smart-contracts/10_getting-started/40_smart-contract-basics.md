@@ -1,43 +1,45 @@
-# Smart Contracts Basics
+--- 
+title: 智能合约基础
+---
 
-A smart contract is a program that runs on the blockchain. It allows you to add functionality to an account ranging from simple ones like a todo application to a fully-fledged RPG game which runs entirely on the blockchain.
+智能合约是运行在区块链上的程序。它允许您向帐户添加功能，从简单的待办事项应用程序到完全在区块链上运行的成熟 RPG 游戏。
 
-This guide will show you how to develop a basic EOS smart contract with **DUNE** and with the C++ programming language.
+本指南将向您展示如何使用 **DUNE** 和 C++ 编程语言开发基本的 EOS 智能合约。
 
-## Preparation Steps
+##准备步骤
 
-### Create the Contract Account
+### 创建合约账户
 
-To deploy a smart contract you need an account to deploy it to. Create an account `hello` with the following command:
+要部署智能合约，您需要一个帐户来部署它。创建一个帐户 `hello` 使用以下命令：
 
 ```shell
 dune --create-account hello
 ```
 
-### Create the Test Account
+### 创建测试账号
 
-Create a second account, `ama`, for test purposes.
+创建第二个帐户， `ama`, 用于测试目的。
 
 ```shell
 dune --create-account ama
 ```
 
-### DUNE
+###沙丘
 
-To develop the smart contract you will use the Docker Utilities for Node Execution (DUNE) which is a tool that allows you to perform the functions of node management, compile smart contracts, and several other common tasks required to develop smart contracts on EOS blockchains.
+要开发智能合约，您将使用 Docker Utilities for Node Execution (DUNE)，该工具允许您执行节点管理功能、编译智能合约以及在 EOS 区块链上开发智能合约所需的其他几个常见任务。
 
-Make sure you have DUNE installed. Otherwise follow the [DUNE development setup](../10_getting-started/10_dune-guide.md#installation) documentation.
+确保你已经安装了 DUNE。否则遵循 [DUNE 开发设置](../10_getting-started/10_dune-guide.md#installation) 文档。
 
-## Create the Smart Contract
+## 创建智能合约
 
-To create the smart contract you need to:
+要创建智能合约，您需要：
 
-1. Create a DUNE basic application.
-2. Extend the application to perform the custom actions you want to.
-3. Build the DUNE application which outputs the smart contract.
-4. Deploy the smart contract resulted from building the application.
+1.创建一个DUNE基础应用。
+2. 扩展应用程序以执行您想要的自定义操作。
+3. 构建输出智能合约的 DUNE 应用程序。
+4.部署构建应用程序产生的智能合约。
 
-### Create the DUNE Application
+### 创建 DUNE 应用程序
 
 ```shell
 dune --create-cmake-app hello .
@@ -45,49 +47,49 @@ cd hello
 ls
 ```
 
-The result of this command is a `hello` directory with the following structure:
+该命令的结果是 `hello` 具有以下结构的目录：
 
-- CMakeLists.txt, cmake configuration file.
-- README.txt, a text file which contains information about how to build this application with cmake.
-- build, the output build folder, at the beginning is empty.
-- include, the C++ include files folder, at the beginning it contains just hello.hpp file.
-- ricardian, the folder contains the smart contract ricardian definition, hello.contracts.md file.
-- src, the C++ implementation files folder, at the beginning it contains just hello.cpp file.
+- CMakeLists.txt，cmake 配置文件。
+- README.txt，一个文本文件，其中包含有关如何使用 cmake 构建此应用程序的信息。
+- build，输出build文件夹，一开始是空的。
+- include，C++ include 文件夹，一开始它只包含 hello.hpp 文件。
+- 李嘉图，该文件夹包含智能合约李嘉图定义，hello.contracts.md 文件。
+- src，C++ 实现文件文件夹，开始时它只包含 hello.cpp 文件。
 
-### Build the DUNE Application
+### 构建 DUNE 应用程序
 
-To build the DUNE cmake application run the following command:
+要构建 DUNE cmake 应用程序，请运行以下命令：
 
 ```shell
 dune --cmake-build <PATH_TO_CMakeLists.txt_PARENT_DIR>
 ls <PATH_TO_CMakeLists.txt_PARENT_DIR>/build/hello
 ```
 
-The result of the above build command are two files located in the `./build/hello/` folder:
+上述构建命令的结果是两个文件位于 `./build/hello/` 文件夹：
 
-- hello.wasm, the WebAssembly binary file for the smart contract.
-- hello.abi, the application binary interface (ABI) file for the smart contract.
+- hello.wasm，智能合约的 WebAssembly 二进制文件。
+- hello.abi，智能合约的应用程序二进制接口 (ABI) 文件。
 
-### Deploy the Smart Contract
+### 部署智能合约
 
-Execute the following command to deploy the `hello` smart contract to the `hello` account:
+执行以下命令部署 `hello` 智能合约到 `hello` 帐户：
 
 ```shell
 dune --deploy <PATH_TO_CMakeLists.txt_PARENT_DIR>/build/hello
 ```
 
-## Smart Contract Source Files
+## 智能合约源文件
 
-The smart contract C++ source files are:
+智能合约C++源文件为：
 
-- hello.hpp
-- hello.cpp
+- 你好.hpp
+- 你好.cpp
 
-### The hpp File
+### hpp 文件
 
-In C++ programming, a `.hpp` file is a header file that contains declarations of classes, functions, variables, and other entities that are intended to be used in other parts of the program. The `.hpp` file is typically included in a source code file (`.cpp`) using the #include preprocessor directive.
+在 C++ 编程中，一个 `.hpp` 文件是一个头文件，其中包含类、函数、变量和其他实体的声明，这些实体旨在用于程序的其他部分。这 `.hpp` 文件通常包含在源代码文件中（`.cpp`) 使用 #include 预处理器指令。
 
-The `hello.hpp` contains the `hello` smart contract C++ class declaration.
+这 `hello.hpp` 包含 `hello` 智能合约 C++ 类声明。
 
 ```cpp
 #include <eosio/eosio.hpp>
@@ -101,28 +103,28 @@ CONTRACT hello : public contract {
 };
 ```
 
-A smart contract class declaration must:
+智能合约类声明必须：
 
-- Be annotated by the [[eosio::contract]] attribute which tells the compiler it is a smart contract class; in the `hello.hpp` generated code the `CONTRACT` `macro` is used, which expands to `class [[eosio::contract]]` C++ code at compilation time.
-- Be derived from the `contract` class which provides basic smart contract functionality.
-- Define at least a public action function.
+- 由 [[eosio::contract]] 属性注释，告诉编译器它是一个智能合约类；在里面 `hello.hpp` 生成代码 `CONTRACT` `macro` 被使用，它扩展到 `class [[eosio::contract]]` 编译时的 C++ 代码。
+- 源自 `contract` 提供基本智能合约功能的类。
+- 至少定义一个公共行为函数。
 
-> ℹ️ **C++ Macro**   
-In C++, a `macro` is a way to define a shorthand for a piece of code or a value. When the `macro` is used in the code, the preprocessor automatically replaces it with its corresponding definition before the code is compiled. This can help to make the code more readable and maintainable by reducing repetition and increasing abstraction.
+> ℹ️ **C++ 宏**
+在 C++ 中，一个 `macro` 是一种为一段代码或一个值定义速记的方法。当。。。的时候 `macro` 在代码中使用时，预处理器会在编译代码之前自动将其替换为相应的定义。这可以通过减少重复和增加抽象来帮助使代码更具可读性和可维护性。
 
-You will learn more about actions later.
+稍后您将了解有关操作的更多信息。
 
-### The cpp File
+### .cpp 文件
 
-In C++ programming, a `.cpp` file is a source code file that contains C++ code. The `.cpp` file is one of the most important files in a C++ project, as it contains the actual implementation of the code that performs the desired functionality.
+在 C++ 编程中，一个 `.cpp` 文件是包含 C++ 代码的源代码文件。这 `.cpp` 文件是 C++ 项目中最重要的文件之一，因为它包含执行所需功能的代码的实际实现。
 
-The `hello.cpp` file contains the `hello` smart contract C++ class implementation for every member function of the class.
+这 `hello.cpp` 文件包含 `hello` 类的每个成员函数的智能合约 C++ 类实现。
 
-## Actions
+## 动作
 
-An action is a method, defined and implemented by a smart contract class. Actions can have parameters and return values and their responsibility is to execute the business logic of the contract. They can be called by other contracts or by external accounts with the EOS Chain API. Each action may require a specific level of authorization, which can be specified in the action's code.
+动作是一种方法，由智能合约类定义和实现。动作可以有参数和返回值，它们的职责是执行合约的业务逻辑。它们可以被其他合约或外部账户使用 EOS Chain API 调用。每个操作可能需要特定级别的授权，这可以在操作的代码中指定。
 
-The `hello` smart contract class has only one action implemented by its `hi` public member function.
+这 `hello` 智能合约类只有一个动作由其实现 `hi` 公共成员函数。
 
 ```cpp
 #include <hello.hpp>
@@ -133,45 +135,45 @@ ACTION hello::hi( name nm ) {
 }
 ```
 
-The function that implements a smart contract action must be annotated by the `[[eosio::action("action.name")]]` attribute. The `action.name` is optional and if not specified then the action is named by the function name that implements it.
-In the `hello.cpp` generated code the `ACTION` macro is used which expands to `[[eosio::action]] void` C++ code at compilation time.
+实现智能合约动作的函数必须由 `[[eosio::action("action.name")]]` 属性。这 `action.name` 是可选的，如果未指定，则操作由实现它的函数名称命名。
+在里面 `hello.cpp` 生成代码 `ACTION` 使用宏扩展为 `[[eosio::action]] void` 编译时的 C++ 代码。
 
-The name of the action must:
+操作名称必须：
 
-- Be no longer than 13 characters.
-- Contain only `.`, `a`-`z`, or `1`-`5` characters.
-- Not end with `.`.
+- 不超过 13 个字符。
+- 仅包含 `.`, `a`-`z`， 或者 `1`-`5` 人物。
+- 不结束 `.`.
 
-Note that when you use the `ACTION` macro the action name is the same as the function name that implements it. Because of that the action name inherits the limitations of the C++ function names as well, which means it can not have `.` in it.
-If you use the `[[eosio::action("action.name")]]` attribute you can name the action differently than the function name that implements it.
+请注意，当您使用 `ACTION` 宏动作名称与实现它的函数名称相同。因为动作名称也继承了 C++ 函数名称的限制，这意味着它不能有 `.` 在里面。
+如果您使用 `[[eosio::action("action.name")]]` 属性，您可以为操作命名，而不是实现它的函数名称。
 
-### Send Action
+### 发送操作
 
-Send the `hi` action to the local node and set as input parameter the `ama` test account name:
+发送 `hi` 对本地节点的操作并将其设置为输入参数 `ama` 测试帐号名称：
 
 ```shell
 dune --send-action hello hi '[ama]' hello@active
 ```
 
-The output of the command above shows on one line that `hello::hi` action was executed with the input parameter `{"nm":"ama"}` and on the second line the output of the action itself `Name: ama`.
+上面命令的输出显示在一行中 `hello::hi` 使用输入参数执行操作 `{"nm":"ama"}` 在第二行是动作本身的输出 `Name: ama`.
 
 ```txt
 #         hello <= hello::hi   {"nm":"ama"}
 >> Name : ama
 ```
 
-## Inline Actions
+## 内联动作
 
-An inline action is initiated by a smart contract action and is executed within the same transaction as the parent action. Inline actions are useful in situations where a smart contract action needs to interact with another smart contract. Instead of making an external call to the other contract, which could potentially result in a new transaction, the action can be executed inline within the same transaction. If any part of the transaction fails, the inline action will unwind with the rest of the transaction.
+内联动作由智能合约动作发起，并在与父动作相同的事务中执行。在智能合约操作需要与另一个智能合约交互的情况下，内联操作很有用。无需对其他合约进行外部调用（这可能会导致新交易），该操作可以在同一交易中内联执行。如果事务的任何部分失败，内联操作将与事务的其余部分一起展开。
 
-The easiest way to execute an inline action is to use `SEND_INLINE_ACTION` macro.
+执行内联操作的最简单方法是使用 `SEND_INLINE_ACTION` 宏。
 
-### Send Inline Action
+### 发送内联操作
 
-Let's extend the hello smart contract to:
+让我们将 hello 智能合约扩展为：
 
-- Implement a new action called `inlineaction` which prints a message at the console.
-- Modify the `hi` action to send an inline `inlineaction` action to the blockchain.
+- 实施一项名为 `inlineaction` 在控制台打印一条消息。
+- 修改 `hi` 发送内联的动作 `inlineaction` 对区块链的行动。
 
 ```hpp
 #include <eosio/eosio.hpp>
@@ -200,14 +202,14 @@ ACTION hello::inlineaction() {
 }
 ```
 
-The `SEND_INLINE_ACTION` macro third parameter uses the `_n()` string operator to convert `"active"` string into a `name` object. `"active"_n` is a shortcut for `name("active")`. And `name` is an EOS built-in type. You will learn more about built-in types later in this guide.
+这 `SEND_INLINE_ACTION` 宏的第三个参数使用 `_n()` 要转换的字符串运算符 `"active"` 串成一个 `name` 目的。 `"active"_n` 是一个捷径 `name("active")`.和 `name` 是 EOS 内置类型。您将在本指南的后面部分了解有关内置类型的更多信息。
 
-> ℹ️ **C++ Operator**   
-In C++ programming, an operator is a symbol or keyword used to perform operations on variables or values. Examples of operators in C++ include arithmetic operators (+, -, *, /), assignment operators (=, +=, -=, *=, /=), comparison operators (==, !=, <, >, <=, >=), logical operators (&&, ||, !), and many others.
+> ℹ️ **C++ 运算符**
+在 C++ 编程中，运算符是用于对变量或值执行操作的符号或关键字。 C++ 中的运算符示例包括算术运算符（+、-、*、/）、赋值运算符（=、+=、-=、*=、/=）、比较运算符（==、!=、<、>、< =、>=）、逻辑运算符（&&、||、!）和许多其他运算符。
 
-Build the smart contract again and deploy it to the local node as you did previously.
+再次构建智能合约并像之前一样将其部署到本地节点。
 
-Send a `hi` action to the local node and observe that both `hi` and `inlineactions` actions are executed.
+寄一个 `hi` 对本地节点采取行动并观察两者 `hi` 和 `inlineactions` 动作被执行。
 
 ```shell
 dune --send-action hello hi '[ama]' hello@active
@@ -220,88 +222,88 @@ dune --send-action hello hi '[ama]' hello@active
 >> Inline action message.
 ```
 
-## Built-in Types
+## 内置类型
 
-EOS supports several C++ data types for developing smart contracts. Developers can use these types to define data structures and write functions that interact with the EOS blockchain and smart contract system.
+EOS 支持多种用于开发智能合约的 C++ 数据类型。开发人员可以使用这些类型来定义数据结构并编写与 EOS 区块链和智能合约系统交互的函数。
 
-This is the full list of built-in types:
+这是内置类型的完整列表：
 
-| Integral Types | Description |
+|积分类型 |说明 |
 | --- | --- |
-| Header file to include | `<eosio/eosio.hpp>` |
-| `bool` | Boolean (true/false) |
-| `int8_t` | Signed 8-bit integer |
-| `uint8_t` | Unsigned 8-bit integer |
-| `int16_t` | Signed 16-bit integer |
-| `uint16_t` | Unsigned 16-bit integer |
-| `int32_t` | Signed 32-bit integer |
-| `uint32_t` | Unsigned 32-bit integer |
-| `int64_t` | Signed 64-bit integer |
-| `uint64_t` | Unsigned 64-bit integer |
-| `int128_t` | Signed 128-bit integer |
-| `uint128_t` | Unsigned 128-bit integer |
-| Header file to include | `<eosio/varint.hpp>` |
-| `signed_int` | Variable-length signed 32-bit integer |
-| `unsigned_int` | Variable-length unsigned 32-bit integer |
+|要包含的头文件 | `<eosio/eosio.hpp>` |
+| `bool` |布尔值（真/假） |
+| `int8_t` |有符号 8 位整数 |
+| `uint8_t` |无符号 8 位整数 |
+| `int16_t` |有符号 16 位整数 |
+| `uint16_t` |无符号 16 位整数 |
+| `int32_t` |有符号 32 位整数 |
+| `uint32_t` |无符号 32 位整数 |
+| `int64_t` |有符号 64 位整数 |
+| `uint64_t` |无符号 64 位整数 |
+| `int128_t` |有符号 128 位整数 |
+| `uint128_t` |无符号 128 位整数 |
+|要包含的头文件 | `<eosio/varint.hpp>` |
+| `signed_int` |可变长度有符号 32 位整数 |
+| `unsigned_int` |可变长度无符号 32 位整数 |
 
-| Float Types | Description |
+|浮动类型 |说明 |
 | --- | --- |
-| Header file to include | `<eosio/eosio.hpp>` |
-| `float` | 32-bit floating-point number |
-| `double` | 64-bit floating-point number |
+|要包含的头文件 | `<eosio/eosio.hpp>` |
+| `float` | 32 位浮点数 |
+| `double` | 64 位浮点数 |
 
-| Time Types | Description |
+|时间类型 |说明 |
 | --- | --- |
-| Header file to include | `<eosio/eosio.hpp>` |
-| `time_point` | Point in time |
-| `time_point_sec` | Point in time with second precision |
-| `block_timestamp_type` | Block timestamp |
+|要包含的头文件 | `<eosio/eosio.hpp>` |
+| `time_point` |时间点 |
+| `time_point_sec` |秒级精度的时间点 |
+| `block_timestamp_type` |区块时间戳 |
 
-| Name Type | Description |
+|姓名类型 |说明 |
 | --- | --- |
-| Header file to include | `<eosio/eosio.hpp>` |
-| `name` | Account name |
+|要包含的头文件 | `<eosio/eosio.hpp>` |
+| `name` |账户名 |
 
-| Blob Types | Description |
+|斑点类型 |说明 |
 | --- | --- |
-| Header file to include | `<eosio/eosio.hpp>` |
-| `bytes` | Raw byte sequence |
-| `string` | String |
+|要包含的头文件 | `<eosio/eosio.hpp>` |
+| `bytes` |原始字节序列 |
+| `string` |字符串 |
 
-| Checksum Types | Description |
+|校验和类型 |说明 |
 | --- | --- |
-| Header file to include | `<eosio/eosio.hpp>` |
-| `checksum160` | 160-bit checksum |
-| `checksum256` | 256-bit checksum |
-| `checksum512` | 512-bit checksum |
+|要包含的头文件 | `<eosio/eosio.hpp>` |
+| `checksum160` | 160 位校验和 |
+| `checksum256` | 256 位校验和 |
+| `checksum512` | 512 位校验和 |
 
-| Cryptography Types | Description |
+|密码学类型 |说明 |
 | --- | --- |
-| Header file to include | `<eosio/crypto.hpp>` |
-| `public_key` | Public key |
-| `signature` | Signature |
+|要包含的头文件 | `<eosio/crypto.hpp>` |
+| `public_key` |公钥 |
+| `signature` |签名 |
 
-| Asset Types | Description |
+|资产类型 |说明 |
 | --- | --- |
-| Header file to include | `<eosio/asset.hpp>` |
-| `symbol` | Asset symbol |
-| `symbol_code` | Asset symbol code |
-| `asset` | Asset |
-| `extended_asset` | Asset with extended precision |
+|要包含的头文件 | `<eosio/asset.hpp>` |
+| `symbol` |资产符号 |
+| `symbol_code` |资产代码 |
+| `asset` |资产 |
+| `extended_asset` |具有扩展精度的资产 |
 
-## Multi-index Tables
+## 多索引表
 
-A multi-index table is a database-like data structure that allows developers to store and manage data in a persistent and efficient manner. Multi-index tables are defined using the `TABLE` macro, and can store any number of rows, each of which contains a set of related data elements.
+多索引表是一种类似于数据库的数据结构，允许开发人员以持久有效的方式存储和管理数据。多索引表是使用 `TABLE` 宏，并且可以存储任意数量的行，每行包含一组相关的数据元素。
 
-Extend the `hello` contract:
+延长 `hello` 合同：
 
-- Add the `userdata` table declaration.
-- Add `createrow` action which creates a new non-admin user.
-- Add `readrow` action which reads a user's data.
-- Add `updaterow` action which updates an existing user's data.
-- Add `deleterow` action which deletes an existing user's data.
+- 添加 `userdata` 表声明。
+- 添加 `createrow` 创建新的非管理员用户的操作。
+- 添加 `readrow` 读取用户数据的操作。
+- 添加 `updaterow` 更新现有用户数据的操作。
+- 添加 `deleterow` 删除现有用户数据的操作。
 
-The hello.hpp file can look like this:
+hello.hpp 文件可能如下所示：
 
 ```cpp
 #include <eosio/eosio.hpp>
@@ -333,42 +335,42 @@ CONTRACT hello : public contract {
 };
 ```
 
-The code above defines a `user_data_table` type, which is a type of a table with name `userdata`, that stores rows defined by the `user_data` structure. The structure contains two fields: the account `name`, and a boolean which says if a user is admin. The `primary_key()` inline method defines the primary key for the table, which in this case is the user's account name represented as a 64-bit unsigned integer value.
+上面的代码定义了一个 `user_data_table` 类型，这是一种具有名称的表 `userdata`，它存储由定义的行 `user_data` 结构。该结构包含两个字段：帐户 `name`和一个布尔值，表示用户是否是管理员。这 `primary_key()` inline 方法定义表的主键，在本例中是用 64 位无符号整数值表示的用户帐户名。
 
-The name of a multi-index table has the same restrictions as the name of an action.
+多索引表的名称与动作的名称具有相同的限制。
 
-### Multi-index: Instantiate with Code and Scope
+### 多索引：使用代码和范围实例化
 
-Developers can use the `user_data_table` type to instantiate a reference **within** the table and perform various operations on that table, such as:
+开发人员可以使用 `user_data_table` 类型以在表中实例化引用**并对该表执行各种操作，例如：
 
-- query the table for specific data,
-- insert new rows,
-- modify existing rows,
-- delete existing rows.
+- 查询特定数据的表，
+- 插入新行，
+- 修改现有行，
+- 删除现有行。
 
-This is how you define a reference within the table with name `userdata`:
+这就是您在表中定义引用的方式 `userdata`:
 
 ```cpp
 user_data_table users(get_self(), get_self().value);
 ```
 
-The first parameter is the `code` parameter, and the second one is the `scope`.
+第一个参数是 `code` 参数，第二个是 `scope`.
 
-- The `code` (`name`) is the account that owns the smart contract (and the table).
+- 这 `code` (`name`) 是拥有智能合约（和表）的帐户。
 
-- The `scope` (`integer`) is used to group related data within the multi-index table. To group all related data within the same contract, the scope is often set as the contract account itself.
+- 这 `scope` (`integer`) 用于对多索引表中的相关数据进行分组。为了将所有相关数据分组在同一个合约中，范围通常设置为合约账户本身。
 
-In the code above, the `code`, is initialized with the `get_self()`, which returns the account the contract is deployed on. The `scope`, is initialized with the `get_self().value`, which returns the numerical representation of the account name.
+在上面的代码中， `code`, 初始化为 `get_self()`，它返回部署合约的帐户。这 `scope`, 初始化为 `get_self().value`，它返回帐户名称的数字表示。
 
-Note that these two parameters allow you to access different table `instances` of the same table `type`. For example, for the same `code` parameter you can access different tables of the same type by using different values for the second parameter `scope`. All these tables belong to the account set for the same `code` parameter.
+请注意，这两个参数允许您访问不同的表 `instances` 同桌的 `type`.例如，对于同一个 `code` parameter 您可以通过为第二个参数使用不同的值来访问相同类型的不同表 `scope`.所有这些表都属于同一帐户集 `code` 范围。
 
-Another way to see it is that the `users` object is a reference within the table with name `userdata` (which is of type `user_data_table`). This reference is an address within the RAM storage space, allocated for this table, where the table rows are saved for the `code` and `scope` defined (the `get_self()` and `get_self().value`). The number of tables within the `userdata` table is equal to the number of (`code`, `scope`) pairs used to instantiate table references.
+另一种看待它的方式是 `users` 对象是具有名称的表中的引用 `userdata` （这是类型 `user_data_table`).这个引用是RAM存储空间中的一个地址，分配给这个表，表行保存在这里 `code` 和 `scope` 定义（的 `get_self()` 和 `get_self().value`).内的表数 `userdata` 表等于（`code`, `scope`) 对用于实例化表引用。
 
-Next implement each action declared in the `hello.hpp` file. Open the `hello.cpp` file and copy and paste the following functions implementations.
+接下来执行在 `hello.hpp` 文件。打开 `hello.cpp` 文件并复制并粘贴以下功能实现。
 
-### Multi-index: Create Row
+### 多索引：创建行
 
-This is how to create a row in the `user_data_table`:
+这是如何在 `user_data_table`:
 
 ```cpp
 ACTION hello::createrow(name nm) {
@@ -389,11 +391,11 @@ ACTION hello::createrow(name nm) {
 }
 ```
 
-The code above uses the `emplace` method to insert a new user into the table.
+上面的代码使用了 `emplace` 向表中插入新用户的方法。
 
-### Multi-index: Read Row
+### 多索引：读取行
 
-This is how to query the `user_data_table` based on its primary key:
+这是查询的方法 `user_data_table` 基于其主键：
 
 ```cpp
 ACTION hello::readrow(name nm) {
@@ -414,9 +416,9 @@ ACTION hello::readrow(name nm) {
 }
 ```
 
-### Multi-index: Modify Row
+### 多索引：修改行
 
-This is how to modify an existing row in the `user_data_table`:
+这是修改现有行的方法 `user_data_table`:
 
 ```cpp
 ACTION hello::updaterow(name nm, bool is_admin) {
@@ -435,9 +437,9 @@ ACTION hello::updaterow(name nm, bool is_admin) {
 }
 ```
 
-### Multi-index: Delete Row
+### 多索引：删除行
 
-This is how to delete an entity from the `user_data_table`:
+这是从中删除实体的方法 `user_data_table`:
 
 ```cpp
 ACTION hello::deleterow(name nm) {
@@ -454,9 +456,9 @@ ACTION hello::deleterow(name nm) {
 }
 ```
 
-### Multi-index: Test
+### 多指标：测试
 
-Build and deploy again the smart contract, send the `createrow` action a couple of times and observe the results:
+再次构建并部署智能合约，发送 `createrow` 操作几次并观察结果：
 
 ```shell
 dune --send-action hello createrow '[ama]' hello@active
@@ -476,9 +478,9 @@ dune --send-action hello createrow '[ama]' hello@active
 >> User already exists.
 ```
 
-Note how the first action created the a non-admin user `ama` and the second one did not because the user already existed.
+请注意第一个操作是如何创建非管理员用户的 `ama` 第二个没有，因为用户已经存在。
 
-Read the `ama` user data:
+阅读 `ama` 用户数据：
 
 ```shell
 dune --send-action hello readrow '[ama]' hello@active
@@ -489,7 +491,7 @@ dune --send-action hello readrow '[ama]' hello@active
 >> User non-admin ama found.
 ```
 
-Make the user `ama` admin:
+让用户 `ama` 行政：
 
 ```shell
 dune --send-action hello updaterow '[ama, 1]' hello@active
@@ -500,7 +502,7 @@ dune --send-action hello updaterow '[ama, 1]' hello@active
 >> User ama is_admin was set to true.
 ```
 
-Delete the user `ama`:
+删除用户 `ama`:
 
 ```shell
 dune --send-action hello deleterow '[ama]' hello@active
@@ -511,13 +513,13 @@ dune --send-action hello deleterow '[ama]' hello@active
 >> User erased.
 ```
 
-## Singleton
+## 单例
 
-A singleton is a special multi-index table that is designed to store a single row of data for each instance of the singleton type. Singletons are often used to store global state variables or configuration parameters in a contract.
+单例是一种特殊的多索引表，旨在为单例类型的每个实例存储一行数据。单例通常用于在合约中存储全局状态变量或配置参数。
 
-It is important to remember the explanation of code and scope. When you instantiate a singleton, you can keep the code parameter fixed, and vary the scope parameter. This way you save one item per scope, and thus for example, you can store per-account configs.
+记住代码和范围的解释很重要。当你实例化一个单例时，你可以保持 code 参数固定，改变 scope 参数。通过这种方式，您可以为每个范围保存一个项目，因此，例如，您可以存储每个帐户的配置。
 
-Here's an example of a singleton declaration:
+这是单例声明的示例：
 
 ```cpp
 TABLE statsdata {
@@ -526,37 +528,37 @@ TABLE statsdata {
 using stats_singleton = eosio::singleton<"stats"_n, statsdata>;
 ```
 
-The code above defines a singleton type `stats_singleton`. This singleton stores statistical data defined by `statsdata` structure. The structure contains the `count` data member which can hold an arbitrary integer value.
+上面的代码定义了一个单例类型 `stats_singleton`.这个单例存储由定义的统计数据 `statsdata` 结构。该结构包含 `count` 可以保存任意整数值的数据成员。
 
-Developers can use the `stats_singleton` template type, to instantiate a reference of the singleton table and to perform various operations, such as:
+开发人员可以使用 `stats_singleton` 模板类型，实例化单例表的引用并执行各种操作，例如：
 
-- read the singleton data,
-- modify existing singleton data,
-- delete existing singleton data.
+- 读取单例数据，
+- 修改现有的单例数据，
+- 删除现有的单例数据。
 
-### Singleton: Instantiate with Code and Scope
+### 单例：使用代码和范围实例化
 
-The code and scope have the same meaning as for the [multi-index table](#multi-index-code-and-scope).
-This is how you instantiate a reference within the singleton with name `stats`. The `code` and `scope` are set as the contract owner account:
+代码和范围与 [多索引表](#multi-index-code-and-scope).
+这就是您在具有名称的单例中实例化引用的方式 `stats`.这 `code` 和 `scope` 被设置为合约所有者帐户：
 
 ```cpp
    stats_singleton stats(get_self(), get_self().value);
 ```
 
-Extend the `hello` contract to:
+延长 `hello` 承包给：
 
-- Add the singleton `stats`.
-- Add `updatestats` action which updates the stats with a given value.
-- Add `readstats` action which reads the stats stored in the singleton.
-- Add `deletestats` action which deletes the stats stored in the singleton.
+- 添加单例 `stats`.
+- 添加 `updatestats` 使用给定值更新统计信息的操作。
+- 添加 `readstats` 读取存储在单例中的统计信息的操作。
+- 添加 `deletestats` 删除存储在单例中的统计信息的操作。
 
-Add the following line at the top of the `hello.hpp` file:
+在顶部添加以下行 `hello.hpp` 文件：
 
 ```cpp
 #include <eosio/singleton.hpp>
 ```
 
-Add the singleton related actions:
+添加单例相关动作：
 
 ```cpp
    ACTION updatestats(int value);
@@ -564,7 +566,7 @@ Add the singleton related actions:
    ACTION deletestats();
 ```
 
-Add the singleton definition:
+添加单例定义：
 
 ```cpp
    TABLE statsdata {
@@ -573,9 +575,9 @@ Add the singleton definition:
    using stats_singleton = eosio::singleton<"stats"_n, statsdata>;
 ```
 
-### Singleton: Modify Data
+### 单例：修改数据
 
-This is how you modify the singleton data:
+这是修改单例数据的方式：
 
 ```cpp
 ACTION hello::updatestats(int value) {
@@ -589,9 +591,9 @@ ACTION hello::updatestats(int value) {
 }
 ```
 
-### Singleton: Read Data
+### 单例：读取数据
 
-This is how you get the singleton data:
+这就是您获取单例数据的方式：
 
 ```cpp
 ACTION hello::readstats() {
@@ -607,9 +609,9 @@ ACTION hello::readstats() {
 }
 ```
 
-### Singleton: Delete Data
+### 单例：删除数据
 
-This is how you delete the singleton data:
+这是删除单例数据的方式：
 
 ```cpp
 ACTION hello::deletestats() {
@@ -625,9 +627,9 @@ ACTION hello::deletestats() {
 }
 ```
 
-### Singleton: Test
+### 单例：测试
 
-Build and deploy again the smart contract, and send the three new actions which you just added:
+再次构建并部署智能合约，并发送您刚刚添加的三个新操作：
 
 ```shell
 dune --send-action hello readstats '[]' hello@active
@@ -669,34 +671,34 @@ dune --send-action hello deletestats '[]' hello@active
 dune --send-action hello readstats '[]' hello@active
 ```
 
-Note that now stats are not initialized anymore:
+请注意，现在统计信息不再初始化：
 
 ```txt
 #         hello <= hello::getstats              ""
 >> Stats not initialized.
 ```
 
-## Indexes
+## 索引
 
-Indexes provide efficient and flexible access to data stored in the multi-index tables. An index is a specialized data structure that allows you to look up data in the table based on a certain field, or a combination of fields. Indexes can be used to optimize the performance of queries that retrieve data from the table, and can also enforce uniqueness constraints on the data (only the primary index).
+索引提供了对存储在多索引表中的数据的高效和灵活的访问。索引是一种专门的数据结构，允许您根据某个字段或字段组合在表中查找数据。索引可用于优化从表中检索数据的查询的性能，还可以对数据实施唯一性约束（仅限主索引）。
 
-EOS supports two types of indexes:
+EOS 支持两种类型的索引：
 
-- primary indexes
-- secondary indexes
+- 主要指标
+- 二级索引
 
-### Primary Indexes
+### 主索引
 
-A primary index is a unique identifier for each row in the multi-index table. It is defined explicitly using the `primary_key()` member function. This function must be defined within the `struct` that represents the table, and must return a value that uniquely identifies each row. In the `hello` smart contract we already have a primary index defined for the `user_balance` table structure definition.
+主索引是多索引表中每一行的唯一标识符。它是使用明确定义的 `primary_key()` 成员函数。该函数必须在 `struct` 表示表，并且必须返回唯一标识每一行的值。在里面 `hello` 智能合约我们已经为 `user_balance` 表结构定义。
 
 ```cpp
 uint64_t primary_key() const { return user.value; }
 ```
 
-### Secondary Indexes
+### 二级索引
 
-A secondary index is any additional field in the table's structure that can be used to efficiently search and filter the data.
-Secondary indexes may be defined on data members which are not unique as well as unique ones. There can be up to 16 secondary indexes. Secondary indices support the following types:
+二级索引是表结构中的任何附加字段，可用于有效地搜索和过滤数据。
+二级索引可以定义在不唯一以及唯一的数据成员上。最多可以有 16 个二级索引。二级索引支持以下类型：
 
 - `uint64_t`
 - `uint128_t`
@@ -704,25 +706,25 @@ Secondary indexes may be defined on data members which are not unique as well as
 - `double`
 - `long double`
 
-If you add a new secondary index to an existing multi-index table it will have an unpredictable outcome since indexes are applied at row insertion or update.
+如果您将新的二级索引添加到现有的多索引表，将会产生不可预知的结果，因为索引是在行插入或更新时应用的。
 
-### Add a Secondary Index
+### 添加二级索引
 
-You know now what secondary indexes are and how to define them.
-Extend the `hello` smart contract with two new actions:
+您现在知道什么是二级索引以及如何定义它们了。
+延长 `hello` 具有两个新操作的智能合约：
 
-- `addmsg`, which allows an account to send a message which is saved in a table and indexed by the message content.
-- `searchmsg`, which can look up a message using the secondary index defined.
+- `addmsg`，它允许一个帐户发送一条消息，该消息保存在一个表中并由消息内容索引。
+- `searchmsg`，它可以使用定义的二级索引查找消息。
 
-#### Add the Data Structure
+#### 添加数据结构
 
-At the top of the `hello.hpp` file add the following line:
+在顶部 `hello.hpp` 文件添加以下行：
 
 ```cpp
 #include <eosio/crypto.hpp>
 ```
 
-And then, after the previous table definition, add the data structure underlying the `user_messages` table:
+然后，在前面的表定义之后，添加底层的数据结构 `user_messages` 桌子：
 
 ```cpp
 TABLE user_messages {
@@ -736,14 +738,14 @@ TABLE user_messages {
 };
 ```
 
-Note in the code above:
+上面代码中注意：
 
-- The `primary_key()` method returns the `time` data member. The primary index is unique therefor must be defined over a data member which holds unique values.
-- The `message_idx()` method returns the `messagecks` data member which holds the SHA-256 hash of the `message` data.
+- 这 `primary_key()` 方法返回 `time` 数据成员。主索引是唯一的，因此必须在保存唯一值的数据成员上定义。
+- 这 `message_idx()` 方法返回 `messagecks` 保存数据的 SHA-256 散列的数据成员 `message` 数据。
 
-#### Define the Table with the Secondary Index
+#### 用二级索引定义表
 
-In the `hello.hpp` file define the `messages_table` table type with the secondary index:
+在里面 `hello.hpp` 文件定义 `messages_table` 具有二级索引的表类型：
 
 ```cpp
 using messages_table = eosio::multi_index<
@@ -753,24 +755,24 @@ using messages_table = eosio::multi_index<
     >;
 ```
 
-Note in the code above the `messages_table` is defined almost the same way as you defined earlier the `user_data_table`. What is different this time is the definition of the `"messageidx"` secondary index which is done with the `indexed_by` and `const_mem_fun` templates. The `const_mem_fun` receives three parameters:
+在上面的代码中注意 `messages_table` 的定义几乎与您之前定义的相同 `user_data_table`.这次的不同之处在于 `"messageidx"` 二级索引，它是用 `indexed_by` 和 `const_mem_fun` 模板。这 `const_mem_fun` 接收三个参数：
 
-- `user_messages`: the multi-index table structure name,
-- `checksum256`: the type of the data the index is defined for,
-- `&user_messages::message_idx`: a reference to the secondary index function defined in the struct.
+- `user_messages`：多索引表结构名，
+- `checksum256`：索引定义的数据类型，
+- `&user_messages::message_idx`：对结构中定义的二级索引函数的引用。
 
-The name of a secondary index has the same restrictions as the name of an action.
+二级索引的名称与操作的名称具有相同的限制。
 
-#### Define and Implement the Actions
+#### 定义和实施操作
 
-In the `hello.hpp` file define the two actions which will make use of the `messages_table` and its `messageidx` secondary index.
+在里面 `hello.hpp` 文件定义将使用的两个动作 `messages_table` 及其 `messageidx` 二级指标。
 
 ```cpp
 ACTION searchmsg(std::string message);
 ACTION addmsg(name nm, std::string message);
 ```
 
-In the `hello.cpp` implement the two actions by adding the following code:
+在里面 `hello.cpp` 通过添加以下代码来实现这两个操作：
 
 ```cpp
 ACTION hello::addmsg(name nm, std::string message) {
@@ -801,20 +803,20 @@ ACTION hello::searchmsg(std::string message) {
 }
 ```
 
-Note in the code above the `eosio::sha256` function returns a fixed-length 256-bit (32-byte) hash value as a checksum256 object. The hash value is computed using the SHA-256 algorithm, which is a widely-used cryptographic hash function. The checksum256 type is a typedef for a fixed-length array of 32 bytes, and is used throughout EOS codebase to represent hash values.
+在上面的代码中注意 `eosio::sha256` 函数返回一个固定长度的 256 位（32 字节）散列值作为 checksum256 对象。哈希值是使用 SHA-256 算法计算的，该算法是一种广泛使用的加密哈希函数。 checksum256 类型是 32 字节固定长度数组的类型定义，在整个 EOS 代码库中用于表示哈希值。
 
-The second action makes use of the secondary index to search for a message by its hash. Please be aware, because it is not a unique index, the first value that matches the search is found, however, multiple rows with the same searched value can exist after it. That's why the `searchmsg` function prints the first message found and all the subsequent ones.
+第二个操作利用二级索引通过哈希来搜索消息。请注意，因为它不是唯一索引，所以会找到与搜索匹配的第一个值，但是在它之后可以存在具有相同搜索值的多行。这就是为什么 `searchmsg` 函数打印找到的第一条消息和所有后续消息。
 
-### Indexes: Test
+### 索引：测试
 
-Build and deploy again the smart contract, send the `addmsg` action a couple of times with two different accounts as first parameter and the same message as the second, and then search for the added message to see if it is found:
+再次构建并部署智能合约，发送 `addmsg` 使用两个不同的帐户作为第一个参数和与第二个参数相同的消息执行几次操作，然后搜索添加的消息以查看是否找到：
 
 ```shell
 dune --send-action hello addmsg '[ama, "good morning sunshine"]' hello@active
 dune --send-action hello addmsg '[hello, "good morning sunshine"]' hello@active
 ```
 
-Find the `good morning sunshine` messages:
+找出 `good morning sunshine` 消息：
 
 ```shell
 dune --send-action hello searchmsg '["good morning sunshine"]' hello@active
@@ -826,35 +828,35 @@ dune --send-action hello searchmsg '["good morning sunshine"]' hello@active
 >> Other message: User: hello, Message: good morning sunshine
 ```
 
-## Assertions
+## 断言
 
-An assertion is a mechanism that checks whether a certain condition is true during the execution of a contract. If the condition is not true, the assertion will cause the contract to terminate with an error message.
+断言是一种在合约执行期间检查某个条件是否为真的机制。如果条件不为真，断言将导致合约终止并显示一条错误消息。
 
-### Use assert()
+### 使用断言()
 
-Implement an assertion check with standard error message like this:
+使用标准错误消息实现断言检查，如下所示：
 
 ```cpp
 assert(message.size() <= 10);
 ```
 
-### Use check()
+### 使用检查（）
 
-Implement an assertion check with a custom error message like this:
+使用如下自定义错误消息实施断言检查：
 
 ```cpp
 check(message.size() <= 10, "Message can not be bigger than 10 characters.");
 ```
 
-### Extend Smart Contract with Asserts
+### 使用断言扩展智能合约
 
-Add the above checks to the `addmsg` implementation, compile and deploy the contract again each time and then execute the command to sign and send the action to the blockchain:
+将上述检查添加到 `addmsg` 执行，每次重新编译和部署合约，然后执行命令签署并发送动作到区块链：
 
 ```shell
 dune --send-action hello addmsg '[ama, "01234567891"]' ama@active
 ```
 
-This is the standard error message you see when you use the `assert()` function:
+这是您在使用 `assert()` 功能：
 
 ```txt
 failed transaction: 50c7566e784a34509e02e4775e6b63b5978d3ddf5ab02618bee8c8a68ff5ce8d  <unknown> bytes  <unknown> us
@@ -868,7 +870,7 @@ pending console output: Assertion failed: message.size() <= 10 (hello.cpp: addms
     nodeos  apply_context.cpp:124 exec_one
 ```
 
-This is the custom error message you see when you use the `check()` function:
+这是您在使用 `check()` 功能：
 
 ```txt
 failed transaction: 6d18bc090aa65880b28a4f697e8bf08999e68d209c2a1367f16d596e11bbed02  <unknown> bytes  <unknown> us
@@ -881,13 +883,13 @@ pending console output:
     nodeos  apply_context.cpp:124 exec_one
 ```
 
-## Authorization
+＃＃ 授权
 
-When a user or contract attempts to send an action, the action can be validated by the EOS blockchain software. This validation process includes checking that the user or contract has the authorization to perform the action.
+当用户或合约尝试发送动作时，EOS 区块链软件可以验证该动作。此验证过程包括检查用户或合同是否有权执行该操作。
 
-The `hello` contract does not perform any authorization checks. Any account could send any of the 'hello' contract's actions to the blockchain and they would be executed.
+这 `hello` 合约不执行任何授权检查。任何账户都可以将任何“你好”合约的动作发送到区块链，然后它们就会被执行。
 
-Send `hi` action and sign it with the `hello@active` private key succeeds:
+发送 `hi` 行动并签署 `hello@active` 私钥成功：
 
 ```shell
 dune --send-action hello addmsg '[ama, "hi again"]' hello@active
@@ -897,7 +899,7 @@ dune --send-action hello addmsg '[ama, "hi again"]' hello@active
 #         hello <= hello::addmsg                {"nm":"ama","message":"hi again"}
 ```
 
-Send `hi` action and sign it with the `ama@active` private key succeeds as well:
+发送 `hi` 行动并签署 `ama@active` 私钥也成功：
 
 ```shell
 dune --send-action hello addmsg '[ama, "hi again"]' ama@active
@@ -907,11 +909,11 @@ dune --send-action hello addmsg '[ama, "hi again"]' ama@active
 #         hello <= hello::addmsg                {"nm":"ama","message":"hi again"}
 ```
 
-You can implement an authorization check to allow only certain accounts or just one account to execute the `hello` contract's actions.
+您可以实施授权检查以仅允许某些帐户或仅允许一个帐户执行 `hello` 合约的动作。
 
-### Use check() with has_auth()
+### 使用 check() 和 has_auth()
 
-To perform an authorization check use the `check()` function in combination with the `has_auth` function. This combination enforces the action `addmsg` to be executed only by the account that is sent as first parameter, no matter what permission the account uses to sign the transaction (e.g. owner, active, code). If the check fails it raises an error with a custom message.
+要执行授权检查，请使用 `check()` 结合功能 `has_auth` 功能。此组合强制执行操作 `addmsg` 仅由作为第一个参数发送的帐户执行，无论帐户使用什么权限来签署交易（例如所有者、活动、代码）。如果检查失败，它会通过自定义消息引发错误。
 
 ```cpp
 ACTION hello::addmsg(name nm, std::string message) {
@@ -929,7 +931,7 @@ ACTION hello::addmsg(name nm, std::string message) {
 }
 ```
 
-Compile and deploy the smart contract, send the `addmsg` action with first parameter `ama` and sign it with `hello@active` key and then observe how it fails with the custom error message:
+编译部署智能合约，发送 `addmsg` 第一个参数的动作 `ama` 并用它签名 `hello@active` 键，然后观察它如何失败并显示自定义错误消息：
 
 ```cpp
 dune --send-action hello addmsg '[ama, "hi again"]' hello@active
@@ -946,9 +948,9 @@ pending console output:
     nodeos  apply_context.cpp:124 exec_one
 ```
 
-### Use require_auth()
+### 使用 require_auth()
 
-It does the same thing as the previous combination only that you can not customize the error message raised in case of failure.
+它与前面的组合做同样的事情，只是您不能自定义失败时引发的错误消息。
 
 ```cpp
 ACTION hello::addmsg(name nm, std::string message) {
@@ -966,7 +968,7 @@ ACTION hello::addmsg(name nm, std::string message) {
 }
 ```
 
-Compile and deploy the smart contract, send the `addmsg` action with first parameter `ama` and sign it with `hello@active` key, and then observe how it fails with a standard error message:
+编译部署智能合约，发送 `addmsg` 第一个参数的动作 `ama` 并用它签名 `hello@active` 键，然后观察它是如何失败并显示标准错误消息的：
 
 ```cpp
 dune --send-action hello addmsg '[ama, "hi again"]' hello@active
@@ -983,9 +985,9 @@ pending console output:
     nodeos  apply_context.cpp:124 exec_one
 ```
 
-### Use require_auth2()
+### 使用 require_auth2()
 
-The `require_auth2()` enforces the execution only by the account that is set as the first parameter and only if the permission used to sign the transaction is the one specified as the second parameter. If the check fails it raises a standard error message which can not be customized.
+这 `require_auth2()` 仅由设置为第一个参数的帐户强制执行，并且仅当用于签署交易的权限是指定为第二个参数的权限时。如果检查失败，则会引发无法自定义的标准错误消息。
 
 ```cpp
 ACTION hello::addmsg(name nm, std::string message) {
@@ -1003,13 +1005,13 @@ ACTION hello::addmsg(name nm, std::string message) {
 }
 ```
 
-Compile and deploy the smart contract, send the `addmsg` action with first parameter `ama`, sign it with `ama@owner` private key, and then observe how it fails with a standard error message:
+编译部署智能合约，发送 `addmsg` 第一个参数的动作 `ama`, 签名 `ama@owner` 私钥，然后观察它如何失败并显示标准错误消息：
 
 ```shell
 dune --send-action hello addmsg '[ama, "hi again"]' ama@owner
 ```
 
-Even if the `ama@owner` private key was used to sign the above transaction, the execution fails because the required signature is the `ama@active`.
+即使 `ama@owner` 私钥用于签署上述交易，执行失败，因为所需的签名是 `ama@active`.
 
 ```txt
 failed transaction: 7dcb10621e4102ec933cdbaf544f0204446cc96bc20b76242391b17286f1408e  <unknown> bytes  <unknown> us
@@ -1022,28 +1024,28 @@ pending console output:
     nodeos  apply_context.cpp:124 exec_one
 ```
 
-## Events
+## 活动
 
-EOS smart contract developers can use an eventing mechanism which allows them to implement a smart contract that listens to notifications sent by another smart contract action. The EOS eventing mechanism is defined by two actors:
+EOS 智能合约开发人员可以使用事件机制，允许他们实施智能合约，监听另一个智能合约动作发送的通知。 EOS 事件机制由两个参与者定义：
 
-- The smart contract that raises an event from one of its action.
-- The smart contract that listens to the event raised by the first smart contract's action.
+- 从其操作之一引发事件的智能合约。
+- 侦听第一个智能合约操作引发的事件的智能合约。
 
 ### require_recipient()
 
-To raise an event from a smart contract action use the `require_recipient()` function which adds the specified recipient account to the set of accounts to be notified. After the current action is executed a notification is sent to each recipient account from the list. And if those accounts have a smart contract deployed which implements the `on_notify()` method with the sending contract account and action registered then they will be able to receive the notification and act accordingly.
+要从智能合约操作中引发事件，请使用 `require_recipient()` 将指定的收件人帐户添加到要通知的帐户集的函数。执行当前操作后，系统会向列表中的每个收件人帐户发送通知。如果这些账户部署了一个智能合约来实现 `on_notify()` 发送合同帐户和操作注册的方法，然后他们将能够收到通知并采取相应的行动。
 
-### on_notify()
+### on_notify（）
 
-To listen to the event raised by a smart contract's action implement the `on_notify()` function and register it for that particular smart contract and its action.
+收听智能合约操作引发的事件，实施 `on_notify()` 功能并为该特定智能合约及其操作注册它。
 
-Implement a second smart contract that listens to `hello::addmsg` action notifications.
+实施第二个监听的智能合约 `hello::addmsg` 动作通知。
 
 ```shell
 dune --create-cmake-app hellolisten ./
 ```
 
-Open the `hellolisten.hpp` and implement the `on_notify()` method as shown below:
+打开 `hellolisten.hpp` 并实施 `on_notify()` 方法如下图：
 
 ```cpp
 #include <eosio/eosio.hpp>
@@ -1066,7 +1068,7 @@ CONTRACT hellolisten : public contract {
 };
 ```
 
-Change the `hello::addmsg` action to raise the event for the `hellolisten` contract account whenever a new message is added.
+改变 `hello::addmsg` 引发事件的行动 `hellolisten` 每当添加新消息时，合约帐户。
 
 ```cpp
 ACTION hello::addmsg(name nm, std::string message) {
@@ -1087,7 +1089,7 @@ ACTION hello::addmsg(name nm, std::string message) {
 }
 ```
 
-Create an account `hellolisten`, and then build and deploy the new smart contract to the newly created account.
+创建一个帐户 `hellolisten`，然后构建新的智能合约并将其部署到新创建的帐户。
 
 ```shell
 dune --create-account hellolisten
@@ -1095,7 +1097,7 @@ dune --cmake-build ./hellolisten/
 dune --deploy ./hellolisten/build/hellolisten hellolisten
 ```
 
-Send an `addmsg` to the `hello` contract and observe its output:
+发送一个 `addmsg` 到 `hello` 收缩并观察其输出：
 
 ```shell
 dune --send-action hello addmsg '[ama, "hi notify"]' ama@active
@@ -1107,7 +1109,7 @@ dune --send-action hello addmsg '[ama, "hi notify"]' ama@active
 >> Notification received. From: ama, message: hi notify
 ```
 
-Note in the output, the last two lines show that:
+注意在输出中，最后两行显示：
 
-- the `hello::addmsg` action with its params were sent to `hellolisten` account and
-- the `hellolisten::on_notify` method was executed; as a result the two input parameters were printed at the console.
+- 这 `hello::addmsg` 带有参数的动作被发送到 `hellolisten` 帐户和
+- 这 `hellolisten::on_notify` 方法被执行；结果，两个输入参数被打印在控制台上。
