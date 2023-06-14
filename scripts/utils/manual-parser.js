@@ -53,6 +53,7 @@ const parse = async (repo, branch = "main", isLatest = true) => {
 
     // some files have a <hr> tag which docusaurus doesn't like
     replaceInAllFiles(basePath, /<hr>/g, '');
+    // some files use content_title instead of title
     replaceInAllFiles(basePath, /content_title:/g, 'title:');
 
     // if no base index.md exists, create one
@@ -67,25 +68,6 @@ title: ${capitalizedTitle} (${branch})
     }
 
     await new Promise(r => setTimeout(r, 100));
-
-//     const indexMdPath = `${basePath}/index.md`;
-//     const capitalizedTitle = repo.split('/')[1].charAt(0).toUpperCase() + repo.split('/')[1].slice(1);
-//     const indexMdContent = `---
-// title: ${capitalizedTitle} (${branch})
-// ---
-//
-// ${swaggerFiles.map(file => {
-//     const fileName = path.basename(file);
-//     const fileNameWithoutExtension = fileName.replace('.swagger.yaml', '');
-//     return `- [${fileNameWithoutExtension}](/apis/${repoName}/${isLatest ? 'latest' : branch}/${fileNameWithoutExtension}.api)`;
-// }).join('\n')
-//     }
-// `;
-//
-//     fs.writeFileSync(indexMdPath, indexMdContent);
-//
-//
-//     return specs;
 }
 
 module.exports = parse;

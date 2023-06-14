@@ -8,10 +8,9 @@ const downloadManuals = async () => {
     fs.mkdirSync("manuals");
 
     const repos = [
-        // Don't enable leap, lots of malformed docs
         {
             repo: 'antelopeio/leap',
-            versions: ['main'],
+            versions: ['v4.0.0', 'v3.2.3'],
         },
         {
             repo: 'antelopeio/cdt',
