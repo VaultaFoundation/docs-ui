@@ -9,10 +9,10 @@ const downloadManuals = async () => {
 
     const repos = [
         // Don't enable leap, lots of malformed docs
-        // {
-        //     repo: 'antelopeio/leap',
-        //     versions: ['main'],
-        // },
+        {
+            repo: 'antelopeio/leap',
+            versions: ['main'],
+        },
         {
             repo: 'antelopeio/cdt',
             versions: ['v4.0.0'],
