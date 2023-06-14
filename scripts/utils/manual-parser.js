@@ -3,7 +3,6 @@ const {createTmpDir, removeTmpDir} = require("./create-temp-dir");
 const { downloadZip, unzip } = require("./download-repo-as-zip");
 const fs = require("fs-extra");
 const path = require("path");
-// content_title
 
 function replaceInAllFiles(basePath, regexToReplace, replaceWith) {
     const files = fs.readdirSync(basePath);
@@ -42,7 +41,6 @@ const parse = async (repo, branch = "main", isLatest = true) => {
     await downloadZip(repo, zipPath, branch);
     await unzip(zipPath, tmpDir);
 
-    // find all .swagger files recursively
     const docsDir = `${tmpDir}/${fs.readdirSync(tmpDir)[0]}/docs`;
     try { fs.mkdirSync(basePath); } catch(e) {}
 
