@@ -23,18 +23,6 @@ function replaceInAllFiles(basePath, regexToReplace, replaceWith) {
         fileContents = fileContents.replace(regexToReplace, replaceWith);
         fs.writeFileSync(filePath, fileContents);
     });
-    // const files = fs.readdirSync(basePath);
-    //
-    // files.forEach((file) => {
-    //     const filePath = path.join(basePath, file);
-    //     if (fs.statSync(filePath).isDirectory()) {
-    //         replaceInAllFiles(filePath, regexToReplace, replaceWith);
-    //     } else {
-    //         let fileContents = fs.readFileSync(filePath, 'utf8');
-    //         fileContents = fileContents.replace(regexToReplace, replaceWith);
-    //         fs.writeFileSync(filePath, fileContents);
-    //     }
-    // });
 }
 
 function removeApiReferenceDirs(basePath) {
@@ -103,7 +91,7 @@ const parse = async (repo, branch = "main", isLatest = true) => {
 
         if(!fileContents.startsWith('---')) {
             fileContents =
-`---
+                `---
 title: ${title}
 ---
 
