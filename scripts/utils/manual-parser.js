@@ -4,17 +4,38 @@ const { downloadZip, unzip } = require("./download-repo-as-zip");
 const fs = require("fs-extra");
 const path = require("path");
 
-function replaceInAllFiles(basePath, regexToReplace, replaceWith) {
+function foreachFileDo(basePath, fn) {
     const files = fs.readdirSync(basePath);
 
     files.forEach((file) => {
         const filePath = path.join(basePath, file);
         if (fs.statSync(filePath).isDirectory()) {
-            replaceInAllFiles(filePath, regexToReplace, replaceWith);
+            foreachFileDo(filePath, fn);
         } else {
-            let fileContents = fs.readFileSync(filePath, 'utf8');
-            fileContents = fileContents.replace(regexToReplace, replaceWith);
-            fs.writeFileSync(filePath, fileContents);
+            fn(filePath);
+        }
+    });
+}
+
+function replaceInAllFiles(basePath, regexToReplace, replaceWith) {
+    foreachFileDo(basePath, (filePath) => {
+        let fileContents = fs.readFileSync(filePath, 'utf8');
+        fileContents = fileContents.replace(regexToReplace, replaceWith);
+        fs.writeFileSync(filePath, fileContents);
+    });
+}
+
+function removeApiReferenceDirs(basePath) {
+    const files = fs.readdirSync(basePath);
+
+    files.forEach((file) => {
+        const filePath = path.join(basePath, file);
+        if (fs.statSync(filePath).isDirectory()) {
+            if(file === 'api-reference') {
+                fs.removeSync(filePath);
+            } else {
+                removeApiReferenceDirs(filePath);
+            }
         }
     });
 }
@@ -53,6 +74,31 @@ const parse = async (repo, branch = "main", isLatest = true) => {
     replaceInAllFiles(basePath, /<hr>/g, '');
     // some files use content_title instead of title
     replaceInAllFiles(basePath, /content_title:/g, 'title:');
+    removeApiReferenceDirs(basePath);
+
+    foreachFileDo(basePath, (filePath) => {
+        // if the file does not start with ---, add it
+        let fileContents = fs.readFileSync(filePath, 'utf8');
+        let title = path.basename(filePath, '.md');
+
+        // some titles are just... "index" :(
+        if(title === 'index') {
+            // get parent folder name
+            title = path.basename(path.dirname(filePath));
+        }
+        // replace all underscores and dashes with spaces
+        title = title.replace(/_/g, ' ').replace(/-/g, ' ');
+
+        if(!fileContents.startsWith('---')) {
+            fileContents =
+                `---
+title: ${title}
+---
+
+${fileContents}`;
+            fs.writeFileSync(filePath, fileContents);
+        }
+    });
 
     // if no base index.md exists, create one
     const indexMdPath = `${basePath}/index.md`;
