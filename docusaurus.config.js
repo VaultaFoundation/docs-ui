@@ -206,10 +206,10 @@ const config = {
           link: '/docs/latest/blockchain-basics/',
         },
         {
-          icon: 'icons/ethereum-logo.svg', // docs
-          title: 'EOS EVM',
-          subtitle: 'Take advantage of the world\'s fastest EVM',
-          link: '/docs/latest/eos-evm/',
+          icon: 'icons/emerald-icon.svg', // docs
+          title: 'Smart Contracts',
+          subtitle: 'Learn how to develop smart contracts on EOS',
+          link: '/docs/latest/smart-contracts/getting-started/smart-contract-basics',
         }
       ],
       secondCards: [
@@ -231,13 +231,13 @@ const config = {
           icon: '/icons/ref-icon.svg',
           title: 'Reference',
           subtitle: "Consult the API references explore the EOS RPC",
-          link: '/docs/latest/api-listing/',
+          link: '/docs/latest/apis-and-manuals',
         },
         {
-          icon: '/icons/docs-icon.svg',
-          title: 'Glossary',
-          subtitle: 'Confused with some terms? Read them all here',
-          link: '/docs/latest/glossary',
+          icon: '/icons/ethereum-logo.svg',
+          title: 'EOS EVM',
+          subtitle: 'Take advantage of the world\'s fastest EVM',
+          link: '/docs/latest/eos-evm/',
         }
       ],
       wideCard: {
