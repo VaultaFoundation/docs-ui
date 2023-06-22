@@ -68,6 +68,18 @@ li > ul {
   list-style-type: circle;
 }
 
+/* handle nested nested li */
+li > ol > li > ol,
+li > ul > li > ul {
+  list-style-type: square;
+}
+
+/* handle nested nested nested li */
+li > ol > li > ol > li > ol,
+li > ul > li > ul > li > ul {
+  list-style-type: disc;
+}
+
 @font-face {
   font-family: "SuisseIntl-Bold";
   src: url("/static/fonts/SuisseIntl-Bold.otf") format("otf");
