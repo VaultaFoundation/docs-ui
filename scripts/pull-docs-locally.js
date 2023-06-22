@@ -39,6 +39,12 @@ const copyFiles = (file = null) => {
             fs.copySync(file, path.join("docs", path.relative(absolutePath, file)), { overwrite: true });
         }
 
+        // move all /docs/images/* to /static/images/*
+        if(!fs.existsSync("static/images")) {
+            fs.mkdirSync("static/images");
+        }
+        fs.copySync("docs/images", "static/images", { overwrite: true });
+
         locked = false;
     }, 50);
 };

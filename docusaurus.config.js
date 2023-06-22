@@ -63,7 +63,7 @@ const config = {
           lastVersion: 'current',
           path: 'docs',
           routeBasePath: 'docs',
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve('./src/sidebars.js'),
           versions: {
             current: {
               label: 'latest',
@@ -316,7 +316,10 @@ const config = {
         },
         docs: {
           /* closes sibling categories when expanding a category */
-          sidebar: { autoCollapseCategories: true },
+          sidebar: {
+            autoCollapseCategories: false,
+            hideable: true,
+          },
         },
         footer: {
           style: 'dark',
