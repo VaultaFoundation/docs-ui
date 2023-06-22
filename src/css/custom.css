@@ -54,6 +54,20 @@
   --ifm-navbar-link-hover-color: var(--ifm-font-color-secondary);
 }
 
+
+ol,
+ul {
+  list-style: inside;
+  list-style-type: disc;
+  padding-left: 10px;
+}
+
+/* handle nested li */
+li > ol,
+li > ul {
+  list-style-type: circle;
+}
+
 @font-face {
   font-family: "SuisseIntl-Bold";
   src: url("/static/fonts/SuisseIntl-Bold.otf") format("otf");
@@ -320,8 +334,7 @@ article h6 {
   margin: 30px 0 0 !important;
 }
 
-article p,
-article li {
+article p {
   font-weight: var(--font-weight-light);
   font-size: var(--font-size-large);
 
@@ -342,11 +355,6 @@ article a {
   border: none !important;
 
   color: #3F65C2;
-}
-
-article li {
-  padding-left: 8px;
-  list-style: square;
 }
 
 article li::marker {
@@ -686,10 +694,6 @@ article .markdown {
   --ifm-heading-margin-bottom: 0.75rem;
 }
 
-/* shorten up the long list for footer links group 2 */
-.footer__col:nth-child(2) ul {
-  columns: 2;
-}
 
 .footer__logo_container {
   display: flex;
@@ -1242,8 +1246,7 @@ aside {
     padding: 0 !important;
   }
 
-  article p,
-  article li {
+  article p {
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-large);
     line-height: 27px;
@@ -1260,16 +1263,6 @@ aside {
     border: none !important;
 
     color: #3F65C2;
-  }
-
-  article ul {
-    margin: 0 !important;
-    padding: 0 24px !important;
-  }
-
-  article li {
-    padding-left: 8px;
-    list-style: square;
   }
 
   article li::marker {
