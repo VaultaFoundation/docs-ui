@@ -3,6 +3,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageHeader from '@site/src/components/Header/Header';
 import { WideCard } from '../components/WideCard/WideCard';
+import { RecentDocs } from '../components/RecentDocs/RecentDocs';
 import { Card } from '../components/Card/Card';
 import { CardWrapper } from '../components/CardWrapper/CardWrapper';
 
@@ -22,12 +23,17 @@ export default function Home(): JSX.Element {
         <WideCard />
 
         <section className="limiter">
+
           <CardWrapper>
             {firstCards.map((item, index) => (
                 <Card key={index} icon={item.icon} title={item.title} subtitle={item.subtitle} link={item.link} />
             ))}
           </CardWrapper>
+
+          <RecentDocs />
+
           <IntakeForm />
+
           <CardWrapper>
             {secondCards.map((item, index) => (
                 <Card key={index} icon={item.icon} title={item.title} subtitle={item.subtitle} link={item.link} color={item.color} />

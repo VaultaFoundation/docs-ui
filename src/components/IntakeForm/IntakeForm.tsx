@@ -15,8 +15,8 @@ export const IntakeForm = () => {
   };
 
   return (
-      <div className="mb-40 flex flex-col justify-center items-center">
-          <H1>{title}</H1>
+      <div className="mb-40 flex flex-col justify-center items-center px-10">
+          <H1 className="text-center mb-5">{title}</H1>
           <P_XLarge className="max-w-[600px] mb-10">{subtitle}</P_XLarge>
           <a href={action} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">
             <Button>{buttonText}</Button>
