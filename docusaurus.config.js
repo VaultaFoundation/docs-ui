@@ -101,7 +101,7 @@ const config = {
         id: 'apis',
         path: 'apis',
         routeBasePath: 'apis',
-        sidebarPath: require.resolve('./src/sidebars.js'),
+        sidebarPath: require.resolve('./src/generic-sidebars.js'),
         // ... other options
       },
     ],
@@ -111,7 +111,7 @@ const config = {
         id: 'manuals',
         path: 'manuals',
         routeBasePath: 'manuals',
-        sidebarPath: require.resolve('./src/sidebars.js'),
+        sidebarPath: require.resolve('./src/generic-sidebars.js'),
         // ... other options
       },
     ],
