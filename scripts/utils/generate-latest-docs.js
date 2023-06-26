@@ -2,7 +2,7 @@
 
 require('isomorphic-fetch');
 const fs = require('fs');
-const {findFiles} = require('./utils/find-files');
+const {findFiles} = require('./find-files');
 const exec = require('child_process').exec;
 let lastCommitDates = [];
 

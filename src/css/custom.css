@@ -564,13 +564,26 @@ article .markdown {
 /* DocSidebar overwrite */
 
 .menu__link {
-  font-weight: 500;
-  font-size: var(--font-size-medium);
-  line-height: 24px;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+  padding:0;
+  margin-bottom:8px;
 
-  letter-spacing: 0.5px;
   background-color: transparent;
   color: #000000;
+}
+
+.menu__list-item-collapsible {
+  font-size: 16px;
+}
+
+.theme-doc-sidebar-item-category-level-1 {
+  margin-bottom:50px;
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible .menu__link {
+  font-size: 11px;
 }
 
 .menu__list-item-collapsible {
@@ -595,7 +608,7 @@ article .markdown {
 }
 
 .menu__link--active {
-  color: #3F65C2;
+  color: #3F65C2 !important;
   background-color: transparent;
 }
 
@@ -612,30 +625,9 @@ article .markdown {
 .theme-doc-sidebar-item-link-level-3 > a,
 .theme-doc-sidebar-item-link-level-4 > a {
   font-weight: 400;
-  font-size: var(--font-size-medium);
-  line-height: 24px;
-
-  letter-spacing: 0.5px;
   color: var(--eos-color-light);
 }
 
-.theme-doc-sidebar-item-category-level-2 .menu__link,
-.theme-doc-sidebar-item-category-level-3 .menu__link,
-.theme-doc-sidebar-item-category-level-4 .menu__link {
-  color: var(--eos-color-light);
-}
-
-.theme-doc-sidebar-item-category-level-2 .menu__link--active,
-.theme-doc-sidebar-item-category-level-3 .menu__link--active,
-.theme-doc-sidebar-item-category-level-4 .menu__link--active {
-  color: #3F65C2;
-}
-
-.theme-doc-sidebar-item-category-level-2 .menu__link:hover,
-.theme-doc-sidebar-item-category-level-3 .menu__link:hover,
-.theme-doc-sidebar-item-category-level-4 .menu__link:hover {
-  color: #3F65C2;
-}
 
 .menu__caret {
   border-radius: 100%;
@@ -660,9 +652,9 @@ article .markdown {
 }
 
 .menu__list .menu__list {
-  border-left: 2px solid var(--color-blue);
-  padding-left: 0;
-  margin-left: 12px;
+  border-left: 1px solid var(--color-blue);
+  padding-left: 12px;
+  margin-left: 0;
 }
 
 .menu__list-item-collapsible {
@@ -1071,9 +1063,11 @@ aside {
     transform: scale(1.15);
   }
 
-  .menu__link--sublist-caret:after {
+  .menu__link--sublist-caret {
     background: url('/icons/sidebar-da-blue.svg') 50% / 2rem 2rem;
     transform: none !important;
+
+    display:none !important;
   }
 
   .menu__link {
@@ -1089,6 +1083,7 @@ aside {
     background-color: transparent !important;
     border-bottom:none;
     width: max-content;
+    color: var(--color-blue);
   }
 
   .theme-doc-sidebar-item-category .menu__link {

@@ -318,7 +318,7 @@ const config = {
           /* closes sibling categories when expanding a category */
           sidebar: {
             autoCollapseCategories: false,
-            hideable: true,
+            hideable: false,
           },
         },
         footer: {

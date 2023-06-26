@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const chokidar = require('chokidar');
 const manualsAndApiMd = require("./utils/manuals-and-api-md");
+const {generateSidebar} = require("./utils/generate-sidebar");
 
 const docsFolderPath = process.argv.slice(2)[0];
 
@@ -44,6 +45,8 @@ const copyFiles = (file = null) => {
             fs.mkdirSync("static/images");
         }
         fs.copySync("docs/images", "static/images", { overwrite: true });
+
+        await generateSidebar();
 
         locked = false;
     }, 50);
