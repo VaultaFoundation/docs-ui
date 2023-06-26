@@ -3,7 +3,8 @@
   border: 1px solid rgba(0,0,0,0.1);
   border-radius: 8px;
   padding: 20px;
-  position:fixed;
+  position:sticky;
+  top:140px;
   overflow-y: auto;
   max-height: calc(100vh - 170px);
   margin-top:-20px;
