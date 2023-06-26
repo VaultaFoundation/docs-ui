@@ -12,12 +12,6 @@
   transition-property: box-shadow;
 }
 
-@media (max-width: 996px) {
-  .wrapper {
-    width: 100%;
-  }
-}
-
 .wrapper:hover {
   background: #FFFFFF;
 
@@ -39,4 +33,15 @@
   flex:1;
 
   padding-left: 10px;
+}
+
+@media (max-width: 996px) {
+  .wrapper {
+    width: 100%;
+  }
+
+  .content h5 {
+    font-size: 16px;
+    font-weight: bold;
+  }
 }

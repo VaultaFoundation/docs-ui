@@ -1458,3 +1458,53 @@ blockquote p {
 blockquote a {
   font-size: var(--font-size-standard);
 }
+
+
+.recent-docs {
+  padding:20px 30px 30px;
+  max-width: 1280px;
+  margin:-50px auto 100px;
+  text-align: center;
+}
+
+.recent-docs-list {
+  border-radius:10px;
+  border:1px solid #e1e5f0;
+  margin-top:20px;
+  background: #f6f6fc;
+}
+
+.recent-docs-item {
+  padding: 10px 20px;
+  text-align: left;
+  display:flex;
+    align-items:center;
+    justify-content:space-between;
+  cursor: pointer;
+}
+
+.recent-docs-item:not(:last-child) {
+  border-bottom: 1px solid #e1e5f0;
+}
+
+.recent-docs-item:nth-child(even) {
+  background: #fbfbfd;
+}
+
+.recent-docs-item > figure:first-child {
+  font-weight: bold;
+}
+
+.recent-docs-item > figure:last-child {
+  font-size: 11px;
+}
+
+.recent-docs-item:hover:after {
+    content: '→';
+    font-weight: bold;
+    color: #d27651;
+    margin-left: 10px;
+}
+.recent-docs-item:hover > figure:last-child {
+    display:none;
+}

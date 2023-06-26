@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Develop with Remix",
+        "last_updated": 1687442090000,
+        "path": "/docs/50_eos-evm/20_smart-contracts/30_using-remix"
+    },
+    {
+        "title": "Peering",
+        "last_updated": 1687433756000,
+        "path": "/docs/40_node-operation/10_getting-started/40_peering"
+    },
+    {
+        "title": "Native Logging",
+        "last_updated": 1687300826000,
+        "path": "/docs/40_node-operation/10_getting-started/60_logging/10_native-logging"
+    },
+    {
+        "title": "Prometheus Integration",
+        "last_updated": 1687300826000,
+        "path": "/docs/40_node-operation/10_getting-started/60_logging/20_third-party-logging/20_prometheus-monitor"
+    },
+    {
+        "title": "Common Issues",
+        "last_updated": 1687178383000,
+        "path": "/docs/40_node-operation/10_getting-started/70_common-issues"
+    }
+]

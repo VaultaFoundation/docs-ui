@@ -10,11 +10,11 @@
   border-radius: 4px;
   text-decoration: none;
   font-weight: 450;
-  font-size: var(--font-size-desktop-standard);
   line-height: 60px;
   letter-spacing: 1px;
   border: none;
   cursor: pointer;
+  padding: 0 20px;
 }
 
 .button:hover {
