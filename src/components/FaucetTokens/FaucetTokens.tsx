@@ -18,8 +18,14 @@ const sendTokens = () => {
         body: JSON.stringify({
             "to": address,
         })
+    }).then(x => {
+        return x.json();
+    }).then(x => {
+        console.log(x);
+        document.getElementById('status').innerHTML = `Tokens sent!`;
     }).catch(err => {
         console.error(err);
+        document.getElementById('status').innerHTML = `There was an error sending your testnet tokens.`
     })
 }
 
@@ -28,6 +34,7 @@ export default function ConnectMetaMask(){
         <section>
             <input id="eos-evm-address" className={styles['tokens-input']} placeholder="EOS EVM Address" />
             <Button type={'button'} onClick={() => sendTokens()}>Send Tokens</Button>
+            <figure className={styles['token-status']} id="status"></figure>
         </section>
     )
 }

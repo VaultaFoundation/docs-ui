@@ -8,3 +8,10 @@
     margin-bottom:10px;
     display:block;
 }
+
+.token-status {
+    margin-top:10px;
+    display:block;
+    font-weight: bold;
+    font-size: 14px;
+}
