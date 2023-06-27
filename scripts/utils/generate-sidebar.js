@@ -2,15 +2,12 @@
 
 const fs = require('fs');
 const { findFiles } = require('./find-files');
-const allDocs = findFiles('./docs', '.md');
 
-const rootLevelDocs = fs.readdirSync('./docs');
 
 const IGNORED_DIRECTORIES = [
     'images'
 ];
 
-let sidebar = [];
 
 const getHeadProperties = (file) => {
     const head = file.split(/---/g)[1];
@@ -42,7 +39,9 @@ const removeUnderscoreNumbers = (docPath) => {
     }).join('/');
 }
 
-const generateSidebar = () => {
+const generateSidebars = (docsPath) => {
+    let sidebar = [];
+    const rootLevelDocs = fs.readdirSync(docsPath);
     for(const root of rootLevelDocs){
         if(IGNORED_DIRECTORIES.includes(root)) continue;
         if(!root.includes('.')){
@@ -50,7 +49,7 @@ const generateSidebar = () => {
 
             let title = null;
 
-            const indexPath = `./docs/${root}/index.md`;
+            const indexPath = `./${docsPath}/${root}/index.md`;
             if(fs.existsSync(indexPath)){
                 const index = fs.readFileSync(indexPath, 'utf8');
                 const properties = getHeadProperties(index);
@@ -86,7 +85,7 @@ const generateSidebar = () => {
             if(root === "index.md") continue;
 
             // document
-            const doc = fs.readFileSync(`./docs/${root}`, 'utf8');
+            const doc = fs.readFileSync(`./${docsPath}/${root}`, 'utf8');
             const properties = getHeadProperties(doc);
 
             let title = null;
@@ -131,9 +130,9 @@ const sidebars = {
 module.exports = sidebars;`;
 
     // console.log(JSON.stringify(sidebar, null, 4));
-    fs.writeFileSync('./src/sidebars.js', sidebarjs);
+    fs.writeFileSync(`./src/${docsPath}-sidebars.js`, sidebarjs);
 };
 
 module.exports = {
-    generateSidebar
+    generateSidebars
 };

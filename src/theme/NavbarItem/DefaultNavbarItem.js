@@ -8,6 +8,7 @@ function DefaultNavbarItemDesktop({
   isActive,
   ...props
 }) {
+  const isActiveLink = isActive();
   const element = (
     <NavbarNavLink
       className={clsx(
@@ -38,18 +39,8 @@ export default function DefaultNavbarItem({
   position, // Need to destructure position from props so that it doesn't get passed on.
   ...props
 }) {
-  const [isActive, setIsActive] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    if (props.href === location.pathname || props.to === location.pathname) {
-      setIsActive(true);
-    }
-
-    return () => {
-      setIsActive(false);
-    }
-  }, [location.pathname]);
+  const isActiveNavbarLink = props.to.split('/').some((item) => item === location.pathname.split('/')[1]);
 
   const Comp = mobile ? DefaultNavbarItemMobile : DefaultNavbarItemDesktop;
 
@@ -60,7 +51,7 @@ export default function DefaultNavbarItem({
           props.activeClassName ??
           (mobile ? 'menu__link--active' : 'navbar__link--active')
         }
-        isActive={() => isActive}
+        isActive={() => isActiveNavbarLink}
       />
   );
 }

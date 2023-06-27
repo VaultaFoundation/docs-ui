@@ -7,9 +7,9 @@ interface ButtonProps {
   type: "button" | "submit" | "reset" | undefined;
 }
 
-export const Button = ({ children, type }: ButtonProps) => {
+export const Button = ({ children, type, onClick }: ButtonProps) => {
   return (
-    <button className={styles.button} type={type}>
+    <button onClick={onClick} className={styles.button} type={type}>
       {children}
     </button>
   );

@@ -59,11 +59,12 @@ const config = {
       'classic',
       ({
         docs: {
+
           // id: 'docs', // omitted => default instance
           lastVersion: 'current',
           path: 'docs',
           routeBasePath: 'docs',
-          sidebarPath: require.resolve('./src/sidebars.js'),
+          sidebarPath: require.resolve('./src/docs-sidebars.js'),
           versions: {
             current: {
               label: 'latest',
@@ -95,6 +96,29 @@ const config = {
     ],
   ],
   plugins: [
+    require.resolve("docusaurus-plugin-image-zoom"),
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'evm',
+        path: 'evm',
+        routeBasePath: 'evm',
+        sidebarPath: require.resolve('./src/evm-sidebars.js'),
+        // sidebarCollapsed: false,
+        // ... other options
+      },
+    ],
+    // [
+    //   '@docusaurus/plugin-content-docs',
+    //   {
+    //     include: ['**/*.md', '**/*.mdx'],
+    //     id: 'native',
+    //     path: 'docs',
+    //     routeBasePath: 'native',
+    //     sidebarPath: require.resolve('./src/sidebars.js'),
+    //     // ... other options
+    //   },
+    // ],
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -150,45 +174,57 @@ const config = {
         src: 'img/eosn_logo_light.png',
       },
       items: [
+        // {
+        //   type: 'dropdown',
+        //   label: 'Learn',
+        //   position: 'left',
+        //   items: [
+        //     {
+        //       label: 'Smart Contracts', // This label is used for mobile view
+        //       title: 'Smart Contracts',
+        //       subtitle: 'Learn to develop EOS smart contracts',
+        //       icon: '/icons/brief-case-icon.svg', //replace with required icon
+        //       href: '/docs/latest/smart-contracts/',
+        //     },
+        //     {
+        //       label: 'Node Operation',
+        //       title: 'Node Operation',
+        //       subtitle: 'Learn how to operate an EOS node',
+        //       icon: '/icons/db-icon.svg',
+        //       href: '/docs/latest/node-operation/',
+        //     },
+        //     {
+        //       label: 'Web Development',
+        //       title: 'Web Development',
+        //       subtitle: 'Learn to integrate EOS into your web app',
+        //       icon: '/icons/globe-icon.svg',
+        //       href: '/docs/latest/web-applications/',
+        //     },
+        //     {
+        //       label: 'EOS EVM',
+        //       title: 'EOS EVM',
+        //       subtitle: 'Learn to develop on EOS EVM',
+        //       icon: '/icons/box-icon.svg',
+        //       href: '/docs/latest/eos-evm/',
+        //     }
+        //   ],
+        // },
         {
-          type: 'dropdown',
-          label: 'Learn',
+          docId: 'native',
           position: 'left',
-          items: [
-            {
-              label: 'Smart Contracts', // This label is used for mobile view
-              title: 'Smart Contracts',
-              subtitle: 'Learn to develop EOS smart contracts',
-              icon: '/icons/brief-case-icon.svg', //replace with required icon
-              href: '/docs/latest/smart-contracts/',
-            },
-            {
-              label: 'Node Operation',
-              title: 'Node Operation',
-              subtitle: 'Learn how to operate an EOS node',
-              icon: '/icons/db-icon.svg',
-              href: '/docs/latest/node-operation/',
-            },
-            {
-              label: 'Web Development',
-              title: 'Web Development',
-              subtitle: 'Learn to integrate EOS into your web app',
-              icon: '/icons/globe-icon.svg',
-              href: '/docs/latest/web-applications/',
-            },
-            {
-              label: 'EOS EVM',
-              title: 'EOS EVM',
-              subtitle: 'Learn to develop on EOS EVM',
-              icon: '/icons/box-icon.svg',
-              href: '/docs/latest/eos-evm/',
-            }
-          ],
+          label: 'Native',
+          to: '/docs/latest/quick-start/introduction',
+        },
+        {
+          docId: 'evm',
+          position: 'left',
+          label: 'EVM',
+          to: '/evm/quick-start/introduction',
         },
         {
           docId: 'courses',
           position: 'left',
-          label: 'Courses',
+          label: 'Video Courses',
           to: 'https://learn.eosnetwork.com/',
         },
         {
@@ -273,6 +309,16 @@ const config = {
   themeConfig:
   /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
+        zoom: {
+          selector: '.markdown :not(em) > img',
+          config: {
+            // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
+            background: {
+              light: 'rgb(255, 255, 255)',
+              dark: 'rgb(50, 50, 50)'
+            }
+          }
+        },
         navbar: {
           logo: {
             alt: 'EOS Network',

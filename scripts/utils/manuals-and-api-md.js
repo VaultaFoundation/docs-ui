@@ -62,5 +62,4 @@ ${manualVersions.map(manual => {
     fs.writeFileSync('./docs/999_miscellaneous/999_apis-and-manuals.md', content);
 }
 
-generateMd();
 module.exports = generateMd;
