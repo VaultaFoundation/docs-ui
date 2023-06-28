@@ -866,6 +866,11 @@ aside {
   filter: contrast(0.5) brightness(2);
 }
 
+.breadcrumbs__item {
+  display: flex;
+  align-items: center;
+}
+
 .theme-doc-version-badge {
   display: none;
 }
