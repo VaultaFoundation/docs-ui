@@ -10,7 +10,7 @@ const path = require('path');
 const zipPath = "./tmp/docs.zip";
 const unzipDir = path.join("tmp/unpacked/");
 
-const processDocs = (files, docsDir, from, to) => {
+const processDocs = (docsDir, from, to) => {
     console.log(`Processing docs: ${from} -> ${to}`);
     const docsPath = path.join(unzipDir, docsDir, from);
 
@@ -35,9 +35,9 @@ const downloadDocs = async (branch) => {
     // find "docs" subdir
     const files = fs.readdirSync(unzipDir);
     const docsDir = files.find(f => f.startsWith("eosnetworkfoundation-docs-"));
-    processDocs(files, docsDir, "native", "docs");
-    processDocs(files, docsDir, "evm", "evm");
-    processDocs(files, docsDir, "images", "static/images");
+    processDocs(docsDir, "native", "docs");
+    processDocs(docsDir, "evm", "evm");
+    processDocs(docsDir, "images", "static/images");
 }
 
 module.exports = downloadDocs;
