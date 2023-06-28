@@ -37,15 +37,7 @@ const downloadDocs = async (branch) => {
     const docsDir = files.find(f => f.startsWith("eosnetworkfoundation-docs-"));
     processDocs(files, docsDir, "native", "docs");
     processDocs(files, docsDir, "evm", "evm");
-    // const docsPath = path.join(unzipDir, docsDir, "docs");
-    //
-    // // copy docs subdir to root docs dir
-    // fs.rmSync("docs", { recursive: true });
-    // fs.mkdirSync("docs");
-    //
-    // fs.readdirSync(docsPath).forEach(file => {
-    //     fs.moveSync(path.join(docsPath, file), path.join("docs", file), { overwrite: true|false })
-    // });
+    processDocs(files, docsDir, "images", "static/images");
 }
 
 module.exports = downloadDocs;
