@@ -130,4 +130,3 @@ const generateLatestDocs = async (branch = "main") => {
 module.exports = {
     generateLatestDocs
 };
-generateLatestDocs();
