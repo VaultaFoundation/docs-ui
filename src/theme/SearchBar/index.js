@@ -171,12 +171,12 @@ function DocSearch({contextualSearch, externalUrlRegex, ...props}) {
         />
       </Head>
 
-      <input
-        className='search-input-box'
-        type="text"
-        placeholder={translations.placeholder}
-        onKeyUp={onCustomInput}
-      />
+      {/*<input*/}
+      {/*  className='search-input-box'*/}
+      {/*  type="text"*/}
+      {/*  placeholder={translations.placeholder}*/}
+      {/*  onKeyUp={onCustomInput}*/}
+      {/*/>*/}
 
       {/* <DocSearchButton
         onTouchStart={importDocSearchModalIfNeeded}

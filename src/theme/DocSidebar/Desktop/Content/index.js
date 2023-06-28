@@ -32,7 +32,7 @@ export default function DocSidebarDesktopContent({path, sidebar, className}) {
         showAnnouncementBar && styles.menuWithAnnouncementBar,
         className,
       )}>
-      <SearchBar />
+      {/*<SearchBar />*/}
       <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list')}>
         <DocSidebarItems items={sidebar} activePath={path} level={1} />
       </ul>

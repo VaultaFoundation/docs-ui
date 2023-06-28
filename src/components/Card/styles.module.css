@@ -10,6 +10,12 @@
   padding: 10px;
 }
 
+.cardtitle {
+  font-size: 22px;
+  font-weight: bold;
+  color: #000;
+}
+
 .infoContainer {
   display: flex;
   flex-direction: column;
@@ -48,7 +54,7 @@ a:hover {
   .card {
     justify-content: flex-start;
     gap: 50px;
-    padding: 28px;
+    padding: 28px 50px 28px 28px;
     cursor: pointer;
     width: 588px;
     height: auto;
@@ -63,5 +69,9 @@ a:hover {
     gap: 28px;
     width: auto;
     max-width: 280px;
+  }
+
+  .cardtitle {
+    padding-top: 10px;
   }
 }

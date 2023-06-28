@@ -63,6 +63,9 @@ const downloadZip = async (repo, zipPath, branch = "main") => {
     }).then(arrayBuffer => {
         const buffer = Buffer.from(arrayBuffer);
         fs.writeFileSync(zipPath, buffer);
+    }).catch(err => {
+        console.error(err);
+        throw err;
     });
 }
 

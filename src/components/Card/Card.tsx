@@ -17,7 +17,7 @@ export const Card = ({ icon, title, subtitle, link, color }: CardProps) => {
     <a className={styles.card} href={link}>
       <IconBox icon={icon} color={color} />
       <div className={styles.infoContainer}>
-        <H4>{title}</H4>
+        <figure className={styles.cardtitle}>{title}</figure>
         <P_Small>{subtitle}</P_Small>
       </div>
     </a>

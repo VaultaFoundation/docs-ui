@@ -24,3 +24,7 @@ tmp/
 docs/
 apis/
 manuals/
+evm/
+
+static/images/
+docs-temp/

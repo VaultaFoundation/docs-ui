@@ -77,7 +77,7 @@ export default function TOC({className, ...props}) {
   const {pathname} = location;
 
   const isVirtual = !!doc.frontMatter.virtual;
-  const isDocs = doc.metadata.source.includes('/docs/');
+  const isDocs = doc.metadata.source.includes('/docs/') || doc.metadata.source.includes('/evm/');
   const canEditOrSuggest = isDocs && !isVirtual;
   const suggestLink = doc.metadata.permalink;
   const sourceFile = doc.metadata.source.replace('@site','');
@@ -87,7 +87,7 @@ export default function TOC({className, ...props}) {
   File: [${doc.metadata.title}](https://github.com/eosnetworkfoundation/docs/tree/main${sourceFile})
 `);
 
-  const suggestEditsLink = `https://github.com/eosnetworkfoundation/docs/edit/main${doc.metadata.source.replace('@site','')}`;
+  const suggestEditsLink = `https://github.com/eosnetworkfoundation/docs/edit/main${doc.metadata.source.replace('@site','').replace('docs/', 'native/')}`;
 
   useEffect(() => {
     Object.keys(allDocsData).forEach((key) => {

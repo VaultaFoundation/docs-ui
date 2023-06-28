@@ -2,8 +2,9 @@
 
 require('isomorphic-fetch');
 const fs = require('fs');
-const {findFiles} = require('./utils/find-files');
+const {findFiles} = require('./find-files');
 const exec = require('child_process').exec;
+const { rimrafSync } = require('rimraf')
 let lastCommitDates = [];
 
 
@@ -17,13 +18,12 @@ const deleteTempDirectory = () => {
 }
 
 const cloneRepoIntoTempDirectory = async (branch) => {
-    // create a temp directory
     deleteTempDirectory();
     await new Promise(r => setTimeout(r, 100));
     fs.mkdirSync(tempPath);
 
 
-    console.log(`Cloning ${repo} into ${tempPath}`);
+    console.log(`Cloning docs@${branch} into ${tempPath}`);
     const cloned = await new Promise((resolve, reject) => {
         exec(`git clone https://github.com/eosnetworkfoundation/docs.git .`, { cwd:tempPath }, (error, stdout, stderr) => {
             if (error) {
@@ -130,4 +130,4 @@ const generateLatestDocs = async (branch = "main") => {
 module.exports = {
     generateLatestDocs
 };
-
+generateLatestDocs();
