@@ -148,7 +148,7 @@ const config = {
             from: '/leapforward/',
           },
           {
-            to: '/docs/latest/eos-evm/',
+            to: '/evm/quick-start/introduction',
             from: '/docs/latest/eos-evm/getting_started/',
           },
           {
