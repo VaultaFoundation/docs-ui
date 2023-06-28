@@ -5,6 +5,7 @@ const manualsAndApiMd = require('./utils/manuals-and-api-md');
 const fs = require("fs-extra");
 const {removeTmpDir, createTmpDir} = require("./utils/create-temp-dir");
 const {generateSidebars} = require("./utils/generate-sidebar");
+const {generateLatestDocs} = require('./utils/generate-latest-docs');
 
 // get nodejs args
 const args = process.argv.slice(2);
@@ -34,6 +35,7 @@ const prepareDocs = async() => {
 
     await generateSidebars('docs');
     await generateSidebars('evm');
+    // await generateLatestDocs(docsBranchName);
 
     console.log(`Done in ${(Date.now() - startTime) / 1000}s`);
 

@@ -77,6 +77,7 @@ async function getLastCommitDate(filePath) {
 const generateLatestDocs = async (branch = "main") => {
     await cloneRepoIntoTempDirectory(branch);
 
+    console.log(`Finding docs in ${docsPath}`);
     const docs = findFiles(docsPath, '.md');
     console.log(`Found ${docs.length} docs in ${docsPath}`);
 

@@ -6,7 +6,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 export const RecentDocs = () => {
     const { siteConfig } = useDocusaurusContext();
 
-    const list = require('./latest-docs.json')
+    // const list = require('./latest-docs.json')
+    const list = [];
     const timeSince = (timestamp: number) => {
         const seconds = Math.floor((new Date().getTime() - timestamp) / 1000);
 
