@@ -3,6 +3,7 @@ const fs = require('fs-extra');
 const chokidar = require('chokidar');
 const manualsAndApiMd = require("./utils/manuals-and-api-md");
 const {generateSidebars} = require("./utils/generate-sidebar");
+const {generateLatestDocs} = require("./utils/generate-latest-docs");
 
 const docsFolderPath = process.argv.slice(2)[0];
 
@@ -30,12 +31,19 @@ let locked = false;
 const unlock = () => {
     locked = false;
 }
+
+const finalize = async () => {
+    await generateSidebars('docs');
+    await generateSidebars('evm');
+};
+
 const copyFiles = async (file = null) => {
     if(!file) {
         copyDirectory(`${absolutePath}/native`, "docs");
         copyDirectory(`${absolutePath}/images`, "static/images");
         copyDirectory(`${absolutePath}/evm`, "evm");
         await manualsAndApiMd();
+        await finalize();
         return;
     }
 
@@ -62,8 +70,7 @@ const copyFiles = async (file = null) => {
             fs.copySync(file, path.join("static/images", path.relative(`${absolutePath}/images/`, file)), { overwrite: true });
         }
 
-        await generateSidebars('docs');
-        await generateSidebars('evm');
+        await finalize();
 
         unlock();
     }, 100)

@@ -151,11 +151,10 @@ const config = {
             to: '/docs/latest/eos-evm/',
             from: '/docs/latest/eos-evm/getting_started/',
           },
-          // Redirect from multiple old paths to the new path
-          // {
-          //   to: '/docs/new/path',
-          //   from: ['/docs/old/path', '/docs/older/path'],
-          // },
+          {
+            to: '/evm/quick-start/introduction',
+            from: '/docs/latest/eos-evm/',
+          },
         ],
       },
     ]
@@ -236,16 +235,16 @@ const config = {
     main: {
       firstCards: [
         {
-          icon: '/icons/docs-icon.svg',
-          title: 'Learn The Basics',
-          subtitle: 'Everything you need to know about blockchain to get you started',
-          link: '/docs/latest/blockchain-basics/',
+          icon: 'icons/emerald-icon.svg',
+          title: 'Write your first EOS Native Smart Contract',
+          subtitle: 'Get building native smart contracts on the EOS Network in minutes',
+          link: '/docs/latest/quick-start/write-a-contract',
         },
         {
-          icon: 'icons/emerald-icon.svg', // docs
-          title: 'Smart Contracts',
-          subtitle: 'Learn how to develop smart contracts on EOS',
-          link: '/docs/latest/smart-contracts/getting-started/smart-contract-basics',
+          icon: '/icons/ethereum-logo.svg', // '/icons/docs-icon.svg',
+          title: 'Write your first EOS EVM Smart Contract',
+          subtitle: 'Take advantage of the raw power of the EOS Network using EVM smart contracts',
+          link: '/evm/smart-contracts/develop-with-remix',
         }
       ],
       secondCards: [
@@ -253,27 +252,27 @@ const config = {
           icon: 'icons/molecules-icon.svg',
           title: 'Create a Token',
           subtitle: 'Learn how to develop fungible tokens',
-          link: '/docs/latest/smart-contracts/tutorials/create-a-token',
+          link: '/docs/latest/guides/create-a-token',
           color: 'yellow',
         },
         {
           icon: '/icons/chat-icon.svg',
           title: 'Create an NFT',
           subtitle: 'Learn how to develop non-fungible tokens',
-          link: '/docs/latest/smart-contracts/tutorials/create-an-nft',
+          link: '/docs/latest/guides/create-an-nft',
           color: 'yellow',
         },
         {
           icon: '/icons/ref-icon.svg',
           title: 'Reference',
           subtitle: "Consult the API references explore the EOS RPC",
-          link: '/docs/latest/apis-and-manuals',
+          link: '/docs/latest/miscellaneous/apis-and-manuals',
         },
         {
           icon: '/icons/ethereum-logo.svg',
           title: 'EOS EVM',
           subtitle: 'Take advantage of the world\'s fastest EVM',
-          link: '/docs/latest/eos-evm/',
+          link: '/evm/quick-start/introduction',
         }
       ],
       wideCard: {
@@ -282,7 +281,7 @@ const config = {
         subtitle: `Migrate your apps to the world's fastest and cheapest EVM using tools and frameworks you're already familiar with.`,
         buttonText:'MIGRATE NOW',
         icon: '/icons/brief-case-icon.svg', //replace with required icon
-        href: '/docs/latest/eos-evm/smart-contracts/migrate-your-smart-contract/',
+        href: '/evm/smart-contracts/migrate-your-smart-contract',
       },
       signUp: {
         title: 'Sign up for developer alerts',
