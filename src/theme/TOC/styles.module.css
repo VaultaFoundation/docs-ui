@@ -27,6 +27,21 @@
   gap: 12px;
 }
 
+.contributorsLabel {
+  font-size: 11px;
+  margin-top: 20px;
+}
+
+.contributorsList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 12px;
+
+    font-size: 13px;
+    text-decoration: underline;
+}
+
 .linkContainerWithTOC {
   padding-bottom: 18px;
   margin-bottom: 10px;

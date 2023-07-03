@@ -89,6 +89,8 @@ export default function TOC({className, ...props}) {
 
   const suggestEditsLink = `https://github.com/eosnetworkfoundation/docs/edit/main${doc.metadata.source.replace('@site','').replace('docs/', 'native/')}`;
 
+  const { contributors } = doc.frontMatter;
+
   useEffect(() => {
     Object.keys(allDocsData).forEach((key) => {
       const { localKey, pluginId } = getPathKey(pathname);
@@ -123,46 +125,6 @@ export default function TOC({className, ...props}) {
 
   return (
     <div className={clsx(styles.tableOfContents, 'thin-scrollbar', className)}>
-      {/*<Select*/}
-      {/*  options={options}*/}
-      {/*  value={currentVersion}*/}
-      {/*  className={styles.select}*/}
-      {/*  onChange={handleOnChange}*/}
-      {/*  isSearchable={false}*/}
-      {/*  styles={{*/}
-      {/*    control: (provided, state) => ({*/}
-      {/*      ...provided,*/}
-      {/*      background: '#F4F5F6',*/}
-      {/*      borderRadius: '6px',*/}
-      {/*      height: '60px',*/}
-      {/*      width: '310px',*/}
-      {/*      margin: 'auto',*/}
-      {/*      outline: 'none',*/}
-      {/*      padding: '10px 24px'*/}
-      {/*    }),*/}
-      {/*    indicatorSeparator: (provided, state) => ({*/}
-      {/*      ...provided,*/}
-      {/*      display: 'none'*/}
-      {/*    }),*/}
-      {/*    dropdownIndicator: (provided, state) => ({*/}
-      {/*      ...provided,*/}
-      {/*      color: '#000000',*/}
-      {/*      padding: '0px 10px'*/}
-      {/*    }),*/}
-      {/*    menu: (provided, state) => ({*/}
-      {/*      ...provided,*/}
-      {/*      background: '#F4F5F6',*/}
-      {/*      borderRadius: '6px',*/}
-      {/*      width: '310px',*/}
-      {/*      margin: 'auto',*/}
-      {/*      outline: 'none',*/}
-      {/*    }),*/}
-      {/*    menuList: (provided, state) => ({*/}
-      {/*      ...provided,*/}
-      {/*      padding: '0px'*/}
-      {/*    }),*/}
-      {/*  }}*/}
-      {/*  />*/}
       {canEditOrSuggest && <div className={clsx(styles.linkContainer, props.toc.length && styles.linkContainerWithTOC)}>
         <a className={styles.link} href={suggestEditsLink} target="_blank">
           <FontAwesomeIcon icon={faBug} />&nbsp; Suggest Edits
@@ -171,6 +133,18 @@ export default function TOC({className, ...props}) {
           <FontAwesomeIcon icon={faCodePullRequest} />&nbsp; Request Changes
         </a>
       </div>}
+
+      {contributors && contributors.length && <section>
+        <figure className={styles.contributorsLabel}>Community authors</figure>
+        <section className={styles.contributorsList}>
+          {contributors.map((contributor, index) => (
+              <figure key={index}>
+                <a href={"https://github.com/"+contributor.github} target="_blank">{contributor.name}</a>
+              </figure>
+          ))}
+        </section>
+      </section>}
+
       <TOCItems
         {...props}
         linkClassName={LINK_CLASS_NAME}
