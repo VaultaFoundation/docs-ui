@@ -403,6 +403,7 @@ const config = {
         },
         prism: {
           theme: require('prism-react-renderer/themes/oceanicNext'),
+          additionalLanguages: ['solidity'],
           // theme: lightCodeTheme,
           // darkTheme: darkCodeTheme,
         },
