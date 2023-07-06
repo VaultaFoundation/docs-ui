@@ -32,14 +32,14 @@ export default function Home(): JSX.Element {
 
           {/*<RecentDocs />*/}
 
-          <IntakeForm />
+          <SignUp />
 
           <CardWrapper>
             {secondCards.map((item, index) => (
                 <Card key={index} icon={item.icon} title={item.title} subtitle={item.subtitle} link={item.link} color={item.color} />
             ))}
           </CardWrapper>
-          <SignUp />
+          <IntakeForm />
         </section>
       </section>
     </Layout>

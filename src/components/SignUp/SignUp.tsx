@@ -13,16 +13,24 @@ export const SignUp = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <H1 className={styles.title}>{title}</H1>
-        <P_XLarge className={styles.subtitle}>{subtitle}</P_XLarge>
-        <form action={action} method="POST" className={styles.form}>
-          <input type="hidden" name="u" value="d65a053d24b3cc087dfb925bb" />
-          <input type="hidden" name="id" value="be3f545626" />
-          <input type="hidden" name="orig-lang" value="1" />
-          <input className={styles.inputMobile} name="MERGE0" id="MERGE0" type="email" placeholder="Enter your email" pattern='' />
-          <input className={styles.inputDesktop} name="MERGE0" id="MERGE1" type="email" placeholder="Enter your email" />
-          <Button type="submit">{buttonText}</Button>
-        </form>
+        <H1 className={styles.title}>
+          Start Networking
+        </H1>
+        <P_XLarge className={styles.subtitle}>
+          Need help or want to help? Maybe you just want to chat with some like-minded developers.
+          Most journeys are less fun alone, <b>join the community</b>.
+        </P_XLarge>
+        <section className={styles.socials}>
+          <a href="https://github.com/eosnetworkfoundation" target="_blank" rel="noopener noreferrer">
+            <img className={styles.icons} src="/icons/github-icon.svg" alt="GitHub" />
+          </a>
+          <a href="https://discord.gg/XjVqej4uT5" target="_blank" rel="noopener noreferrer">
+            <img className={styles.icons} src="/icons/discord-icon.svg" alt="Discord" />
+          </a>
+          <a href="https://t.me/antelopedevs" target="_blank" rel="noopener noreferrer">
+            <img className={styles.icons} src="/icons/telegram-icon.svg" alt="Discord" />
+          </a>
+        </section>
       </div>
     </div>
   )

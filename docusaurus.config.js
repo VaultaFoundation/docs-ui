@@ -396,6 +396,11 @@ const config = {
                   href: 'https://discord.gg/XjVqej4uT5',
                   logo: '/icons/discord-icon.svg',
                 },
+                {
+                  label: 'Telegram',
+                  href: 'https://t.me/antelopedevs',
+                  logo: '/icons/telegram-icon.svg',
+                },
               ],
             },
           ],
