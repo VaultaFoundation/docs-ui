@@ -35,6 +35,7 @@
   /*--eos-color-gray: #F4F5F6;*/
   --eos-color-gray: #ececf5;
   --color-blue: #D1DAF0;
+  --eos-blue: #3F65C2;
   --color-yellow: #F0E9D8;
   --color-yellow-dark: #ccc1ab;
   --color-black: #B6B4B4;
@@ -462,6 +463,16 @@ article .markdown {
   gap: 24px;
 }
 
+article pre {
+  padding:0;
+  border-radius: 6px;
+  margin:20px 0;
+}
+
+article pre div {
+  border-radius: 6px;
+}
+
 .pagination-nav {
   display: flex;
   padding: 0 24px;
@@ -771,6 +782,22 @@ article .markdown {
   line-height: 30px;
 }
 
+.ask-the-ai {
+  cursor: pointer;
+  background: var(--eos-blue);
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 14px 20px;
+
+  font-weight: 400;
+  font-size: var(--font-size-large);
+  line-height: 27px;
+}
+
 .search-input-box {
   outline: none;
   border: none;
@@ -778,13 +805,14 @@ article .markdown {
   border-radius: 6px;
   width: 90%;
   margin: 0 auto;
-  padding: 16.5px 24px 16.5px 60px;
+  padding: 14px 20px;
 
   font-weight: 400;
   font-size: var(--font-size-large);
   line-height: 27px;
   color: var(--eos-color-light);
-  background-image: url('/icons/search-icon.svg');
+  /*background-image: url('/icons/search-icon.svg');*/
+  background-image: none;
   background-repeat: no-repeat;
   background-position: 24px 18px;
 }
@@ -792,6 +820,7 @@ article .markdown {
 .search-input-box::placeholder {
   color: var(--eos-color-light);
 }
+
 
 /* overriding Desktop menu styles */
 

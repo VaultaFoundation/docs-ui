@@ -69,146 +69,29 @@ function DocSearch({contextualSearch, externalUrlRegex, ...props}) {
     });
   }, []);
 
-  const onOpen = useCallback(() => {
-    importDocSearchModalIfNeeded().then(() => {
-      searchContainer.current = document.createElement('div');
-      document.body.insertBefore(
-        searchContainer.current,
-        document.body.firstChild,
-      );
-      setIsOpen(true);
-    });
-  }, [importDocSearchModalIfNeeded, setIsOpen]);
-
-  const onClose = useCallback(() => {
-    setIsOpen(false);
-    searchContainer.current?.remove();
-  }, [setIsOpen]);
-
-  const onInput = useCallback(
-    (event) => {
-      importDocSearchModalIfNeeded().then(() => {
-        setIsOpen(true);
-        setInitialQuery(event.key);
-      });
-    },
-    [importDocSearchModalIfNeeded, setIsOpen, setInitialQuery],
-  );
-
-  const navigator = useRef({
-    navigate({itemUrl}) {
-      // Algolia results could contain URL's from other domains which cannot
-      // be served through history and should navigate with window.location
-      if (isRegexpStringMatch(externalUrlRegex, itemUrl)) {
-        window.location.href = itemUrl;
-      } else {
-        history.push(itemUrl);
-      }
-    },
-  }).current;
-
-  const transformItems = useRef((items) =>
-    items.map((item) => {
-      // If Algolia contains a external domain, we should navigate without
-      // relative URL
-      if (isRegexpStringMatch(externalUrlRegex, item.url)) {
-        return item;
-      }
-      // We transform the absolute URL into a relative URL.
-      const url = new URL(item.url);
-      return {
-        ...item,
-        url: withBaseUrl(`${url.pathname}${url.hash}`),
-      };
-    }),
-  ).current;
-
-  const resultsFooterComponent = useMemo(
-    () =>
-      // eslint-disable-next-line react/no-unstable-nested-components
-      (footerProps) =>
-        <ResultsFooter {...footerProps} onClose={onClose} />,
-    [onClose],
-  );
-
-  const transformSearchClient = useCallback(
-    (searchClient) => {
-      searchClient.addAlgoliaAgent(
-        'docusaurus',
-        siteMetadata.docusaurusVersion,
-      );
-      return searchClient;
-    },
-    [siteMetadata.docusaurusVersion],
-  );
-
-  useDocSearchKeyboardEvents({
-    isOpen,
-    onOpen,
-    onClose,
-    onInput,
-    searchButtonRef,
-  });
 
   const onCustomInput = (event) => {
     if (event.key === 'Enter') {
-      const query = event.target.value;
-      const searchPageLink = withBaseUrl(`/search?q=${query}`);
-      navigator.navigate({itemUrl: searchPageLink});
+      // const query = event.target.value;
+      // const searchPageLink = withBaseUrl(`/search?q=${query}`);
+      // navigator.navigate({itemUrl: searchPageLink});
     }
   };
 
   return (
     <>
-      <Head>
-        {/* This hints the browser that the website will load data from Algolia,
-        and allows it to preconnect to the DocSearch cluster. It makes the first
-        query faster, especially on mobile. */}
-        <link
-          rel="preconnect"
-          href={`https://${props.appId}-dsn.algolia.net`}
-          crossOrigin="anonymous"
-        />
-      </Head>
-
+      <a href={withBaseUrl('/chatbot')}>
+        <button className='ask-the-ai'>
+          Ask the robots 👀
+        </button>
+      </a>
       {/*<input*/}
       {/*  className='search-input-box'*/}
       {/*  type="text"*/}
-      {/*  placeholder={translations.placeholder}*/}
+      {/*  // placeholder={translations.placeholder}*/}
+      {/*  placeholder="Ask the AI 🤖"*/}
       {/*  onKeyUp={onCustomInput}*/}
       {/*/>*/}
-
-      {/* <DocSearchButton
-        onTouchStart={importDocSearchModalIfNeeded}
-        onFocus={importDocSearchModalIfNeeded}
-        onMouseOver={importDocSearchModalIfNeeded}
-        onClick={onOpen}
-        ref={searchButtonRef}
-        translations={translations.button}
-      /> */}
-
-      {/* {isOpen &&
-        DocSearchModal &&
-        searchContainer.current &&
-        createPortal(
-          <DocSearchModal
-            onClose={onClose}
-            initialScrollY={window.scrollY}
-            initialQuery={initialQuery}
-            navigator={navigator}
-            transformItems={transformItems}
-            hitComponent={Hit}
-            transformSearchClient={transformSearchClient}
-            {...(props.searchPagePath && {
-              resultsFooterComponent,
-            })}
-            {...props}
-            searchParameters={searchParameters}
-            placeholder={translations.placeholder}
-            translations={translations.modal}
-          />,
-          searchContainer.current,
-        )} */}
     </>
   );
 }
