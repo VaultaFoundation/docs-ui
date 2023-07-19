@@ -239,6 +239,7 @@ const markdownToSymbols = (markdown) => {
 }
 
 const saveCache = (translationCache) => fs.writeFileSync('./translations/translated.json', JSON.stringify(translationCache, null, 2));
+// const saveCache = (translationCache) => {}
 
 const translateUI = async (languages, translationCache) => {
     execSync('npm run write-translations');
