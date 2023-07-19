@@ -28,3 +28,7 @@ evm/
 
 static/images/
 docs-temp/
+
+# We don't need the english versions, they are only used
+# to generate the other languages
+i18n/en/

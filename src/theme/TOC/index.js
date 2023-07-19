@@ -8,6 +8,8 @@ import styles from './styles.module.css';
 import { useLocation, useHistory } from '@docusaurus/router';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faBug, faCodePullRequest } from '@fortawesome/free-solid-svg-icons'
+import Translate from "@docusaurus/Translate";
+
 // Using a custom className
 // This prevents TOCInline/TOCCollapsible getting highlighted by mistake
 const suggestTitle = '<ENTER A TITLE HERE>';
@@ -77,7 +79,7 @@ export default function TOC({className, ...props}) {
   const {pathname} = location;
 
   const isVirtual = !!doc.frontMatter.virtual;
-  const isDocs = doc.metadata.source.includes('/docs/') || doc.metadata.source.includes('/evm/');
+  const isDocs = doc.metadata.permalink.includes('/docs/') || doc.metadata.permalink.includes('/evm/');
   const canEditOrSuggest = isDocs && !isVirtual;
   const suggestLink = doc.metadata.permalink;
   const sourceFile = doc.metadata.source.replace('@site','');
@@ -128,15 +130,15 @@ export default function TOC({className, ...props}) {
     <div className={clsx(styles.tableOfContents, 'thin-scrollbar', className)}>
       {canEditOrSuggest && <div className={clsx(styles.linkContainer, props.toc.length && styles.linkContainerWithTOC)}>
         <a className={styles.link} href={suggestEditsLink} target="_blank">
-          <FontAwesomeIcon icon={faBug} />&nbsp; Suggest Edits
+          <FontAwesomeIcon icon={faBug} />&nbsp; <Translate>Suggest Edits</Translate>
         </a>
         <a className={styles.link} href={`https://github.com/eosnetworkfoundation/docs/issues/new?body=${suggestBody}&title=${suggestTitle}`} target="_blank">
-          <FontAwesomeIcon icon={faCodePullRequest} />&nbsp; Request Changes
+          <FontAwesomeIcon icon={faCodePullRequest} />&nbsp; <Translate>Request Changes</Translate>
         </a>
       </div>}
 
       {contributors && contributors.length && <section>
-        <figure className={styles.contributorsLabel}>Community authors</figure>
+        <figure className={styles.contributorsLabel}><Translate>Community authors</Translate></figure>
         <section className={styles.contributorsList}>
           {contributors.map((contributor, index) => (
               <figure key={index}>

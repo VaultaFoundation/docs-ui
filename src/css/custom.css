@@ -1616,3 +1616,7 @@ b, strong {
 ol, ul, menu {
   padding-left:25px;
 }
+
+.navbar__items--right {
+  margin-top: 0;
+}

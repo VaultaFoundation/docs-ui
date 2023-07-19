@@ -1,14 +1,10 @@
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import React from 'react';
-import { Button } from '../Shared/Button/Button';
-import {H3, H2, P_XLarge, H1} from '../Shared/Typography/Typography';
+import {P_XLarge, H1} from '../Shared/Typography/Typography';
+import useBaseUrl from "@docusaurus/useBaseUrl";
 
 import styles from './styles.module.css';
 
 export const SignUp = () => {
-  const { siteConfig } = useDocusaurusContext();
-
-  const { title, subtitle, action, buttonText } = siteConfig.customFields.main.signUp;
 
   return (
     <div className={styles.container}>
@@ -22,13 +18,13 @@ export const SignUp = () => {
         </P_XLarge>
         <section className={styles.socials}>
           <a href="https://github.com/eosnetworkfoundation" target="_blank" rel="noopener noreferrer">
-            <img className={styles.icons} src="/icons/github-icon.svg" alt="GitHub" />
+            <img className={styles.icons} src={useBaseUrl("/icons/github-icon.svg")} alt="GitHub" />
           </a>
           <a href="https://discord.gg/XjVqej4uT5" target="_blank" rel="noopener noreferrer">
-            <img className={styles.icons} src="/icons/discord-icon.svg" alt="Discord" />
+            <img className={styles.icons} src={useBaseUrl("/icons/discord-icon.svg")} alt="Discord" />
           </a>
           <a href="https://t.me/antelopedevs" target="_blank" rel="noopener noreferrer">
-            <img className={styles.icons} src="/icons/telegram-icon.svg" alt="Discord" />
+            <img className={styles.icons} src={useBaseUrl("/icons/telegram-icon.svg")} alt="Discord" />
           </a>
         </section>
       </div>

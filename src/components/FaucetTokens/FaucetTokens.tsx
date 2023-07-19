@@ -3,7 +3,6 @@ import React from 'react';
 import styles from './styles.module.css';
 import {Button} from "@site/src/components/Shared/Button/Button";
 
-console.log('styles', styles);
 
 const sendTokens = () => {
     const address:string = (document.getElementById('eos-evm-address') as HTMLInputElement).value;
@@ -21,7 +20,7 @@ const sendTokens = () => {
     }).then(x => {
         return x.json();
     }).then(x => {
-        console.log(x);
+        console.log('Sending testnet tokens', x);
         document.getElementById('status').innerHTML = `Tokens sent!`;
     }).catch(err => {
         console.error(err);

@@ -11,6 +11,7 @@ function normalizeComponentType(type, props) {
 export default function NavbarItem({type, ...props}) {
   const componentType = normalizeComponentType(type, props);
   const NavbarItemComponent = ComponentTypes[componentType];
+
   if (!NavbarItemComponent) {
     throw new Error(`No NavbarItem component found for type "${type}".`);
   }

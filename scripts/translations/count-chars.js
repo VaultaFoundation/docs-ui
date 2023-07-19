@@ -25,3 +25,4 @@ const countChars = (dir) => {
 }
 
 countChars(`./docs`);
+countChars(`./evm`);

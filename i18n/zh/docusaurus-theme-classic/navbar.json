@@ -1,0 +1,18 @@
+{
+  "logo.alt": {
+    "message": "EOS 网络",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Native": {
+    "message": "原生的",
+    "description": "Navbar item with label Native"
+  },
+  "item.label.EVM": {
+    "message": "EVM",
+    "description": "Navbar item with label EVM"
+  },
+  "item.label.Video Courses": {
+    "message": "视频课程",
+    "description": "Navbar item with label Video Courses"
+  }
+}

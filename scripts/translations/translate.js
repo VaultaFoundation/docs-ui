@@ -3,14 +3,22 @@ const fs = require('fs');
 const path = require('path');
 const docusaurusConfig = require('../../docusaurus.config.js');
 const cliProgress = require('cli-progress');
+const yaml = require('js-yaml');
 
-const {TranslationServiceClient} = require('@google-cloud/translate');
 const crypto = require('crypto');
 const {execSync} = require('child_process');
 
 const { copyNonDocs } = require('./copy-non-md');
+const { translateText } = require('./translate-text');
 
-const DOCS_DIR = `./docs`;
+const getProperties = (doc) => {
+    // get everything between the first set of --- and the second set of ---
+    const frontMatter = doc.match(/---([\s\S]*?)---/)[1];
+    if(!frontMatter) return {};
+    return yaml.load(frontMatter);
+};
+
+
 
 // TODO: Tables are getting messed up (see supported-tokens.md) (actually, looks like they are only messed up in the preview, but not in the actual docs)
 
@@ -54,44 +62,16 @@ const pushSymbol = (type, content) => {
     });
 }
 
-const translationClient = new TranslationServiceClient(
-    {
-        projectId: process.env.GOOGLE_CLOUD_PROJECT_ID,
-        keyFilename: process.env.GOOGLE_CLOUD_KEY_FILE
-    }
-);
-
-const getTranslator = (targetLanguageCode) => {
-    return async (text) => {
-        return await getTranslation(text, targetLanguageCode);
-    }
-}
-
-const getTranslation = async (text, targetLanguageCode) => {
-    const request = {
-        parent: `projects/${process.env.GOOGLE_CLOUD_PROJECT_ID}/locations/global`,
-        contents: [text],
-        mimeType: 'text/plain',
-        sourceLanguageCode: 'en',
-        targetLanguageCode: targetLanguageCode,
-    };
-
-    const [response] = await translationClient.translateText(request);
-    if(response && response.translations && response.translations.length > 0){
-        return response.translations[0].translatedText;
-    }
-
-    return null;
+const finalizeTranslation = (translated) => {
+    translated = translated.replace(/！/g, '!');
 }
 
 
 const translate = async (doc, targetLanguageCode) => {
 
-    const translator = getTranslator(targetLanguageCode);
-
     splitDocIntoSymbols(doc);
 
-    let translatedTitle = await translator(symbols.find(symbol => symbol.type === SYMBOL_TYPE.TITLE).content);
+    let translatedTitle = await translateText(symbols.find(symbol => symbol.type === SYMBOL_TYPE.TITLE).content, targetLanguageCode);
     symbols = symbols.filter(symbol => symbol.type !== SYMBOL_TYPE.TITLE);
 
     const progressBar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
@@ -128,7 +108,7 @@ const translate = async (doc, targetLanguageCode) => {
                 continue;
             }
             linkText = linkText[1];
-            const translatedLinkText = await translator(linkText);
+            const translatedLinkText = await translateText(linkText, targetLanguageCode);
             if(!translatedLinkText){
                 console.error(`Translation failed for symbol: ${symbol}`);
                 translatedSymbols.push(symbol.content);
@@ -157,11 +137,13 @@ const translate = async (doc, targetLanguageCode) => {
         // translated string.
         const terminatedByWhitespace = symbol.content.endsWith(' ');
 
-        let translated = await translator(symbol.content);
+        let translated = await translateText(symbol.content, targetLanguageCode);
         if(translated){
             if(terminatedByWhitespace && !translated.endsWith(' ')){
                 translated += ' ';
             }
+
+            finalizeTranslation(translated);
             translatedSymbols.push(translated);
         } else {
             console.error(`Translation failed for symbol: ${symbol}`)
@@ -173,20 +155,20 @@ const translate = async (doc, targetLanguageCode) => {
     return translatedSymbols.join('');
 }
 
-const getAllDocs = () => {
+const getAllDocs = (dir) => {
     let files = [];
     const iterateFiles = (_files, _path = "") => {
         _files.map(file => {
             if(!path.extname(file)){
-                iterateFiles(fs.readdirSync(path.join(DOCS_DIR, _path, file)), _path + '/' + file);
+                iterateFiles(fs.readdirSync(path.join(dir, _path, file)), _path + '/' + file);
             }
             else if(path.extname(file) === '.md'){
-                files.push(path.normalize(path.join(DOCS_DIR, _path, file)).replace(/\\/g, '/'));
+                files.push(path.normalize(path.join(dir, _path, file)).replace(/\\/g, '/'));
             }
         });
     }
 
-    iterateFiles(fs.readdirSync(DOCS_DIR));
+    iterateFiles(fs.readdirSync(dir));
 
     return files;
 }
@@ -276,14 +258,13 @@ const translateUI = async (languages, translationCache) => {
             translationCache[language] = {};
         }
 
-        const translator = await getTranslator(language);
-
         const translateJson = async (json, hash, prop, saveTo) => {
             console.log(`Translating ${prop} for ${language}`);
             const translatedJson = {};
             if(!translationCache[language][prop] || translationCache[language][prop].hash !== codeHash){
                 for(const key in json){
-                    const translated = await translator(json[key].message);
+                    const translated = await translateText(json[key].message, language);
+                    console.log('translated', translated);
 
                     if(!translated){
                         console.error(`Translation failed for code.json key: ${key}`);
@@ -324,7 +305,8 @@ const translateDocs = async () => {
     const languages = docusaurusConfig.i18n.locales.filter(locale => locale !== 'en');
     // const languages = ['zh'];
 
-    let docPaths = getAllDocs();
+    let docPaths = getAllDocs('./docs').concat(getAllDocs('./evm'));
+
 
     const translationCache = JSON.parse(fs.readFileSync('./translations/translated.json', 'utf8'));
     for(const language of languages){
@@ -333,51 +315,54 @@ const translateDocs = async () => {
         }
     }
 
-    // for(let docPath of docPaths){
-    //     for(let language of languages){
-    //         const isTranslated = translationCache[language][docPath];
-    //         const doc = fs.readFileSync(docPath, 'utf8');
-    //         const hash = crypto.createHash('md5').update(doc).digest("hex");
-    //
-    //         const translateThisDoc = async () => {
-    //             const title = (x => x ? x[0] : docPath)(doc.match(/title:\s*(.+)/));
-    //             console.info(`\r\nTranslating ${title} to ${language}`);
-    //             const translated = await translate(doc, language);
-    //
-    //             const translatedDocPath = `./i18n/${language}/docusaurus-plugin-content-docs/current/${docPath.replace('docs/', '')}`;
-    //
-    //             fs.mkdirSync(path.dirname(translatedDocPath), { recursive: true });
-    //             fs.writeFileSync(translatedDocPath, translated);
-    //
-    //             translationCache[language][docPath] = {
-    //                 hash,
-    //                 timestamp: Date.now(),
-    //                 manually_translated: false,
-    //             };
-    //             saveCache(translationCache);
-    //
-    //             await new Promise(resolve => setTimeout(resolve, 1000));
-    //         }
-    //
-    //         if(!isTranslated){
-    //             await translateThisDoc();
-    //         } else {
-    //             if(translationCache[language][docPath].hash !== hash){
-    //                 await translateThisDoc();
-    //             }
-    //         }
-    //
-    //     }
-    // }
+    for(let docPath of docPaths){
+        const docPrefixPath = docPath.split('/')[0];
+        for(let language of languages){
+            const isTranslated = translationCache[language][docPath];
+            const doc = fs.readFileSync(docPath, 'utf8');
+            const hash = crypto.createHash('md5').update(doc).digest("hex");
+
+            const translateThisDoc = async () => {
+                const title = (x => x ? x[0] : docPath)(doc.match(/title:\s*(.+)/));
+                console.info(`\r\nTranslating ${title} to ${language}`);
+                const translatedDocPath = `./i18n/${language}/docusaurus-plugin-content-docs${docPrefixPath === 'docs' ? '' : `-${docPrefixPath}`}/current/${docPath.replace(`${docPrefixPath}/`, '')}`;
+
+                const translated = await translate(doc, language);
+
+
+                fs.mkdirSync(path.dirname(translatedDocPath), { recursive: true });
+                fs.writeFileSync(translatedDocPath, translated);
+
+                translationCache[language][docPath] = {
+                    hash,
+                    timestamp: Date.now(),
+                    manually_translated: false,
+                };
+                saveCache(translationCache);
+
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+
+            if(!isTranslated){
+                await translateThisDoc();
+            } else {
+                if(translationCache[language][docPath].hash !== hash){
+                    await translateThisDoc();
+                }
+            }
+
+        }
+    }
 
     // Translates the various UI elements
     await translateUI(languages, translationCache);
 
     // Copies over non-doc files like diagrams, images, etc.
-    copyNonDocs(languages);
+    // copyNonDocs('./docs', languages);
+    // copyNonDocs('./evm', languages);
 
 
     process.exit(0);
 }
 
-translateDocs(DOCS_DIR);
+translateDocs();

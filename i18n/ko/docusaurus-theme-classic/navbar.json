@@ -1,0 +1,18 @@
+{
+  "logo.alt": {
+    "message": "에오스",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Native": {
+    "message": "原",
+    "description": "Navbar item with label Native"
+  },
+  "item.label.EVM": {
+    "message": "EVM",
+    "description": "Navbar item with label EVM"
+  },
+  "item.label.Video Courses": {
+    "message": "视频课程",
+    "description": "Navbar item with label Video Courses"
+  }
+}
