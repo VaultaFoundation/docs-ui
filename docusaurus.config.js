@@ -27,7 +27,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'], // , 'zh', 'ko'
+    locales: ['en', 'zh', 'ko'],
     path: 'i18n',
     localeConfigs: {
       en: {
@@ -173,108 +173,10 @@ const config = {
         src: 'img/eosn_logo_light.png',
       },
       items: [
-        // {
-        //   type: 'dropdown',
-        //   label: 'Learn',
-        //   position: 'left',
-        //   items: [
-        //     {
-        //       label: 'Smart Contracts', // This label is used for mobile view
-        //       title: 'Smart Contracts',
-        //       subtitle: 'Learn to develop EOS smart contracts',
-        //       icon: '/icons/brief-case-icon.svg', //replace with required icon
-        //       href: '/docs/latest/smart-contracts/',
-        //     },
-        //     {
-        //       label: 'Node Operation',
-        //       title: 'Node Operation',
-        //       subtitle: 'Learn how to operate an EOS node',
-        //       icon: '/icons/db-icon.svg',
-        //       href: '/docs/latest/node-operation/',
-        //     },
-        //     {
-        //       label: 'Web Development',
-        //       title: 'Web Development',
-        //       subtitle: 'Learn to integrate EOS into your web app',
-        //       icon: '/icons/globe-icon.svg',
-        //       href: '/docs/latest/web-applications/',
-        //     },
-        //     {
-        //       label: 'EOS EVM',
-        //       title: 'EOS EVM',
-        //       subtitle: 'Learn to develop on EOS EVM',
-        //       icon: '/icons/box-icon.svg',
-        //       href: '/docs/latest/eos-evm/',
-        //     }
-        //   ],
-        // },
-        {
-          docId: 'native',
-          position: 'left',
-          label: 'Native',
-          to: '/docs/latest/quick-start/introduction',
-        },
-        {
-          docId: 'evm',
-          position: 'left',
-          label: 'EVM',
-          to: '/evm/quick-start/introduction',
-        },
-        {
-          docId: 'courses',
-          position: 'left',
-          label: 'Video Courses',
-          to: 'https://learn.eosnetwork.com/',
-        },
-        {
-          type: 'localeDropdown',
-          position: 'right',
-        },
+
       ],
     },
     main: {
-      firstCards: [
-        {
-          icon: 'icons/emerald-icon.svg',
-          title: 'Write your first EOS Native Smart Contract',
-          subtitle: 'Get building native smart contracts on the EOS Network in minutes',
-          link: '/docs/latest/quick-start/write-a-contract',
-        },
-        {
-          icon: '/icons/ethereum-logo.svg', // '/icons/docs-icon.svg',
-          title: 'Write your first EOS EVM Smart Contract',
-          subtitle: 'Take advantage of the raw power of the EOS Network using EVM smart contracts',
-          link: '/evm/smart-contracts/develop-with-remix',
-        }
-      ],
-      secondCards: [
-        {
-          icon: 'icons/molecules-icon.svg',
-          title: 'Create a Token',
-          subtitle: 'Learn how to develop fungible tokens',
-          link: '/docs/latest/guides/create-a-token',
-          color: 'yellow',
-        },
-        {
-          icon: '/icons/chat-icon.svg',
-          title: 'Create an NFT',
-          subtitle: 'Learn how to develop non-fungible tokens',
-          link: '/docs/latest/guides/create-an-nft',
-          color: 'yellow',
-        },
-        {
-          icon: '/icons/ref-icon.svg',
-          title: 'Reference',
-          subtitle: "Consult the API references explore the EOS RPC",
-          link: '/docs/latest/miscellaneous/apis-and-manuals',
-        },
-        {
-          icon: '/icons/ethereum-logo.svg',
-          title: 'EOS EVM',
-          subtitle: 'Take advantage of the world\'s fastest EVM',
-          link: '/evm/quick-start/introduction',
-        }
-      ],
       wideCard: {
         title: 'EOS EVM',
         tagline:'A brand new home for EVM developers',
@@ -326,10 +228,26 @@ const config = {
           // keep this items array as is, this is used just to let docosaurus know that something is there
           items: [
             {
-              type: 'doc',
-              docId: 'index',
+              docId: 'native',
               position: 'left',
-              label: 'Welcome',
+              label: 'Native',
+              to: '/docs/latest/quick-start/introduction',
+            },
+            {
+              docId: 'evm',
+              position: 'left',
+              label: 'EVM',
+              to: '/evm/quick-start/introduction',
+            },
+            {
+              docId: 'courses',
+              position: 'left',
+              label: 'Video Courses',
+              to: 'https://learn.eosnetwork.com/',
+            },
+            {
+              type: 'localeDropdown',
+              position: 'right',
             },
           ]
         },

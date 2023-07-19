@@ -86,7 +86,7 @@ li > ul > li > ul > li > ul {
 
 @font-face {
   font-family: "SuisseIntl-Bold";
-  src: url("/static/fonts/SuisseIntl-Bold.otf") format("otf");
+  src: url("@site/static/fonts/SuisseIntl-Bold.otf") format("otf");
   font-weight: 700;
 }
 
@@ -784,7 +784,7 @@ article .markdown {
   font-size: var(--font-size-large);
   line-height: 27px;
   color: var(--eos-color-light);
-  background-image: url('/icons/search-icon.svg');
+  background-image: url('@site/static/icons/search-icon.svg');
   background-repeat: no-repeat;
   background-position: 24px 18px;
 }
@@ -1600,4 +1600,19 @@ b, strong {
 
 .medium-zoom-image--opened {
   z-index: 9999999;
+}
+
+
+.card-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #000;
+}
+
+.card-p {
+
+}
+
+ol, ul, menu {
+  padding-left:25px;
 }

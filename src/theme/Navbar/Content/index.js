@@ -1,8 +1,8 @@
 import React from 'react';
 import {useThemeConfig} from '@docusaurus/theme-common';
 import {
-  splitNavbarItems,
-  useNavbarMobileSidebar,
+    splitNavbarItems,
+    useNavbarMobileSidebar,
 } from '@docusaurus/theme-common/internal';
 import NavbarItem from '@theme/NavbarItem';
 import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle';
@@ -15,53 +15,53 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useMediaQuery from '@site/src/hooks/useMediaQuery';
 
 function NavbarItems({items}) {
-  return (
-    <>
-      {items.map((item, i) => (
-        <NavbarItem {...item} key={i} />
-      ))}
-    </>
-  );
+    return (
+        <>
+            {items.map((item, i) => (
+                <NavbarItem {...item} key={i} />
+            ))}
+        </>
+    );
 }
 function NavbarContentLayout({left, right}) {
-  return (
-    <div className="navbar__inner">
-      <div className="navbar__items">{left}</div>
-      <div className="navbar__items navbar__items--right">{right}</div>
-    </div>
-  );
+    return (
+        <div className="navbar__inner">
+            <div className="navbar__items">{left}</div>
+            <div className="navbar__items navbar__items--right">{right}</div>
+        </div>
+    );
 }
 export default function NavbarContent() {
-  const matches = useMediaQuery('(max-width: 996px)');
+    const matches = useMediaQuery('(max-width: 996px)');
 
-  const {siteConfig} = useDocusaurusContext();
-  const items = siteConfig.customFields.navbar.items;
+    const {siteConfig, i18n} = useDocusaurusContext();
+    const {navbar: {items} = {}} = useThemeConfig();
 
-  const leftItems = items.filter((item) => item.position === 'left');
-  const rightItems = items.filter((item) => item.position === 'right');
+    const leftItems = items.filter((item) => item.position === 'left');
+    const rightItems = items.filter((item) => item.position === 'right');
 
-  const searchBarItem = items.find((item) => item.type === 'search');
+    const searchBarItem = items.find((item) => item.type === 'search');
 
-  return (
-    <NavbarContentLayout
-      left={
-        <>
-          {matches && <NavbarMobileSidebarToggle />}
-          <NavbarLogo />
-          <NavbarItems items={leftItems} />
-        </>
-      }
-      right={
-        // TODO stop hardcoding items?
-        // Ask the user to add the respective navbar items => more flexible
-        <>
-          <NavbarItems items={rightItems} />
-          <NavbarColorModeToggle className={styles.colorModeToggle} />
-            <NavbarSearch>
-                <SearchBar />
-            </NavbarSearch>
-        </>
-      }
-    />
-  );
+    return (
+        <NavbarContentLayout
+            left={
+                <>
+                    {matches && <NavbarMobileSidebarToggle />}
+                    <NavbarLogo />
+                    <NavbarItems items={leftItems} />
+                </>
+            }
+            right={
+                // TODO stop hardcoding items?
+                // Ask the user to add the respective navbar items => more flexible
+                <>
+                    <NavbarItems items={rightItems} />
+                    <NavbarColorModeToggle className={styles.colorModeToggle} />
+                    <NavbarSearch>
+                        <SearchBar />
+                    </NavbarSearch>
+                </>
+            }
+        />
+    );
 }

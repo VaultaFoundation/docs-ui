@@ -123,6 +123,7 @@ export default function TOC({className, ...props}) {
     history.push(newPath);
   }
 
+
   return (
     <div className={clsx(styles.tableOfContents, 'thin-scrollbar', className)}>
       {canEditOrSuggest && <div className={clsx(styles.linkContainer, props.toc.length && styles.linkContainerWithTOC)}>
