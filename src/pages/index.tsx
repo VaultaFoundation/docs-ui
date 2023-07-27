@@ -7,7 +7,7 @@ import { CardWrapper } from '../components/CardWrapper/CardWrapper';
 import Translate from "@docusaurus/Translate";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
-import { SignUp } from '../components/SignUp/SignUp';
+import { JoinCommunity } from '../components/JoinCommunity/JoinCommunity';
 import { IntakeForm } from '../components/IntakeForm/IntakeForm';
 
 export default function Home(): JSX.Element {
@@ -31,7 +31,7 @@ export default function Home(): JSX.Element {
                         </Card>
                     </CardWrapper>
 
-                    <SignUp />
+                    <JoinCommunity />
 
                     <CardWrapper>
                         <Card icon="icons/molecules-icon.svg" link={useBaseUrl("/docs/latest/guides/create-a-token")} color="yellow">

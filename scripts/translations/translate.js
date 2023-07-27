@@ -43,9 +43,7 @@ const DO_NOT_TRANSLATE = [
 const SYMBOL_TYPE = {
     TITLE: 'title',
     METADATA: 'metadata',
-    HEAD: 'head',
-    CODE_BLOCK: 'codeBlock',
-    CODE_SNIPPET: 'codeSnippet',
+    IGNORED: 'ignored',
     TEXT: 'text',
     LINK: 'link',
 }
@@ -82,17 +80,6 @@ const translate = async (doc, targetLanguageCode) => {
     for(const symbol of symbols){
         progressBar.update(++symbolIndex);
 
-
-        if(symbol.type === SYMBOL_TYPE.CODE_BLOCK){
-            translatedSymbols.push(`\`\`\`${symbol.content}\n\`\`\``);
-            continue;
-        }
-
-        if(symbol.type === SYMBOL_TYPE.CODE_SNIPPET){
-            translatedSymbols.push(`\`${symbol.content}\``);
-            continue;
-        }
-
         if(symbol.type === SYMBOL_TYPE.METADATA){
             const translated = symbol.content.replace(/title:\s*(.+)/, `title: ${translatedTitle}`);
             translatedSymbols.push(translated);
@@ -117,6 +104,12 @@ const translate = async (doc, targetLanguageCode) => {
                 translatedSymbols.push(symbol.content.replace(linkText, translatedLinkText));
             }
 
+            continue;
+        }
+
+
+        if(symbol.type === SYMBOL_TYPE.IGNORED){
+            translatedSymbols.push(symbol.content);
             continue;
         }
 
@@ -190,52 +183,72 @@ const splitDocIntoSymbols = (doc) => {
     markdownToSymbols(everythingAfter);
 }
 
+
 const markdownToSymbols = (markdown) => {
     let result = [];
-    let regex = /(```[\s\S]*?```|`.*?`|<head>.*?<\/head>|[^`]+)/g;
-    // TODO: Head still isn't working
-    // let regex = /(```[\s\S]*?```|`.*?`|<head>[\s\S]*?<\/head>|[^`]+)/g;
+    const regexes = {
+        head: new RegExp(/<head>([\s\S]*?)<\/head>/),
+        codeBlock: new RegExp(/```[\s\S]*?```/),
+        codeSnippet: new RegExp(/`[^`]*`/),
+        image: new RegExp(/!\[[^\]]*]\([^)]*\)/),
+        // matches markdown links (will include images, must be done after image search)
+        link: new RegExp(/\[[^\]]*]\([^)]*\)/),
+        // matches custom ignores, used in MDX
+        ignored: new RegExp(/<!-- translation-ignore -->[\s\S]*?<!-- end-translation-ignore -->/),
+        // finds only the |---|---| part of the table, doesn't attempt to match the content
+        tableSplitter: new RegExp(/\|[-]+\|[-]+\|/),
+        // matches only the > in the quotes, not the following texts
+        blockquote: new RegExp(/>(?=\s)/g),
+    }
+    const combinedRegex = Object.values(regexes).reduce((acc, regex) => {
+        return new RegExp(`${acc.source}|${regex.source}`, 'gs');
+    });
 
-    let matches = markdown.match(regex);
+    let foundSymbols = [];
+
+    const pushFoundSymbol = (type, content) => {
+        foundSymbols.push({ type, content });
+    }
+
+    let matches = markdown.match(combinedRegex);
     matches.forEach((match, i) => {
-        // Check if it is a code block.
-        if (match.startsWith('```') && match.endsWith('```')) {
-            pushSymbol(SYMBOL_TYPE.CODE_BLOCK, match.slice(3, -3).trim());
+        if (match.match(/<head>([\s\S]*?)<\/head>/)) {
+            console.log('Ignoring head');
+            pushFoundSymbol(SYMBOL_TYPE.HEAD, match);
         }
-        // Check if it is a code snippet.
-        else if (match.startsWith('`') && match.endsWith('`')) {
-            pushSymbol(SYMBOL_TYPE.CODE_SNIPPET, match.slice(1, -1).trim());
+        // image is too similar to link, needs to be ignored
+        // before looking for links
+        else if (match.match(/!\[[^\]]*]\([^)]*\)/g)) {
+            console.log('Found image');
+            pushFoundSymbol(SYMBOL_TYPE.IGNORED, match);
         }
-        // Check if it is a head
-        else if (match.startsWith('<head>') && match.endsWith('</head>')) {
-            pushSymbol(SYMBOL_TYPE.HEAD, match.slice(6, -7).trim());
+        else if (match.match(/\[[^\]]*]\([^)]*\)/g)) {
+            console.log('Found link');
+            pushFoundSymbol(SYMBOL_TYPE.LINK, match);
         }
-        // If it is not a code block or snippet, it is just plain text.
         else {
-            // Links should not be translated (causes issues with google translate)
-            const linkMatches = match.match(/\[.*?\]\(.*?\)/g);
-            if(linkMatches){
-                let lastIndex = 0;
-                for(const link of linkMatches){
-                    const index = match.indexOf(link, lastIndex);
-                    if(index > lastIndex) {
-                        pushSymbol(SYMBOL_TYPE.TEXT, match.substring(lastIndex, index));
-                    }
-
-                    pushSymbol(SYMBOL_TYPE.LINK, link);
-                    lastIndex = index + link.length;
-                }
-                if(lastIndex < match.length){
-                    pushSymbol(SYMBOL_TYPE.TEXT, match.substring(lastIndex));
-                }
-                return;
-            }
-
-            pushSymbol(SYMBOL_TYPE.TEXT, match);
+            pushFoundSymbol(SYMBOL_TYPE.IGNORED, match);
         }
     });
 
-    return result;
+    let lastIndex = 0;
+    for(const foundSymbol of foundSymbols){
+        const index = markdown.indexOf(foundSymbol.content, lastIndex);
+        if(index > lastIndex) {
+            result.push({ type: SYMBOL_TYPE.TEXT, content: markdown.substring(lastIndex, index) });
+        }
+
+        result.push(foundSymbol);
+        lastIndex = index + foundSymbol.content.length;
+    }
+
+    if(lastIndex < markdown.length){
+        result.push({ type: SYMBOL_TYPE.TEXT, content: markdown.substring(lastIndex) });
+    }
+
+    for(const symbol of result){
+        pushSymbol(symbol.type, symbol.content);
+    }
 }
 
 const saveCache = (translationCache) => fs.writeFileSync('./translations/translated.json', JSON.stringify(translationCache, null, 2));
@@ -303,10 +316,13 @@ const translateUI = async (languages, translationCache) => {
 
 const translateDocs = async () => {
 
+    const optionalFileArgument = process.argv[2];
+
     const languages = docusaurusConfig.i18n.locales.filter(locale => locale !== 'en');
     // const languages = ['zh'];
 
-    let docPaths = getAllDocs('./docs').concat(getAllDocs('./evm'));
+    let docPaths = optionalFileArgument ? [optionalFileArgument]
+        : getAllDocs('./docs').concat(getAllDocs('./evm'));
 
 
     const translationCache = JSON.parse(fs.readFileSync('./translations/translated.json', 'utf8'));
@@ -344,7 +360,7 @@ const translateDocs = async () => {
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
 
-            if(!isTranslated){
+            if(!isTranslated || optionalFileArgument){
                 await translateThisDoc();
             } else {
                 if(translationCache[language][docPath].hash !== hash){
@@ -355,12 +371,15 @@ const translateDocs = async () => {
         }
     }
 
-    // Translates the various UI elements
-    await translateUI(languages, translationCache);
+    if(!optionalFileArgument){
 
-    // Copies over non-doc files like diagrams, images, etc.
-    // copyNonDocs('./docs', languages);
-    // copyNonDocs('./evm', languages);
+        // Translates the various UI elements
+        await translateUI(languages, translationCache);
+
+        // Copies over non-doc files like diagrams, images, etc.
+        // copyNonDocs('./docs', languages);
+        // copyNonDocs('./evm', languages);
+    }
 
 
     process.exit(0);

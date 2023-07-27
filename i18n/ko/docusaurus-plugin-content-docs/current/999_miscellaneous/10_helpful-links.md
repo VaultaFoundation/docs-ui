@@ -8,3 +8,4 @@ title: 유용한 링크
 - [깃허브: EOS 파운데이션](https://github.com/eosnetworkfoundation)
 - [깃허브: 앤텔로프 프레임워크](https://github.com/antelopeio)
 - [트위터](https://twitter.com/EOSnFoundation)
+- [IBC 설명서](https://ibc-docs.uxnetwork.io/overview/)

@@ -2,6 +2,9 @@
 title: EVM 代币
 --- 
 
+<head>
+</head>测试
+
 那个 `EOS` 代币在 `EOS EVM` 的代币和上面的代币完全一样 `EOS Network`。
 
 这意味着 `EOS` 您在交易所看到的代币与您在交易所使用的代币相同 `EOS EVM`。但是，由于大多数 
@@ -9,11 +12,15 @@ title: EVM 代币
 
 ## 测试网水龙头
 
-从 “@site /src/components/faucetTokens/faucetTokens” 导入 faucetTokens；
-
 想要一些EOS代币来玩吗？点击下面的按钮，从测试网水龙头中获取一些。
 
+<!-- translation-ignore -->
+
+import FaucetTokens from '@site/src/components/FaucetTokens/FaucetTokens';
+
 <FaucetTokens />
+
+<!-- end-translation-ignore -->
 
 ## 从 EOS 到 EOS EVM 的桥梁
 
@@ -25,9 +32,10 @@ title: EVM 代币
 
 ### 来自交易所的桥接代币
 
->⚠ **免责声明：**
-> >并非所有交易所都支持向智能合约发送代币。根据您使用的交易所，您可能需要
->首先将代币发送到您自己的钱包，然后按照上一节中的说明进行操作。
+> ⚠ **免责声明：**
+> 
+> 并非所有交易所都支持向智能合约发送代币。根据您使用的交易所，您可能需要
+> 首先将代币发送到您自己的钱包，然后按照上一节中的说明进行操作。
 
 要将EOS代币从中心化交易所 (CEX) 提取到EOS EVM地址，请执行以下操作：
 
@@ -37,7 +45,7 @@ title: EVM 代币
 4.输入 `eosio.evm` 作为钱包地址
 5.输入您的 EOS EVM 公钥作为备忘录
 
-![EOS EVM 代币流量](/images/EOS-EVM_withdraw_from_CEX_to_wallet.png)
+![EOS EVM Token Flow](/images/EOS-EVM_withdraw_from_CEX_to_wallet.png)
 
 
 
@@ -58,10 +66,11 @@ title: EVM 代币
 
 ### 将代币桥接到交易所
 
->⚠ **免责声明：**
->>一些交易所尚不支持在EOS上跟踪内联转账，这使他们无法看到EOS EVM的转账。 
->如果您不确定您的交易所是否支持此功能，请先将代币桥接到原生EOS网络，然后将其发送
->到您的交易所账户。
+> ⚠ **免责声明：**
+>
+> 一些交易所尚不支持在EOS上跟踪内联转账，这使他们无法看到EOS EVM的转账。 
+> 如果您不确定您的交易所是否支持此功能，请先将代币桥接到原生EOS网络，然后将其发送
+> 到您的交易所账户。
 
 您可以按照上述相同的流程进行操作，但与其输入EOS账户，不如输入您的交易所账户名称。
 
@@ -77,5 +86,5 @@ title: EVM 代币
 ## 其他已知代币
 
 | 符号 | 代币名称 | 地址 |
-|------------------------------------------------------------------------
+|-----------|-----------------|------------------------------------------
 | WEOS | Wrapped EOS | 0xc00592aa41d32d137dc480d9f6d0df19b860104F |

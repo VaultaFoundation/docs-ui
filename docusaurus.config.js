@@ -301,26 +301,6 @@ const config = {
                 },
               ],
             },
-            {
-              title: 'Community',
-              items: [
-                {
-                  label: 'GitHub',
-                  href: 'https://github.com/eosnetworkfoundation',
-                  logo: '/icons/github-icon.svg',
-                },
-                {
-                  label: 'Discord',
-                  href: 'https://discord.gg/XjVqej4uT5',
-                  logo: '/icons/discord-icon.svg',
-                },
-                {
-                  label: 'Telegram',
-                  href: 'https://t.me/antelopedevs',
-                  logo: '/icons/telegram-icon.svg',
-                },
-              ],
-            },
           ],
           copyright: `Copyright © ${new Date().getFullYear()} EOS Network Foundation.`,
         },

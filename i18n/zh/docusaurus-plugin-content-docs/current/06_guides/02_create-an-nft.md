@@ -28,7 +28,7 @@ NFT 标准是所有 NFT 都必须遵守的一组规则。这允许 NFT 成为
 是最常见的 NFT 标准，被以太坊网络上的许多 NFT 所使用。如果你有
 见过 Bored Ape，它们是 ERC721 NFT。
 
-![无聊猿俱乐部示例](/images/boredapeclub.jpg)
+！[无聊猿俱乐部示例](/images/boredapeclub.jpg)
 
 ## 创建新合约
 
@@ -131,25 +131,25 @@ CONTRACT nft : public contract {
 那个 `mint` 操作用于创建新的 NFT。
 
 它需要两个参数：
--**to**-将拥有 NFT 的账户
--**token_id**-NFT 的 ID
+- `to` -将拥有 NFT 的账户
+- `token_id` -NFT 的 ID
 
 ### 转账
 
 那个 `transfer` action 用于将 NFT 从一个账户转移到另一个账户。
 
 它需要四个参数：
--**from**-目前拥有 NFT 的账户
--**to**-将拥有 NFT 的账户
--**token_id**-NFT 的 ID
--**memo**-交易中将包含的备忘录
+- `from` -目前拥有 NFT 的账户
+- `to` -将拥有 NFT 的账户
+- `token_id` -NFT 的 ID
+- `memo` -交易中将包含的备忘录
 
 ### balanceOf
 
 那个 `balanceof` action 用于获取账户余额。
 
 它需要一个参数：
--**所有者**-您想要获得余额的账户
+- `owner` -您想要获得余额的账户
 
 它返回一个 `uint64_t` 这是账户的余额。
 
@@ -158,7 +158,7 @@ CONTRACT nft : public contract {
 那个 `ownerof` 操作用于获取 NFT 的所有者。
 
 它需要一个参数：
--**token_id**-NFT 的 ID
+- `token_id` -NFT 的 ID
 
 它返回一个 `name` 这是拥有 NFT 的账户。
 
@@ -167,24 +167,24 @@ CONTRACT nft : public contract {
 那个 `approve` action 用于批准账户代表您转账 NFT。
 
 它需要两个参数：
--**to**-将被批准转移 NFT 的账户
--**token_id**-NFT 的 ID
+- `to` -将获准转移 NFT 的账户
+- `token_id` -NFT 的 ID
 
 ### ApproveAll
 
 那个 `approveall` action 用于批准一个账户代表您转移所有 NFT。
 
 它需要三个参数：
--**from**-目前拥有 NFT 的账户
--**to**-将被批准转移 NFT 的账户
--**已批准**-一个布尔值，用于确定账户是否获得批准
+- `from` -目前拥有 NFT 的账户
+- `to` -将获准转移 NFT 的账户
+- `approved` -一个布尔值，用于确定账户是否获得批准
 
 ### 获得批准
 
 那个 `getapproved` action 用于获取获准代表您转移 NFT 的账户。
 
 它需要一个参数：
--**token_id**-NFT 的 ID
+- `token_id` -NFT 的 ID
 
 它返回一个 `name` 这是获准转移 NFT 的账户。
 
@@ -193,8 +193,8 @@ CONTRACT nft : public contract {
 那个 `approved4all` action 用于获取账户是否获准代表您转移所有 NFT。
 
 它需要两个参数：
--**所有者**-目前拥有 NFT 的账户
--**approved_account**-你要检查的账户是否被批准转移 NFT
+- `owner` -目前拥有 NFT 的账户
+- `approved_account` -您要检查其是否获准转移 NFT 的账户
 
 它返回一个 `bool` 这是 `true` 如果该账户获准转移 NFT，以及 `false` 如果不是。
 
@@ -203,7 +203,7 @@ CONTRACT nft : public contract {
 那个 `gettokenuri` 操作用于获取 NFT 元数据的 URI。
 
 它需要一个参数：
--**token_id**-NFT 的 ID
+- `token_id` -NFT 的 ID
 
 它返回一个 `std::string` 这是 NFT 元数据的 URI。
 
@@ -212,7 +212,7 @@ CONTRACT nft : public contract {
 那个 `setbaseuri` 操作用于设置 NFT 元数据的基本 URI。
 
 它需要一个参数：
--**base_uri**-NFT 元数据的基本 URI
+- `base_uri` -NFT 元数据的基本 URI
 
 </details>
 
@@ -241,11 +241,11 @@ CONTRACT nft : public contract {
 ```
 
 我们已经为以下内容创建了单例表：
--**_owners**-从代币 ID 到 NFT 所有者的映射
--**_balances**-从所有者到他们拥有的 NFT 数量的映射
--**_approvals**-从代币 ID 到获准转移该 NFT 的账户的映射
--**_approvealls**-从所有者到获准转移所有 NFT 的账户的映射
--**_base_uris**-存储 NFT 元数据的基本 URI 的配置表
+- `_owners` -从代币 ID 到 NFT 所有者的映射
+- `_balances` -从所有者到他们拥有的 NFT 数量的映射
+- `_approvals` -从代币 ID 到获准转移该 NFT 的账户的映射
+- `_approvealls` -从所有者到获准转移所有 NFT 的账户的映射
+- `_base_uris` -存储 NFT 元数据的基本 URI 的配置表
 
 >❔ **表格命名**
 > > `singleton<"<TABLE NAME>"_n, <ROW TYPE>>`
