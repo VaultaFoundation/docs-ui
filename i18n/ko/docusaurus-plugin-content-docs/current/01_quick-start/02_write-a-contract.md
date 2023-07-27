@@ -57,4 +57,4 @@ CONTRACT mycontract : public contract {
 
 이제 화면이 다음과 같이 보일 것입니다.
 
-![이오스 웹 IDE](/images/native-web-ide-basics.png)
+![EOS Web IDE](/images/native-web-ide-basics.png)

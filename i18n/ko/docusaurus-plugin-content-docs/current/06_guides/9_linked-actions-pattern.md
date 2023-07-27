@@ -10,7 +10,8 @@ title: 링크드 액션 패턴
 이 패턴을 사용해야 하는 유일한 경우는 아니기 때문에 “연결된 액션 패턴”이라는 용어가 붙었습니다.
 
 예금 패턴을 예로 들어 이 거래가 어떤 모습일지 살펴보겠습니다.
-```- Transaction
+```
+- Transaction
     1. eosio.token::transfer (Token Transfer) 
         -[inline] mycontract::on_transfer (Notifiable Action Receiver) 
     2. mycontract::record (Regular Action)
@@ -56,11 +57,12 @@ ACTION record(name from, uint64_t internal_id, uint8_t status){
 계약에 적용되지만 토큰 전송 작업에서는 그렇게 할 수 없습니다. 왜냐하면 우리가 사용할 수 있는 것은 다음과 같기 때문입니다. 
 그 `memo` 필드는 문자열입니다.
 
->⚠ **성능 고려 사항**
-> >데이터를 얻기 위해 문자열 조작 및 변환을 할 수 있다고 짐작하셨을 것입니다.
->당신은 에 필요합니다 `memo` 필드이지만 권장되지 않습니다.더 `memo` 필드는 256으로 제한되지 않습니다.
->대부분의 토큰 계약에는 문자가 있지만 스마트 계약 내에서 문자열을 조작하는 것은 다음 중 하나입니다. 
->할 수 있는 가장 비용이 많이 드는 작업입니다.
+> ⚠ **성능 고려 사항**
+> 
+> 데이터를 얻기 위해 문자열 조작 및 변환을 할 수 있다고 짐작하셨을 것입니다.
+> 당신은 에 필요합니다 `memo` 필드이지만 권장되지 않습니다.더 `memo` 필드는 256으로 제한되지 않습니다.
+> 대부분의 토큰 계약에는 문자가 있지만 스마트 계약 내에서 문자열을 조작하는 것은 다음 중 하나입니다. 
+> 할 수 있는 가장 비용이 많이 드는 작업입니다.
 
 대신 Linked-action 패턴을 사용하여 토큰 전송이 이루어졌는지 확인할 수 있습니다.
 우리가 허용하기 전에 `record` 조치를 취하고 필요한 추가 정보를 전달할 수도 있습니다.
@@ -83,7 +85,7 @@ TABLE transfer_info {
 
 using _transfers = multi_index<"transfers"_n, transfer_info>;
 
-[[eosio::on_notify("eosio.token::transfer")]]
+[[eosio: :on_notify (“eosio.token: :전송”)]]
 void on_transfer(name from, name to, asset quantity, string memo){
     _transfers transfers( get_self(), get_self().value );
     transfers.emplace( get_self(), [&]( auto& row ) {
@@ -93,10 +95,11 @@ void on_transfer(name from, name to, asset quantity, string memo){
 }
 ```
 
->⚠ **경고**
->>더 많은 검사를 받아야 합니다. `on_transfer` 이 예제에서 보여드린 것보다 말이죠.이 가이드는 그렇지 않습니다
->보안에 대해서는 명확성을 위해 이러한 검사를 생략하고 있지만 토큰 이벤트 수신기를 배포해서는 안 됩니다.
->이런 식으로 생산하고 있습니다.
+> ⚠ **경고**
+>
+> 더 많은 검사를 받아야 합니다. `on_transfer` 이 예제에서 보여드린 것보다 말이죠.이 가이드는 그렇지 않습니다
+> 보안에 대해서는 명확성을 위해 이러한 검사를 생략하고 있지만 토큰 이벤트 수신기를 배포해서는 안 됩니다.
+> 이런 식으로 생산하고 있습니다.
 
 그런 다음, 우리의 `record` 조치를 취하면 전송이 존재하는지 확인할 수 있으며, 존재하는 경우 다음을 수행할 수 있습니다.
 테이블에서 삭제하여 RAM을 비우고 로직을 수행하십시오.

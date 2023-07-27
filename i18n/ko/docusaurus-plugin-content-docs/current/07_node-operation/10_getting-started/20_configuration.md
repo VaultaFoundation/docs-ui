@@ -12,13 +12,13 @@ title: 구성
 
 따라서, `config.ini` 파일은 노드 작동에 직접적인 영향을 미칩니다.대부분의 노드 운영자는 이 파일을 편집하고 사용자 지정하여 노드에 특정 역할을 할당합니다.
 
->ℹ️ `nodeos` 명령줄 인터페이스 (CLI) 옵션 중 하나를 사용하여 구성할 수 있습니다. `config.ini` 파일 또는 둘 다반면, 노드별 옵션은 명령줄을 통해서만 지정할 수 있습니다.사용 가능한 모든 CLI 옵션을 보려면 `config.ini` 옵션, 터미널에서 “nodeos --help”를 실행하십시오.
+> ℹ️ `nodeos` 명령줄 인터페이스 (CLI) 옵션 중 하나를 사용하여 구성할 수 있습니다. `config.ini` 파일 또는 둘 다반면, 노드별 옵션은 명령줄을 통해서만 지정할 수 있습니다.사용 가능한 모든 CLI 옵션을 보려면 `config.ini` 옵션, 터미널에서 “nodeos --help”를 실행하십시오.
 
 ### CLI 옵션 vs. `config.ini`
 
 의 모든 옵션 `config.ini` 파일을 CLI 옵션으로 지정할 수도 있습니다.예를 들어, `plugin = arg` 옵션 입력 `config.ini` 를 통해 전달할 수도 있습니다. `--plugin arg` CLI 옵션.그러나 그 반대가 항상 그렇지는 않습니다. 모든 CLI 옵션에 동일한 항목이 있는 것은 아닙니다. `config.ini` 파일.예를 들어, 즉각적인 작업을 수행하는 플러그인 관련 옵션은 다음과 같습니다. `--delete-state-history` 에서 `state_history_plugin`, 에서 지정할 수 없습니다. `config.ini` 파일.
 
->ℹ️ 대부분의 노드 운영자가 선호 `config.ini` CLI 옵션에 대한 옵션그 이유는 `config.ini` 시작 시 지정된 CLI 옵션과 달리 구성 상태를 유지합니다. `nodeos`.
+> ℹ️ 대부분의 노드 운영자가 선호 `config.ini` CLI 옵션에 대한 옵션그 이유는 `config.ini` 시작 시 지정된 CLI 옵션과 달리 구성 상태를 유지합니다. `nodeos`.
 
 ### 커스텀 `config.ini`
 
@@ -29,7 +29,8 @@ title: 구성
 <details>
 <summary>다음은 공통 값이 제공된 간단한 예제입니다.</summary>
 
-```# Specify the Access-Control-Allow-Origin to be returned on each request (eosio::http_plugin)
+```
+# Specify the Access-Control-Allow-Origin to be returned on each request (eosio::http_plugin)
 access-control-allow-origin = *
 
 # The name supplied to identify this node amongst the peers. (eosio::net_plugin)
@@ -79,7 +80,7 @@ plugin = eosio::trace_api_plugin
 
 이 섹션에서는 노드 동작에 영향을 미치는 가장 일반적인 플러그인 옵션을 다룹니다.이러한 옵션은 항상 플러그인에 따라 다릅니다.이는 생산 노드, 릴레이 노드, API 노드 등으로 작동하도록 구성된 노드에 해당됩니다.
 
->ℹ️ 다음 플러그인은 다음과 같은 경우 기본적으로 활성화됩니다. `nodeos` 출시: `chain_plugin`, `net_plugin`, `producer_plugin`, `resource_monitor_plugin`.따라서 다시 로드할 필요가 없습니다. 
+> ℹ️ 다음 플러그인은 다음과 같은 경우 기본적으로 활성화됩니다. `nodeos` 출시: `chain_plugin`, `net_plugin`, `producer_plugin`, `resource_monitor_plugin`.따라서 다시 로드할 필요가 없습니다. 
 
 ### `plugin` 선택권
 
@@ -132,7 +133,7 @@ plugin = eosio::trace_api_plugin
 
 CORS (Cross-Origin Resource Sharing) 는 브라우저 클라이언트의 스크립트가 다양한 출처의 리소스와 상호 작용할 수 있도록 하는 프로토콜입니다.이는 JavaScript가 일반적으로 동일 출처 정책에 의해 제한되어 스크립트 위치와 다른 출처에 있는 URL에 대한 요청을 보내는 기능을 제한하기 때문에 필요합니다.예를 들어 JavaScript 애플리케이션이 다른 도메인에서 호스팅되는 API에 대해 AJAX 호출을 하려는 경우 동일 출처 정책으로 인해 차단될 수 있습니다.
 
->ℹ️ CORS는 웹 분산형 애플리케이션 (dApp) 에 중요합니다. CORS가 없으면 원격 호스트에서 RPC API가 호출되어 API 노드가 차단될 수 있다고 말하기 때문입니다.
+> ℹ️ CORS는 웹 분산형 애플리케이션 (dApp) 에 중요합니다. CORS가 없으면 원격 호스트에서 RPC API가 호출되어 API 노드가 차단될 수 있다고 말하기 때문입니다.
 
 ### CORS가 필요한 이유는 무엇입니까?
 
@@ -148,15 +149,17 @@ CORS (Cross-Origin Resource Sharing) 는 브라우저 클라이언트의 스크�
 
 여러 헤더를 설정할 수 있지만 리소스 접근성을 결정하는 기본 헤더는 `Access-Control-Allow-Origin`.이 헤더는 리소스에 액세스할 수 있는 출처를 지정합니다.예를 들어, 모든 출처에서 액세스를 허용하려면 헤더를 다음과 같이 설정할 수 있습니다.
 
-```Access-Control-Allow-Origin: *
+```
+Access-Control-Allow-Origin: *
 ```
 
 또는 특정 출처로 제한할 수도 있습니다.
 
-```Access-Control-Allow-Origin: https://sample.io
+```
+Access-Control-Allow-Origin: https://sample.io
 ```
 
->ℹ️ 웹 DApp으로 실행되는 블록체인 애플리케이션의 맥락에서, `nodeos` 를 제공합니다 `access-control-allow-origin` 다른 출처에서의 액세스를 제어하는 옵션예를 들어 EOS API 노드에서 이 옵션을 사용하여 선택한 원격 호스트에 액세스 권한을 부여할 수 있습니다.
+> ℹ️ 웹 DApp으로 실행되는 블록체인 애플리케이션의 맥락에서, `nodeos` 를 제공합니다 `access-control-allow-origin` 다른 출처에서의 액세스를 제어하는 옵션예를 들어 EOS API 노드에서 이 옵션을 사용하여 선택한 원격 호스트에 액세스 권한을 부여할 수 있습니다.
 
 ## 요약
 

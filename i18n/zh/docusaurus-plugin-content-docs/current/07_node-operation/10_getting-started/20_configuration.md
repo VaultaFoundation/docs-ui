@@ -12,13 +12,13 @@ title: 配置
 
 因此， `config.ini` 文件对节点的操作有直接影响。大多数节点操作员都会编辑和自定义此文件，为其节点分配特定的角色。
 
->ℹ️ `nodeos` 可以使用命令行接口 (CLI) 选项进行配置， `config.ini` 文件，或两者兼而有之。另一方面，特定于 NodeOS 的选项只能通过命令行指定。查看所有可用的 CLI 选项以及 `config.ini` 选项，从终端启动 “nodeos--help”。
+> ℹ️ `nodeos` 可以使用命令行接口 (CLI) 选项进行配置， `config.ini` 文件，或两者兼而有之。另一方面，特定于 NodeOS 的选项只能通过命令行指定。查看所有可用的 CLI 选项以及 `config.ini` 选项，从终端启动 “nodeos--help”。
 
 ### CLI 选项与 `config.ini`
 
 所有选项都来自 `config.ini` 也可以将文件指定为 CLI 选项。例如， `plugin = arg` 选项在 `config.ini` 也可以通过 `--plugin arg` 命令行界面选项。但是，情况并非总是恰恰相反：并非每个 CLI 选项都有等效的条目 `config.ini` 文件。例如，执行即时操作的特定于插件的选项，比如 `--delete-state-history` 来自 `state_history_plugin`，无法在中指定 `config.ini` 文件。
 
->ℹ️ 大多数节点运营商更喜欢 `config.ini` 选项而不是 CLI 选项。这是因为 `config.ini` 将保留配置状态，这与启动时指定的 CLI 选项不同 `nodeos`。
+> ℹ️ 大多数节点运营商更喜欢 `config.ini` 选项而不是 CLI 选项。这是因为 `config.ini` 将保留配置状态，这与启动时指定的 CLI 选项不同 `nodeos`。
 
 ### 自定义 `config.ini`
 
@@ -29,7 +29,8 @@ title: 配置
 <details>
 <summary>以下是提供常用值的简单示例：</summary>
 
-```# Specify the Access-Control-Allow-Origin to be returned on each request (eosio::http_plugin)
+```
+# Specify the Access-Control-Allow-Origin to be returned on each request (eosio::http_plugin)
 access-control-allow-origin = *
 
 # The name supplied to identify this node amongst the peers. (eosio::net_plugin)
@@ -79,7 +80,7 @@ plugin = eosio::trace_api_plugin
 
 本节介绍影响节点行为的最常见插件选项。这些选项始终是特定于插件的。对于配置为作为生产节点、中继节点、API 节点等运行的节点，情况确实如此。
 
->ℹ️ 以下插件在以下情况下默认处于启用状态 `nodeos` 已启动： `chain_plugin`, `net_plugin`, `producer_plugin`, `resource_monitor_plugin`。因此，没有必要再次加载它们 
+> ℹ️ 以下插件在以下情况下默认处于启用状态 `nodeos` 已启动： `chain_plugin`, `net_plugin`, `producer_plugin`, `resource_monitor_plugin`。因此，没有必要再次加载它们 
 
 ### `plugin` 选项
 
@@ -132,7 +133,7 @@ plugin = eosio::trace_api_plugin
 
 跨源资源共享 (CORS) 是一种协议，它使浏览器客户端上的脚本能够与来自不同来源的资源进行交互。这是必要的，因为 JavaScript 通常受到同源策略的限制，该策略限制了它向位于与脚本所在位置不同的来源的 URL 发出请求的能力。例如，如果 JavaScript 应用程序想要对托管在其他域上的 API 进行 AJAX 调用，则由于同源策略，该应用程序将被阻止。
 
->ℹ️ CORS 对于 Web 去中心化应用程序 (dApps) 很重要，因为没有它，来自远程主机的 RPC API 调用来表示 API 节点可能会被阻止。
+> ℹ️ CORS 对于 Web 去中心化应用程序 (dApps) 很重要，因为没有它，来自远程主机的 RPC API 调用来表示 API 节点可能会被阻止。
 
 ### 为什么需要 CORS？
 
@@ -148,15 +149,17 @@ plugin = eosio::trace_api_plugin
 
 可以设置多个标头，但决定资源可访问性的主要标头是 `Access-Control-Allow-Origin`。此标头指定了允许访问资源的来源。例如，要允许从任何来源进行访问，可以将标头设置为：
 
-```Access-Control-Allow-Origin: *
+```
+Access-Control-Allow-Origin: *
 ```
 
 或者，也可以将其限制在特定的来源：
 
-```Access-Control-Allow-Origin: https://sample.io
+```
+Access-Control-Allow-Origin: https://sample.io
 ```
 
->ℹ️ 在区块链应用程序作为 Web dApp 运行的背景下， `nodeos` 提供了 `access-control-allow-origin` 用于控制来自其他来源的访问权限的选项。例如，EOS API 节点可以使用此选项授予对选定远程主机的访问权限。
+> ℹ️ 在区块链应用程序作为 Web dApp 运行的背景下， `nodeos` 提供了 `access-control-allow-origin` 用于控制来自其他来源的访问权限的选项。例如，EOS API 节点可以使用此选项授予对选定远程主机的访问权限。
 
 ## 摘要
 

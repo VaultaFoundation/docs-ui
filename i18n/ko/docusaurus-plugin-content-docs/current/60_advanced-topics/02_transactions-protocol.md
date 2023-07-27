@@ -64,171 +64,171 @@ EOS 스마트 계약은 다음에서 파생되는 C++ 클래스로 구현됩니�
 -|-|-
 `expiration` | `time_point_sec` | 거래가 만료되기 전까지 확인되어야 하는 시간
 `ref_block_num` | `uint16_t` | 마지막 $2^ {16} $ 블록에 있는 블록 번호의 하위 16비트
-`ref_block_prefix` | `uint32_t` | 에서 참조하는 블록 ID의 하위 32비트 ref_block_num'
-`max_net_usage_words` | `unsigned_int` | 청구되는 총 네트워크 대역폭의 상한선 (64비트 단어)
-`max_cpu_usage_ms` | `uint8_t` | 청구되는 총 CPU 시간의 상한선 (밀리초 단위)
-`delay_sec` | `unsigned_int` | 트랜잭션을 지연하는 데 걸리는 시간 (초)
-`context_free_actions` | 배열 `action` | 컨텍스트가 없는 작업 목록 (있는 경우)
-`actions` | 배열 `action` | 목록 [액션 인스턴스](#343-action-instance)
-`transaction_extensions` | `extensions_type` | 필드를 확장하여 추가 기능 지원
-`signatures` | 배열 `signature_type` | 거래 서명 후 디지털 서명
-`context_free_data` | 배열 `bytes` | 컨텍스트가 없는 작업 데이터 (있는 경우 전송 가능)
+`ref_block_prefix` | `uint32_t` | 에서 참조하는 블록 ID의 하위 32비트 `ref_block_num'
+`최대 순사용량_단어` | `unsignned_int` | upper limit on total network bandwidth billed (in 64-bit words)
+`최대_CPU_사용량_밀리초` | `uint8_t` | upper limit on total CPU time billed (in milliseconds)
+`지연_초` | `unsignned_int` | number of seconds to delay transaction for
+`컨텍스트_프리_액션` | array of `동작` | list of context-free actions if any
+`행위` | array of `동작` | list of [액션 인스턴스](#343-action-instance)
+`트랜잭션_확장` | `확장_유형` | extends fields to support additional features
+`서명` | array of `서명_유형` | digital signatures after transaction is signed
+`컨텍스트_프리_데이터` | array of `바이트` | context-free action data to send if any
 
 
-### 2.3.패킹 트랜잭션 인스턴스
+### 2.3. Packed Transaction Instance
 
-압축 트랜잭션은 선택적으로 압축된 서명된 트랜잭션으로, 압축을 해제하고 신속하게 검증할 수 있도록 하우스키핑 필드를 추가할 수 있습니다.패키지 트랜잭션은 장기적으로 공간 풋프린트와 블록 크기를 최소화합니다 (참조). `packed_transaction` 아래 스키마).팩 트랜잭션은 EOS 블록체인에서 가장 일반적인 유형의 트랜잭션을 형성합니다.따라서 트랜잭션이 블록으로 푸시되면 압축 여부에 관계없이 실제로는 압축된 트랜잭션입니다.
+A packed transaction is an optionally compressed signed transaction with additional housekeeping fields to allow for decompression and quick validation. Packed transactions minimize space footprint and block size in the long run (see `포장 트랜잭션` schema below). A packed transaction forms the most generic type of transaction in the EOS blockchain. Consequently, when transactions are pushed to a block, they are actually packed transactions whether compressed or not.
 
-#### 패킹된 트랜잭션 스키마
+#### packed_transaction schema
 
-이름 | 유형 | 설명
+Name | Type | Description
 -|-|-
-`signatures` | `signature_type` | 거래 서명 후 디지털 서명
-`compression` | `compression_type` | 압축 방법 사용
-`packed_context_free_data` | `bytes` | 컨텍스트가 없는 압축된 데이터 (트랜잭션이 압축된 경우)
-`packed_trx` | `bytes` | 압축된 트랜잭션 (압축된 경우)
-`unpacked_trx` | `signed_transaction` | 캐시된 압축 해제된 트랜잭션
-`trx_id` | `transaction_id_type` | 거래 ID
+`서명` | `서명_유형` | digital signatures after transaction is signed
+`압축` | `압축_유형` | compression method used
+`패킹된_컨텍스트_무료_데이터` | `바이트` | compressed context-free data (if transaction compressed)
+`packed_trx` | `바이트` | compressed transaction (if compressed)
+`언팩드_trx` | `서명된_거래` | cached decompressed transaction
+`trx_id` | `트랜잭션_ID_유형` | transaction ID
 
-더 `unpacked_trx` field는 트랜잭션 인스턴스가 생성된 후 캐시된 압축이 풀린 트랜잭션을 보유합니다.서명된 트랜잭션이 이전에 압축된 경우 압축이 풀립니다. `packed_trx` 필드 및 캐시 대상 `unpacked_trx`.서명된 트랜잭션이 압축되지 않은 상태로 저장된 경우 간단히 다음 위치에 그대로 복사됩니다. `unpacked_trx`.더 `signatures` 필드를 사용하면 트랜잭션을 완전히 압축 해제하지 않고도 트랜잭션의 빠른 서명 검증을 수행할 수 있습니다.
-
-
-## 3.트랜잭션 라이프사이클
-
-거래는 수명 기간 동안 다양한 단계를 거칩니다.먼저, 관련 작업을 트랜잭션에 푸시하여 애플리케이션 또는 Cleos와 같은 EOS 클라이언트에서 트랜잭션을 생성합니다.그런 다음 트랜잭션은 로컬로 연결된 노드로 전송되고, 이 노드는 이를 P2P 네트워크를 통해 검증 및 실행을 위해 활성 생산 노드로 전달합니다.다음으로, 유효한 트랜잭션은 다른 트랜잭션과 함께 일정에 따라 활성 생산자에 의해 블록으로 푸시됩니다.마지막으로 트랜잭션을 포함하는 블록이 검증을 위해 다른 모든 노드로 푸시됩니다.생산자의 과반수가 블록을 검증하고 블록이 되돌릴 수 없게 되면 트랜잭션은 블록체인에 영구적으로 기록되고 변경할 수 없는 것으로 간주됩니다.
+The `언팩드_trx` field holds the cached unpacked transaction after the transaction instance is constructed. If the signed transaction was previously compressed, it is decompressed from the `packed_trx` field and cached to `언팩드_trx`. If the signed transaction was stored uncompressed, it is simply copied verbatim to `언팩드_trx`. The `서명` field allows a quick signature validation of the transaction without requiring a full decompression of the transaction.
 
 
-### 3.1.거래 생성
+## 3. Transaction Lifecycle
 
-트랜잭션은 트랜잭션 객체를 인스턴스화하고 관련 작업 인스턴스를 트랜잭션 인스턴스 내의 목록으로 푸시하여 애플리케이션 내에서 생성됩니다.액션 인스턴스에는 액션을 받을 대상 수신자 계정에 대한 실제 세부 정보, 액션의 이름, 서명과 지연을 통해 트랜잭션을 승인해야 하는 행위자 목록 및 권한 수준, 전송될 실제 메시지 (있는 경우) 에 대한 실제 세부 정보가 포함됩니다 (참조). `action` 아래 스키마).
+Transactions go through various stages during their lifespan. First, a transaction is created in an application or an EOS client such as cleos by pushing the associated actions into the transaction. Next, the transaction is sent to the locally connected node, which in turn relays it to the active producing nodes for validation and execution via the peer-to-peer network. Next, the validated transaction is pushed to a block by the active producer on schedule along with other transactions. Finally the block that contains the transaction is pushed to all other nodes for validation. When a supermajority of producers have validated the block, and the block becomes irreversible, the transaction gets permanently recorded in the blockchain and it is considered immutable.
 
-#### 액션 스키마
 
-이름 | 유형 | 설명
+### 3.1. Create Transaction
+
+Transactions are created within an application by instantiating a transaction object and pushing the related action instances into a list within the transaction instance. An action instance contains the actual details about the receiver account to whom the action is intended, the name of the action, the list of actors and permission levels that must authorize the transaction via signatures and delays, and the actual message to be sent, if any (see `동작` schema below).
+
+#### action schema
+
+Name | Type | Description
 -|-|-
-`account` | `name` | 인코딩된 13자 계정 이름
-`action_name` | `name` | 인코딩된 13자 액션 이름
-`authorization` | 배열 `permission_level` | 목록 `actor:permission` 승인
-`data` | `bytes` | 전송할 작업 데이터
+`계정` | `이름` | encoded 13-char account name
+`액션_이름` | `이름` | encoded 13-char action name
+`권한 부여` | array of `권한 수준` | list of `액터:권한` authorizations
+`데이터` | `바이트` | action data to send
 
-애플리케이션 수준에서 트랜잭션 인스턴스가 생성되면 트랜잭션이 처리되도록 정렬됩니다.여기에는 트랜잭션에 서명하는 단계와 트랜잭션의 실제 전파 및 실행을 위해 서명된 트랜잭션을 로컬 노드로 푸시하는 두 가지 주요 단계가 포함됩니다.이러한 단계는 일반적으로 EOS 애플리케이션 내에서 수행됩니다.
+After the transaction instance is created at the application level, the transaction is arranged for processing. This involves two main steps: signing the transaction and pushing the signed transaction to the local node for actual propagation and execution of the transaction. These steps are typically performed within the EOS application.
 
 
-## 3.2.거래 서명
+### 3.2. Sign Transaction
 
-누적된 명시적 세트를 만족시키기에 충분한 키 집합으로 트랜잭션에 서명해야 합니다. `actor:permission` 트랜잭션에 포함된 모든 액션에 지정된 쌍입니다.이 연결은 주어진 권한에 대한 권한 테이블을 통해 이루어집니다.실제 서명 키는 애플리케이션이 실행되는 클라이언트에서 서명 계정과 연결된 지갑을 쿼리하여 얻습니다.
+The transaction must be signed by a set of keys sufficient to satisfy the accumulated set of explicit `액터:권한` pairs specified in all the actions enclosed within the transaction. This linkage is done through the authority table for the given permission. The actual signing key is obtained by querying the wallet associated with the signing account on the client where the application is run.
 
-트랜잭션 서명 프로세스에는 서명할 트랜잭션 인스턴스, 애플리케이션 지갑 내의 관련 개인 키를 가져오는 공개 키 세트, 체인 ID라는 세 가지 파라미터가 사용됩니다.체인 ID는 실제 EOS 블록체인을 식별하며 블록체인의 초기 구성 매개변수에 따라 달라지는 생성 상태의 해시로 구성됩니다.트랜잭션에 서명하기 전에 EOS 소프트웨어는 먼저 트랜잭션의 다이제스트를 계산합니다.다이제스트 값은 체인 ID, 트랜잭션 인스턴스 및 트랜잭션에 컨텍스트 프리 작업이 있는 경우 컨텍스트 프리 데이터의 SHA-256 해시입니다.모든 인스턴스 필드는 해시 계산에 참조 필드 (메모리 주소) 가 포함되지 않도록 암호화 해시를 계산하기 전에 직렬화됩니다.트랜잭션 다이제스트 계산 및 서명 프로세스는 다음과 같습니다.
+The transaction signing process takes three parameters: the transaction instance to sign, the set of public keys from which the associated private keys within the application wallet are retrieved, and the chain ID. The chain ID identifies the actual EOS blockchain and consists of a hash of its genesis state, which depends on the blockchain’s initial configuration parameters. Before signing the transaction, the EOS software first computes a digest of the transaction. The digest value is a SHA-256 hash of the chain ID, the transaction instance, and the context free data if the transaction has any context free actions. Any instance fields get serialized before computing any cryptographic hashes to avoid including reference fields (memory addresses) in the hash computation. The transaction digest computation and the signing process are depicted below.
 
 ![](/images/protocol-xact_sign.png "Transaction Signing")
 
-트랜잭션 다이제스트가 계산된 후 최종적으로 서명 계정의 공개 키와 연결된 개인 키로 다이제스트에 서명됩니다.공개-개인 키 쌍은 일반적으로 로컬 노드에 연결된 로컬 시스템 내에 저장됩니다.서명 프로세스는 일반적으로 애플리케이션을 배포하는 동일한 사용자인 서명 계정과 연결된 지갑 관리자 내에서 수행됩니다.지갑 관리자는 디지털 서명을 수행할 수 있는 가상 보안 구역을 제공하므로 개인 키가 지갑을 떠나지 않고도 메시지 서명이 생성됩니다.서명이 생성되면 최종적으로 서명된 트랜잭션 인스턴스에 추가됩니다.
+After the transaction digest is computed, the digest is finally signed with the private key associated with the signing account’s public key. The public-private key pair is usually stored within the local machine that connects to the local node. The signing process is performed within the wallet manager associated with the signing account, which is typically the same user that deploys the application. The wallet manager provides a virtual secure enclave to perform the digital signing, so a message signature is generated without the private key ever leaving the wallet. After the signature is generated, it is finally added to the signed transaction instance.
 
 
-## 3.3.푸시 트랜잭션
+### 3.3. Push Transaction
 
-트랜잭션이 서명되면 서명된 트랜잭션 인스턴스에서 패킹된 트랜잭션 인스턴스가 생성되어 애플리케이션에서 로컬 노드로 푸시되고, 로컬 노드는 서명 확인, 실행 및 검증을 위해 트랜잭션을 활성 생산 노드로 전달합니다.트랜잭션을 수신하는 모든 프로덕션 노드는 트랜잭션을 다음 프로덕션 노드로 전달하기 전에 로컬 컨텍스트에서 트랜잭션을 실행하고 검증하려고 시도합니다.따라서 유효한 트랜잭션은 릴레이되고 유효하지 않은 트랜잭션은 삭제됩니다.이를 뒷받침하는 아이디어는 악의적인 공격자가 가짜 트랜잭션으로 네트워크에 스팸을 보내는 것을 방지하는 것입니다.잘못된 거래는 예정된 일정에 따라 활성 생산자에게 도달하기 전에 필터링되어 삭제될 것으로 예상됩니다.거래가 접수되면 그 유효성에 대한 어떠한 가정도 이루어지지 않습니다.모든 트랜잭션은 블록을 생성하는지 여부에 관계없이 다음 생산 노드에 의해 다시 검증됩니다.유일한 차이점은 생산자가 일정에 따라 검증한 트랜잭션을 보류 중인 블록으로 푸시한 후 최종 블록을 자체 로컬 체인으로 푸시하여 다른 노드에 릴레이하는 방식으로 블록을 생성하려고 시도한다는 것입니다.
-
-
-## 3.4.거래 확인
-
-거래를 확인하는 프로세스는 두 가지입니다.먼저, 트랜잭션에 서명한 계정과 관련된 공개 키가 트랜잭션에 제공된 서명 세트에서 복구됩니다.EOS에서 사용되는 타원 곡선 디지털 서명 알고리즘인 ECDSA에서는 이러한 복구가 암호학적으로 가능합니다.둘째, 트랜잭션에 포함된 각 작업의 작업 권한 목록 (actor:permission) 에 지정된 각 행위자의 공개 키를 복구된 키 집합과 비교하여 만족하는지 확인합니다.셋째, 각각 만족 `actor:permission` 해당 작업에 필요한 관련 최소 권한과 대조하여 확인됩니다. `actor:contract::action` 쌍을 이루어 해당 최소값을 충족하거나 초과하는지 확인하십시오.이 마지막 검사는 작업이 실행되기 전에 작업 수준에서 수행됩니다 (참조). [3.4.2.권한 확인](#342-permission-check)).
+After the transaction is signed, a packed transaction instance is created from the signed transaction instance and pushed from the application to the local node, which in turn relays the transaction to the active producing nodes for signature verification, execution, and validation. Every producing node that receives a transaction will attempt to execute and validate it in their local context before relaying it to the next producing node. Hence, valid transactions are relayed while invalid ones are dropped. The idea behind this is to prevent bad actors from spamming the network with bogus transactions. The expectation is for bad transactions to get filtered and dropped before reaching the active producer on schedule. When a transaction is received, no assumption is made on its validity. All transactions are validated again by the next producing node, regardless of whether it is producing blocks. The only difference is that the producer on schedule attempts to produce blocks by pushing the transactions it validates into a pending block before pushing the finalized block to its own local chain and relaying it to other nodes.
 
 
-### 3.4.1.트랜잭션 컨텍스트
+### 3.4. Verify Transaction
 
-공개 키가 복구되면 트랜잭션 인스턴스에서 트랜잭션 컨텍스트가 생성됩니다.트랜잭션 컨텍스트는 작업의 추적을 추적하고 각 작업이 전달되고 실행될 때 생성되는 작업 수신을 추적합니다.생성된 모든 상태는 트랜잭션 추적 인스턴스와 작업 수신 목록에 보관됩니다.트랜잭션 추적은 작업 추적 목록으로 구성됩니다.각 작업 추적에는 실행된 작업에 대한 정보 (작업 수신, 작업 인스턴스, 컨텍스트가 없는 작업인지 여부, 작업을 생성한 트랜잭션 ID 등) 가 포함됩니다.조치 영수증은 나중에 트랜잭션 실행 및 완료 중에 생성됩니다.
-
-
-### 3.4.2.권한 확인
-
-트랜잭션에 포함된 일련의 작업을 전체적으로 원자적으로 실행해야 하므로 EOS 소프트웨어는 먼저 각 작업에 지정된 행위자가 이를 실행하는 데 필요한 최소 권한을 가지고 있는지 확인합니다.이를 위해 소프트웨어는 각 작업에 대해 다음을 확인합니다.
-
-* 각 액션 인스턴스에 지정된 각 액터의 지정된 권한.
-* 해당 기관의 기명 허가 `actor:contract::action` 스마트 컨트랙트에 지정된 쌍
-
-명명된 권한 집합이 해당 작업자가 요구하는 최소 권한 수준을 충족하지 못하는 행위자가 한 명 이상 있는 경우 `actor:contract::action` 스마트 컨트랙트에서 페어링하면 트랜잭션이 실패합니다.작업을 실행하기 전에 작업 권한을 확인하는 이유는 성능 때문입니다.몇 가지 작업을 실행한 후 나중에 작업 또는 권한 부여가 실패하여 롤백되는 것보다 모든 작업이 실행되지 않은 상태에서 트랜잭션을 취소하는 것이 더 효율적입니다.데이터 무결성을 유지하려면 작업 실패 중에 발생한 모든 상태 변경을 취소해야 합니다.데이터베이스 세션은 메모리 사용량 및 컴퓨팅 리소스 측면에서 비용이 많이 듭니다.따라서 실행 취소 작업을 최대한 최소화해야 합니다.
+The process to verify a transaction is twofold. First, the public keys associated with the accounts that signed the transaction are recovered from the set of signatures provided in the transaction. Such a recovery is cryptographically possible for ECDSA, the elliptic curve digital signature algorithm used in EOS. Second, the public key of each actor specified in the list of action authorizations (actor:permission) from each action included in the transaction is checked against the set of recovered keys to see if it is satisfied. Third, each satisfied `액터:권한` is checked against the associated minimum permission required for that `배우:계약: :액션` pair to see if it meets or exceeds that minimum. This last check is performed at the action level before any action is executed (see [3.4.2.권한 확인](#342-permission-check)).
 
 
-### 3.4.3.액션 인스턴스
+#### 3.4.1. Transaction Context
 
-아래 다이어그램은 액션 인스턴스를 보여줍니다.수신자 계정, 작업 이름, 행위자 목록 및 권한, 수신자 계정으로 보낼 메시지 (있는 경우) 가 포함된 작업 데이터로 구성됩니다.
+Once the public keys are recovered, a transaction context is created from the transaction instance. The transaction context keeps track of the trace of actions and the action receipt generated as each action is dispatched and executed. All state generated is kept within a transaction trace instance and a list of action receipts. The transaction trace consists of a list of action traces. Each action trace contains information about the executed action, which includes the action receipt, the action instance, whether it is a context-free action, and the transaction ID that generated the action. The action receipt is generated later during transaction execution and finalization.
+
+
+#### 3.4.2. Permission Check
+
+Since the sequence of actions contained in the transaction must be executed atomically as a whole, the EOS software first checks that the actors specified in each action have the minimum permission required to execute it. To that end, the software checks the following for each action:
+
+*   The named permission of each actor specified in each action instance.
+*   The named permission of the corresponding `배우:계약: :액션` pair specified in the smart contract.
+
+If there is at least one actor whose set of named permissions fail to meet the minimum permission level required by the corresponding `배우:계약: :액션` pair in the smart contract, the transaction fails. The reason why action permissions are checked before any action is executed is due to performance. It is more efficient to cancel a transaction with all actions unexecuted, than doing so after a few actions executed, but later were rolled back as a result of a failed action or authorization. Any state changes incurred during a failed action must be undone to preserve data integrity. Database sessions are expensive in terms of memory usage and computing resources. Therefore, undo operations must be minimized as possible.
+
+
+#### 3.4.3. Action Instance
+
+The diagram below depicts an action instance. It consists of the receiver account, the action name, the list of actors and their permissions, and the action data containing the message to be sent, if any, to the receiver account.
 
 ![](/images/protocol-xacts_act_instance.png "Action Instance")
 
-### 3.4.4.권한 확인
+#### 3.4.4. Authority Check
 
-최소 권한 수준을 확인한 후 액션 인스턴스 내에서 각 액터의 권한과 일치하는 수신자 계정의 권한에 대한 권한 테이블을 확인합니다.
-
-
-### 3.5.트랜잭션 실행
-
-트랜잭션을 실행하기 위해 체인 데이터베이스 세션이 시작되고 스냅샷이 생성됩니다.이를 통해 트랜잭션 작업이 실패할 경우 체인 상태에 대한 모든 변경 사항을 롤백할 수 있습니다.해당 트랜잭션 컨텍스트는 실행 중에 트랜잭션 상태를 유지합니다.트랜잭션을 실행하기 위해 해당 트랜잭션 인스턴스와 관련된 각 작업이 실행을 위해 디스패치됩니다.컨텍스트가 없는 작업 (있는 경우) 이 먼저 전달되고 그 다음에 일반 작업이 전달됩니다.
+After the minimum permission levels are checked, the authority table for the receiver account’s permission that matches each actor’s permission within the action instance is checked.
 
 
-### 3.5.1.컨텍스트 적용
+### 3.5. Execute Transaction
 
-작업 실행을 준비하기 위해 각 작업에 대해 로컬에 적용 컨텍스트 인스턴스가 작성됩니다.적용 컨텍스트는 이름에서 알 수 있듯이 체인 컨트롤러에 대한 인스턴스와 같이 작업을 적용하는 데 필요한 리소스에 대한 참조를 포함합니다 (참조). [네트워크 피어 프로토콜: 2.2.체인 컨트롤러](03_network-peer-protocol.md#22-chain-controller)), 상태가 유지되는 체인 데이터베이스, 트랜잭션이 실행되는 트랜잭션 컨텍스트, 실제 작업 인스턴스 및 작업이 예정된 수신자 계정.
-
-
-#### 3.5.2.액션 트레이스
-
-각 작업의 실행을 준비하기 위해 작업 수신 및 작업 추적 인스턴스가 모두 초기화됩니다.먼저, 액션 인스턴스 자체의 해시가 계산되어 액션 수신에 저장됩니다.다음으로, 작업이 포함된 트랜잭션이 푸시될 보류 중인 블록에 대한 통계로 작업 추적이 초기화됩니다.따라서 작업 추적을 사용하면 블록을 생성한 실제 노드를 포함하여 작업이 포함된 실제 블록 및 트랜잭션까지 작업을 추적할 수 있습니다.마지막으로, 핸들러 이름, 수신자 계정, 액터 계정을 생산 노드 내에서 체인 컨트롤러가 관리하는 액션 핸들러 목록과 매칭시켜 액션 핸들러를 찾습니다.이러한 작업 핸들러는 시스템이 계약되고 클라이언트 애플리케이션이 로드될 때 컨트롤러에 적용됩니다.핸들러는 수신자 계정 이름, 계약 이름, 작업 이름 및 작업 핸들러를 사용합니다.
+To execute the transaction, a chain database session is started and a snapshot is taken. This allows to roll back any changes made to the chain state in case any of the transaction actions fails. A corresponding transaction context keeps the transaction state during execution. To execute the transaction, each action associated with the corresponding transaction instance is dispatched for execution. Context free actions, if any, are dispatched first, followed by regular actions.
 
 
-#### 3.5.3.액션 실행
+#### 3.5.1. Apply Context
 
-적절한 액션 핸들러를 찾으면 적절한 화이트리스트와 블랙리스트가 확인됩니다.노드가 현재 블록을 생성하고 있는 경우, 수신자 계정은 계정 화이트리스트 및 블랙리스트 (있는 경우) 와 대조하여 확인됩니다.액션 블랙리스트가 있으면 다음에 확인합니다.수신자 계정이나 작업 이름이 블랙리스트에 있으면 작업이 중단됩니다.수신자 계정이 이미 화이트리스트에 있는 경우 블랙리스트 확인은 생략됩니다.모든 검사가 통과되면 해당 작업 핸들러를 호출하고 액터 계정을 전달하여 액션이 최종적으로 실행됩니다. `from` 매개 변수 및 내 수신 계정 `to` 파라미터.
-
-
-## 3.6.거래 마무리
-
-트랜잭션에 포함된 모든 작업이 실행되면 트랜잭션은 마무리 단계에 들어갑니다.이 단계에서는 각 작업에 대해 해당 조치 영수증이 생성됩니다.작업 수신에는 해당 작업 인스턴스의 해시, 분석에 사용되는 몇 가지 카운터, 작업의 대상 수신자 계정 (해당하는 경우) 이 포함됩니다.
+To prepare for action execution, an apply context instance is created locally for each action. The apply context, as its name implies, contains references to the necessary resources to apply the action, such as an instance to the chain controller (see [Network Peer Protocol: 2.2. Chain Controller](03_network-peer-protocol.md#22-chain-controller)), the chain database where state is kept, the transaction context where the transaction is running, the actual action instance, and the receiver account to whom the action is intended.
 
 
-### 3.6.1.거래 영수증
+#### 3.5.2. Action Trace
 
-거래에 대한 모든 조치 영수증이 생성되면 최종적으로 거래 영수증이 생성되어 블록에 포함된 다른 거래 영수증과 함께 서명된 블록으로 푸시됩니다.트랜잭션 영수증에는 마이크로초 단위로 청구된 실제 CPU 양과 사용된 총 NET 스토리지를 포함하여 트랜잭션 결과 (실행, 미실행, 실패, 지연, 만료 등) 가 요약됩니다 (참조). `transaction_receipt` 아래 스키마).
+To prepare each action for execution, both action receipt and action trace instances are initialized. First, a hash of the action instance itself is computed and stored in the action receipt. Next, the action trace is initialized with statistics about the pending block where the transaction that includes the action will be pushed to. Therefore, an action trace allows an action to be traced to the actual block and transaction that includes the action, including the actual node that produced the block. Finally, the action handler is located by matching the handler name, receiver account, and actor account with the list of action handlers maintained by the chain controller within the producing node. These action handlers are applied in the controller when the system contracts and the client application are loaded. The handlers take the receiver account name, the contract name, the action name, and the action handler.
 
-##### 트랜잭션_영수증 스키마
 
-이름 | 유형 | 설명
+#### 3.5.3. Action Execution
+
+Once the proper action handler is located, the appropriate whitelists and blacklists are checked. If the node is currently producing blocks, the receiver account is checked against the account whitelist and blacklist, if any. The action blacklist is checked next, if any. If the receiver account or the action name are in a blacklist, the action is aborted. If the receiver account is already on the whitelist, the blacklist check is skipped. If all checks pass, the action is finally executed by invoking the corresponding action handler, passing the actor account in the `...에서` parameter and the receiving account in the `에` parameter.
+
+
+### 3.6. Finalize Transaction
+
+After all actions included in the transaction are executed, the transaction enters the finalization stage. In this step, a corresponding action receipt is produced for each action. The action receipt contains a hash of the corresponding action instance, a few counters used for analytics, and the receiver account to which the action is intended to, if applicable.
+
+
+#### 3.6.1. Transaction Receipt
+
+After all action receipts are generated for the transaction, a transaction receipt is finally created and pushed into the signed block, along with other transaction receipts included in the block. The transaction receipt summarizes the result of the transaction (executed, unexecuted, failed, deferred, expired, etc.), including the actual amount of CPU billed in microseconds, and the total NET storage used (see `거래_영수증` schema below).
+
+##### transaction_receipt schema
+
+Name | Type | Description
 -|-|-
-`status` | `uint8_t` | 트랜잭션 실행 시도 결과
-`cpu_usage_us` | `uint32_t` | 총 CPU 사용량 (마이크로초 단위)
-`net_usage_words` | `unsigned int` | 64비트 워드에서 사용된 총 NET의 수
-`trx` | `variant` | 거래 ID 또는 포장 거래 보유
+`상태` | `uint8_t` | result of transaction execution attempt
+`CPU_USE_USE` | `uint32_t` | total CPU used in microseconds
+`순사용량_단어` | `부호없는 정수` | total NET used in 64-bit words
+`trx` | `변형이 있습니다` | holds transaction ID or packed transaction
 
-더 `status` field는 다음 결과 중 하나를 포함할 수 있는 8비트 열거형입니다.
+The `상태` field is an 8-bit enumeration type that can hold one of the following results:
 
-* `executed` - 트랜잭션이 성공했습니다. 오류 처리기가 실행되지 않았습니다.
-* `soft_fail` - 트랜잭션 실패, 오류 처리기 성공
-* `hard_fail` - 트랜잭션 실패, 오류 핸들러 실패.
-* `delayed` - 향후 실행을 위해 사용자가 거래를 지연합니다.
-* `expired` - 거래 만료, CPU/NET이 사용자에게 환불되었습니다.
+* `실행되었습니다` - transaction succeeded, no error handler executed.
+* `소프트_페일` - transaction failed, error handler succeeded.
+* `하드_페일` - transaction failed, error handler failed.
+* `지연되었습니다` - transaction delayed by user for future execution.
+* `만료` - transaction expired, CPU/NET refunded to user.
 
->ℹ️ 더 `delayed` 상태는 **지연된 사용자 거래**, 즉 승인을 충족하는 데 지연이 있는 명시적인 사용자 생성 거래에만 적용됩니다 (참조). [3.6.3.지연된 사용자 거래](#363-delayed-user-transactions) 자세한 내용은 여기를 참조하십시오).
+> ℹ️ The `지연되었습니다` status only applies to **delayed user transactions**, that is, explicit user-created transactions that have a delay to satisfy authorizations (see [3.6.3.지연된 사용자 거래](#363-delayed-user-transactions) for more information).
 
-더 `trx` 필드에는 트랜잭션 ID 또는 패킹된 트랜잭션 자체가 들어 있습니다.실제 선택은 거래 유형에 따라 달라집니다.지연된 거래 및 지연된 사용자 거래에서 생성된 영수증은 거래 ID별로 저장되며, 다른 모든 유형은 묶음 거래로 저장됩니다.
+The `trx` field holds the transaction ID or the packed transaction itself. The actual choice depends on the transaction type. Receipts generated from Deferred Transactions and Delayed User Transactions are stored by transaction ID; all other types are stored as packed transactions.
 
-### 3.6.2.지연된 트랜잭션
+#### 3.6.2. Deferred Transactions
 
-지연된 트랜잭션은 블록체인 처리의 부작용으로 생성되므로 해당 상태는 블록 내부가 아닌 체인 데이터베이스에 저장됩니다.따라서 거래 영수증에 해당 내용을 명시적으로 포함할 필요가 없습니다.모든 동기화 노드는 합의에 따라 지연된 트랜잭션의 형태를 인식해야 합니다.스마트 컨트랙트에 의해 발행된 지연된 거래는 스마트 컨트랙트에 아무런 역할이나 영향을 미치지 않습니다. `delayed` 거래 영수증의 상태 필드.
+Deferred transactions are generated as a side effect of processing the blockchain, so their state is stored in the chain database, not within a block. Therefore, there is no need to explicitly include their contents in the transaction receipt. All in-sync nodes should be aware of the form of a deferred transaction as a matter of consensus. Deferred transactions issued by a smart contract have no role or effect on the `지연되었습니다` status field of the transaction receipt.
 
->⚠ **경고: **
->지원 중단 공지
->지연된 트랜잭션은 EOS 2.0부터 더 이상 사용되지 않습니다.
+> ⚠ **Warning:**
+> Deprecation Notice
+> Deferred transactions are deprecated as of EOS 2.0.
 
-### 3.6.3.지연된 사용자 거래
+#### 3.6.3. Delayed User Transactions
 
-지연된 사용자 트랜잭션에는 패킹된 트랜잭션이 네트워크로 푸시될 때 (지연 타이머 시작 시) 포함됩니다.그러나 일반 거래와 달리 “지연된” 상태이므로 실행 및 검증이 연기될 수 있습니다.나중에 실행/실패/만료될 때 (지연 타이머 종료 시) 에는 트랜잭션 ID만 포함됩니다.동기화 중인 모든 노드에는 이전 브로드캐스트 블록의 트랜잭션 콘텐츠가 있기 때문입니다.
-
-
-## 3.7.거래 검증
-
-트랜잭션은 수명 주기 동안 다양한 단계에서 검증되고 검증됩니다. 처음에는 P2P 네트워크에서 느슨한 트랜잭션으로 전파될 때 (참조). [3.4.거래 확인](#34-verify-transaction)) 를 선택한 후 블록 검증 중에 대다수의 블록 생산자 사이에서 블록이 확인되고, 선택적으로 노드가 리플레이 중에 트랜잭션을 완전히 재검증하도록 구성된 경우 블록체인 리플레이 중에 가능합니다.기본적으로 기록된 트랜잭션은 리플레이 중에 완전히 재검증되지 않습니다. 노드 운영자가 개인적으로 또는 부채널을 통해 로컬 블록 로그에 대한 신뢰를 구축한 것으로 간주되어 더 이상 비잔틴 정보의 잠재적 출처로 간주되지 않기 때문입니다.
+Delayed user transactions contain the packed transactions when they are pushed to the network (at the start of the delay timer). However, unlike regular transactions, they bear a "delayed" status so their execution and validation can be postponed. Later on when they execute/fail/expire (at the end of the delay timer), they only contain the transaction ID. This is because any in-sync node will have the transaction content from a previously broadcast block.
 
 
-### 3.7.1.검증 프로세스
+### 3.7. Validate Transaction
 
-블록의 일부로 트랜잭션을 검증하는 경우 다양한 수준에서 여러 검증이 발생합니다.전체 블록 검증에서는 블록에 기록된 모든 트랜잭션이 재생되고 로컬에서 계산된 머클 트리 루트 해시 (각각 트랜잭션 수신 데이터 및 액션 수신 데이터에서 생성됨) 를 다음과 비교합니다. `transaction_mroot` 과 `action_mroot` 블록 헤더의 필드.따라서 기록된 트랜잭션이 블록 내에서 변조되면 머클 트리 루트 해시가 불일치를 야기할 뿐만 아니라 트랜잭션 서명도 검증하지 못할 수 있습니다.선의의 블록 생산자가 변조를 수행하지 않았다면 블록 서명의 검증도 실패할 것입니다 (참조 [컨센서스 프로토콜: 5.3.블록 검증](01_consensus-protocol.md#53-block-validation)).
+A transaction is verified and validated at various stages during its lifecycle: first when it propagates on the peer-to-peer network as a loose transaction (see [3.4.거래 확인](#34-verify-transaction)), then during block validation as the block is confirmed among a supermajority of block producers, and optionally during a blockchain replay if nodeos is configured to fully re-validate transactions during replays. By default, recorded transactions are not completely re-validated during replays since it is assumed that the node operator has established trust in the local block log, either personally or through a side-channel so it is no longer considered a potential source of byzantine information.
+
+
+#### 3.7.1. Validation Process
+
+When validating a transaction as part of a block, multiple validations occur at various levels. In full block validation, all transactions recorded in the block are replayed and the locally calculated merkle tree root hashes (generated from the transaction receipt data and the action receipt data, respectively) are compared against the `트랜잭션_루트` and `블록 헤더의 action_mroot` 필드.따라서 기록된 트랜잭션이 블록 내에서 변조되면 머클 트리 루트 해시가 불일치를 야기할 뿐만 아니라 트랜잭션 서명도 검증하지 못할 수 있습니다.선의의 블록 생산자가 변조를 수행하지 않았다면 블록 서명의 검증도 실패할 것입니다 (참조 [컨센서스 프로토콜: 5.3.블록 검증](01_consensus-protocol.md#53-block-validation)).

@@ -2,9 +2,6 @@
 title: EVM 代币
 --- 
 
-<head>
-</head>测试
-
 那个 `EOS` 代币在 `EOS EVM` 的代币和上面的代币完全一样 `EOS Network`。
 
 这意味着 `EOS` 您在交易所看到的代币与您在交易所使用的代币相同 `EOS EVM`。但是，由于大多数 

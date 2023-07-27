@@ -8,7 +8,7 @@ Remix 是一个基于 Web 的 IDE，允许你编写、编译和部署智能合�
 
 前往 [混音](https://remix.ethereum.org/) 你应该会看到以下内容：
 
-![混音简介](/images/eos-evm_using-remix_intro.png)
+![Remix intro](/images/eos-evm_using-remix_intro.png)
 
 Remix 界面可以分为 2 个主要部分：
 
@@ -21,7 +21,7 @@ Remix 界面可以分为 2 个主要部分：
 2.**Editor**-您可以在这里编写智能合约代码。
 3.**Terminal**-在这里，您将看到编译、部署和运行测试等不同操作的输出。
 
-![混音部分](/images/eos-evm_using-remix_sections.png)
+![Remix sections](/images/eos-evm_using-remix_sections.png)
 
 ## 工作区
 
@@ -29,21 +29,21 @@ Remix 有一个工作空间的概念，它本质上是一个文件集合，你�
 
 您可以通过单击 “创建新工作区” `+` 旁边的侧边栏中的图标 `WORKSPACES`
 
-![混音创建工作区](/images/eos-evm_using-remix_create-workspace.png)
+![Remix create workspace](/images/eos-evm_using-remix_create-workspace.png)
 
 在弹出窗口中，选择 `Blank` 在模板下拉列表中，为您的工作区命名，然后单击 `OK`.
 
-![混音创建工作区弹出窗口](/images/eos-evm_using-remix_blank-template.png)
+![Remix create workspace popup](/images/eos-evm_using-remix_blank-template.png)
 
 现在您的工作区为空，请为我们将要处理的合同创建一个新文件。
 
 点击边栏中的空白页图标并命名文件 `Todo.sol`.
 
-![重新混音新工作区](/images/eos-evm_using-remix_new-file.png)
+![Remix new workspace](/images/eos-evm_using-remix_new-file.png)
 
 现在，您有了新的工作区，其中包含一个名为的文件 `Todo.sol`，你已经准备好开始编写智能合约了。
 
-![重新混音新工作区](/images/eos-evm_using-remix_todosol.png)
+![Remix new workspace](/images/eos-evm_using-remix_todosol.png)
 
 ## 编写你的智能合约
 
@@ -109,11 +109,12 @@ pragma solidity ^0.8.0;
 
 函数是一种封装逻辑的方法，可以从合约外部或合约内部调用。
 
-我们只需要可以从合约外部**调用的函数，所以我们将把函数定义为 `external`。
+我们只需要可以从合约外部**调用的函数，所以我们将把函数定义为 `external`.
 
->❔ **函数可见性类型**
-> >有 4 种不同的函数可见性类型： `external`, `public`, `internal`，以及 `private`。
->我们将在以后的指南中详细介绍其中的每一项内容。
+> ❔ **函数可见性类型**
+> 
+> 有 4 种不同的函数可见性类型： `external`, `public`, `internal`，以及 `private`.
+> 我们将在以后的指南中详细介绍其中的每一项内容。
 
 函数是与智能合约交互的主要方式。它们可以从合同之外调用，也可以从
 在合同范围内。
@@ -130,16 +131,17 @@ pragma solidity ^0.8.0;
 
 点击 `Solidity Compiler` 侧边栏中的图标。
 
->❕ **确保您打开了正确的文件**
-> >无论你打开什么合约，它都能让你编译，所以一定要有 `Todo.sol` 文件已打开。
+> ❕ **确保您打开了正确的文件**
+> 
+> 无论你打开什么合约，它都能让你编译，所以一定要有 `Todo.sol` 文件已打开。
 
 现在点击 `Compile Todo.sol` 按钮。
 
-![混音编译](/images/eos-evm_using-remix_compile.png)
+![Remix compile](/images/eos-evm_using-remix_compile.png)
 
 如果你的合同有任何错误，你会在侧边栏上看到一个红色方框，表示它发现的每个错误。
 
-![混音编译错误](/images/eos-evm_using-remix_compiler-error.png)
+![Remix compile errors](/images/eos-evm_using-remix_compiler-error.png)
 
 ## 部署你的智能合约
 
@@ -147,32 +149,35 @@ pragma solidity ^0.8.0;
 
 点击 `Deploy & Run Transactions` 侧边栏中的图标。
 
-然后点击 `ENVIROMENT` 下拉列表并选择 `Injected Provider - MetaMask`。
+然后点击 `ENVIROMENT` 下拉列表并选择 `Injected Provider - MetaMask`.
 
->❕ **先设置好你的 MetaMask!**
-> >如果你还没有，请确保你已经设置好了 MetaMask 钱包并将其连接到 EOS EVM。
-> >**你可以关注 [本指南](/evm/10_quick-start/02_setup-metamask.md) 学习如何做到这一点。**
+> ❕ **先设置好你的 MetaMask！**
+> 
+> 如果你还没有，请确保你已经设置好了 MetaMask 钱包并将其连接到 EOS EVM。
+> 
+> **你可以关注 [本指南](/evm/10_quick-start/02_setup-metamask.md) 学习如何做到这一点。**
 
-![混音部署](/images/eos-evm_using-remix_open-deploy.png)
+![Remix deploy](/images/eos-evm_using-remix_open-deploy.png)
 
 MetaMask 会弹出并要求你关联一个账户。
 
-![混音连接 metamask](/images/eos-evm_using-remix_connect-metamask.png)
+![Remix connect metamask](/images/eos-evm_using-remix_connect-metamask.png)
 
 你现在可以点击 `Deploy` 按钮可将您的智能合约部署到 EOS EVM。
 
 这将打开一个 MetaMask 弹出窗口，要求你确认交易。
 
-![混音部署](/images/eos-evm_using-remix_deploy-button.png)
+![Remix deploy](/images/eos-evm_using-remix_deploy-button.png)
 
 如果成功，您将在控制台中看到一条消息，还会看到来自 MetaMask 的通知。
 
-![混音部署成功](/images/eos-evm_using-remix_deployed.png)
+![Remix deploy success](/images/eos-evm_using-remix_deployed.png)
 
->🤕 **遇到错误？**
-> >如果你遇到任何错误，你将从 MetaMask 和 Remix 的主机中获得信息。
->常见问题是你的钱包里没有足够的余额来支付交易费用，或者你有
->您的 MetaMask 钱包设置不正确。
+> 🤕 **遇到错误？**
+> 
+> 如果你遇到任何错误，你将从 MetaMask 和 Remix 的主机中获得信息。
+> 常见问题是你的钱包里没有足够的余额来支付交易费用，或者你有
+> 您的 MetaMask 钱包设置不正确。
 
 ## 与你的智能合约互动
 
@@ -182,14 +187,14 @@ MetaMask 会弹出并要求你关联一个账户。
 
 你应该会看到一份名为的合约 `TODO` 旁边有一个小箭头。点击箭头展开合约。
 
-![Remix 已部署的合同](/images/eos-evm_using-remix_deployed-chevron.png)
+![Remix deployed contracts](/images/eos-evm_using-remix_deployed-chevron.png)
 
 现在，您将看到合约中所有函数的列表，以及所有公共状态变量。
 
 单击 “” 旁边的输入字段 `addTodoItem` 函数，然后键入一些文本。 
 然后点击 `addTodoItem` 按钮，它将使用 MetaMask 向链发送另一笔交易。
 
-![混音添加待办事项](/images/eos-evm_using-remix_add-todo.png)
+![Remix add todo item](/images/eos-evm_using-remix_add-todo.png)
 
 要验证我们是否已将某项添加到待办事项列表中，您可以按 `todoCount` 按钮，它将读取值
 的 `todoCount` 状态变量。然后，它将在按钮下方显示结果。
@@ -197,15 +202,15 @@ MetaMask 会弹出并要求你关联一个账户。
 你也可以填写 `0` 索引到 `todos` 数组状态变量，然后按下按钮查看数组状态变量的内容 
 `todos` 该索引处的数组。
 
->索引从零开始，因此数组中的第一项在索引处 `0`.
+> 索引从零开始，因此数组中的第一项在索引处 `0`.
 
-![混音待办事项很重要](/images/eos-evm_using-remix_see-count.png)
+![Remix todo count](/images/eos-evm_using-remix_see-count.png)
 
 最后，我们可以通过填写以下内容来切换待办事项 `0` 索引到 `toggleTodoItem` 功能，然后按下
 按钮。你可以像以前一样按下 todo 项目来获取 `todos` 再按一次按钮，你应该会看到
 那个 `completed` 属性已更改。
 
-![混音切换待办事项](/images/eos-evm_using-remix_toggle-todo.png)
+![Remix toggle todo item](/images/eos-evm_using-remix_toggle-todo.png)
 
 ## 验证您的智能合约
 
@@ -227,14 +232,14 @@ MetaMask 会弹出并要求你关联一个账户。
 你还需要 `compiler` 和 `EVM version` 你用来编译合约的。你可以找到这个信息
 在 `Solidity Compiler` 选项卡。
 
-![混音编译器版本](/images/eos-evm_using-remix_verify.png)
+![Remix compiler version](/images/eos-evm_using-remix_verify.png)
 
 
 ## 后续步骤
 
-**恭喜你!**
+**恭喜你！**
 
-现在，你已经在EOS EVM上成功部署了你的第一个智能合约并与之进行了交互!
+现在，你已经在EOS EVM上成功部署了你的第一个智能合约并与之进行了交互！
 
 你学习了智能合约基础知识、设置 MetaMask 以及使用 Remix 进行开发、部署和交互
 您的智能合约。

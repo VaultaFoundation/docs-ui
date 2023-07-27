@@ -17,7 +17,7 @@ EOS 日志库支持两个 `appender` 类型:
 
 ### GELF
 
-这个 `appender` 将日志消息发送到 [`Graylog`] (https://github.com/Graylog2/graylog2-server) 这是一个用于收集、索引和分析日志消息的完全集成的平台。支持的配置选项有：
+这个 `appender` 将日志消息发送到 [`Graylog`](https://github.com/Graylog2/graylog2-server) 这是一个用于收集、索引和分析日志消息的完全集成的平台。支持的配置选项有：
 
 - `name` -用于标识在记录器中使用的实例的任意名称
 - `type` -“gelf”
@@ -112,7 +112,7 @@ EOS 日志库支持以下记录器：
 }
 ```
 
->ℹ️ 每个记录器都可以在中独立配置 `logging.json` 文件。所有记录器的默认日志记录级别（如果没有） `logging.json` 已提供，是 `info`。
+> ℹ️ 每个记录器都可以在中独立配置 `logging.json` 文件。所有记录器的默认日志记录级别（如果没有） `logging.json` 已提供，是 `info`。
 
 ## 日志级别
 

@@ -107,9 +107,10 @@ pragma solidity 0.8.x;
 
 당신은 또한 사용할 수 있습니다 `*` 와일드카드 심볼로.
 
->❔ **추가 옵션**
-> >솔리디티 컴파일러는 NodeJS 서버 구성을 지원합니다. 
->에서 더 많은 관리 방법을 찾을 수 있습니다. [npmjs 서버 문서](https://docs.npmjs.com/cli/v6/using-npm/semver).
+> ❔ **추가 옵션**
+> 
+> 솔리디티 컴파일러는 NodeJS 서버 구성을 지원합니다. 
+> 에서 더 많은 관리 방법을 찾을 수 있습니다. [npmjs 서버 문서](https://docs.npmjs.com/cli/v6/using-npm/semver).
 
 
 

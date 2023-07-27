@@ -47,17 +47,19 @@ plugin = eosio::state_history_plugin
 nodeos --snapshot /path/to/snapshot.bin
 ```
 
->⚠ **警告**
-> >在节点从网络收到至少 1 个区块之前，请勿将其停止，否则它将无法重启。
+> ⚠ **警告**
+> 
+> 在节点从网络收到至少 1 个区块之前，请勿将其停止，否则它将无法重启。
 
 ### 如果你的节点无法接收方块
 
 如果 nodeos 无法从网络接收方块，请尝试使用 `cleos net disconnect` 
 和 `cleos net connect` 重新连接超时的节点。
 
->⚠ **警告**
-> >使用时要小心 `net_api_plugin`。要么使用防火墙来阻止访问你的 `http-server-address`，或者更改 
->它到 `localhost:8888` 禁用远程访问。
+> ⚠ **警告**
+> 
+> 使用时要小心 `net_api_plugin`。要么使用防火墙来阻止访问你的 `http-server-address`，或者更改 
+> 它到 `localhost:8888` 禁用远程访问。
 
 ### 使用数据库填充物
 
@@ -89,8 +91,9 @@ curl http://127.0.0.1:8888/v1/producer/create_snapshot
 包含的块比便携式快照至少多 1 个，而且 `blocks.log` 之后要包含区块的文件 
 它已变得不可逆转。
 
->⚠ **警告**
-> >如果便携式快照中包含的块被分叉出去，则该快照将无效。如果发生这种情况，请重复此过程。
+> ⚠ **警告**
+> 
+> 如果便携式快照中包含的块被分叉，则该快照将无效。如果发生这种情况，请重复此过程。
 
 ### 收集其他文件
 

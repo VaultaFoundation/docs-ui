@@ -59,7 +59,7 @@ EOS使用我们所谓的*权限系统*，为开箱即用的账户提供了额外
 
 权限只能更改控制它的内容（密钥或账户）或控制其子项的内容。它永远无法改变控制其父项的内容。
 
-![谁可以更改权限？](/images/accts_who_can_change_permissions.png)
+![Who can change permissions?](/images/accts_who_can_change_permissions.png)
 
 
 控制权限的是**公钥**或另一个**账户**。 
@@ -72,7 +72,7 @@ EOS使用我们所谓的*权限系统*，为开箱即用的账户提供了额外
 但请记住，所有账户最终都由密钥控制。 
 
 
-![委托账户所有权](/images/accts_delegated_account_ownership.png)
+![Delegated account ownership](/images/accts_delegated_account_ownership.png)
 
 
 您可以在下方添加自定义权限 `active` 权限，允许您限制该权限的访问权限 
@@ -83,7 +83,7 @@ EOS使用我们所谓的*权限系统*，为开箱即用的账户提供了额外
 它们的用法。 
 
 
-![自定义权限](/images/accts_custom_permissions.png)
+![Custom permissions](/images/accts_custom_permissions.png)
 
 
 最重要的是，权限系统内置了对多重签名交易（需要多重签名的交易）的支持 
@@ -95,7 +95,7 @@ EOS使用我们所谓的*权限系统*，为开箱即用的账户提供了额外
 手， `charlie` 和 `jenny` 无法单独签署交易，他们需要 `bob`. 
 
 
-![权重和阈值](/images/accts_weights_and_thresholds.png)
+![Weights and thresholds](/images/accts_weights_and_thresholds.png)
 
 
 ## 智能合约
@@ -116,8 +116,9 @@ EOS使用我们所谓的*权限系统*，为开箱即用的账户提供了额外
 大多数EOS钱包都允许你自己创建一个账户，但需要你支付所需的RAM
 存储您的账户。有些钱包会为你支付 RAM 的费用，但稍后会要求你偿还它们。
 
->💰 **当前成本**
-> >开设账户的成本取决于开设账户所需的内存，截至撰写本文件（2023年2月20日） `2996 bytes`。
+> 💰 **当前成本**
+> 
+> 开设账户的成本取决于开设账户所需的内存，截至撰写本文件（2023年2月20日） `2996 bytes`。
 
 ## 放弃账户所有权
 
@@ -127,10 +128,11 @@ EOS使用我们所谓的*权限系统*，为开箱即用的账户提供了额外
 
 要实现这个目标，你有几种选择。
 
->💀 **别忘了密码权限!**
->>如果您放弃账户的所有权，请不要忘记保留 `eosio.code` 许可
->在账户上 `active` 许可。否则，该账户将无法在区块链上执行任何内联操作， 
->这可能会 “扼杀你的合同”。
+> 💀 **别忘了密码权限！**
+>
+> 如果您放弃账户的所有权，请不要忘记保留 `eosio.code` 许可
+> 在账户上 `active` 许可。否则，该账户将无法在区块链上执行任何内联操作， 
+> 这可能会 “扼杀你的合同”。
 
 ### 空账户
 

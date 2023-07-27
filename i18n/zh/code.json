@@ -36,7 +36,7 @@
     "message": "充分利用世界上最快的 EVM"
   },
   "Boost Your App! 🚀": {
-    "message": "提升您的应用程序!🚀"
+    "message": "提升您的应用程序！🚀"
   },
   "Submit your app to our ecosystem page and reach a wider audience, gain exposure, and attract new users to your already built application.": {
     "message": "将您的应用程序提交到我们的生态系统页面，吸引更广泛的受众，获得曝光度，并吸引新用户使用您已经构建的应用程序。"
@@ -470,5 +470,11 @@
   },
   "Community authors": {
     "message": "社区作者"
+  },
+  "Start Networking": {
+    "message": "开始联网"
+  },
+  "Need help or want to help? Maybe you just want to chat with some like-minded developers. Most journeys are less fun alone, join the community.": {
+    "message": "需要帮助还是想帮忙？也许你只想和一些志同道合的开发者聊一聊。大多数旅程都不那么有趣，请加入社区。"
   }
 }

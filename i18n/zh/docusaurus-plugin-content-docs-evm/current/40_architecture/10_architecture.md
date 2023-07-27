@@ -53,7 +53,7 @@ EOS 区块链。为方便起见，EOS EVM 节点连接到 EOS 节点的状态历
 实现还取决于对 EOS 节点链 API 的访问权限。特别是，它只是抢走了最低的汽油价格 
 在相应的表中在 EOS EVM 合约中配置，然后将其返回给调用者。
 
-![EOS EVM 的总体设计](/images/EOS-EVM_design_drawio.svg)
+![Overall Design of the EOS EVM](/images/EOS-EVM_design_drawio.svg)
 
 如果认为有必要，这种架构允许使用以太坊节点的其他实现 
 对于某些特定场景。

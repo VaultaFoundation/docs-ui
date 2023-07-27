@@ -29,13 +29,13 @@ C/C++/Rust와 같은 고급 언어를 컴파일하여 클라이언트 및 서버
 계속 진행하여 클릭하십시오 `Build` EOS 웹 IDE의 왼쪽 하단에 있는 버튼입니다.에 메시지가 표시되어야 합니다.
 다음과 같은 콘솔 `Building project...`
 
-![이오스 웹 IDE](/images/native-web-ide-build.png)
+![EOS Web IDE](/images/native-web-ide-build.png)
 
 빌드가 성공**되면 콘솔에 zip, wasm 및 abi 파일이 다운로드되는 것을 볼 수 있습니다.
 
 빌드가 **실패**하면 콘솔에 오류가 발생한 줄 번호와 함께 오류 메시지가 표시됩니다.
 
-![이오스 웹 IDE](/images/native-web-ide-built.png)
+![EOS Web IDE](/images/native-web-ide-built.png)
 
 ## 테스트넷에 배포
 
@@ -43,17 +43,17 @@ C/C++/Rust와 같은 고급 언어를 컴파일하여 클라이언트 및 서버
 
 맨 왼쪽 사이드바에서 배포 탭을 클릭하여 배포 옵션을 엽니다.
 
-![이오스 웹 IDE](/images/native-web-ide-deploy-tab.png)
+![EOS Web IDE](/images/native-web-ide-deploy-tab.png)
 
 이제 다음을 클릭할 수 있습니다. `Build & Deploy` 버튼을 눌러 스마트 계약을 블록체인에 배포하세요.
 이렇게 하면 스마트 컨트랙트를 EOS 정글 테스트넷에 배포하고 상호 작용할 수 있습니다.
 
-![이오스 웹 IDE](/images/native-web-ide-deploying.png)
+![EOS Web IDE](/images/native-web-ide-deploying.png)
 
 배포 프로세스 중에 오류가 발생하면 콘솔에 오류가 표시됩니다.그렇지 않은 경우 
 다음과 같은 메시지가 표시됩니다. `Deployed successfully!`.
 
-![이오스 웹 IDE](/images/native-web-ide-deployed.png)
+![EOS Web IDE](/images/native-web-ide-deployed.png)
 
 ## 계약서와의 상호 작용
 
@@ -65,14 +65,14 @@ C/C++/Rust와 같은 고급 언어를 컴파일하여 클라이언트 및 서버
 3.계약에 의해 노출되는 행위
 4.컨트랙트가 노출하는 테이블
 
-![이오스 웹 IDE](/images/native-web-ide-interact.png)
+![EOS Web IDE](/images/native-web-ide-interact.png)
 
 다음 필드를 채울 수 있습니다. `save` 작업을 수행하고 클릭합니다. `RUN` 버튼을 눌러 작업을 실행합니다.
 
 을 클릭할 수도 있습니다. `GET` 쿼리하려는 테이블 옆의 버튼을 클릭하여 해당 테이블의 데이터를 확인합니다. 
 당신은 얻을 것이다 `JSON` 콘솔에서 출력합니다.
 
-![이오스 웹 IDE](/images/native-web-ide-interacted.png)
+![EOS Web IDE](/images/native-web-ide-interacted.png)
 
 ## 축하합니다!
 

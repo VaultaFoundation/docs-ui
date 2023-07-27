@@ -9,12 +9,14 @@ NFT 是一种**不可替代的代币**。这意味着它是一个唯一的代币
 物品是唯一的，不能与其他物品互换，因为它们的值是
 因为它们的独特性。
 
->👀 **只想创建一个 NFT 吗？**
-> >在本教程中，我们将讨论创建遵循以太坊的 ERC721 的 NFT
->标准，这样我们就可以使用明确的标准来深入研究一些 EOS 的开发情况。
-> >**但是**，如果你想创建一个遵循以下内容的 NFT [**原子资产**](https://github.com/pinknetworkx/atomicassets-contract) 标准是哪个
->在 EOS 网络上更常见，你可以访问 [原子资产 NFT 创作者](https://eos.atomichub.io/creator)
->在这里，您可以轻松创建一个 NFT，该NFT将立即在AtomicHub市场上市，而无需部署任何代码。
+> 👀 **只想创建一个 NFT 吗？**
+> 
+> 在本教程中，我们将讨论创建遵循以太坊的 ERC721 的 NFT
+> 标准，这样我们就可以使用明确的标准来深入研究一些 EOS 的开发情况。
+> 
+> **但是**，如果你想创建一个遵循以下内容的 NFT [**原子资产**](https://github.com/pinknetworkx/atomicassets-contract) 标准是哪个
+> 在 EOS 网络上更常见，你可以访问 [原子资产 NFT 创作者](https://eos.atomichub.io/creator)
+> 在这里，您可以轻松创建一个 NFT，该NFT将立即在AtomicHub市场上市，而无需部署任何代码。
 
 ## 什么是 NFT 标准？
 
@@ -28,7 +30,7 @@ NFT 标准是所有 NFT 都必须遵守的一组规则。这允许 NFT 成为
 是最常见的 NFT 标准，被以太坊网络上的许多 NFT 所使用。如果你有
 见过 Bored Ape，它们是 ERC721 NFT。
 
-！[无聊猿俱乐部示例](/images/boredapeclub.jpg)
+![Bored Ape Club Examples](/images/boredapeclub.jpg)
 
 ## 创建新合约
 
@@ -106,17 +108,17 @@ CONTRACT nft : public contract {
 将它们添加到您的合约中，然后让我们深入研究每个操作，看看它们做了什么，以及它们采用了哪些参数。
 
 你会注意到带有返回值的操作标有 `[[eosio::action]]` 相反
-的 `ACTION`。 
+的 `ACTION`. 
 
->❔ **动作宏**
-> > `ACTION` 是叫做 a 的东西 `MACRO`，这是一种编写将被替换的代码的方法
->在编译时使用其他代码。在这种情况下， `ACTION` 宏替换为：
+> ❔ **动作宏**
+> 
+> `ACTION` 是叫做 a 的东西 `MACRO`，这是一种编写将被替换的代码的方法
+> 在编译时使用其他代码。在这种情况下， `ACTION` 宏替换为：
 > ```cpp
 > [[eosio::action]] void
->
-```
->我们无法使用的原因 `ACTION` 返回值的操作的宏是因为
->它添加了 `void` 函数的关键字，这意味着它不会返回任何东西。
+> ```
+> 我们无法使用的原因 `ACTION` 返回值的操作的宏是因为
+> 它添加了 `void` 函数的关键字，这意味着它不会返回任何东西。
 
 ## 深入研究动作参数
 
@@ -124,7 +126,7 @@ CONTRACT nft : public contract {
 每项操作，请展开以下部分。
 
 <details>
- <summary>点击此处查看</summary>
+    <summary>点击此处查看</summary>
 
 ### 薄荷
 
@@ -213,7 +215,7 @@ CONTRACT nft : public contract {
 
 它需要一个参数：
 - `base_uri` -NFT 元数据的基本 URI
-
+    
 </details>
 
 
@@ -223,10 +225,11 @@ CONTRACT nft : public contract {
 
 我们将使用 `singleton` 用于存储 NFT。 
 
->❔ **辛格尔顿**
-> >A `singleton` 是一个表，每个作用域只能有一行，这与 `multi_index` 其中 
->每个作用域可以有多行并使用 `primary_key` 来标识每一行。
->Singletons 更接近以太坊的存储模式。 
+> ❔ **辛格尔顿**
+> 
+> A `singleton` 是一个表，每个作用域只能有一行，这与 `multi_index` 其中 
+> 每个作用域可以有多行并使用 `primary_key` 来标识每一行。
+> Singletons 更接近以太坊的存储模式。 
 
 在操作上方将以下代码添加到您的合约中：
 
@@ -247,11 +250,13 @@ CONTRACT nft : public contract {
 - `_approvealls` -从所有者到获准转移所有 NFT 的账户的映射
 - `_base_uris` -存储 NFT 元数据的基本 URI 的配置表
 
->❔ **表格命名**
-> > `singleton<"<TABLE NAME>"_n, <ROW TYPE>>`
-> >如果我们看一下单例定义，在双引号里面有表名。
->EOS 表中的名称还必须遵循账户名称规则，这意味着它们必须是
->12 个字符或更少，只能包含字符 `a-z`, `1-5`，以及 `.`。
+> ❔ **表格命名**
+> 
+> `singleton<"<TABLE NAME>"_n, <ROW TYPE>>`
+> 
+> 如果我们看一下单例定义，在双引号里面有表名。
+> EOS 表中的名称还必须遵循账户名称规则，这意味着它们必须是
+> 12 个字符或更少，只能包含字符 `a-z`, `1-5`，以及 `.`。
 
 现在我们已经创建了用于存储 NFT 数据的表和结构，
 我们可以开始填写每个动作的逻辑。
@@ -340,7 +345,7 @@ CONTRACT nft : public contract {
         
         // Set the new balances of the account
         balances.set(balances.get_or_default(0) + 1, get_self());
-    }
+    }    
 ```
 
 
@@ -396,10 +401,11 @@ CONTRACT nft : public contract {
     }
 ```
 
->⚠ **返回值和可组合性**
-> >返回值只能在区块链外部使用，目前无法使用
->在 EOS 中实现智能合约的可组合性。EOS 支持 [**内联操作**](/docs/03_smart-contracts/02_actions.md#inline-actions) 哪个可以使用
->调用其他智能合约，但它们无法返回值。
+> ⚠ **返回值和可组合性**
+> 
+> 返回值只能在区块链外部使用，目前无法使用
+> 在 EOS 中实现智能合约的可组合性。EOS 支持 [**内联操作**](/docs/03_smart-contracts/02_actions.md#inline-actions) 哪个可以使用
+> 调用其他智能合约，但它们无法返回值。
 
 ### OwnerOf
 
@@ -482,10 +488,11 @@ CONTRACT nft : public contract {
    }
 ```
 
->⚠ **动作名称限制**
-> >账户名也有与表名相同的限制，因此它们只能包含
->人物 `a-z`, `1-5`，以及 `.`。因此，我们无法使用该标准 `isApprovedForAll`
->动作的名称，所以我们正在使用 `approved4all` 相反。
+> ⚠ **动作名称限制**
+> 
+> 账户名也有与表名相同的限制，因此它们只能包含
+> 人物 `a-z`, `1-5`，以及 `.`。因此，我们无法使用该标准 `isApprovedForAll`
+> 动作的名称，所以我们正在使用 `approved4all` 相反。
 
 ### tokeNuri
 
@@ -527,7 +534,7 @@ CONTRACT nft : public contract {
 然后使用已批准的账户将其转移到另一个账户。
 
 <details>
- <summary>点击此处查看完整合同</summary>
+    <summary>点击此处查看完整合同</summary>
 
 ```cpp
 #include <eosio/eosio.hpp>

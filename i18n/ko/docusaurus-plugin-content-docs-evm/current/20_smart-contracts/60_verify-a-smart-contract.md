@@ -13,12 +13,13 @@ title: 스마트 컨트랙트 확인
 
 이 URL을 복사하여 바꾸십시오. `SMART_CONTRACT_ADDRESS` 스마트 컨트랙트 주소와 함께:
 
-```https://explorer.evm.eosnetwork.com/address/SMART_CONTRACT_ADDRESS/verify-via-flattened-code/new
+```
+https://explorer.evm.eosnetwork.com/address/SMART_CONTRACT_ADDRESS/verify-via-flattened-code/new
 ```
 
 브라우저에 붙여넣으면 다음 페이지가 표시됩니다.
 
-![스마트 컨트랙트 확인](/images/verify_contract.png)
+![verify smart contract](/images/verify_contract.png)
 
 ## 인증 프로세스 완료
 

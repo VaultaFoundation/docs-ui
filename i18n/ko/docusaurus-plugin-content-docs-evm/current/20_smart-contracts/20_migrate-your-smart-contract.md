@@ -11,7 +11,7 @@ title: 스마트 컨트랙트 마이그레이션
 
 이 버튼 중 하나를 클릭하면 EOS EVM을 메타마스크에 즉시 추가할 수 있습니다.
 
-<ConnectMetaMask />
+<커넥트메타마스크/>
 
 
 ## EOS 토큰 받기
@@ -20,7 +20,7 @@ title: 스마트 컨트랙트 마이그레이션
 
 EOS 토큰을 가지고 놀고 싶으신가요?아래 버튼을 클릭하여 테스트넷 수도꼭지에서 일부를 가져오세요.
 
-<FaucetTokens />
+<수도꼭지 토큰/>
 
 테스트넷을 사용하는 경우 다음을 사용하여 EOS 토큰을 얻을 수 있습니다. [**테스트넷 수도꼭지**](https://faucet.testnet.evm.eosnetwork.com/).
 
@@ -56,12 +56,14 @@ const config: HardhatUserConfig = {
 };
 ```
 
->🔑 **프라이빗 키**
-> >우리가 사용하고 있다는 점에 유의하십시오 `process.env.PRIVATE_KEY` 코드에 개인 키가 노출되지 않도록 하기 위해서죠.
->즉, 다음과 같은 것을 사용해야 합니다. `dotenv` 키를 환경에 주입하려면
->환경에 수동으로 추가하거나 환경 변수를 개인 키로 직접 바꿀 수 있습니다.
-> >그러나 실제 키를 이 파일에 넣는 것은 공용 리포지토리에 커밋될 수 있으므로 주의해야 합니다.
->그리고 개인 키를 누구와도 공유해서는 안 됩니다.
+> 🔑 **프라이빗 키**
+> 
+> 우리가 사용하고 있다는 점에 유의하십시오 `process.env.PRIVATE_KEY` 코드에 개인 키가 노출되지 않도록 하기 위해서죠.
+> 즉, 다음과 같은 것을 사용해야 합니다. `dotenv` 키를 환경에 주입하려면
+> 환경에 수동으로 추가하거나 환경 변수를 개인 키로 직접 바꿀 수 있습니다.
+> 
+> 그러나 실제 키를 이 파일에 넣는 것은 공용 리포지토리에 커밋될 수 있으므로 주의해야 합니다.
+> 그리고 개인 키를 누구와도 공유해서는 안 됩니다.
 
 ## 계약 배포
 
@@ -80,7 +82,7 @@ npx hardhat run scripts/deploy.js --network eosevm_testnet
 - [**테스트넷 익스플로러**](https://explorer.testnet.evm.eosnetwork.com/)
 - [**메인넷 익스플로러**](https://explorer.evm.eosnetwork.com/)
 
-![안전모 배포](/images/deploy_hardhat.png)
+![deploy hardhat](/images/deploy_hardhat.png)
 
 ## 축하합니다!
 

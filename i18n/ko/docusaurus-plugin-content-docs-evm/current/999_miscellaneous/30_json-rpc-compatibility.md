@@ -32,9 +32,9 @@ title: JSON RPC 호환성
 | eth\ _해시로 트랜잭션 가져오기 | EOS EVM 노드 |
 | eth\ _GetRawTransaction by Hash | EOS EVM 노드 |
 | eth\ _블록 해시와 인덱스로 트랜잭션 가져오기 | EOS EVM 노드 |
-| eth\ _블록 해시와 인덱스를 통한 원시 트랜잭션 가져오기 | EOS EVM 노드 |
+| eth\ _블록 해시와 인덱스를 통한 로우 트랜잭션 가져오기 | EOS EVM 노드 |
 | eth\ _블록 번호 및 인덱스로 트랜잭션 가져오기 | EOS EVM 노드 |
-| eth\ _블록 번호 및 인덱스로 원시 트랜잭션 가져오기 | EOS EVM 노드 |
+| eth\ _블록 번호 및 인덱스로 원본 트랜잭션 가져오기 | EOS EVM 노드 |
 | eth\ _거래 영수증 받기 | EOS EVM 노드 |
 | eth\ _GetBlockReceipts | EOS EVM 노드 |
 | eth\ _EstimateGas | EOS EVM 노드 |

@@ -107,9 +107,10 @@ pragma solidity 0.8.x;
 
 你也可以使用 `*` 作为你的通配符符号。
 
->❔ **更多选项**
-> >Solidity 编译器支持 NodeJS semver 配置。 
->你可以找到更多管理它们的方法 [npmjs semver 文档](https://docs.npmjs.com/cli/v6/using-npm/semver)。
+> ❔ **更多选项**
+> 
+> Solidity 编译器支持 NodeJS semver 配置。 
+> 你可以找到更多管理它们的方法 [npmjs semver 文档](https://docs.npmjs.com/cli/v6/using-npm/semver)。
 
 
 

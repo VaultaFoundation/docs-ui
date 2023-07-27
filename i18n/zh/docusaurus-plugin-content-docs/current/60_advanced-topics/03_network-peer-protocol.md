@@ -33,7 +33,7 @@ p2p 协议的主要目标是安全高效地同步节点。为了实现这一总�
 
 ![](/images/protocol-p2p_system_arch.png "Peer-to-peer Architecture")
 
-最高级别是 Net Plugin，它在节点与其对等方之间交换消息以同步区块和交易。典型的消息流如下所示：
+最高级别是 Net Plugin，它在节点与其对等方之间交换消息以同步区块和交易。典型的消息流如下：
 
 1.节点 A 通过 Net 插件向节点 B 发送消息（参见上图）。
  1.节点 A 的 Net Serializer 打包消息并将其发送到节点 B
@@ -44,7 +44,7 @@ p2p 协议的主要目标是安全高效地同步节点。为了实现这一总�
 
 ### 2.1。本地连锁店
 
-本地链是节点的区块链本地副本。它由节点收到的不可逆和可逆区块组成，每个区块都以密码方式链接到前一个区块。不可逆区块列表包含不可变区块链的实际副本。可逆区块列表的长度通常较短，当链控制器向其推送区块时，它由 Fork 数据库管理。本地连锁店如下所示。
+本地链是节点的区块链本地副本。它由节点收到的不可逆和可逆区块组成，每个区块都以密码方式链接到前一个区块。不可逆区块列表包含不可变区块链的实际副本。可逆区块列表的长度通常较短，当链控制器向其推送区块时，它由分叉数据库管理。本地连锁店如下所示。
 
 ![](/images/protocol-p2p_local_chain.png "Local Chain (before pruning)“)
 
@@ -56,7 +56,7 @@ p2p 协议的主要目标是安全高效地同步节点。为了实现这一总�
 
 ### 2.2。链条控制器
 
-Chain Controller 管理区块和交易的基本操作，这些操作会改变本地链状态，例如验证和执行交易、推送区块等。链控制器接收来自 Net Plugin 的命令，并根据网络插件收到的网络消息对区块或交易进行正确的操作。网络消息在EOS节点之间持续交换，因为它们相互通信以同步区块和交易的状态。
+Chain Controller 管理区块和交易的基本操作，这些操作会改变本地链状态，例如验证和执行交易、推送区块等。链控制器接收来自 Net Plugin 的命令，并根据网络插件收到的网络消息在区块或交易上调度正确的操作。当EOS节点相互通信以同步区块和交易状态时，网络消息在EOS节点之间持续交换。
 
 #### 2.2.1。Signals 的制作者和消费者
 
@@ -88,7 +88,7 @@ Chain Controller 管理区块和交易的基本操作，这些操作会改变本
 | | commit_block | 在将区块添加到 fork db 之后（前提是你是生成区块的人，换句话说，这不适用于从其他人那里收到的区块）|
 | | replay_push_block | 在将重播的方块添加到 fork db 之后 |（前提是重播方块不是不可逆的，因为在重播期间没有将不可逆的方块添加到 fork db 中）|
 
--消耗者
+-被消耗者
 
 | 模块 | 用法 |
 |---|---|
@@ -142,7 +142,7 @@ Chain Controller 管理区块和交易的基本操作，这些操作会改变本
 |---|---|
 | chain_plugin | 将数据转发到已接受的交易频道 |
 
-##### applied_transaction (carry std::tuple<const transaction_trace_ptr&, const signed_transaction&>)
+##### applied_transaction (carry std:: tuple<const transaction_ptr&，const signed_transaction&>)
 
 -由... 制作
 
@@ -183,7 +183,7 @@ Chain Controller 管理区块和交易的基本操作，这些操作会改变本
  7. net_plugin 会对信号做出反应并将区块广播给对等方
  8.如果新区块变得不可逆转，则将发出与不可逆区块相关的信号（参见第 A.5 点）
 4.生成方块时
- 1.对于你生成的区块，该区块将在提交时添加到 fork_db 中-> `accepted_block_header` 将由控制器发出
+ 1.对于您生成的区块，该区块将在提交时添加到 fork_db 中-> `accepted_block_header` 将由控制器发出
  2. chain_plugin 将对信号做出反应，将 block_state 转发到 accepted_block_header_channel 并使用检查点对其进行验证
  3.紧接着（在提交区块期间）-> `accepted_block` 将由控制器发出
  4. net_plugin 会对信号做出反应并将区块广播给对等方
@@ -205,8 +205,8 @@ Chain Controller 管理区块和交易的基本操作，这些操作会改变本
 1.重播不可逆方块时-> `irreversible_block` 将由控制器发出
 2.请参阅 A.5 了解操作方法 `irreversible_block` 信号已响应
 3.重播可逆方块时，在将方块添加到 fork_db 之前-> `pre_accepted_block` 将由控制器发出
-4.重播可逆方块时，将方块添加到 fork db 后-> `accepted_block_header` 将由控制器发出
-5.重播可逆方块时，提交方块时-> `accepted_block` 将由控制器发出
+4.重播可逆方块时，将方块添加到 fork db 之后-> `accepted_block_header` 将由控制器发出
+5.重玩可逆方块时，当方块提交时-> `accepted_block` 将由控制器发出
 6.请参阅 A.3 了解操作方法 `pre_accepted_block`, `accepted_block_header` 和 `accepted_block` 信号已响应
 
 #### 2.2.3。分叉数据库

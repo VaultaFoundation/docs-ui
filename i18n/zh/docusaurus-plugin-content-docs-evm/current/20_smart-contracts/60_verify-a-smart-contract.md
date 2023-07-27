@@ -13,12 +13,13 @@ title: 验证智能合约
 
 复制此 URL 并替换 `SMART_CONTRACT_ADDRESS` 使用您的智能合约地址：
 
-```https://explorer.evm.eosnetwork.com/address/SMART_CONTRACT_ADDRESS/verify-via-flattened-code/new
+```
+https://explorer.evm.eosnetwork.com/address/SMART_CONTRACT_ADDRESS/verify-via-flattened-code/new
 ```
 
 将其粘贴到浏览器中，您应该会看到以下页面：
 
-![验证智能合约](/images/verify_contract.png)
+![verify smart contract](/images/verify_contract.png)
 
 ## 完成验证流程
 

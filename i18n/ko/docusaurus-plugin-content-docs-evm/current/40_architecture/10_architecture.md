@@ -53,7 +53,7 @@ EOS EVM 계약에 가입하세요.
 구현은 또한 EOS 노드의 체인 API에 대한 액세스에 따라 달라집니다.특히, 단순히 최저 휘발유 가격을 유지합니다. 
 적절한 테이블에서 EOS EVM 계약에 구성하고 이를 호출자에게 반환합니다.
 
-![EOS EVM의 전반적인 설계](/images/EOS-EVM_design_drawio.svg)
+![Overall Design of the EOS EVM](/images/EOS-EVM_design_drawio.svg)
 
 이 아키텍처를 사용하면 필요하다고 판단되는 경우 다른 이더리움 노드 구현을 사용할 수 있습니다. 
 일부 특정 시나리오의 경우

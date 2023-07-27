@@ -10,7 +10,8 @@ title: 链接操作模式
 这不是你唯一一次可能想使用这种模式，因此被称为 “Linked-Actions Pattern”。
 
 以存款模式为例，让我们来看看这笔交易可能是什么样子：
-```- Transaction
+```
+- Transaction
     1. eosio.token::transfer (Token Transfer) 
         -[inline] mycontract::on_transfer (Notifiable Action Receiver) 
     2. mycontract::record (Regular Action)
@@ -56,11 +57,12 @@ ACTION record(name from, uint64_t internal_id, uint8_t status){
 在我们的合约中，但我们无法在代币转移操作中这样做，因为我们所拥有的只是 
 这 `memo` 字段，这是一个字符串。
 
->⚠ **性能注意事项**
-> >你可能已经猜到你可以做一些字符串操作和转换来获取数据
->你需要进入 `memo` 字段，但不建议这样做。那个 `memo` 字段不仅限于 256
->大多数代币合约中的字符，但是智能合约中的字符串操作是其中之一 
->你能做的最昂贵的操作。
+> ⚠ **性能注意事项**
+> 
+> 你可能已经猜到你可以做一些字符串操作和转换来获取数据
+> 你需要进入 `memo` 字段，但不建议这样做。那个 `memo` 字段不仅限于 256
+> 大多数代币合约中的字符，但是智能合约中的字符串操作是其中之一 
+> 你能做的最昂贵的操作。
 
 取而代之的是，我们可以使用 linked-actions 模式来确保代币转移已经发生
 在我们允许之前 `record` 要采取行动，我们也可以传递我们需要的其他信息
@@ -83,7 +85,7 @@ TABLE transfer_info {
 
 using _transfers = multi_index<"transfers"_n, transfer_info>;
 
-[[eosio::on_notify("eosio.token::transfer")]]
+[[eosio:: on_notify (“eosio.token:: transfer”)]]
 void on_transfer(name from, name to, asset quantity, string memo){
     _transfers transfers( get_self(), get_self().value );
     transfers.emplace( get_self(), [&]( auto& row ) {
@@ -93,10 +95,11 @@ void on_transfer(name from, name to, asset quantity, string memo){
 }
 ```
 
->⚠ **警告**
->>你应该有更多的支票 `on_transfer` 比我们在这个例子中看到的要多。本指南不是
->关于安全性，所以为了清楚起见，我们省略了这些检查，但你不应该部署令牌事件接收器
->在生产中是这样的。
+> ⚠ **警告**
+>
+> 你应该有更多的支票 `on_transfer` 比我们在这个例子中看到的要多。本指南不是
+> 关于安全性，所以为了清楚起见，我们省略了这些检查，但你不应该部署令牌事件接收器
+> 在生产中是这样的。
 
 然后，在我们的 `record` action 我们可以检查转账是否存在，如果有，我们可以
 将其从表中删除以释放 RAM 并执行我们的逻辑。

@@ -6,7 +6,7 @@ title: 设置 MetaMask
 
 点击这两个按钮即可立即将 EOS EVM 添加到您的 MetaMask。
 
-<ConnectMetaMask />
+<connectMetaMask/>
 
 
 ## 手动添加

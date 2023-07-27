@@ -9,10 +9,11 @@ EOS에서는 전송이 발생할 수 있는 여러 가지 방법이 있습니다
 직접적이지만 전송은 비전송 작업에 의해 트리거되는 인라인 작업으로 발생할 수도 있습니다.만약 당신만이
 블록을 보면 인라인 액션 전송을 놓칠 수 있습니다.이는 사용자 경험에 영향을 미칠 수 있습니다.
 
->❔ **인라인 액션이란?**
->>인라인 액션은 다른 액션에 의해 트리거되는 액션입니다.예를 들어, 탈중앙화에서 인출하는 경우 
->Exchange를 사용하면 거래소가 전송 작업을 트리거하여 토큰을 사용자에게 보냅니다.이 전송 작업은 인라인입니다.
->에서 발생한 것과 같은 행동 `exchange::withdraw` 동작.루트 레벨이 아닌 액션이었습니다.
+> ❔ **인라인 액션이란?**
+>
+> 인라인 액션은 다른 액션에 의해 트리거되는 액션입니다.예를 들어, 탈중앙화에서 인출하는 경우 
+> Exchange를 사용하면 거래소가 전송 작업을 트리거하여 토큰을 사용자에게 보냅니다.이 전송 작업은 인라인입니다.
+> 에서 발생한 것과 같은 행동 `exchange::withdraw` 동작.루트 레벨이 아닌 액션이었습니다.
 
 이 자습서는 환승을 감시하는 데 중점을 두고 있지만, 동일한 방법을 사용하여 다음과 같은 행동을 관찰할 수 있습니다.
 모든 계약에서 EOS 네트워크에서 발생합니다.
@@ -42,7 +43,7 @@ curl -X POST \
 이거 읽어보세요.
 
 <details>
- <summary>JSON ABI를 참조하십시오.</summary>
+    <summary>JSON ABI를 참조하십시오.</summary>
 
 ```json
 {
@@ -266,14 +267,15 @@ Trace API를 활성화하면 플러그인을 활성화한 후에 생성된 블�
 플러그인을 활성화하기 전에 생성된 블록에 대한 트레이스를 가져오려면 체인을 다시 재생해야 합니다.
 그 블록에서.
 
->🕔 **EOS EVM 출시를 다시 보고 싶으신가요?**
-> >EOS EVM에서 발생한 전송에 대한 추적을 얻으려는 경우, 또는 그 이전에 생성된 스냅샷을 사용할 수 있습니다.
->2023-04-05T 02:18:09 UTC이렇게 하면 EOS EVM에서 발생한 전송에 대한 추적을 얻을 수 있지만 그렇지 않습니다. 
->EOS EVM 출시 전에 생성된 블록을 재생하느라 시간을 낭비하세요.
+> 🕔 **EOS EVM 출시를 다시 보고 싶으신가요?**
+> 
+> EOS EVM에서 발생한 전송에 대한 추적을 얻으려는 경우, 또는 그 이전에 생성된 스냅샷을 사용할 수 있습니다.
+> 2023-04-05T 02:18:09 UTC.이렇게 하면 EOS EVM에서 발생한 전송에 대한 추적을 얻을 수 있지만 그렇지 않습니다. 
+> EOS EVM 출시 전에 생성된 블록을 재생하느라 시간을 낭비하세요.
 
 # SSD 고려사항
 
-Trace API의 지속형 데이터는 다음과 비슷한 속도로 증가합니다. `blocks.log`.저장하려면 더 많은 SSD 스토리지가 필요합니다.
+Trace API의 영구 데이터는 다음과 비슷한 속도로 증가합니다. `blocks.log`.저장하려면 더 많은 SSD 스토리지가 필요합니다.
 추적을 통해 완전한 거래 내역을 확인할 수 있습니다.
 
 오래된 트레이스를 제거하고 로그 파일을 압축하여 디스크 사용을 최적화할 수 있습니다.
@@ -293,7 +295,7 @@ trace-minimum-uncompressed-history-blocks=<number of blocks to keep uncompressed
 에서의 거래 `transactions` 전송을 스캔할 배열.
 
 <details>
- <summary>체인 블록을 가져오려면 curl 명령을 참조하십시오.</summary>
+    <summary>체인 블록을 가져오려면 curl 명령을 참조하십시오.</summary>
 
 ```shell
 curl -X POST \
@@ -309,7 +311,7 @@ Trace API가 활성화되면 이제 다음을 사용할 수 있습니다. `/v1/t
 이를 통해 체인에 전송된 루트 액션만 보여주는 것이 아니라 트랜잭션이 실행되는 동안 어떤 일이 일어났는지 완벽하게 파악할 수 있습니다.
 
 <details>
- <summary>트레이스 블록을 가져오려면 curl 명령을 참조하십시오.</summary>
+    <summary>트레이스 블록을 가져오려면 curl 명령을 참조하십시오.</summary>
 
 ```shell
 curl -X POST \
@@ -325,14 +327,15 @@ Trace API에 대해 주목해야 할 몇 가지 다른 중요한 사항이 있�
 - 액션 `data` 이제 프로퍼티가 호출되었습니다 `params`
 - 더 `block_num_or_id` POST 데이터 매개변수는 이제 `block_num`
 
->📄 **API 참조**
->>Trace API에 대한 자세한 내용은 다음을 참조하십시오. [API 레퍼런스](https://docs.eosnetwork.com/apis/leap/latest/trace_api.api).
+> 📄 **API 참조**
+>
+> Trace API에 대한 자세한 내용은 다음을 참조하십시오. [API 레퍼런스](https://docs.eosnetwork.com/apis/leap/latest/trace_api.api).
 
 
 ### 두 형식의 예
 
 <details>
- <summary>체인/get_block 참조</summary>
+    <summary>체인/get_block 참조</summary>
 
 ```json
 {
@@ -398,7 +401,7 @@ Trace API에 대해 주목해야 할 몇 가지 다른 중요한 사항이 있�
 </details>
 
 <details>
- <summary>트레이스_API/get_block 참조</summary>
+    <summary>트레이스_API/get_block 참조</summary>
 
 ```json
 {
@@ -544,6 +547,7 @@ Trace API에 대해 주목해야 할 몇 가지 다른 중요한 사항이 있�
     }
   ]
 }
+
 ```
 </details>
 
@@ -567,13 +571,14 @@ Trace API에 대해 주목해야 할 몇 가지 다른 중요한 사항이 있�
 예를 들어, 다음과 같은 경우 `someexchange` 계정, 당신은 다음을 확인하고 싶을 것입니다 `to` 필드가 계정과 일치함 
 이름, 그리고 메모 필드가 예상한 식별자와 일치할 수도 있습니다.
 
->⚠ **경고**
-> >더 `receiver` 필드가 항상 같은 것은 아닙니다 `account` 필드.만약 `receiver` 필드가 다음과 다릅니다. 
+> ⚠ **경고**
+> 
+> 더 `receiver` 필드가 항상 같은 것은 아닙니다 `account` 필드.만약 `receiver` 필드가 다음과 다릅니다. 
 > `account` 필드인 경우 이것은 다른 계약에서 조치가 아닌 부작용을 트리거할 수 있도록 하는 알림입니다. 
->처리해야 할 내용입니다.
+> 처리해야 할 내용입니다.
 
 <details>
- <summary>전송 확인을 위한 자바스크립트 예제</summary>
+    <summary>전송 확인을 위한 자바스크립트 예제</summary>
 
 ```javascript
 const CONTRACT = "eosio.token";
@@ -634,12 +639,13 @@ curl -X POST -H "Content-Type: application/json" \
 
 이렇게 하면 다음과 정확히 동일한 형식으로 단일 트랜잭션 추적이 제공됩니다. `get_block` 끝점.
 
->⚠ **경고**
-> >더 `v1/trace_api/get_transaction_trace` API는 트랜잭션이 발견될 때까지 추적 로그 파일의 각 블록을 검사합니다.
->따라서 이 API는 비효율적이며 테스트 목적으로만 사용해야 합니다.
+> ⚠ **경고**
+> 
+> 더 `v1/trace_api/get_transaction_trace` API는 트랜잭션이 발견될 때까지 추적 로그 파일의 각 블록을 검사합니다.
+> 따라서 이 API는 비효율적이며 테스트 목적으로만 사용해야 합니다.
 
 <details>
- <summary>예제 결과 보기</summary>
+    <summary>예제 결과 보기</summary>
 
 ```json
 {
@@ -721,6 +727,7 @@ curl -X POST -H "Content-Type: application/json" \
 ```
 </details>
 
->📄 **API 참조**
->>Trace API에 대한 자세한 내용은 다음을 참조하십시오. [API 레퍼런스](https://docs.eosnetwork.com/apis/leap/latest/trace_api.api).
+> 📄 **API 참조**
+>
+> Trace API에 대한 자세한 내용은 다음을 참조하십시오. [API 레퍼런스](https://docs.eosnetwork.com/apis/leap/latest/trace_api.api).
 

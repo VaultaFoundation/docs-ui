@@ -36,7 +36,7 @@
     "message": "充分利用世界上最快的 EVM"
   },
   "Boost Your App! 🚀": {
-    "message": "앱 부스트 🚀!"
+    "message": "！🚀"
   },
   "Submit your app to our ecosystem page and reach a wider audience, gain exposure, and attract new users to your already built application.": {
     "message": "。"
@@ -470,5 +470,11 @@
   },
   "Community authors": {
     "message": "社区作者"
+  },
+  "Start Networking": {
+    "message": "开始联网"
+  },
+  "Need help or want to help? Maybe you just want to chat with some like-minded developers. Most journeys are less fun alone, join the community.": {
+    "message": "？。大都，，。"
   }
 }

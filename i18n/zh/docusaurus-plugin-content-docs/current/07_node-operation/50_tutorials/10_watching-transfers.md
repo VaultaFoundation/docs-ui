@@ -6,13 +6,14 @@ title: 观看转账
 需要跟踪资金流入/流出资金的**钱包**。
 
 在EOS中，可以通过多种方式进行转移。最常见的方法是通过 `transfer` 对交易采取行动
-直接传输，但也可以在非传输操作触发时作为内联操作发生。如果你只是
+直接传输，但也可以在非传输操作触发时以内联操作的形式进行传输。如果你只是
 看着方块，那么你就会错过内联动作传输。这可能会影响用户的体验。
 
->❔ **什么是内联动作？**
->>内联操作是指由其他操作触发的操作。例如，在退出去中心化交易时 
->交易所，交易所将触发转账操作，将代币发送给用户。此传输操作是内联的
->动作，就像它发生在 `exchange::withdraw` 行动。这是一次非根级别的动作。
+> ❔ **什么是内联动作？**
+>
+> 内联操作是指由其他操作触发的操作。例如，在退出去中心化交易时 
+> 交易所，交易所将触发转账操作，将代币发送给用户。此传输操作是内联的
+> 动作，就像它发生在 `exchange::withdraw` 行动。这是一次非根级别的动作。
 
 尽管本教程以监视转会为中心，但你可以使用同样的方法来监视任何动作
 发生在EOS网络上，来自任何合约。
@@ -42,7 +43,7 @@ curl -X POST \
 读这个。
 
 <details>
- <summary>见 JSON ABI</summary>
+    <summary>见 JSON ABI</summary>
 
 ```json
 {
@@ -266,10 +267,11 @@ trace-dir=/path/to/traces
 如果您想获取在启用插件之前生成的区块的跟踪，则需要重播该链
 从那个街区出发
 
->🕔 **想重播 EOS EVM 发布会吗？**
-> >如果您的目标是获取在EOS EVM上发生的传输的跟踪，则可以使用在当天或之前拍摄的快照
->2023-04-05T 02:18:09 世界标准时间这样你就可以获得在 EOS EVM 上发生的转移的痕迹，但不能 
->浪费时间重播EOS EVM发布之前生成的方块。
+> 🕔 **想重播 EOS EVM 发布会吗？**
+> 
+> 如果您的目标是获取在EOS EVM上发生的传输的跟踪，则可以使用在当天或之前拍摄的快照
+> 2023-04-05T 02:18:09 世界标准时间这样你就可以获得在 EOS EVM 上发生的转移的痕迹，但不能 
+> 浪费时间重播EOS EVM发布之前生成的方块。
 
 ## 固态硬盘注意事项
 
@@ -293,7 +295,7 @@ trace-minimum-uncompressed-history-blocks=<number of blocks to keep uncompressed
 交易在 `transactions` 用于扫描传输的阵列。
 
 <details>
- <summary>参见 curl 命令获取链块</summary>
+    <summary>参见 curl 命令获取链块</summary>
 
 ```shell
 curl -X POST \
@@ -309,7 +311,7 @@ curl -X POST \
 这描绘了交易执行期间发生的事情的完整画面，而不仅仅是发送到链上的根操作。
 
 <details>
- <summary>参见 curl 命令以获取跟踪块</summary>
+    <summary>参见 curl 命令以获取跟踪块</summary>
 
 ```shell
 curl -X POST \
@@ -325,14 +327,15 @@ curl -X POST \
 -一个动作的 `data` 属性现在被称为 `params`
 -那个 `block_num_or_id` POST 数据参数现在只是 `block_num`
 
->📄 **API 参考**
->>有关 Trace API 的更多信息，请参阅 [API 参考](https://docs.eosnetwork.com/apis/leap/latest/trace_api.api)。
+> 📄 **API 参考**
+>
+> 有关 Trace API 的更多信息，请参阅 [API 参考](https://docs.eosnetwork.com/apis/leap/latest/trace_api.api)。
 
 
 ### 两种格式的示例
 
 <details>
- <summary>见 chain/get_block</summary>
+    <summary>见 chain/get_block</summary>
 
 ```json
 {
@@ -398,7 +401,7 @@ curl -X POST \
 </details>
 
 <details>
- <summary>请参阅 trace_api/get_block</summary>
+    <summary>请参阅 trace_api/get_block</summary>
 
 ```json
 {
@@ -544,6 +547,7 @@ curl -X POST \
     }
   ]
 }
+
 ```
 </details>
 
@@ -567,13 +571,14 @@ curl -X POST \
 例如，如果你是 `someexchange` 账户，你需要确保 `to` 字段与您的账户相匹配 
 名称，而且备忘录字段可能与您期望的某个标识符匹配。
 
->⚠ **警告**
-> >那个 `receiver` 字段并不总是与 `account` 字段。如果 `receiver` 字段不同于 
+> ⚠ **警告**
+> 
+> 那个 `receiver` 字段并不总是与 `account` 字段。如果 `receiver` 字段不同于 
 > `account` 字段，那么这是一个允许其他合约触发副作用的通知，而不是一个动作 
->你应该处理的。
+> 你应该处理的。
 
 <details>
- <summary>检查转账的 JavaScript 示</summary>
+    <summary>检查转账的 JavaScript 示</summary>
 
 ```javascript
 const CONTRACT = "eosio.token";
@@ -634,12 +639,13 @@ curl -X POST -H "Content-Type: application/json" \
 
 这将为您提供一个与之完全相同的格式的单一交易跟踪 `get_block` 端点。
 
->⚠ **警告**
-> >那个 `v1/trace_api/get_transaction_trace` API 将扫描跟踪日志文件中的每个区块，直到找到交易。
->因此，此 API 效率低下，只能用于测试目的。
+> ⚠ **警告**
+> 
+> 那个 `v1/trace_api/get_transaction_trace` API 将扫描跟踪日志文件中的每个区块，直到找到交易。
+> 因此，此 API 效率低下，只能用于测试目的。
 
 <details>
- <summary>查看示例结果</summary>
+    <summary>查看示例结果</summary>
 
 ```json
 {
@@ -721,6 +727,7 @@ curl -X POST -H "Content-Type: application/json" \
 ```
 </details>
 
->📄 **API 参考**
->>有关 Trace API 的更多信息，请参阅 [API 参考](https://docs.eosnetwork.com/apis/leap/latest/trace_api.api).
+> 📄 **API 参考**
+>
+> 有关 Trace API 的更多信息，请参阅 [API 参考](https://docs.eosnetwork.com/apis/leap/latest/trace_api.api).
 

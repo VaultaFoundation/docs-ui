@@ -27,14 +27,14 @@ RAM 就像在计算机中一样，是一种有限的资源。它是一个快速�
 如果你想快速从任何钱包购买 RAM，你可以**向钱包发送任意数量的 EOS `buyramforeos` 账户**，它会将等量的 RAM 发回给你。
 
 <details>
- <summary>想知道 RAM 价格是如何计算的吗？</summary>
+    <summary>想知道 RAM 价格是如何计算的吗？</summary>
 
 智能合约存储其数据所需的必要RAM是根据使用的区块链状态计算得出的。
 
 作为开发者，要了解您的智能合约所需的内存量，请注意您的智能合约实例化和使用的多索引表所依据的数据结构。一个多索引表所依据的数据结构定义了表中的一行。数据结构的每个数据成员都对应于表中的一个行单元格。
 要估算一个多索引行需要在区块链上存储的 RAM 量，必须将每个数据成员类型的大小和每个已定义索引的内存开销（如果有）相加。以下是EOS代码为多索引表、索引和数据类型定义的管理费用：
 
-<br />
+<br/>
 
 * [多索引 RAM 字节开销](https://github.com/AntelopeIO/leap/blob/f6643e434e8dc304bba742422dd036a6fbc1f039/libraries/chain/include/eosio/chain/contract_table_objects.hpp#L240)
 * [每个索引 RAM 字节每行的开销](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L109)
@@ -60,14 +60,14 @@ CPU 是一种为区块链账户提供处理能力的系统资源。当交易在�
 
 
 <details>
- <summary>想知道 CPU 是如何计算的吗？</summary>
+    <summary>想知道 CPU 是如何计算的吗？</summary>
 
 区块链执行的交易包含一项或多项操作。每笔交易必须消耗一定数量的 CPU
 在最小和最大事务 CPU 使用率值预定义的限制范围内。对于EOS区块链来说，这些限制
 在区块链的配置中设置。你可以通过运行以下命令来找出这些限制，然后查阅
 这 `min_transaction_cpu_usage` 还有 `max_transaction_cpu_usage` 以微秒为单位表示。
 
-<br />
+<br/>
 
 对于执行交易的账户，区块链会在执行每笔交易之前计算并更新每个区块的剩余资源。当交易准备好执行时，区块链会决定付款人账户是否有足够的CPU来完成交易的执行。为了计算必要的 CPU，主动构建当前区块的节点会测量执行事务的时间。如果账户有足够的 CPU，则会执行交易；否则交易将被拒绝。有关技术详情，请参阅以下链接：
 
@@ -83,15 +83,15 @@ CPU 是一种为区块链账户提供处理能力的系统资源。当交易在�
 NET 是一种根据交易使用的网络带宽消耗的资源。
 
 <details>
- <summary>想知道净值是如何计算的吗？</summary>
+    <summary>想知道净值是如何计算的吗？</summary>
 
 每笔交易消耗的净额不得超过预定义的最大交易净使用值。对于EOS区块链，此限制是在区块链的配置中设置的。您可以通过运行以下命令来找出此限制，并查阅 `max_transaction_net_usage` 以字节表示。
 
-<br />
+<br/>
 
 对于执行交易的账户，区块链会在执行每笔交易之前计算并更新每个区块的剩余资源。当交易准备好执行时，区块链决定付款人账户是否有足够的净资产来支付交易的执行。必要的净额是根据交易大小计算的，交易大小是存储在区块链中的打包交易的大小。如果账户有足够的 NET 资源，则可以执行交易；否则交易将被拒绝。有关技术细节，请参阅以下来源：
 
-<br />
+<br/>
 
 * [NET 配置变量](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L57)
 * [交易初始化](https://github.com/AntelopeIO/leap/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1559)
@@ -111,11 +111,11 @@ NET 是一种根据交易使用的网络带宽消耗的资源。
 每天。
 
 <details>
- <summary>查看有关如何手动启动 PowerUp 的详细信息</summary>
+    <summary>查看有关如何手动启动 PowerUp 的详细信息</summary>
 
 启动账户是一种从 PowerUp 资源模型中租用 CPU 和 NET 资源的技术。智能合约在区块链上实现此模型，并将这些资源分配给您选择的账户。为账户加电的操作是 `powerup`。它以以下参数为参数：
 
-<br />
+<br/>
 
 * 那个 `payer` 在费用中，必须是有效的 EOS 账户。
 * 那个 `receiver` 的资源，必须是有效的 EOS 账户。
@@ -123,17 +123,17 @@ NET 是一种根据交易使用的网络带宽消耗的资源。
 * 那个 `net_frac`，还有 `cpu_frac` 是所需资源的百分比。计算百分比的最简单方法是将 10^15 (100%) 乘以所需的百分比。例如：10^15 * 0.01 = 10^13。
 * 那个 `max_payment`，必须以 EOS 表示，并且是最大金额 `payer` 愿意付钱。
 
-<br />
+<br/>
 
 ```sh
 cleos push action eosio powerup '[user, user, 1, 10000000000000, 10000000000000, "1000.0000 EOS"]' -p user
 ```
 
-<br />
+<br/>
 
 要查看收到的 NET 和 CPU 权重以及费用金额，请查看 `eosio.reserv::powupresult` 由操作返回，应与以下内容类似：
 
-<br />
+<br/>
 
 ```console
 executed transaction: 82b7124601612b371b812e3bf65cf63bb44616802d3cd33a2c0422b58399f54f  144 bytes  521 us
@@ -144,31 +144,31 @@ executed transaction: 82b7124601612b371b812e3bf65cf63bb44616802d3cd33a2c0422b583
 #     eosio.rex <= eosio.token::transfer        {"from":"user","to":"eosio.rex","quantity":"999.9901 EOS","memo":"transfer from user to eosio.rex"}
 ```
 
-<br />
+<br/>
 
 EOS 区块链上的 PowerUp 资源模型初始化为 `"powerup_days": 1,`。此设置允许租用 CPU 和 NET 的最长时间为 24 小时。如果您在 24 小时间隔内未使用资源，则租用的 CPU 和 NET 将过期。
 
-<br />
+<br/>
 
 #### 处理过期订单
 
 系统不会自动回收到期的贷款中的资源。到期的贷款仍处于队列中，必须处理。
 
-<br />
+<br/>
 
 拨打的任何电话 `powerup` action 也会处理这个队列（一次只能处理两笔到期的贷款）。因此，到期的贷款会自动及时处理。有时，可能需要手动处理队列中的过期贷款，以便将资源释放回系统，从而降低价格。因此，如果任何账户调用，则最多可以处理任意数量的到期贷款 `powerupexec` 行动。
 
-<br />
+<br/>
 
 查看订单表 `powup.order` 执行以下命令：
 
-<br />
+<br/>
 
 ```sh
 cleos get table eosio 0 powup.order
 ```
 
-<br />
+<br/>
 
 ```json
 {
@@ -186,17 +186,17 @@ cleos get table eosio 0 powup.order
 }
 ```
 
-<br />
+<br/>
 
 示例 `powerupexec` 打电话:
 
-<br />
+<br/>
 
 ```sh
 cleos push action eosio powerupexec '[user, 2]' -p user
 ```
 
-<br />
+<br/>
 
 ```console
 executed transaction: 93ab4ac900a7902e4e59e5e925e8b54622715328965150db10774aa09855dc98  104 bytes  363 us

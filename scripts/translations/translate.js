@@ -18,13 +18,6 @@ const getProperties = (doc) => {
     return yaml.load(frontMatter);
 };
 
-
-
-// TODO: Tables are getting messed up (see supported-tokens.md) (actually, looks like they are only messed up in the preview, but not in the actual docs)
-
-// TODO: <head> tags are still getting messed up, are are being translated which breaks docusaurus.
-
-
 // TODO: implement
 const DO_NOT_TRANSLATE = [
     'Web3',
@@ -32,13 +25,6 @@ const DO_NOT_TRANSLATE = [
     'EOS',
     'EVM'
 ];
-
-// We're going to split the docs into a few different symbols:
-// Title (everything between the first and second ---)
-// Code blocks (everything between ``` and ```)
-// Code snippets (everything between ` and `)
-// Everything else (text)
-//  - We'll also split links into their own symbol, so we can discard them from translation
 
 const SYMBOL_TYPE = {
     TITLE: 'title',
@@ -50,13 +36,10 @@ const SYMBOL_TYPE = {
 
 let symbols = [];
 
-let id = 0;
-let snippetId = 0;
 const pushSymbol = (type, content) => {
     symbols.push({
         type,
-        content,
-        id: id++
+        content
     });
 }
 
@@ -123,7 +106,7 @@ const translate = async (doc, targetLanguageCode) => {
             continue;
         }
 
-        // There's an issue where Google Translate API removes trailing
+        // There's an issue where the Translate API removes trailing
         // whitespaces, and there's no way to prevent this with configs afaik.
         // To solve it, we'll add a whitespace to the end of the string
         // if it was terminated by a whitespace, and one doesn't exist in the
@@ -199,6 +182,8 @@ const markdownToSymbols = (markdown) => {
         tableSplitter: new RegExp(/\|[-]+\|[-]+\|/),
         // matches only the > in the quotes, not the following texts
         blockquote: new RegExp(/>(?=\s)/g),
+        summaryElement: new RegExp(/<summary>|<\/summary>/g),
+        detailsElement: new RegExp(/<details>|<\/details>/g),
     }
     const combinedRegex = Object.values(regexes).reduce((acc, regex) => {
         return new RegExp(`${acc.source}|${regex.source}`, 'gs');
@@ -211,25 +196,22 @@ const markdownToSymbols = (markdown) => {
     }
 
     let matches = markdown.match(combinedRegex);
-    matches.forEach((match, i) => {
-        if (match.match(/<head>([\s\S]*?)<\/head>/)) {
-            console.log('Ignoring head');
-            pushFoundSymbol(SYMBOL_TYPE.HEAD, match);
-        }
-        // image is too similar to link, needs to be ignored
-        // before looking for links
-        else if (match.match(/!\[[^\]]*]\([^)]*\)/g)) {
-            console.log('Found image');
-            pushFoundSymbol(SYMBOL_TYPE.IGNORED, match);
-        }
-        else if (match.match(/\[[^\]]*]\([^)]*\)/g)) {
-            console.log('Found link');
-            pushFoundSymbol(SYMBOL_TYPE.LINK, match);
-        }
-        else {
-            pushFoundSymbol(SYMBOL_TYPE.IGNORED, match);
-        }
-    });
+    if(matches) {
+        matches.forEach((match, i) => {
+            if (match.match(/<head>([\s\S]*?)<\/head>/)) {
+                pushFoundSymbol(SYMBOL_TYPE.HEAD, match);
+            }
+                // image is too similar to link, needs to be ignored
+            // before looking for links
+            else if (match.match(/!\[[^\]]*]\([^)]*\)/g)) {
+                pushFoundSymbol(SYMBOL_TYPE.IGNORED, match);
+            } else if (match.match(/\[[^\]]*]\([^)]*\)/g)) {
+                pushFoundSymbol(SYMBOL_TYPE.LINK, match);
+            } else {
+                pushFoundSymbol(SYMBOL_TYPE.IGNORED, match);
+            }
+        });
+    }
 
     let lastIndex = 0;
     for(const foundSymbol of foundSymbols){
@@ -249,6 +231,9 @@ const markdownToSymbols = (markdown) => {
     for(const symbol of result){
         pushSymbol(symbol.type, symbol.content);
     }
+
+    // console.log(JSON.stringify(symbols, null, 4));
+    // process.exit(1);
 }
 
 const saveCache = (translationCache) => fs.writeFileSync('./translations/translated.json', JSON.stringify(translationCache, null, 2));
@@ -341,7 +326,7 @@ const translateDocs = async () => {
 
             const translateThisDoc = async () => {
                 const title = (x => x ? x[0] : docPath)(doc.match(/title:\s*(.+)/));
-                console.info(`\r\nTranslating ${title} to ${language}`);
+                console.info(`\r\nTranslating ${title} to ${language} (${docPath})`);
                 const translatedDocPath = `./i18n/${language}/docusaurus-plugin-content-docs${docPrefixPath === 'docs' ? '' : `-${docPrefixPath}`}/current/${docPath.replace(`${docPrefixPath}/`, '')}`;
 
                 const translated = await translate(doc, language);
