@@ -5,7 +5,7 @@ dont_translate_title: true
 
 ## 개요
 
-더 `net_plugin` 노드의 지속적인 동기화를 위한 인증된 P2P (Peer-to-Peer) 프로토콜을 제공합니다.또한 에서 제공하는 핵심 기능을 구현합니다. [넷 API 플러그인](../net_api_plugin/index.md).
+더 `net_plugin` 노드의 지속적인 동기화를 위한 인증된 P2P (Peer-to-Peer) 프로토콜을 제공합니다.또한 에서 제공하는 핵심 기능을 구현합니다. [넷 API 플러그인](./net-api-plugin.md).
 
 ## 사용법
 

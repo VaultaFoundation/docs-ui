@@ -7,7 +7,7 @@ dont_translate_title: true
 
 ## 概述
 
-那个 `test_control_api_plugin` 允许将控制消息转发到 [测试控制插件](../test_control_plugin/index.md)。当前端点指示插件启动正常关闭 `nodeos` 到达特定区块后即为实例。此功能主要是为测试目的而设计的。
+那个 `test_control_api_plugin` 允许将控制消息转发到 [测试控制插件](./test-control-plugin.md)。当前端点指示插件启动正常关闭 `nodeos` 到达特定区块后即为实例。此功能主要是为测试目的而设计的。
 
 ## 用法
 
@@ -32,9 +32,9 @@ curl %s/v1/test_control/kill_node_on_producer -d '{ \"producer\":\"%s\", \"where
 
 ## 依赖关系
 
-* [`test_control_plugin`](../test_control_plugin/index.md)
-* [`chain_plugin`](../chain_plugin/index.md)
-* [`http_plugin`](../http_plugin/index.md)
+* [`test_control_plugin`](./test-control-plugin.md)
+* [`chain_plugin`](./chain-plugin.md)
+* [`http_plugin`](./http-plugin.md)
 
 ### 加载依赖关系示例
 

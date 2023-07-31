@@ -7,7 +7,7 @@ dont_translate_title: true
 
 ## 개요
 
-더 `test_control_api_plugin` 제어 메시지를 전달할 수 있습니다. [테스트_제어_플러그인](../test_control_plugin/index.md).현재 엔드포인트는 플러그인이 정상적인 종료를 시작하도록 지시합니다. `nodeos` 특정 블록에 도달했을 때의 인스턴스이 기능은 주로 테스트 목적으로 설계되었습니다.
+더 `test_control_api_plugin` 제어 메시지를 전달할 수 있습니다. [테스트_제어_플러그인](./test-control-plugin.md).현재 엔드포인트는 플러그인이 정상적인 종료를 시작하도록 지시합니다. `nodeos` 특정 블록에 도달했을 때의 인스턴스이 기능은 주로 테스트 목적으로 설계되었습니다.
 
 ## 사용법
 
@@ -32,9 +32,9 @@ curl %s/v1/test_control/kill_node_on_producer -d '{ \"producer\":\"%s\", \"where
 
 ## 종속성
 
-* [`테스트_제어_플러그인`](../test_control_plugin/index.md)
-* [`체인_플러그인`](../chain_plugin/index.md)
-* [`http_plugin`](../http_plugin/index.md)
+* [`테스트_제어_플러그인`](./test-control-plugin.md)
+* [`체인_플러그인`](./chain-plugin.md)
+* [`http_plugin`](./http-plugin.md)
 
 ### 로드 종속성 예제
 

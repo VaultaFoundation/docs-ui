@@ -5,7 +5,7 @@ dont_translate_title: true
 
 ## 概述
 
-那个 `producer_plugin` 包含节点执行区块生产任务的功能。它还实现了由提供的核心功能 [制作人 API 插件](../producer_api_plugin/index.md).
+那个 `producer_plugin` 包含节点执行区块生产任务的功能。它还实现了由提供的核心功能 [制作人 API 插件](./producer-api-plugin.md).
 
 > ℹ️ 要启用区块生产，特定 `nodeos` 配置是必要的。请参阅 [配置区块生成节点](https://docs.eosnetwork.com/manuals/leap/latest/nodeos/usage/node-setups/producing-node) 详细说明指南。
 
@@ -61,7 +61,7 @@ nodeos ... -- plugin eosio::producer_plugin [options]
 
 ## 依赖关系
 
-* [`chain_plugin`](../chain_plugin/index.md)
+* [`chain_plugin`](./chain-plugin.md)
 
 ## 交易的优先级
 

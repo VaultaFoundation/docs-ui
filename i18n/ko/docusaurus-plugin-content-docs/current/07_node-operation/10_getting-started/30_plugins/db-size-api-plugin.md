@@ -30,8 +30,8 @@ nodeos ... --plugin eosio::db_size_api_plugin
 
 ## 종속성
 
-* [`체인_플러그인`](../chain_plugin/index.md)
-* [`http_plugin`](../http_plugin/index.md)
+* [`체인_플러그인`](./chain-plugin.md)
+* [`http_plugin`](./http-plugin.md)
 
 ### 로드 종속성 예제
 

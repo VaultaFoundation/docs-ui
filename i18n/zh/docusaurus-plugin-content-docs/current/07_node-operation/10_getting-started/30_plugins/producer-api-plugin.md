@@ -7,7 +7,7 @@ dont_translate_title: true
 
 ## 概述
 
-那个 `producer_api_plugin` 公开了各种端点 [`producer_plugin`](../producer_plugin/index.md) 到由管理的 RPC API 接口 [`http_plugin`](../http_plugin/index.md)。
+那个 `producer_api_plugin` 公开了各种端点 [`producer_plugin`](./producer-plugin.md) 到由管理的 RPC API 接口 [`http_plugin`](./http-plugin.md)。
 
 ## 用法
 
@@ -26,9 +26,9 @@ nodeos ... --plugin eosio::producer_api_plugin
 
 ## 依赖关系
 
-* [`producer_plugin`](../producer_plugin/index.md)
-* [`chain_plugin`](../chain_plugin/index.md)
-* [`http_plugin`](../http_plugin/index.md)
+* [`producer_plugin`](./producer-plugin.md)
+* [`chain_plugin`](./chain-plugin.md)
+* [`http_plugin`](./http-plugin.md)
 
 ### 加载依赖关系示例
 

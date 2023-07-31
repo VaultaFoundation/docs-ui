@@ -7,7 +7,7 @@ dont_translate_title: true
 
 ## 概述
 
-那个 `chain_api_plugin` 公开了来自 [`chain_plugin`](../chain_plugin/index.md) 到由管理的 RPC API 接口 [`http_plugin`](../http_plugin/index.md)。
+那个 `chain_api_plugin` 公开了来自 [`chain_plugin`](./chain-plugin.md) 到由管理的 RPC API 接口 [`http_plugin`](../http_plugin/index.md)。
 
 ## 用法
 
@@ -26,8 +26,8 @@ nodeos ... --plugin eosio::chain_api_plugin
 
 ## 依赖关系
 
-* [`chain_plugin`](../chain_plugin/index.md)
-* [`http_plugin`](../http_plugin/index.md)
+* [`chain_plugin`](./chain-plugin.md)
+* [`http_plugin`](./http-plugin.md)
 
 ### 加载依赖关系示例
 

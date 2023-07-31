@@ -5,7 +5,7 @@ dont_translate_title: true
 
 ## 개요
 
-더 `producer_plugin` 노드가 블록 제작 작업을 수행하는 기능을 포함합니다.또한 에서 제공하는 핵심 기능을 구현합니다. [프로듀서 API 플러그인](../producer_api_plugin/index.md).
+더 `producer_plugin` 노드가 블록 제작 작업을 수행하는 기능을 포함합니다.또한 에서 제공하는 핵심 기능을 구현합니다. [프로듀서 API 플러그인](./producer-api-plugin.md).
 
 > ℹ️ 블록 프로덕션을 활성화하려면, 특정 `nodeos` 구성이 필요합니다.를 참조하십시오. [블록 생성 노드 구성](https://docs.eosnetwork.com/manuals/leap/latest/nodeos/usage/node-setups/producing-node) 자세한 지침을 보려면 안내서를 참조하십시오.
 
@@ -61,7 +61,7 @@ nodeos ... -- plugin eosio::producer_plugin [options]
 
 ## 종속성
 
-* [`체인_플러그인`](../chain_plugin/index.md)
+* [`체인_플러그인`](./chain-plugin.md)
 
 ## 거래의 우선순위
 

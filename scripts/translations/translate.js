@@ -53,7 +53,6 @@ const translate = async (doc, targetLanguageCode) => {
     splitDocIntoSymbols(doc);
 
     const frontMatter = getProperties(doc);
-    console.log('frontMatter', frontMatter);
 
     let translatedTitle = symbols.find(symbol => symbol.type === SYMBOL_TYPE.TITLE).content;
     if (!frontMatter['dont_translate_title']) {

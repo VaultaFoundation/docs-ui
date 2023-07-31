@@ -5,7 +5,7 @@ dont_translate_title: true
 
 ## 概述
 
-那个 `chain_plugin` 是处理和整合 EOS 节点上链数据所必需的必备插件。它实现了由提供的核心功能 [链式 API 插件](../chain_api_plugin/index.md)。
+那个 `chain_plugin` 是处理和整合 EOS 节点上链数据所必需的必备插件。它实现了由提供的核心功能 [链式 API 插件](./chain-api-plugin.md)。
 
 ## 用法
 

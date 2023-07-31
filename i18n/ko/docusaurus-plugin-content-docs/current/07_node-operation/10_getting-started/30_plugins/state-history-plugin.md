@@ -57,7 +57,7 @@ nodeos ... --plugin eosio::state_history_plugin [operations] [options]
 
 ## 종속성
 
-* [`체인_플러그인`](../chain_plugin/index.md)
+* [`체인_플러그인`](./chain-plugin.md)
 
 ### 로드 종속성 예제
 

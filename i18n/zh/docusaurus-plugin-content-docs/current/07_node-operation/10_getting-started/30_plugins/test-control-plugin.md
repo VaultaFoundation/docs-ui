@@ -9,7 +9,7 @@ dont_translate_title: true
 
 > ℹ️ 那个 `test_control_plugin` 可以用来根据**head block**（指最近的区块）或**最后一个不可逆区块**（代表已实现不可逆终局的区块）启动关闭。
 
-那个 `test_control_plugin` 还实现了由提供的核心功能 [测试控制 API 插件](../test_control_api_plugin/index.md)。
+那个 `test_control_plugin` 还实现了由提供的核心功能 [测试控制 API 插件](./test-control-api-plugin.md)。
 
 ## 用法
 
@@ -28,7 +28,7 @@ nodeos ... --plugin eosio::test_control_plugin
 
 ## 依赖关系
 
-* [`chain_plugin`](../chain_plugin/index.md)
+* [`chain_plugin`](./chain-plugin.md)
 
 ### 加载依赖关系示例
 

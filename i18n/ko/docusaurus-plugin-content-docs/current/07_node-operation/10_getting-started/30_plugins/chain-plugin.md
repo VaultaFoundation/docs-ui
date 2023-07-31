@@ -5,7 +5,7 @@ dont_translate_title: true
 
 ## 개요
 
-더 `chain_plugin` EOS 노드에서 체인 데이터를 처리하고 통합하는 데 필요한 필수 플러그인입니다.에서 제공하는 핵심 기능을 구현합니다. [체인 API 플러그인](../chain_api_plugin/index.md).
+더 `chain_plugin` EOS 노드에서 체인 데이터를 처리하고 통합하는 데 필요한 필수 플러그인입니다.에서 제공하는 핵심 기능을 구현합니다. [체인 API 플러그인](./chain-api-plugin.md).
 
 ## 사용법
 

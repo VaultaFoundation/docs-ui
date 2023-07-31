@@ -7,7 +7,7 @@ dont_translate_title: true
 
 ## 概述
 
-那个 `net_api_plugin` 公开了来自 [`net_plugin`](../net_plugin/index.md) 到由管理的 RPC API 接口 [`http_plugin`](../http_plugin/index.md)。那个 `net_api_plugin` 允许节点操作员管理主动节点的点对点 (p2p) 连接。
+那个 `net_api_plugin` 公开了来自 [`net_plugin`](./net-plugin.md) 到由管理的 RPC API 接口 [`http_plugin`](./http-plugin.md)。那个 `net_api_plugin` 允许节点操作员管理主动节点的点对点 (p2p) 连接。
 
 那个 `net_api_plugin` 提供了四个 RPC API 端点：
 * 连接
@@ -34,8 +34,8 @@ nodeos ... --plugin eosio::net_api_plugin
 
 ## 依赖关系
 
-* [`net_plugin`](../net_plugin/index.md)
-* [`http_plugin`](../http_plugin/index.md)
+* [`net_plugin`](./net-plugin.md)
+* [`http_plugin`](./http-plugin.md)
 
 ### 加载依赖关系示例
 

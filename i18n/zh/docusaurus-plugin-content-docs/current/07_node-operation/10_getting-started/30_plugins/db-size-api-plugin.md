@@ -30,8 +30,8 @@ nodeos ... --plugin eosio::db_size_api_plugin
 
 ## 依赖关系
 
-* [`chain_plugin`](../chain_plugin/index.md)
-* [`http_plugin`](../http_plugin/index.md)
+* [`chain_plugin`](./chain-plugin.md)
+* [`http_plugin`](./http-plugin.md)
 
 ### 加载依赖关系示例
 

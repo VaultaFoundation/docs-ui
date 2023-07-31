@@ -7,7 +7,7 @@ dont_translate_title: true
 
 ## 개요
 
-더 `net_api_plugin` 의 기능을 노출합니다. [`넷_플러그인`](../net_plugin/index.md) 에서 관리하는 RPC API 인터페이스로 [`http_plugin`](../http_plugin/index.md).더 `net_api_plugin` 노드 운영자가 활성 노드의 P2P (Peer-to-Peer) 연결을 관리할 수 있습니다.
+더 `net_api_plugin` 의 기능을 노출합니다. [`넷_플러그인`](./net-plugin.md) 에서 관리하는 RPC API 인터페이스로 [`http_plugin`](./http-plugin.md).더 `net_api_plugin` 노드 운영자가 활성 노드의 P2P (Peer-to-Peer) 연결을 관리할 수 있습니다.
 
 더 `net_api_plugin` 네 가지 RPC API 엔드포인트를 제공합니다.
 * 연결
@@ -34,8 +34,8 @@ nodeos ... --plugin eosio::net_api_plugin
 
 ## 종속성
 
-* [`넷_플러그인`](../net_plugin/index.md)
-* [`http_plugin`](../http_plugin/index.md)
+* [`넷_플러그인`](./net-plugin.md)
+* [`http_plugin`](./http-plugin.md)
 
 ### 로드 종속성 예제
 

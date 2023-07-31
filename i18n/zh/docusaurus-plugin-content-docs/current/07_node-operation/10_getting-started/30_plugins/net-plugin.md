@@ -5,7 +5,7 @@ dont_translate_title: true
 
 ## 概述
 
-那个 `net_plugin` 提供经过身份验证的点对点 (p2p) 协议，用于节点的持续同步。它还实现了由提供的核心功能 [Net API 插件](../net_api_plugin/index.md)。
+那个 `net_plugin` 提供经过身份验证的点对点 (p2p) 协议，用于节点的持续同步。它还实现了由提供的核心功能 [Net API 插件](./net-api-plugin.md)。
 
 ## 用法
 

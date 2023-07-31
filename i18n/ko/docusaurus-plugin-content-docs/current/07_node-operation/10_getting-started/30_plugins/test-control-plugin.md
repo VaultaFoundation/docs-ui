@@ -9,7 +9,7 @@ dont_translate_title: true
 
 > ℹ️ 더 `test_control_plugin` 가장 최근 블록을 가리키는 **헤드 블록** 또는 돌이킬 수 없는 최종성을 달성한 블록을 나타내는**마지막 비가역 블록**을 기반으로 종료를 시작하는 데 사용할 수 있습니다.
 
-더 `test_control_plugin` 또한 에서 제공하는 핵심 기능을 구현합니다. [테스트 컨트롤 API 플러그인](../test_control_api_plugin/index.md).
+더 `test_control_plugin` 또한 에서 제공하는 핵심 기능을 구현합니다. [테스트 컨트롤 API 플러그인](./test-control-api-plugin.md).
 
 ## 사용법
 
@@ -28,7 +28,7 @@ nodeos ... --plugin eosio::test_control_plugin
 
 ## 종속성
 
-* [`체인_플러그인`](../chain_plugin/index.md)
+* [`체인_플러그인`](./chain-plugin.md)
 
 ### 로드 종속성 예제
 
