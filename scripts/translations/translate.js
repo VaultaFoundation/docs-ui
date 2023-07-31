@@ -52,7 +52,14 @@ const translate = async (doc, targetLanguageCode) => {
 
     splitDocIntoSymbols(doc);
 
-    let translatedTitle = await translateText(symbols.find(symbol => symbol.type === SYMBOL_TYPE.TITLE).content, targetLanguageCode);
+    const frontMatter = getProperties(doc);
+    console.log('frontMatter', frontMatter);
+
+    let translatedTitle = symbols.find(symbol => symbol.type === SYMBOL_TYPE.TITLE).content;
+    if (!frontMatter['dont_translate_title']) {
+        translatedTitle = await translateText(symbols.find(symbol => symbol.type === SYMBOL_TYPE.TITLE).content, targetLanguageCode);
+    }
+
     symbols = symbols.filter(symbol => symbol.type !== SYMBOL_TYPE.TITLE);
 
     const progressBar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
