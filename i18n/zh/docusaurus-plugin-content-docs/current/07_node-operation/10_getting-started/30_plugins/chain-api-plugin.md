@@ -7,7 +7,7 @@ dont_translate_title: true
 
 ## 概述
 
-那个 `chain_api_plugin` 公开了来自 [`chain_plugin`](./chain-plugin.md) 到由管理的 RPC API 接口 [`http_plugin`](../http_plugin/index.md)。
+那个 `chain_api_plugin` 公开了来自 [`chain_plugin`](./chain-plugin.md) 到由管理的 RPC API 接口 [`http_plugin`](./http-plugin/index.md)。
 
 ## 用法
 

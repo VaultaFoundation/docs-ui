@@ -7,7 +7,7 @@ dont_translate_title: true
 
 ## 개요
 
-더 `chain_api_plugin` 의 기능을 노출합니다. [`체인_플러그인`](./chain-plugin.md) 에서 관리하는 RPC API 인터페이스로 [`http_plugin`](../http_plugin/index.md).
+더 `chain_api_plugin` 의 기능을 노출합니다. [`체인_플러그인`](./chain-plugin.md) 에서 관리하는 RPC API 인터페이스로 [`http_plugin`](./http-plugin/index.md).
 
 ## 사용법
 

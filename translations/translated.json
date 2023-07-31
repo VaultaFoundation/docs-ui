@@ -447,12 +447,12 @@
     },
     "footer": {
       "hash": "ca03e44f3f1033deb89b65676990073f",
-      "timestamp": 1690810128293,
+      "timestamp": 1690822386763,
       "manually_translated": false
     },
     "navbar": {
       "hash": "fb3686f8ba032fcb2795c2b5a329ebc7",
-      "timestamp": 1690810129947,
+      "timestamp": 1690822388899,
       "manually_translated": false
     },
     "docs/02_core-concepts/30_resources.md": {
@@ -486,8 +486,8 @@
       "manually_translated": false
     },
     "docs/07_node-operation/10_getting-started/30_plugins/chain-api-plugin.md": {
-      "hash": "b953e854bb18f19a7f137b4b57bc0cfa",
-      "timestamp": 1690808916879,
+      "hash": "3ca0a2c01d9b0bb308ef1b5fb25130a8",
+      "timestamp": 1690822353248,
       "manually_translated": false
     },
     "docs/07_node-operation/10_getting-started/30_plugins/chain-plugin.md": {
@@ -563,6 +563,11 @@
     "docs/07_node-operation/10_getting-started/30_plugins/trace-api-plugin.md": {
       "hash": "7ddde3a9f7f2a69e985cddda71b76022",
       "timestamp": 1690809312643,
+      "manually_translated": false
+    },
+    "evm/23_advanced-guides/10_account-info.md": {
+      "hash": "5b4c3f713efba2780de86fa697634ab5",
+      "timestamp": 1690822370261,
       "manually_translated": false
     }
   },
@@ -1014,12 +1019,12 @@
     },
     "footer": {
       "hash": "ca03e44f3f1033deb89b65676990073f",
-      "timestamp": 1690810133456,
+      "timestamp": 1690822392552,
       "manually_translated": false
     },
     "navbar": {
       "hash": "fb3686f8ba032fcb2795c2b5a329ebc7",
-      "timestamp": 1690810135240,
+      "timestamp": 1690822394272,
       "manually_translated": false
     },
     "docs/02_core-concepts/30_resources.md": {
@@ -1053,8 +1058,8 @@
       "manually_translated": false
     },
     "docs/07_node-operation/10_getting-started/30_plugins/chain-api-plugin.md": {
-      "hash": "b953e854bb18f19a7f137b4b57bc0cfa",
-      "timestamp": 1690808924282,
+      "hash": "3ca0a2c01d9b0bb308ef1b5fb25130a8",
+      "timestamp": 1690822361398,
       "manually_translated": false
     },
     "docs/07_node-operation/10_getting-started/30_plugins/chain-plugin.md": {
@@ -1130,6 +1135,11 @@
     "docs/07_node-operation/10_getting-started/30_plugins/trace-api-plugin.md": {
       "hash": "7ddde3a9f7f2a69e985cddda71b76022",
       "timestamp": 1690809360485,
+      "manually_translated": false
+    },
+    "evm/23_advanced-guides/10_account-info.md": {
+      "hash": "5b4c3f713efba2780de86fa697634ab5",
+      "timestamp": 1690822378505,
       "manually_translated": false
     }
   }
