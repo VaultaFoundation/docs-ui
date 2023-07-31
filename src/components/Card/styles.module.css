@@ -23,6 +23,7 @@
   align-items: flex-start;
   max-width: 215px;
   gap: 12px;
+  padding-top:20px;
 }
 
 a {

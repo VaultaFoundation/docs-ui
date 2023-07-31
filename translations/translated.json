@@ -1,0 +1,1136 @@
+{
+  "zh": {
+    "docs/01_quick-start/01_introduction.md": {
+      "hash": "6057fb275f60348b45b5b7ce9a234146",
+      "timestamp": 1690461422496,
+      "manually_translated": false
+    },
+    "docs/01_quick-start/02_write-a-contract.md": {
+      "hash": "0bff4ae2a60064d125158a05e1a2ce15",
+      "timestamp": 1690461432482,
+      "manually_translated": false
+    },
+    "docs/01_quick-start/03_build-and-deploy.md": {
+      "hash": "7e5b39df8cdaa285b9fc4d830d488686",
+      "timestamp": 1690461453039,
+      "manually_translated": false
+    },
+    "docs/01_quick-start/index.md": {
+      "hash": "625049b0e2dae82c9261d204d10b2299",
+      "timestamp": 1690462467935,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/10_decentralization.md": {
+      "hash": "11c6de82d961bc89042752edcc7ee435",
+      "timestamp": 1690462521943,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/20_consensus.md": {
+      "hash": "1efa0fb25c373e03956244b593596ee7",
+      "timestamp": 1690462526385,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/30_cryptography.md": {
+      "hash": "72bc364e13c8b861b4c92b92b81dda3f",
+      "timestamp": 1690462534361,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/40_transactions-and-blocks.md": {
+      "hash": "179a3f012a5ddbdf245e3c45d702e688",
+      "timestamp": 1690462542424,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/50_smart-contracts.md": {
+      "hash": "95a6b0e0e81e8a01a397ef811e3156d6",
+      "timestamp": 1690462548055,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/60_web3.md": {
+      "hash": "6fa2f1452c27b71222ff998ebb2ba4ef",
+      "timestamp": 1690462555283,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/index.md": {
+      "hash": "e02a6c4c224b3010a656d996d6893213",
+      "timestamp": 1690462564831,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/20_accounts.md": {
+      "hash": "e81e52a802389089b6142aec584b2195",
+      "timestamp": 1690462600719,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/index.md": {
+      "hash": "c31f4947663ffa9aa9a81acf588b52b3",
+      "timestamp": 1690462732692,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/01_contract-anatomy.md": {
+      "hash": "1cff478ae892901b6d1c520e3bb95067",
+      "timestamp": 1690462754939,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/02_actions.md": {
+      "hash": "ebbf06b3256f6547e7df4d82e96e2694",
+      "timestamp": 1690462809012,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/03_variables.md": {
+      "hash": "e8e72dd872462153d36f91b907d3be6d",
+      "timestamp": 1690462889831,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/04_state-data.md": {
+      "hash": "1f0f323510145d47512e72d51dc9b789",
+      "timestamp": 1690462998603,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/05_authorization.md": {
+      "hash": "ffcb3d9d661d22439201dfd0855ed994",
+      "timestamp": 1690463071583,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/06_assertions.md": {
+      "hash": "b6a7ac58c8c716764c24d22638f89fca",
+      "timestamp": 1690463088801,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/07_events.md": {
+      "hash": "2eda90049767884978332d17a56d4adb",
+      "timestamp": 1690463123296,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/999_language-support.md": {
+      "hash": "dafa52fb13a0cc535fcad6e96493dad3",
+      "timestamp": 1690463154081,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/index.md": {
+      "hash": "c7126c638aa62c4c61fa95e2975ecc9a",
+      "timestamp": 1690463159556,
+      "manually_translated": false
+    },
+    "docs/04_web-applications/01_beginner-concepts.md": {
+      "hash": "8c735817ff4b394095915fbd72a4db9e",
+      "timestamp": 1690463175266,
+      "manually_translated": false
+    },
+    "docs/04_web-applications/05_reading-state.md": {
+      "hash": "5c879fe831551305e00730e8c049619c",
+      "timestamp": 1690463255943,
+      "manually_translated": false
+    },
+    "docs/04_web-applications/index.md": {
+      "hash": "13d3bdb9dcdd33d4cc3d848972f30e06",
+      "timestamp": 1690463322901,
+      "manually_translated": false
+    },
+    "docs/06_guides/02_create-an-nft.md": {
+      "hash": "a3de541f1ebff41831356588e355a129",
+      "timestamp": 1690466916275,
+      "manually_translated": false
+    },
+    "docs/06_guides/9_linked-actions-pattern.md": {
+      "hash": "95da749729c366925fb1b3f8791ce61f",
+      "timestamp": 1690463762760,
+      "manually_translated": false
+    },
+    "docs/06_guides/index.md": {
+      "hash": "31541dc76737903f0869c351003fb4f3",
+      "timestamp": 1690463788122,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/100_migration-guides/01_v1-history-alternatives.md": {
+      "hash": "d492aa9e310638abef7e31c4a4001929",
+      "timestamp": 1690463805157,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/100_migration-guides/index.md": {
+      "hash": "84e815ab97203f8e6768ca2e38847849",
+      "timestamp": 1690463823384,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/00_software.md": {
+      "hash": "1e9a7052034b2e46d16a868b01acda06",
+      "timestamp": 1690463836848,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/10_hardware-requirements.md": {
+      "hash": "65cbf90a334878f1c2949824fec5ede3",
+      "timestamp": 1690463857023,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins.md": {
+      "hash": "23e678273de3ae2caf3ae46bb13ae6dc",
+      "timestamp": 1690463960766,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/40_peering.md": {
+      "hash": "5df23b0a9f6bc8bd60fa8f2221c76126",
+      "timestamp": 1690463992873,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/50_snapshots.md": {
+      "hash": "0bbd1ff9ec1235fedd1a99af34186e4c",
+      "timestamp": 1690464049758,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/60_logging/10_native-logging.md": {
+      "hash": "0bad6604cf475083e99defc91eea37d5",
+      "timestamp": 1690464114646,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/60_logging/20_third-party-logging/10_deep-mind-logger.md": {
+      "hash": "aa899f65dd2aa686c88c95a740e51cf6",
+      "timestamp": 1690464171954,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/60_logging/20_third-party-logging/20_prometheus-monitor.md": {
+      "hash": "e4b30c2256427183726925c367f25af1",
+      "timestamp": 1690464196143,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/60_logging/20_third-party-logging/index.md": {
+      "hash": "59fd285c543d1deaeed91a6a102f8ad7",
+      "timestamp": 1690464211319,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/60_logging/index.md": {
+      "hash": "df32654f78079134402e171ae818f38b",
+      "timestamp": 1690464217967,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/70_common-issues.md": {
+      "hash": "db0f818f7b37e573ef7b7fe39c41c927",
+      "timestamp": 1690464237920,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/index.md": {
+      "hash": "1de4a88e2046c8ff204e923736b63e06",
+      "timestamp": 1690464260808,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/50_tutorials/10_watching-transfers.md": {
+      "hash": "1721c942ee5109dffe5850d9db2695c4",
+      "timestamp": 1690464316354,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/50_tutorials/index.md": {
+      "hash": "2c356d0f7c9964a8f31069a6ccb44085",
+      "timestamp": 1690464369773,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/index.md": {
+      "hash": "e5eb806deed641c8a878d7efc3765d59",
+      "timestamp": 1690464374375,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/01_consensus-protocol.md": {
+      "hash": "e65ca4d58684dcfa614206e1c4ce40b0",
+      "timestamp": 1690804931161,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/02_transactions-protocol.md": {
+      "hash": "bf1c75d1c5c278d94665fc2d41c64455",
+      "timestamp": 1690464490397,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/03_network-peer-protocol.md": {
+      "hash": "79d90115bf2599d8d1354e558dd73448",
+      "timestamp": 1690464620710,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/10_understanding-ABI-files.md": {
+      "hash": "0b85816e73fc37357c479b7a8bdabf8e",
+      "timestamp": 1690464698437,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/20_linking-custom-permission.md": {
+      "hash": "8bdf36ea02e65f0b017137b116303da2",
+      "timestamp": 1690464719474,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/999_dune-guide.md": {
+      "hash": "78263086d330ec4d07ade145ac1d0180",
+      "timestamp": 1690464752124,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/index.md": {
+      "hash": "57bb8f59d90737485a6f4348be905865",
+      "timestamp": 1690464796323,
+      "manually_translated": false
+    },
+    "docs/999_miscellaneous/1000_glossary.md": {
+      "hash": "354d6bf9f61581c9b8169ea891c7c8b7",
+      "timestamp": 1690464847120,
+      "manually_translated": false
+    },
+    "docs/999_miscellaneous/10_helpful-links.md": {
+      "hash": "45301335f580caccdf93cd3300e72ec6",
+      "timestamp": 1690464884938,
+      "manually_translated": false
+    },
+    "docs/999_miscellaneous/20_audits.md": {
+      "hash": "e82b0bf0a4918701e6512fc4580c8a9a",
+      "timestamp": 1690801951369,
+      "manually_translated": false
+    },
+    "docs/999_miscellaneous/999_apis-and-manuals.md": {
+      "hash": "e2547aa87b0ca8ecf429d5b862be65e1",
+      "timestamp": 1690464903595,
+      "manually_translated": false
+    },
+    "docs/999_miscellaneous/index.md": {
+      "hash": "c498291cf8df85276077f8d00aedf632",
+      "timestamp": 1690464912140,
+      "manually_translated": false
+    },
+    "docs/index.md": {
+      "hash": "0d6fe09b3b4d08b3dfa89e6f438e2776",
+      "timestamp": 1690464914953,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/01_introduction.md": {
+      "hash": "729ba8a3ff0e91f7c789f317db8d21fa",
+      "timestamp": 1690464918483,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/10_endpoints.md": {
+      "hash": "60333726d49ad543f94538b9512c64db",
+      "timestamp": 1690464994767,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/index.md": {
+      "hash": "625049b0e2dae82c9261d204d10b2299",
+      "timestamp": 1690465009267,
+      "manually_translated": false
+    },
+    "evm/15_core-concepts/02_gas.md": {
+      "hash": "6c7b57955cd249c25df7357063f6a1c9",
+      "timestamp": 1690465015770,
+      "manually_translated": false
+    },
+    "evm/15_core-concepts/index.md": {
+      "hash": "c31f4947663ffa9aa9a81acf588b52b3",
+      "timestamp": 1690465022552,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/01_contract-anatomy.md": {
+      "hash": "27d3f18e388ab88f37bafa683517ec64",
+      "timestamp": 1690465055382,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/02_functions.md": {
+      "hash": "cb0fbc6c81bcab8fb5bd5b257d874252",
+      "timestamp": 1690465114307,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/03_variables.md": {
+      "hash": "a42179f9cf18152d721290d72e625697",
+      "timestamp": 1690465172689,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/04_state-data.md": {
+      "hash": "80e6c695f00b1e9390f2750e93b74480",
+      "timestamp": 1690465218825,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/05_assertions.md": {
+      "hash": "d5b047e1a8ec3d2b5f946d49ad349c3f",
+      "timestamp": 1690465243477,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/06_authorization.md": {
+      "hash": "bfa145073d1e45baad59790070dc3be1",
+      "timestamp": 1690465258852,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/07_events.md": {
+      "hash": "1c35b7c6c6730c7ecebe0a41830c7517",
+      "timestamp": 1690465272144,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/30_develop-with-remix.md": {
+      "hash": "4ffb1800d681ddddb61ed8179034d935",
+      "timestamp": 1690465374360,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/60_verify-a-smart-contract.md": {
+      "hash": "a870178819f041aa9d67e3a5d752a6a8",
+      "timestamp": 1690465437123,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/index.md": {
+      "hash": "c7126c638aa62c4c61fa95e2975ecc9a",
+      "timestamp": 1690465443140,
+      "manually_translated": false
+    },
+    "evm/23_advanced-guides/20_using-multicall3.md": {
+      "hash": "c425356f4662703840ccbe9f72328faa",
+      "timestamp": 1690465457541,
+      "manually_translated": false
+    },
+    "evm/23_advanced-guides/index.md": {
+      "hash": "ede5e3bfa9af9dcea96f38440cd607f0",
+      "timestamp": 1690465472516,
+      "manually_translated": false
+    },
+    "evm/25_configure-tooling/10_ethers.md": {
+      "hash": "583583d19ab0c3137f77ede4b366d18a",
+      "timestamp": 1690465476492,
+      "manually_translated": false
+    },
+    "evm/25_configure-tooling/20_hardhat.md": {
+      "hash": "6c4568b64b82d2f37fe14f2ed56bb650",
+      "timestamp": 1690465482893,
+      "manually_translated": false
+    },
+    "evm/25_configure-tooling/30_truffle.md": {
+      "hash": "f9d9f80efd7f8107c089693087bc30ed",
+      "timestamp": 1690465491173,
+      "manually_translated": false
+    },
+    "evm/25_configure-tooling/index.md": {
+      "hash": "a7f6d551cc66a9702b3fda9e7b9cd61e",
+      "timestamp": 1690465497033,
+      "manually_translated": false
+    },
+    "evm/30_miners-and-nodes/10_transaction-miner.md": {
+      "hash": "9fdee8f86ec89963d20ba8fa900962e4",
+      "timestamp": 1690465527538,
+      "manually_translated": false
+    },
+    "evm/30_miners-and-nodes/index.md": {
+      "hash": "eb91a4b54128a4ffe04fc5fa733bcfcb",
+      "timestamp": 1690465558687,
+      "manually_translated": false
+    },
+    "evm/40_architecture/10_architecture.md": {
+      "hash": "0bfa8a6ce8da407778ed9f401310d736",
+      "timestamp": 1690465574918,
+      "manually_translated": false
+    },
+    "evm/40_architecture/20_token-economy.md": {
+      "hash": "98a8015c99c3cee8f46bbbd50e4f8471",
+      "timestamp": 1690465594621,
+      "manually_translated": false
+    },
+    "evm/40_architecture/index.md": {
+      "hash": "a1060aaeb1b0521cbcdfce9b39bdb697",
+      "timestamp": 1690465601108,
+      "manually_translated": false
+    },
+    "evm/999_miscellaneous/20_evm-compatibility.md": {
+      "hash": "27f96f2b195b824d675c7355335b3b04",
+      "timestamp": 1690465617650,
+      "manually_translated": false
+    },
+    "evm/999_miscellaneous/30_json-rpc-compatibility.md": {
+      "hash": "cf9bd38c25af2a9906e09ecd3e910c2e",
+      "timestamp": 1690465635469,
+      "manually_translated": false
+    },
+    "evm/999_miscellaneous/index.md": {
+      "hash": "c498291cf8df85276077f8d00aedf632",
+      "timestamp": 1690465639591,
+      "manually_translated": false
+    },
+    "evm/index.md": {
+      "hash": "01e905e1457630e5f0d37d53247952b5",
+      "timestamp": 1690465642420,
+      "manually_translated": false
+    },
+    "code": {
+      "hash": "8188003e512e7f68a397591df63fc2d5",
+      "timestamp": 1690465708052,
+      "manually_translated": false
+    },
+    "footer": {
+      "hash": "ca03e44f3f1033deb89b65676990073f",
+      "timestamp": 1690806831370,
+      "manually_translated": false
+    },
+    "navbar": {
+      "hash": "fb3686f8ba032fcb2795c2b5a329ebc7",
+      "timestamp": 1690806832977,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/30_resources.md": {
+      "hash": "ef02adc2ee94e26f718d9baf54e24029",
+      "timestamp": 1690465916752,
+      "manually_translated": false
+    },
+    "docs/06_guides/01_create-a-token.md": {
+      "hash": "d4aa0b83810eead4b47799c3f6200170",
+      "timestamp": 1690466197214,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/20_configuration.md": {
+      "hash": "4f0cf6074a80c16df9c1ae9d77433e5b",
+      "timestamp": 1690467142036,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/02_setup-metamask.md": {
+      "hash": "429b21ad48ca19df4ddcf5b62a0f2811",
+      "timestamp": 1690800511911,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/03_evm-tokens.md": {
+      "hash": "34eee996378a2c821739a20c1e4b8265",
+      "timestamp": 1690800541866,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/20_migrate-your-smart-contract.md": {
+      "hash": "44ebe8c7c3fed6d0e0c1f77fa92528f0",
+      "timestamp": 1690800577590,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/chain-api-plugin.md": {
+      "hash": "b88dcbe0e574be5382a3dabd911faeea",
+      "timestamp": 1690806181116,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/chain-plugin.md": {
+      "hash": "103b8dbd7402643e630525224d16c2c7",
+      "timestamp": 1690806231290,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/db-size-api-plugin.md": {
+      "hash": "c0ab5840480dce9c453f4b70301967c3",
+      "timestamp": 1690806419507,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/http-plugin.md": {
+      "hash": "df0921bd5086625cd744093ea91b17f0",
+      "timestamp": 1690806440924,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/index.md": {
+      "hash": "ab83e53ec80a98505d54927b8dcddb32",
+      "timestamp": 1690806326530,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/net-api-plugin.md": {
+      "hash": "e8669ff5692d062630fa58fc5b6e34de",
+      "timestamp": 1690806467123,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/net-plugin.md": {
+      "hash": "add2dc8f3abe9f8cd9ec98b923a79ee9",
+      "timestamp": 1690806493831,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/producer-api-plugin.md": {
+      "hash": "a71da14cc53ee551785fb759671ac652",
+      "timestamp": 1690806518469,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/producer-plugin.md": {
+      "hash": "80f2a5b61ade72925b605312ca566d87",
+      "timestamp": 1690806560581,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/prometheus-plugin.md": {
+      "hash": "f645cc647b5a0d03c34427f6c67cf82e",
+      "timestamp": 1690806604583,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/resource-monitor-plugin.md": {
+      "hash": "1cb1d1c0770dcfdc327f78daba5260b1",
+      "timestamp": 1690806629064,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/signature-provider-plugin.md": {
+      "hash": "2348dd93ef8794d675d6a667b2f96096",
+      "timestamp": 1690806652041,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/state-history-plugin.md": {
+      "hash": "34cabd3633b7a8c98e2cff0e33ced78f",
+      "timestamp": 1690806676895,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/test-control-api-plugin.md": {
+      "hash": "a279163f50aef40a16f56e7b8a5cf932",
+      "timestamp": 1690806702691,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/test-control-plugin.md": {
+      "hash": "fa2e2cb92d6cf296590315819f4baaba",
+      "timestamp": 1690806719493,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/trace-api-plugin.md": {
+      "hash": "4025fb065b538307c8b226b5c854568a",
+      "timestamp": 1690806775616,
+      "manually_translated": false
+    }
+  },
+  "ko": {
+    "docs/01_quick-start/01_introduction.md": {
+      "hash": "6057fb275f60348b45b5b7ce9a234146",
+      "timestamp": 1690461426025,
+      "manually_translated": false
+    },
+    "docs/01_quick-start/02_write-a-contract.md": {
+      "hash": "0bff4ae2a60064d125158a05e1a2ce15",
+      "timestamp": 1690461439088,
+      "manually_translated": false
+    },
+    "docs/01_quick-start/03_build-and-deploy.md": {
+      "hash": "7e5b39df8cdaa285b9fc4d830d488686",
+      "timestamp": 1690461466913,
+      "manually_translated": false
+    },
+    "docs/01_quick-start/index.md": {
+      "hash": "625049b0e2dae82c9261d204d10b2299",
+      "timestamp": 1690462507527,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/10_decentralization.md": {
+      "hash": "11c6de82d961bc89042752edcc7ee435",
+      "timestamp": 1690462524205,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/20_consensus.md": {
+      "hash": "1efa0fb25c373e03956244b593596ee7",
+      "timestamp": 1690462528717,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/30_cryptography.md": {
+      "hash": "72bc364e13c8b861b4c92b92b81dda3f",
+      "timestamp": 1690462540263,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/40_transactions-and-blocks.md": {
+      "hash": "179a3f012a5ddbdf245e3c45d702e688",
+      "timestamp": 1690462545079,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/50_smart-contracts.md": {
+      "hash": "95a6b0e0e81e8a01a397ef811e3156d6",
+      "timestamp": 1690462550865,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/60_web3.md": {
+      "hash": "6fa2f1452c27b71222ff998ebb2ba4ef",
+      "timestamp": 1690462560166,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/10_blockchain-basics/index.md": {
+      "hash": "e02a6c4c224b3010a656d996d6893213",
+      "timestamp": 1690462569618,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/20_accounts.md": {
+      "hash": "e81e52a802389089b6142aec584b2195",
+      "timestamp": 1690462632687,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/index.md": {
+      "hash": "c31f4947663ffa9aa9a81acf588b52b3",
+      "timestamp": 1690462734115,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/01_contract-anatomy.md": {
+      "hash": "1cff478ae892901b6d1c520e3bb95067",
+      "timestamp": 1690462774640,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/02_actions.md": {
+      "hash": "ebbf06b3256f6547e7df4d82e96e2694",
+      "timestamp": 1690462844026,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/03_variables.md": {
+      "hash": "e8e72dd872462153d36f91b907d3be6d",
+      "timestamp": 1690462935647,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/04_state-data.md": {
+      "hash": "1f0f323510145d47512e72d51dc9b789",
+      "timestamp": 1690463060832,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/05_authorization.md": {
+      "hash": "ffcb3d9d661d22439201dfd0855ed994",
+      "timestamp": 1690463081536,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/06_assertions.md": {
+      "hash": "b6a7ac58c8c716764c24d22638f89fca",
+      "timestamp": 1690463096484,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/07_events.md": {
+      "hash": "2eda90049767884978332d17a56d4adb",
+      "timestamp": 1690463150411,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/999_language-support.md": {
+      "hash": "dafa52fb13a0cc535fcad6e96493dad3",
+      "timestamp": 1690463158046,
+      "manually_translated": false
+    },
+    "docs/03_smart-contracts/index.md": {
+      "hash": "c7126c638aa62c4c61fa95e2975ecc9a",
+      "timestamp": 1690463160960,
+      "manually_translated": false
+    },
+    "docs/04_web-applications/01_beginner-concepts.md": {
+      "hash": "8c735817ff4b394095915fbd72a4db9e",
+      "timestamp": 1690463189257,
+      "manually_translated": false
+    },
+    "docs/04_web-applications/05_reading-state.md": {
+      "hash": "5c879fe831551305e00730e8c049619c",
+      "timestamp": 1690463321442,
+      "manually_translated": false
+    },
+    "docs/04_web-applications/index.md": {
+      "hash": "13d3bdb9dcdd33d4cc3d848972f30e06",
+      "timestamp": 1690463324314,
+      "manually_translated": false
+    },
+    "docs/06_guides/02_create-an-nft.md": {
+      "hash": "a3de541f1ebff41831356588e355a129",
+      "timestamp": 1690466995161,
+      "manually_translated": false
+    },
+    "docs/06_guides/9_linked-actions-pattern.md": {
+      "hash": "95da749729c366925fb1b3f8791ce61f",
+      "timestamp": 1690463786714,
+      "manually_translated": false
+    },
+    "docs/06_guides/index.md": {
+      "hash": "31541dc76737903f0869c351003fb4f3",
+      "timestamp": 1690463789559,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/100_migration-guides/01_v1-history-alternatives.md": {
+      "hash": "d492aa9e310638abef7e31c4a4001929",
+      "timestamp": 1690463820935,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/100_migration-guides/index.md": {
+      "hash": "84e815ab97203f8e6768ca2e38847849",
+      "timestamp": 1690463826040,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/00_software.md": {
+      "hash": "1e9a7052034b2e46d16a868b01acda06",
+      "timestamp": 1690463847872,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/10_hardware-requirements.md": {
+      "hash": "65cbf90a334878f1c2949824fec5ede3",
+      "timestamp": 1690463865997,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins.md": {
+      "hash": "23e678273de3ae2caf3ae46bb13ae6dc",
+      "timestamp": 1690463962221,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/40_peering.md": {
+      "hash": "5df23b0a9f6bc8bd60fa8f2221c76126",
+      "timestamp": 1690464024011,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/50_snapshots.md": {
+      "hash": "0bbd1ff9ec1235fedd1a99af34186e4c",
+      "timestamp": 1690464075651,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/60_logging/10_native-logging.md": {
+      "hash": "0bad6604cf475083e99defc91eea37d5",
+      "timestamp": 1690464159867,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/60_logging/20_third-party-logging/10_deep-mind-logger.md": {
+      "hash": "aa899f65dd2aa686c88c95a740e51cf6",
+      "timestamp": 1690464184529,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/60_logging/20_third-party-logging/20_prometheus-monitor.md": {
+      "hash": "e4b30c2256427183726925c367f25af1",
+      "timestamp": 1690464207622,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/60_logging/20_third-party-logging/index.md": {
+      "hash": "59fd285c543d1deaeed91a6a102f8ad7",
+      "timestamp": 1690464215041,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/60_logging/index.md": {
+      "hash": "df32654f78079134402e171ae818f38b",
+      "timestamp": 1690464220987,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/70_common-issues.md": {
+      "hash": "db0f818f7b37e573ef7b7fe39c41c927",
+      "timestamp": 1690464256633,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/index.md": {
+      "hash": "1de4a88e2046c8ff204e923736b63e06",
+      "timestamp": 1690464264532,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/50_tutorials/10_watching-transfers.md": {
+      "hash": "1721c942ee5109dffe5850d9db2695c4",
+      "timestamp": 1690464366623,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/50_tutorials/index.md": {
+      "hash": "2c356d0f7c9964a8f31069a6ccb44085",
+      "timestamp": 1690464372970,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/index.md": {
+      "hash": "e5eb806deed641c8a878d7efc3765d59",
+      "timestamp": 1690464375831,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/01_consensus-protocol.md": {
+      "hash": "e65ca4d58684dcfa614206e1c4ce40b0",
+      "timestamp": 1690804960313,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/02_transactions-protocol.md": {
+      "hash": "bf1c75d1c5c278d94665fc2d41c64455",
+      "timestamp": 1690464553079,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/03_network-peer-protocol.md": {
+      "hash": "79d90115bf2599d8d1354e558dd73448",
+      "timestamp": 1690464687434,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/10_understanding-ABI-files.md": {
+      "hash": "0b85816e73fc37357c479b7a8bdabf8e",
+      "timestamp": 1690464710218,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/20_linking-custom-permission.md": {
+      "hash": "8bdf36ea02e65f0b017137b116303da2",
+      "timestamp": 1690464728188,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/999_dune-guide.md": {
+      "hash": "78263086d330ec4d07ade145ac1d0180",
+      "timestamp": 1690464776741,
+      "manually_translated": false
+    },
+    "docs/60_advanced-topics/index.md": {
+      "hash": "57bb8f59d90737485a6f4348be905865",
+      "timestamp": 1690464815707,
+      "manually_translated": false
+    },
+    "docs/999_miscellaneous/1000_glossary.md": {
+      "hash": "354d6bf9f61581c9b8169ea891c7c8b7",
+      "timestamp": 1690464880168,
+      "manually_translated": false
+    },
+    "docs/999_miscellaneous/10_helpful-links.md": {
+      "hash": "45301335f580caccdf93cd3300e72ec6",
+      "timestamp": 1690464889284,
+      "manually_translated": false
+    },
+    "docs/999_miscellaneous/20_audits.md": {
+      "hash": "e82b0bf0a4918701e6512fc4580c8a9a",
+      "timestamp": 1690801955028,
+      "manually_translated": false
+    },
+    "docs/999_miscellaneous/999_apis-and-manuals.md": {
+      "hash": "e2547aa87b0ca8ecf429d5b862be65e1",
+      "timestamp": 1690464910731,
+      "manually_translated": false
+    },
+    "docs/999_miscellaneous/index.md": {
+      "hash": "c498291cf8df85276077f8d00aedf632",
+      "timestamp": 1690464913547,
+      "manually_translated": false
+    },
+    "docs/index.md": {
+      "hash": "0d6fe09b3b4d08b3dfa89e6f438e2776",
+      "timestamp": 1690464916358,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/01_introduction.md": {
+      "hash": "729ba8a3ff0e91f7c789f317db8d21fa",
+      "timestamp": 1690464920664,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/10_endpoints.md": {
+      "hash": "60333726d49ad543f94538b9512c64db",
+      "timestamp": 1690465007860,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/index.md": {
+      "hash": "625049b0e2dae82c9261d204d10b2299",
+      "timestamp": 1690465010691,
+      "manually_translated": false
+    },
+    "evm/15_core-concepts/02_gas.md": {
+      "hash": "6c7b57955cd249c25df7357063f6a1c9",
+      "timestamp": 1690465021140,
+      "manually_translated": false
+    },
+    "evm/15_core-concepts/index.md": {
+      "hash": "c31f4947663ffa9aa9a81acf588b52b3",
+      "timestamp": 1690465023961,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/01_contract-anatomy.md": {
+      "hash": "27d3f18e388ab88f37bafa683517ec64",
+      "timestamp": 1690465086395,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/02_functions.md": {
+      "hash": "cb0fbc6c81bcab8fb5bd5b257d874252",
+      "timestamp": 1690465142858,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/03_variables.md": {
+      "hash": "a42179f9cf18152d721290d72e625697",
+      "timestamp": 1690465203841,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/04_state-data.md": {
+      "hash": "80e6c695f00b1e9390f2750e93b74480",
+      "timestamp": 1690465233929,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/05_assertions.md": {
+      "hash": "d5b047e1a8ec3d2b5f946d49ad349c3f",
+      "timestamp": 1690465252412,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/06_authorization.md": {
+      "hash": "bfa145073d1e45baad59790070dc3be1",
+      "timestamp": 1690465265140,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/07_events.md": {
+      "hash": "1c35b7c6c6730c7ecebe0a41830c7517",
+      "timestamp": 1690465279029,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/30_develop-with-remix.md": {
+      "hash": "4ffb1800d681ddddb61ed8179034d935",
+      "timestamp": 1690465431733,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/60_verify-a-smart-contract.md": {
+      "hash": "a870178819f041aa9d67e3a5d752a6a8",
+      "timestamp": 1690465441734,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/index.md": {
+      "hash": "c7126c638aa62c4c61fa95e2975ecc9a",
+      "timestamp": 1690465444550,
+      "manually_translated": false
+    },
+    "evm/23_advanced-guides/20_using-multicall3.md": {
+      "hash": "c425356f4662703840ccbe9f72328faa",
+      "timestamp": 1690465471073,
+      "manually_translated": false
+    },
+    "evm/23_advanced-guides/index.md": {
+      "hash": "ede5e3bfa9af9dcea96f38440cd607f0",
+      "timestamp": 1690465473914,
+      "manually_translated": false
+    },
+    "evm/25_configure-tooling/10_ethers.md": {
+      "hash": "583583d19ab0c3137f77ede4b366d18a",
+      "timestamp": 1690465478984,
+      "manually_translated": false
+    },
+    "evm/25_configure-tooling/20_hardhat.md": {
+      "hash": "6c4568b64b82d2f37fe14f2ed56bb650",
+      "timestamp": 1690465486742,
+      "manually_translated": false
+    },
+    "evm/25_configure-tooling/30_truffle.md": {
+      "hash": "f9d9f80efd7f8107c089693087bc30ed",
+      "timestamp": 1690465495631,
+      "manually_translated": false
+    },
+    "evm/25_configure-tooling/index.md": {
+      "hash": "a7f6d551cc66a9702b3fda9e7b9cd61e",
+      "timestamp": 1690465498435,
+      "manually_translated": false
+    },
+    "evm/30_miners-and-nodes/10_transaction-miner.md": {
+      "hash": "9fdee8f86ec89963d20ba8fa900962e4",
+      "timestamp": 1690465557274,
+      "manually_translated": false
+    },
+    "evm/30_miners-and-nodes/index.md": {
+      "hash": "eb91a4b54128a4ffe04fc5fa733bcfcb",
+      "timestamp": 1690465560089,
+      "manually_translated": false
+    },
+    "evm/40_architecture/10_architecture.md": {
+      "hash": "0bfa8a6ce8da407778ed9f401310d736",
+      "timestamp": 1690465589287,
+      "manually_translated": false
+    },
+    "evm/40_architecture/20_token-economy.md": {
+      "hash": "98a8015c99c3cee8f46bbbd50e4f8471",
+      "timestamp": 1690465599649,
+      "manually_translated": false
+    },
+    "evm/40_architecture/index.md": {
+      "hash": "a1060aaeb1b0521cbcdfce9b39bdb697",
+      "timestamp": 1690465602504,
+      "manually_translated": false
+    },
+    "evm/999_miscellaneous/20_evm-compatibility.md": {
+      "hash": "27f96f2b195b824d675c7355335b3b04",
+      "timestamp": 1690465633247,
+      "manually_translated": false
+    },
+    "evm/999_miscellaneous/30_json-rpc-compatibility.md": {
+      "hash": "cf9bd38c25af2a9906e09ecd3e910c2e",
+      "timestamp": 1690465638186,
+      "manually_translated": false
+    },
+    "evm/999_miscellaneous/index.md": {
+      "hash": "c498291cf8df85276077f8d00aedf632",
+      "timestamp": 1690465641010,
+      "manually_translated": false
+    },
+    "evm/index.md": {
+      "hash": "01e905e1457630e5f0d37d53247952b5",
+      "timestamp": 1690465643853,
+      "manually_translated": false
+    },
+    "code": {
+      "hash": "8188003e512e7f68a397591df63fc2d5",
+      "timestamp": 1690465773277,
+      "manually_translated": false
+    },
+    "footer": {
+      "hash": "ca03e44f3f1033deb89b65676990073f",
+      "timestamp": 1690806836323,
+      "manually_translated": false
+    },
+    "navbar": {
+      "hash": "fb3686f8ba032fcb2795c2b5a329ebc7",
+      "timestamp": 1690806838223,
+      "manually_translated": false
+    },
+    "docs/02_core-concepts/30_resources.md": {
+      "hash": "ef02adc2ee94e26f718d9baf54e24029",
+      "timestamp": 1690465960479,
+      "manually_translated": false
+    },
+    "docs/06_guides/01_create-a-token.md": {
+      "hash": "d4aa0b83810eead4b47799c3f6200170",
+      "timestamp": 1690466313921,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/20_configuration.md": {
+      "hash": "4f0cf6074a80c16df9c1ae9d77433e5b",
+      "timestamp": 1690467183716,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/02_setup-metamask.md": {
+      "hash": "429b21ad48ca19df4ddcf5b62a0f2811",
+      "timestamp": 1690800523481,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/03_evm-tokens.md": {
+      "hash": "34eee996378a2c821739a20c1e4b8265",
+      "timestamp": 1690800560250,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/20_migrate-your-smart-contract.md": {
+      "hash": "44ebe8c7c3fed6d0e0c1f77fa92528f0",
+      "timestamp": 1690800595827,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/chain-api-plugin.md": {
+      "hash": "b88dcbe0e574be5382a3dabd911faeea",
+      "timestamp": 1690806188351,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/chain-plugin.md": {
+      "hash": "103b8dbd7402643e630525224d16c2c7",
+      "timestamp": 1690806275775,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/db-size-api-plugin.md": {
+      "hash": "c0ab5840480dce9c453f4b70301967c3",
+      "timestamp": 1690806424813,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/http-plugin.md": {
+      "hash": "df0921bd5086625cd744093ea91b17f0",
+      "timestamp": 1690806457570,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/index.md": {
+      "hash": "ab83e53ec80a98505d54927b8dcddb32",
+      "timestamp": 1690806332329,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/net-api-plugin.md": {
+      "hash": "e8669ff5692d062630fa58fc5b6e34de",
+      "timestamp": 1690806477005,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/net-plugin.md": {
+      "hash": "add2dc8f3abe9f8cd9ec98b923a79ee9",
+      "timestamp": 1690806510635,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/producer-api-plugin.md": {
+      "hash": "a71da14cc53ee551785fb759671ac652",
+      "timestamp": 1690806526801,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/producer-plugin.md": {
+      "hash": "80f2a5b61ade72925b605312ca566d87",
+      "timestamp": 1690806594202,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/prometheus-plugin.md": {
+      "hash": "f645cc647b5a0d03c34427f6c67cf82e",
+      "timestamp": 1690806614423,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/resource-monitor-plugin.md": {
+      "hash": "1cb1d1c0770dcfdc327f78daba5260b1",
+      "timestamp": 1690806644189,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/signature-provider-plugin.md": {
+      "hash": "2348dd93ef8794d675d6a667b2f96096",
+      "timestamp": 1690806660048,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/state-history-plugin.md": {
+      "hash": "34cabd3633b7a8c98e2cff0e33ced78f",
+      "timestamp": 1690806694013,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/test-control-api-plugin.md": {
+      "hash": "a279163f50aef40a16f56e7b8a5cf932",
+      "timestamp": 1690806710675,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/test-control-plugin.md": {
+      "hash": "fa2e2cb92d6cf296590315819f4baaba",
+      "timestamp": 1690806728057,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/10_getting-started/30_plugins/trace-api-plugin.md": {
+      "hash": "4025fb065b538307c8b226b5c854568a",
+      "timestamp": 1690806823426,
+      "manually_translated": false
+    }
+  }
+}
