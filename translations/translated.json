@@ -295,16 +295,6 @@
       "timestamp": 1690464918483,
       "manually_translated": false
     },
-    "evm/10_quick-start/02_setup-metamask.md": {
-      "hash": "d3c0633935598ea4533d61452b2c2cdd",
-      "timestamp": 1690464932083,
-      "manually_translated": false
-    },
-    "evm/10_quick-start/03_evm-tokens.md": {
-      "hash": "34eee996378a2c821739a20c1e4b8265",
-      "timestamp": 1690467050786,
-      "manually_translated": false
-    },
     "evm/10_quick-start/10_endpoints.md": {
       "hash": "60333726d49ad543f94538b9512c64db",
       "timestamp": 1690464994767,
@@ -358,11 +348,6 @@
     "evm/20_smart-contracts/07_events.md": {
       "hash": "1c35b7c6c6730c7ecebe0a41830c7517",
       "timestamp": 1690465272144,
-      "manually_translated": false
-    },
-    "evm/20_smart-contracts/20_migrate-your-smart-contract.md": {
-      "hash": "def81e633851a1b1e5647fbd9d9484b8",
-      "timestamp": 1690465297915,
       "manually_translated": false
     },
     "evm/20_smart-contracts/30_develop-with-remix.md": {
@@ -462,12 +447,12 @@
     },
     "footer": {
       "hash": "ca03e44f3f1033deb89b65676990073f",
-      "timestamp": 1690467191417,
+      "timestamp": 1690800627526,
       "manually_translated": false
     },
     "navbar": {
       "hash": "fb3686f8ba032fcb2795c2b5a329ebc7",
-      "timestamp": 1690467193026,
+      "timestamp": 1690800629140,
       "manually_translated": false
     },
     "docs/02_core-concepts/30_resources.md": {
@@ -483,6 +468,21 @@
     "docs/07_node-operation/10_getting-started/20_configuration.md": {
       "hash": "4f0cf6074a80c16df9c1ae9d77433e5b",
       "timestamp": 1690467142036,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/02_setup-metamask.md": {
+      "hash": "429b21ad48ca19df4ddcf5b62a0f2811",
+      "timestamp": 1690800511911,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/03_evm-tokens.md": {
+      "hash": "34eee996378a2c821739a20c1e4b8265",
+      "timestamp": 1690800541866,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/20_migrate-your-smart-contract.md": {
+      "hash": "44ebe8c7c3fed6d0e0c1f77fa92528f0",
+      "timestamp": 1690800577590,
       "manually_translated": false
     }
   },
@@ -782,16 +782,6 @@
       "timestamp": 1690464920664,
       "manually_translated": false
     },
-    "evm/10_quick-start/02_setup-metamask.md": {
-      "hash": "d3c0633935598ea4533d61452b2c2cdd",
-      "timestamp": 1690464943412,
-      "manually_translated": false
-    },
-    "evm/10_quick-start/03_evm-tokens.md": {
-      "hash": "34eee996378a2c821739a20c1e4b8265",
-      "timestamp": 1690467069043,
-      "manually_translated": false
-    },
     "evm/10_quick-start/10_endpoints.md": {
       "hash": "60333726d49ad543f94538b9512c64db",
       "timestamp": 1690465007860,
@@ -845,11 +835,6 @@
     "evm/20_smart-contracts/07_events.md": {
       "hash": "1c35b7c6c6730c7ecebe0a41830c7517",
       "timestamp": 1690465279029,
-      "manually_translated": false
-    },
-    "evm/20_smart-contracts/20_migrate-your-smart-contract.md": {
-      "hash": "def81e633851a1b1e5647fbd9d9484b8",
-      "timestamp": 1690465317476,
       "manually_translated": false
     },
     "evm/20_smart-contracts/30_develop-with-remix.md": {
@@ -949,12 +934,12 @@
     },
     "footer": {
       "hash": "ca03e44f3f1033deb89b65676990073f",
-      "timestamp": 1690467196351,
+      "timestamp": 1690800632473,
       "manually_translated": false
     },
     "navbar": {
       "hash": "fb3686f8ba032fcb2795c2b5a329ebc7",
-      "timestamp": 1690467198008,
+      "timestamp": 1690800634153,
       "manually_translated": false
     },
     "docs/02_core-concepts/30_resources.md": {
@@ -970,6 +955,21 @@
     "docs/07_node-operation/10_getting-started/20_configuration.md": {
       "hash": "4f0cf6074a80c16df9c1ae9d77433e5b",
       "timestamp": 1690467183716,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/02_setup-metamask.md": {
+      "hash": "429b21ad48ca19df4ddcf5b62a0f2811",
+      "timestamp": 1690800523481,
+      "manually_translated": false
+    },
+    "evm/10_quick-start/03_evm-tokens.md": {
+      "hash": "34eee996378a2c821739a20c1e4b8265",
+      "timestamp": 1690800560250,
+      "manually_translated": false
+    },
+    "evm/20_smart-contracts/20_migrate-your-smart-contract.md": {
+      "hash": "44ebe8c7c3fed6d0e0c1f77fa92528f0",
+      "timestamp": 1690800595827,
       "manually_translated": false
     }
   }

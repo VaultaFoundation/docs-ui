@@ -2,11 +2,15 @@
 title: 设置 MetaMask
 ---
 
-从 “@site /src/components/connectmetamask/connectMetamask” 导入 connectMetaMask”；
-
 点击这两个按钮即可立即将 EOS EVM 添加到您的 MetaMask。
 
-<connectMetaMask/>
+<!-- translation-ignore -->
+
+import ConnectMetaMask from '@site/src/components/ConnectMetaMask/ConnectMetaMask';
+
+<ConnectMetaMask />
+
+<!-- end-translation-ignore -->
 
 
 ## 手动添加

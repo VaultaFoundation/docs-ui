@@ -6,21 +6,29 @@ title: 迁移您的智能合约
 
 ## 设置你的 MetaMask
 
-
-从 “@site /src/components/connectmetamask/connectMetamask” 导入 connectMetaMask”；
-
 点击这两个按钮即可立即将 EOS EVM 添加到您的 MetaMask。
 
-<connectMetaMask/>
+<!-- translation-ignore -->
+
+import ConnectMetaMask from '@site/src/components/ConnectMetaMask/ConnectMetaMask';
+
+<ConnectMetaMask />
+
+<!-- end-translation-ignore -->
 
 
 ## 获取 EOS 代币
 
-从 “@site /src/components/faucetTokens/faucetTokens” 导入 faucetTokens；
-
 想要一些EOS代币来玩吗？点击下面的按钮，从测试网水龙头中获取一些。
 
-<FaucetTokens/>
+
+<!-- translation-ignore -->
+
+import FaucetTokens from '@site/src/components/FaucetTokens/FaucetTokens';
+
+<FaucetTokens />
+
+<!-- end-translation-ignore -->
 
 如果你在测试网上，你可以使用以下方法获得一些 EOS 代币 [**测试网水龙头**](https://faucet.testnet.evm.eosnetwork.com/)。
 

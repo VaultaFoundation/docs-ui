@@ -2,11 +2,15 @@
 title: 메타마스크 설정
 ---
 
-'@site /src/Components/ConnectMetamask/ConnectMetamask'에서 ConnectMetaMask 가져오기;
-
 이 버튼 중 하나를 클릭하면 EOS EVM을 메타마스크에 즉시 추가할 수 있습니다.
 
-<커넥트메타마스크/>
+<!-- translation-ignore -->
+
+import ConnectMetaMask from '@site/src/components/ConnectMetaMask/ConnectMetaMask';
+
+<ConnectMetaMask />
+
+<!-- end-translation-ignore -->
 
 
 ## 수동 추가

@@ -6,21 +6,29 @@ title: 스마트 컨트랙트 마이그레이션
 
 ## 메타마스크 설정
 
-
-'@site /src/Components/ConnectMetamask/ConnectMetamask'에서 ConnectMetaMask 가져오기;
-
 이 버튼 중 하나를 클릭하면 EOS EVM을 메타마스크에 즉시 추가할 수 있습니다.
 
-<커넥트메타마스크/>
+<!-- translation-ignore -->
+
+import ConnectMetaMask from '@site/src/components/ConnectMetaMask/ConnectMetaMask';
+
+<ConnectMetaMask />
+
+<!-- end-translation-ignore -->
 
 
 ## EOS 토큰 받기
 
-'@site /SRC/COMPONENTS/FaucetTokens'에서 수도꼭지 토큰을 가져옵니다.
-
 EOS 토큰을 가지고 놀고 싶으신가요?아래 버튼을 클릭하여 테스트넷 수도꼭지에서 일부를 가져오세요.
 
-<수도꼭지 토큰/>
+
+<!-- translation-ignore -->
+
+import FaucetTokens from '@site/src/components/FaucetTokens/FaucetTokens';
+
+<FaucetTokens />
+
+<!-- end-translation-ignore -->
 
 테스트넷을 사용하는 경우 다음을 사용하여 EOS 토큰을 얻을 수 있습니다. [**테스트넷 수도꼭지**](https://faucet.testnet.evm.eosnetwork.com/).
 
