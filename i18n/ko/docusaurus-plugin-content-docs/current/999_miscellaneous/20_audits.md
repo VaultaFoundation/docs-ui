@@ -6,4 +6,4 @@ title: 감사
 
 | 날짜 | 감사 | 감사 |
 |------------|----------------------------------------------------------------------------|---------------------|
-| 05-03-2023 | [EOS EVM 퍼징 감사](./05_03_2023_eos_evm_fuzzing_audit_sentnl.pdf) | [sentnl.io](https://sentnl.io/) |
+| 05-03-2023 | [EOS EVM 퍼징 감사](https://docs.eosnetwork.com/docs/latest/miscellaneous/05_03_2023_eos_evm_fuzzing_audit_sentnl.pdf) | [sentnl.io](https://sentnl.io/) |

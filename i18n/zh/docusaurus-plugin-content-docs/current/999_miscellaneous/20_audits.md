@@ -6,4 +6,4 @@ title: 审计
 
 | 日期 | 审计 | 审计员 |
 |------------|----------------------------------------------------------------------------|--------------------|
-| 05-03-2023 | [EOS EVM 模糊审计](./05_03_2023_eos_evm_fuzzing_audit_sentnl.pdf) | [sentnl.io](https://sentnl.io/) |
+| 05-03-2023 | [EOS EVM 模糊审计](https://docs.eosnetwork.com/docs/latest/miscellaneous/05_03_2023_eos_evm_fuzzing_audit_sentnl.pdf) | [sentnl.io](https://sentnl.io/) |
