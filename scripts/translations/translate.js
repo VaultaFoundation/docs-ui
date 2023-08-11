@@ -365,7 +365,7 @@ const translateDocs = async () => {
     if(!optionalFileArgument){
 
         // Translates the various UI elements
-        await translateUI(languages, translationCache);
+        // await translateUI(languages, translationCache);
 
         // Copies over non-doc files like diagrams, images, etc.
         // copyNonDocs('./docs', languages);
