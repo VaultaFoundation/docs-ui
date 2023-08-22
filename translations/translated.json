@@ -166,8 +166,8 @@
       "manually_translated": false
     },
     "docs/07_node-operation/10_getting-started/40_peering.md": {
-      "hash": "d7c2c136fcb1c8b15298d32e7b76643e",
-      "timestamp": 1692617961952,
+      "hash": "6dc6713dc7fd201447395a1f56a4244c",
+      "timestamp": 1692724230521,
       "manually_translated": false
     },
     "docs/07_node-operation/10_getting-started/50_snapshots.md": {
@@ -574,6 +574,11 @@
       "hash": "de073960add0b00d48c6cbc4854abf7c",
       "timestamp": 1692620676501,
       "manually_translated": false
+    },
+    "docs/04_web-applications/02_javascript-sdk.md": {
+      "hash": "afe39fad6fb0aff86bf9ce3540a2ff87",
+      "timestamp": 1692724195077,
+      "manually_translated": false
     }
   },
   "ko": {
@@ -743,8 +748,8 @@
       "manually_translated": false
     },
     "docs/07_node-operation/10_getting-started/40_peering.md": {
-      "hash": "d7c2c136fcb1c8b15298d32e7b76643e",
-      "timestamp": 1692620593774,
+      "hash": "6dc6713dc7fd201447395a1f56a4244c",
+      "timestamp": 1692724260962,
       "manually_translated": false
     },
     "docs/07_node-operation/10_getting-started/50_snapshots.md": {
@@ -1150,6 +1155,11 @@
     "docs/07_node-operation/20_api-node.md": {
       "hash": "de073960add0b00d48c6cbc4854abf7c",
       "timestamp": 1692620757989,
+      "manually_translated": false
+    },
+    "docs/04_web-applications/02_javascript-sdk.md": {
+      "hash": "afe39fad6fb0aff86bf9ce3540a2ff87",
+      "timestamp": 1692724199777,
       "manually_translated": false
     }
   }
