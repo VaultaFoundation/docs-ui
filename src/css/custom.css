@@ -1617,6 +1617,14 @@ ol, ul, menu {
   padding-left:25px;
 }
 
+li > p {
+  display: inline;
+}
+
 .navbar__items--right {
   margin-top: 0;
+}
+
+pre {
+  margin: 10px 0 !important;
 }
