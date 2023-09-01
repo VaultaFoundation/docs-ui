@@ -1,0 +1,22 @@
+name: CICheck
+
+on:
+  workflow_dispatch:
+    inputs:
+      is_production:
+        description: 'Deploy to production? (defaults to staging)'
+        required: true
+        default: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            whoami
