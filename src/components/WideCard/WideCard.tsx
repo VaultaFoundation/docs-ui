@@ -23,7 +23,7 @@ export const WideCard = () => {
                 <br />
                 <br />
                 <LinkButton href={useBaseUrl("/evm/smart-contracts/migrate-your-smart-contract")}>
-                    <Translate>MIGRATE NOW</Translate>
+                    <Translate>HOW TO MIGRATE?</Translate>
                 </LinkButton>
             </section>
         </div>
