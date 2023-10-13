@@ -242,8 +242,14 @@ const config = {
             {
               docId: 'courses',
               position: 'left',
-              label: 'Video Courses',
+              label: 'Videos',
               to: 'https://learn.eosnetwork.com/',
+            },
+            {
+              docId: 'eosnetwork',
+              position: 'left',
+              label: 'What is EOS?',
+              to: 'https://eosnetwork.com/',
             },
             {
               type: 'localeDropdown',
