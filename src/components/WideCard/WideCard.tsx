@@ -16,8 +16,10 @@ export const WideCard = () => {
 
             <section className={"content-container"}>
                 <section className="hero-title"><Translate>EOS EVM</Translate></section>
-                <section className={"hero-subtitle"}><Translate>A brand new home for EVM developers</Translate></section>
-                <P_Medium><Translate>Migrate your apps to the world's fastest and cheapest EVM using tools and frameworks you're already familiar with.</Translate></P_Medium>
+                <section className={"hero-subtitle"}><Translate>New opportunities for Solidity developers</Translate></section>
+                <P_Medium><Translate>
+                    Introducing a brand new home for your decentralized applications.
+                </Translate></P_Medium>
                 <br />
                 <br />
                 <LinkButton href={useBaseUrl("/evm/smart-contracts/migrate-your-smart-contract")}>
