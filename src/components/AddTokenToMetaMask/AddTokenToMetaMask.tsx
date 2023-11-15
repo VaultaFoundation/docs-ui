@@ -7,6 +7,7 @@ interface IProps {
     address: string;
     symbol: string;
     decimals: number;
+    text: string;
 }
 
 export default function FaucetTokens({ address, symbol, decimals }: IProps){
@@ -38,6 +39,6 @@ export default function FaucetTokens({ address, symbol, decimals }: IProps){
     }
 
     return (
-        <Button type={'button'} onClick={() => addTokenToMetamask()}>Add to MetaMask</Button>
+        <Button type={'button'} onClick={() => addTokenToMetamask()}>Add {symbol} to MetaMask</Button>
     )
 }
