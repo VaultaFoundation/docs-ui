@@ -33,6 +33,7 @@ const testnetDetails = {
 export default function LoginMetaMask({ type }: IProps){
 
     const [selectedNetwork, setSelectedNetwork] = useState(mainnetDetails.chainName);
+    const [output, setOutput] = useState("");
 
 
 
@@ -119,6 +120,9 @@ export default function LoginMetaMask({ type }: IProps){
         </section>
 
         <Button type={'button'} onClick={() => login()}>Login to MetaMask</Button>
+        <section className="mt-2">
+            {output}
+        </section>
     </section>)
 
 }
