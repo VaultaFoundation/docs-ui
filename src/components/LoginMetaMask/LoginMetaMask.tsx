@@ -83,24 +83,17 @@ export default function LoginMetaMask({ type }: IProps){
                     return false;
                 });
 
-                //
-                // if(!await window.ethereum.request({
-                //     method: 'wallet_switchEthereumChain',
-                //     params: [{ chainId: selectedNetwork === mainnetDetails.chainName ? mainnetDetails.chainId : testnetDetails.chainId }]
-                // }).then(x => true).catch((error) => {
-                //     console.log('error',error);
-                //     setOutput(error.message || error);
-                //     return false;
-                // })) return;
 
-                if(!await window.ethereum.request({
-                    method: 'eth_requestAccounts',
-                }).then(x => true).catch((error) => {
-                    console.log('error',error);
-                    setOutput(error.message || error);
-                    return false;
-                })) return;
+
             }
+
+            if(!await window.ethereum.request({
+                method: 'eth_requestAccounts',
+            }).then(x => true).catch((error) => {
+                console.log('error',error);
+                setOutput(error.message || error);
+                return false;
+            })) return;
 
 
 
