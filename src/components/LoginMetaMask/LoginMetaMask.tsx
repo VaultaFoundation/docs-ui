@@ -35,6 +35,31 @@ export default function LoginMetaMask({ type }: IProps){
     const [selectedNetwork, setSelectedNetwork] = useState(mainnetDetails.chainName);
     const [output, setOutput] = useState("");
 
+    const [loggedInWith, setLoggedInWith] = useState("");
+
+
+    const checkAccounts = async () => {
+        const accounts = await ethereum.request({method: 'eth_accounts'});
+        const network = await ethereum.request({method: 'net_version'});
+        if(accounts.length) {
+            if(![mainnetDetails.numericalChainId, testnetDetails.numericalChainId].includes(parseInt(network))) {
+                setLoggedInWith("");
+                return;
+            }
+            setOutput(`Logged in with ${accounts[0]} on ${network === mainnetDetails.numericalChainId ? mainnetDetails.chainName : testnetDetails.chainName}`);
+            setLoggedInWith(accounts[0]);
+        } else {
+            setOutput(`Not logged in`);
+            setLoggedInWith("");
+        }
+    }
+
+    if(window.ethereum){
+        checkAccounts();
+        window.ethereum.on('accountsChanged', function () {
+            checkAccounts();
+        });
+    }
 
 
     async function login() {
@@ -102,6 +127,21 @@ export default function LoginMetaMask({ type }: IProps){
             setOutput(error.message || error);
         }
     }
+
+    if(loggedInWith) return (<section>
+        <section id="connect-metamask" className="mt-2">
+            <label className={"text-xs font-bold"}>Network</label>
+            <select className={styles.input} onChange={(e) => setSelectedNetwork(e.target.value)}>
+                <option value={mainnetDetails.chainName}>{mainnetDetails.chainName}</option>
+                <option value={testnetDetails.chainName}>{testnetDetails.chainName}</option>
+            </select>
+        </section>
+
+        <Button type={'button'} onClick={() => login()}>Login to MetaMask</Button>
+        <section className="mt-2">
+            {output}
+        </section>
+    </section>);
 
     return (<section>
         <section id="connect-metamask" className="mt-2">
