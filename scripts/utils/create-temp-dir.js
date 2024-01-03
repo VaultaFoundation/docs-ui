@@ -5,10 +5,19 @@ const createTmpDir = async () => {
     }
 }
 
-const removeTmpDir = async () => {
-    // Remove temp dir
-    if (fs.existsSync("tmp")) {
-        fs.rmSync("tmp", { recursive: true });
+const removeTmpDir = async (tries = 0) => {
+    try {
+        // Remove temp dir
+        if (fs.existsSync("tmp")) {
+            fs.rmSync("tmp", { recursive: true });
+        }
+    } catch (e) {
+        if (tries < 3) {
+            tries++;
+            await removeTmpDir(tries);
+        } else {
+            console.error(e);
+        }
     }
 }
 
