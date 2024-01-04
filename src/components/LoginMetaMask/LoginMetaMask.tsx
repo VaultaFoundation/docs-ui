@@ -65,60 +65,55 @@ export default function LoginMetaMask({ type }: IProps){
     async function login() {
 
         try {
-            // Check if MetaMask is installed
             if (!window.ethereum) {
                 alert('MetaMask is not installed');
                 return;
             }
 
-            // check if on the right network
             const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const signer = provider.getSigner();
             const network = await provider.getNetwork();
 
-            if(network.chainId !== (selectedNetwork === mainnetDetails.chainName ? mainnetDetails.numericalChainId : testnetDetails.numericalChainId)) {
-                if(!await window.ethereum.request({
-                    method: 'wallet_addEthereumChain',
-                    params: [{
-                        chainId: selectedNetwork === mainnetDetails.chainName ? mainnetDetails.chainId : testnetDetails.chainId,
-                        chainName:  selectedNetwork === mainnetDetails.chainName ? mainnetDetails.chainName : testnetDetails.chainName,
-                        nativeCurrency: {
-                            name: 'EOS',
-                            symbol: 'EOS',
-                            decimals: 18
-                        },
-                        rpcUrls: selectedNetwork === mainnetDetails.chainName ? mainnetDetails.rpcUrls : testnetDetails.rpcUrls,
-                        blockExplorerUrls: selectedNetwork === mainnetDetails.chainName ? mainnetDetails.blockExplorerUrls : testnetDetails.blockExplorerUrls
-                    }]
-                }).then(x => true).catch((error) => {
-                    console.log('error',error);
-                    setOutput(error.message || error);
-                    return false;
-                })) return;
+            if(!(await window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [{
+                    chainId: selectedNetwork === mainnetDetails.chainName ? mainnetDetails.chainId : testnetDetails.chainId,
+                    chainName:  selectedNetwork === mainnetDetails.chainName ? mainnetDetails.chainName : testnetDetails.chainName,
+                    nativeCurrency: {
+                        name: 'EOS',
+                        symbol: 'EOS',
+                        decimals: 18
+                    },
+                    rpcUrls: selectedNetwork === mainnetDetails.chainName ? mainnetDetails.rpcUrls : testnetDetails.rpcUrls,
+                    blockExplorerUrls: selectedNetwork === mainnetDetails.chainName ? mainnetDetails.blockExplorerUrls : testnetDetails.blockExplorerUrls
+                }]
+            }).then(x => true).catch((error) => {
+                console.log('error',error);
+                setOutput(error.message || error);
+                return false;
+            }))) return;
 
-                // log out all accounts
+            const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+            // log out all accounts if any are logged in
+            if(!accounts || accounts.length) {
                 await window.ethereum.request({
                     method: 'wallet_requestPermissions',
                     params: [{
                         eth_accounts: {}
                     }]
                 }).then(x => true).catch((error) => {
-                    console.log('error',error);
+                    console.log('error', error);
                     setOutput(error.message || error);
                     return false;
                 });
-
-
-
             }
 
-            if(!await window.ethereum.request({
+            if(!(await window.ethereum.request({
                 method: 'eth_requestAccounts',
             }).then(x => true).catch((error) => {
                 console.log('error',error);
                 setOutput(error.message || error);
                 return false;
-            })) return;
+            }))) return;
 
 
 
