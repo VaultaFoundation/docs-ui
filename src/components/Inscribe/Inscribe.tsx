@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import { ethers } from 'ethers';
 import styles from './styles.module.css';
 import {Button} from "@site/src/components/Shared/Button/Button";
@@ -115,40 +115,46 @@ export default function Inscribe({ type }: IProps){
     )
 
     if(type === TYPES.deploy) {
-        return (<section>
-            {inputElem("Token Symbol", "Symbol", tick, setTick)}
-            {inputElem("Maximum Supply", "420420", max, setMax)}
-            {inputElem("Mint Limit", "69", lim, setLim)}
+        return (<BrowserOnly>
+            {() => <section>
+                {inputElem("Token Symbol", "Symbol", tick, setTick)}
+                {inputElem("Maximum Supply", "420420", max, setMax)}
+                {inputElem("Mint Limit", "69", lim, setLim)}
 
-            {buttonElem("Send Deploy Inscription")}
+                {buttonElem("Send Deploy Inscription")}
 
-            {outputElem}
-            {hashElem}
-        </section>);
+                {outputElem}
+                {hashElem}
+            </section>}
+        </BrowserOnly>);
     }
 
     if(type === TYPES.mint) {
-        return (<section>
-            {inputElem("Token Symbol", "Symbol", tick, setTick)}
-            {inputElem("Amount to Mint", "420420", amt, setAmt)}
+        return (<BrowserOnly>
+            {() => <section>
+                {inputElem("Token Symbol", "Symbol", tick, setTick)}
+                {inputElem("Amount to Mint", "420420", amt, setAmt)}
 
-            {buttonElem("Send Mint Inscription")}
+                {buttonElem("Send Mint Inscription")}
 
-            {outputElem}
-            {hashElem}
-        </section>);
+                {outputElem}
+                {hashElem}
+            </section>}
+        </BrowserOnly>);
     }
 
     if(type === TYPES.transfer) {
-        return (<section>
-            {inputElem("Token Symbol", "Symbol", tick, setTick)}
-            {inputElem("Amount to Transfer", "420420", amt, setAmt)}
-            {inputElem("Recipient Address", "0x1234", to, setTo)}
+        return (<BrowserOnly>
+            {() => <section>
+                {inputElem("Token Symbol", "Symbol", tick, setTick)}
+                {inputElem("Amount to Transfer", "420420", amt, setAmt)}
+                {inputElem("Recipient Address", "0x1234", to, setTo)}
 
-            {buttonElem("Send Transfer Inscription")}
+                {buttonElem("Send Transfer Inscription")}
 
-            {outputElem}
-            {hashElem}
-        </section>);
+                {outputElem}
+                {hashElem}
+            </section>}
+        </BrowserOnly>);
     }
 }

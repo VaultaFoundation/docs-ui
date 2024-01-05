@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import { ethers } from 'ethers';
 import styles from './styles.module.css';
 import {Button} from "@site/src/components/Shared/Button/Button";
@@ -54,11 +54,16 @@ export default function LoginMetaMask({ type }: IProps){
         }
     }
 
-    if(window.ethereum){
-        checkAccounts();
-        window.ethereum.on('accountsChanged', function () {
+    let initialized = false;
+    const run = () => {
+        if(initialized) return;
+        initialized = true;
+        if(window.ethereum){
             checkAccounts();
-        });
+            window.ethereum.on('accountsChanged', function () {
+                checkAccounts();
+            });
+        }
     }
 
 
@@ -123,34 +128,38 @@ export default function LoginMetaMask({ type }: IProps){
         }
     }
 
-    if(loggedInWith) return (<section>
-        <section id="connect-metamask" className="mt-2">
-            <label className={"text-xs font-bold"}>Network</label>
-            <select className={styles.input} onChange={(e) => setSelectedNetwork(e.target.value)}>
-                <option value={mainnetDetails.chainName}>{mainnetDetails.chainName}</option>
-                <option value={testnetDetails.chainName}>{testnetDetails.chainName}</option>
-            </select>
-        </section>
+    if(loggedInWith) return (<BrowserOnly>
+        {() => <section>
+            <section id="connect-metamask" className="mt-2">
+                <label className={"text-xs font-bold"}>Network</label>
+                <select className={styles.input} onChange={(e) => setSelectedNetwork(e.target.value)}>
+                    <option value={mainnetDetails.chainName}>{mainnetDetails.chainName}</option>
+                    <option value={testnetDetails.chainName}>{testnetDetails.chainName}</option>
+                </select>
+            </section>
 
-        <Button type={'button'} onClick={() => login()}>Login to MetaMask</Button>
-        <section className="mt-2">
-            {output}
-        </section>
-    </section>);
+            <Button type={'button'} onClick={() => login()}>Login to MetaMask</Button>
+            <section className="mt-2">
+                {output}
+            </section>
+        </section>}
+    </BrowserOnly>);
 
-    return (<section>
-        <section id="connect-metamask" className="mt-2">
-            <label className={"text-xs font-bold"}>Network</label>
-            <select className={styles.input} onChange={(e) => setSelectedNetwork(e.target.value)}>
-                <option value={mainnetDetails.chainName}>{mainnetDetails.chainName}</option>
-                <option value={testnetDetails.chainName}>{testnetDetails.chainName}</option>
-            </select>
-        </section>
+    return (<BrowserOnly>
+        {() => <section>
+            <section run={run()} id="connect-metamask" className="mt-2">
+                <label className={"text-xs font-bold"}>Network</label>
+                <select className={styles.input} onChange={(e) => setSelectedNetwork(e.target.value)}>
+                    <option value={mainnetDetails.chainName}>{mainnetDetails.chainName}</option>
+                    <option value={testnetDetails.chainName}>{testnetDetails.chainName}</option>
+                </select>
+            </section>
 
-        <Button type={'button'} onClick={() => login()}>Login to MetaMask</Button>
-        <section className="mt-2">
-            {output}
-        </section>
-    </section>)
+            <Button type={'button'} onClick={() => login()}>Login to MetaMask</Button>
+            <section className="mt-2">
+                {output}
+            </section>
+        </section>}
+    </BrowserOnly>)
 
 }
