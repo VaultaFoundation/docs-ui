@@ -579,6 +579,11 @@
       "hash": "afe39fad6fb0aff86bf9ce3540a2ff87",
       "timestamp": 1692724195077,
       "manually_translated": false
+    },
+    "evm/23_advanced-guides/30_inscriptions.md": {
+      "hash": "93605e077e780c7ee4634cfeaef3feef",
+      "timestamp": 1704461634141,
+      "manually_translated": false
     }
   },
   "ko": {
@@ -1160,6 +1165,11 @@
     "docs/04_web-applications/02_javascript-sdk.md": {
       "hash": "afe39fad6fb0aff86bf9ce3540a2ff87",
       "timestamp": 1692724199777,
+      "manually_translated": false
+    },
+    "evm/23_advanced-guides/30_inscriptions.md": {
+      "hash": "93605e077e780c7ee4634cfeaef3feef",
+      "timestamp": 1704461656954,
       "manually_translated": false
     }
   }
