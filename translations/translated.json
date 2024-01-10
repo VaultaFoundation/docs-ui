@@ -584,6 +584,11 @@
       "hash": "93605e077e780c7ee4634cfeaef3feef",
       "timestamp": 1704461634141,
       "manually_translated": false
+    },
+    "docs/07_node-operation/100_migration-guides/03_upgrade-guide-5-0.md": {
+      "hash": "9ed752974d8fa0be23ac279d67b711ed",
+      "timestamp": 1704897172670,
+      "manually_translated": false
     }
   },
   "ko": {
@@ -1170,6 +1175,11 @@
     "evm/23_advanced-guides/30_inscriptions.md": {
       "hash": "93605e077e780c7ee4634cfeaef3feef",
       "timestamp": 1704461656954,
+      "manually_translated": false
+    },
+    "docs/07_node-operation/100_migration-guides/03_upgrade-guide-5-0.md": {
+      "hash": "9ed752974d8fa0be23ac279d67b711ed",
+      "timestamp": 1704897199696,
       "manually_translated": false
     }
   }
