@@ -17,20 +17,8 @@ const downloadManuals = async () => {
             versions: ['v4.0.0'],
         },
         {
-            repo: 'antelopeio/dune',
-            versions: ['v1.1.1'],
-        },
-        {
             repo: 'eosnetworkfoundation/eos-system-contracts',
             versions: ['v3.1.1'],
-        },
-        {
-            repo: 'eosnetworkfoundation/mandel-eosjs',
-            versions: ['main'],
-        },
-        {
-            repo: 'eosnetworkfoundation/mandel-swift',
-            versions: ['master']
         }
     ]
 
