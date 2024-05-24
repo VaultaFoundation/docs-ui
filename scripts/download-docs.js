@@ -4,7 +4,7 @@ const { createTmpDir, removeTmpDir } = require("./utils/create-temp-dir");
 const { downloadZip, unzip } = require("./utils/download-repo-as-zip");
 
 const fs = require("fs-extra");
-const yauzl = require('yauzl');
+const yauzl = require('yauzl-promise');
 const path = require('path');
 
 const zipPath = "./tmp/docs.zip";
