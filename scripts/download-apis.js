@@ -26,8 +26,8 @@ const downloadApis = async () => {
             repo:'antelopeIO/spring',
             versions: [{
                 latest:true,
-                version: 'docs-v1.0-beta1',
-                branch:'release/1.0-beta1'
+                version: 'docs-v1.0-beta2',
+                branch:'release/1.0-beta2'
             }]
         }]
     ];
