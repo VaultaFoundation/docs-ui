@@ -188,7 +188,6 @@ html {
 
 .navbar__logo img {
   height: 40px;
-  width:40px;
   margin-top:-3px;
 }
 
@@ -196,7 +195,6 @@ html {
 
   .navbar__logo img {
     height: 30px;
-    width:30px;
     margin-top:3px;
   }
 }
