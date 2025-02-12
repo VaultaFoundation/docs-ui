@@ -12,9 +12,8 @@ const generateMd = async () => {
     }
 
     const manualOrder = [
-        'leap',
+        'spring',
         'cdt',
-        'dune',
         'eos-system-contracts'
     ]
 

@@ -9,25 +9,14 @@ const downloadApis = async () => {
 
     const projects = [
         [{
-            repo:'antelopeIO/leap',
-            versions: [{
-                latest:true,
-                version: 'v5.0.2',
-                branch:'release/5.0'
-            },{
-                version:'v4.0.6',
-                branch:'release/4.0'
-            },{
-                version:'v3.2.6',
-                branch:'release/3.2'
-            }]
-        }],
-        [{
             repo:'antelopeIO/spring',
             versions: [{
-                latest:true,
-                version: 'v1.0.0',
+                version: 'v1.0.4',
                 branch:'release/1.0'
+            },{
+                latest:true,
+                version: 'v1.1.0',
+                branch:'release/1.1'
             }]
         }]
     ];
