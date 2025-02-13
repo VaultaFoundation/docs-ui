@@ -10,7 +10,7 @@ const downloadManuals = async () => {
     const repos = [
         {
             repo: 'antelopeio/spring',
-            versions: ['v1.0.4','v1.1.0'],
+            versions: ['v1.0.4'],
         },
         {
             repo: 'antelopeio/cdt',
@@ -18,7 +18,7 @@ const downloadManuals = async () => {
         },
         {
             repo: 'eosnetworkfoundation/eos-system-contracts',
-            versions: ['v3.7.0'],
+            versions: ['v3.6.1'],
         }
     ]
 
