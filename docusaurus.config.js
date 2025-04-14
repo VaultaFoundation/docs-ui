@@ -230,7 +230,7 @@ const config = {
             {
               docId: 'native',
               position: 'left',
-              label: 'Native',
+              label: 'Build',
               to: '/docs/latest/quick-start/introduction',
             },
             {
@@ -239,17 +239,17 @@ const config = {
               label: 'EVM',
               to: '/evm/quick-start/introduction',
             },
-            {
-              docId: 'courses',
-              position: 'left',
-              label: 'Videos',
-              to: 'https://learn.eosnetwork.com/',
-            },
+            // {
+            //   docId: 'courses',
+            //   position: 'left',
+            //   label: 'Videos',
+            //   to: 'https://learn.eosnetwork.com/',
+            // },
             {
               docId: 'eosnetwork',
               position: 'left',
-              label: 'What is EOS?',
-              to: 'https://eosnetwork.com/',
+              label: 'Vaulta?',
+              to: 'https://vaulta.com/',
             },
             {
               type: 'localeDropdown',

@@ -15,16 +15,23 @@ export const WideCard = () => {
         <div className={styles.wideCard}>
 
             <section className={"content-container"}>
-                <section className="hero-title"><Translate>EOS EVM</Translate></section>
-                <section className={"hero-subtitle"}><Translate>New opportunities for Solidity developers</Translate></section>
-                <P_Medium><Translate>
-                    Introducing a brand new home for your decentralized applications.
-                </Translate></P_Medium>
-                <br />
-                <br />
-                <LinkButton href={useBaseUrl("/evm/smart-contracts/migrate-your-smart-contract")}>
-                    <Translate>HOW TO MIGRATE?</Translate>
-                </LinkButton>
+                    <section className="hero-title">
+                        <img width="400px" src={useBaseUrl('icons/emerald-icon.svg')} />
+                    </section>
+                    {/*<section className="hero-title"><Translate>Vaulta</Translate></section>*/}
+                <section className={"hero-subtitle"}><Translate>
+                    VAULTA Blockchain documentation
+                </Translate></section>
+                <section style={{ maxWidth: "500px" }}>
+                    <P_Medium><Translate>
+                        Join the banking revolution and leave your mark on the world of finance.
+                    </Translate></P_Medium>
+                </section>
+                {/*<br />*/}
+                {/*<br />*/}
+                {/*<LinkButton href={useBaseUrl("/evm/smart-contracts/migrate-your-smart-contract")}>*/}
+                {/*    <Translate>HOW TO MIGRATE?</Translate>*/}
+                {/*</LinkButton>*/}
             </section>
         </div>
     );

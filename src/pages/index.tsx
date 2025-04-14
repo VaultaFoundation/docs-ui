@@ -22,12 +22,16 @@ export default function Home(): JSX.Element {
 
                     <CardWrapper>
                         <Card icon="icons/emerald-icon.svg" link={useBaseUrl("/docs/latest/quick-start/write-a-contract")}>
-                            <figure className="card-title"><Translate>Write your first EOS Native Smart Contract</Translate></figure>
-                            <figure className="card-p"><Translate>Get building native smart contracts on the EOS Network in minutes</Translate></figure>
+                            <figure className="card-title"><Translate>Write your first Vaulta Smart Contract</Translate></figure>
+                            <figure className="card-p"><Translate>Learn how to write Vaulta's NativeVM contracts in minutes</Translate></figure>
                         </Card>
                         <Card icon="icons/ethereum-logo.svg" link={useBaseUrl("/evm/smart-contracts/develop-with-remix")}>
-                            <figure className="card-title"><Translate>Write your first EOS EVM Smart Contract</Translate></figure>
-                            <figure className="card-p"><Translate>Take advantage of the raw power of the EOS Network using EVM smart contracts</Translate></figure>
+                            <figure className="card-title"><Translate>
+                                Vaulta's EVM
+                            </Translate></figure>
+                            <figure className="card-p"><Translate>
+                                Write Solidity contracts and deploy them on Vaulta's EVM to leverage the Ethereum ecosystem.
+                            </Translate></figure>
                         </Card>
                     </CardWrapper>
 
@@ -44,15 +48,15 @@ export default function Home(): JSX.Element {
                         </Card>
                         <Card icon="icons/ref-icon.svg" link={useBaseUrl("/docs/latest/miscellaneous/apis-and-manuals")}>
                             <figure className="card-title"><Translate>Reference</Translate></figure>
-                            <figure className="card-p"><Translate>Consult the API references explore the EOS RPC</Translate></figure>
+                            <figure className="card-p"><Translate>Consult the API references explore the Vaulta RPC</Translate></figure>
                         </Card>
-                        <Card icon="icons/ethereum-logo.svg" link={useBaseUrl("/evm/quick-start/introduction")}>
-                            <figure className="card-title"><Translate>EOS EVM</Translate></figure>
-                            <figure className="card-p"><Translate>Take advantage of the world's fastest EVM</Translate></figure>
+                        <Card icon="icons/ethereum-logo.svg" link={useBaseUrl("/docs/latest/core-concepts/accounts")}>
+                            <figure className="card-title"><Translate>Vaulta Basics</Translate></figure>
+                            <figure className="card-p"><Translate>Learn about accounts and resources on Vaulta</Translate></figure>
                         </Card>
                     </CardWrapper>
 
-                    <IntakeForm />
+                    {/*<IntakeForm />*/}
                 </section>
             </section>
         </Layout>
