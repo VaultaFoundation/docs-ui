@@ -25,7 +25,7 @@ const cloneRepoIntoTempDirectory = async (branch) => {
 
     console.log(`Cloning docs@${branch} into ${tempPath}`);
     const cloned = await new Promise((resolve, reject) => {
-        exec(`git clone https://github.com/eosnetworkfoundation/docs.git .`, { cwd:tempPath }, (error, stdout, stderr) => {
+        exec(`git clone https://github.com/vaultafoundation/docs.git .`, { cwd:tempPath }, (error, stdout, stderr) => {
             if (error) {
                 console.error(error);
                 reject(error);

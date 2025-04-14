@@ -27,14 +27,14 @@ const downloadDocs = async (branch) => {
     try { fs.rmSync("docs", { recursive: true }); } catch (e) { }
     fs.mkdirSync("docs");
 
-    console.log(`Preparing docs: eosnetworkfoundation/docs (${branch})`);
+    console.log(`Preparing docs: vaultafoundation/docs (${branch})`);
 
-    await downloadZip("eosnetworkfoundation/docs", zipPath, branch);
+    await downloadZip("vaultafoundation/docs", zipPath, branch);
     await unzip(zipPath, unzipDir);
 
     // find "docs" subdir
     const files = fs.readdirSync(unzipDir);
-    const docsDir = files.find(f => f.startsWith("eosnetworkfoundation-docs-"));
+    const docsDir = files.find(f => f.startsWith("vaultafoundation-docs-"));
     processDocs(docsDir, "native", "docs");
     processDocs(docsDir, "evm", "evm");
     processDocs(docsDir, "images", "static/images");
