@@ -27,7 +27,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'zh', 'ko'],
+    locales: ['en'], // , 'zh', 'ko'
     path: 'i18n',
     localeConfigs: {
       en: {
@@ -129,16 +129,16 @@ const config = {
         // ... other options
       },
     ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'manuals',
-        path: 'manuals',
-        routeBasePath: 'manuals',
-        sidebarPath: require.resolve('./src/generic-sidebars.js'),
-        // ... other options
-      },
-    ],
+    // [
+    //   '@docusaurus/plugin-content-docs',
+    //   {
+    //     id: 'manuals',
+    //     path: 'manuals',
+    //     routeBasePath: 'manuals',
+    //     sidebarPath: require.resolve('./src/generic-sidebars.js'),
+    //     // ... other options
+    //   },
+    // ],
     [
       '@docusaurus/plugin-client-redirects',
       {

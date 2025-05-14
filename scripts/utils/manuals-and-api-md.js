@@ -46,14 +46,7 @@ ${apiVersions.map(api => {
     }).join('\n')
 }).join('\n')}
 
-## Manuals 
 
-${manualVersions.map(manual => {
-    const capitalizedTitle = manual.manual.charAt(0).toUpperCase() + manual.manual.slice(1);
-    return manual.versions.map(version => {
-        return `- [${capitalizedTitle} (${version})](/manuals/${manual.manual}/${version}/)`
-    }).join('\n')
-}).join('\n')}
 
 
 `;
