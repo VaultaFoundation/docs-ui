@@ -203,7 +203,7 @@ const config = {
       },
     },
     featureFlags: {
-      lang: true,
+      lang: false,
     }
   },
 
