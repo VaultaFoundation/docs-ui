@@ -17,7 +17,7 @@ const downloadManuals = async () => {
             versions: ['v4.1.0'],
         },
         {
-            repo: 'eosnetworkfoundation/eos-system-contracts',
+            repo: 'vaultafoundation/eos-system-contracts',
             versions: ['v3.6.1'],
         }
     ]

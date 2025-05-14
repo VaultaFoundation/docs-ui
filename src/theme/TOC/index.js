@@ -86,10 +86,10 @@ export default function TOC({className, ...props}) {
   const suggestBody = encodeURIComponent(`
   <ENTER DESCRIPTION HERE>
 
-  File: [${doc.metadata.title}](https://github.com/eosnetworkfoundation/docs/tree/main${sourceFile})
+  File: [${doc.metadata.title}](https://github.com/vaultafoundation/docs/tree/main${sourceFile})
 `);
 
-  const suggestEditsLink = `https://github.com/eosnetworkfoundation/docs/edit/main${doc.metadata.source.replace('@site','').replace('docs/', 'native/')}`;
+  const suggestEditsLink = `https://github.com/vaultafoundation/docs/edit/main${doc.metadata.source.replace('@site','').replace('docs/', 'native/')}`;
 
   const { contributors } = doc.frontMatter;
 
@@ -132,7 +132,7 @@ export default function TOC({className, ...props}) {
         <a className={styles.link} href={suggestEditsLink} target="_blank">
           <FontAwesomeIcon icon={faBug} />&nbsp; <Translate>Suggest Edits</Translate>
         </a>
-        <a className={styles.link} href={`https://github.com/eosnetworkfoundation/docs/issues/new?body=${suggestBody}&title=${suggestTitle}`} target="_blank">
+        <a className={styles.link} href={`https://github.com/vaultafoundation/docs/issues/new?body=${suggestBody}&title=${suggestTitle}`} target="_blank">
           <FontAwesomeIcon icon={faCodePullRequest} />&nbsp; <Translate>Request Changes</Translate>
         </a>
       </div>}
