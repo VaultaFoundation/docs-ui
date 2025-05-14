@@ -2,7 +2,7 @@
 title: Leap 5.0 升级指南
 ---
 
-要查看 5.0 版本说明，请单击 [这里](https://github.com/AntelopeIO/leap/releases/tag/v5.0.0-rc2)。
+要查看 5.0 版本说明，请单击 [这里](https://github.com/AntelopeIO/spring/releases/tag/v5.0.0-rc2)。
 
 ## 弃用和移除
 
@@ -17,7 +17,7 @@ title: Leap 5.0 升级指南
 
 以下是在 ubuntu 上从快照重启的示例步骤：
 -下载最新版本
- -前往 [Leap 发布](https://github.com/AntelopeIO/leap/releases) 下载最新版本
+ -前往 [Leap 发布](https://github.com/AntelopeIO/spring/releases) 下载最新版本
 -创建新快照
  - `curl -X POST http://127.0.0.1:8888/v1/producer/create_snapshot`
       等待 curl 返回一个包含新创建的快照文件文件名的 JSON 响应。

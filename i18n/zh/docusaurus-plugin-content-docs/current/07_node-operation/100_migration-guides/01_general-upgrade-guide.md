@@ -24,9 +24,9 @@ title: 通用升级指南
 
 ### 1。下载/生成二进制文件
 
-如果您想从源代码构建和安装，可以按照中的说明进行操作 [自述文件](https://github.com/AntelopeIO/leap#build-and-install-from-source)。
+如果您想从源代码构建和安装，可以按照中的说明进行操作 [自述文件](https://github.com/AntelopeIO/spring#build-and-install-from-source)。
 
-如果你想使用二进制文件，可以从中下载它们 [发布页面](https://github.com/AntelopeIO/leap/releases)。
+如果你想使用二进制文件，可以从中下载它们 [发布页面](https://github.com/AntelopeIO/spring/releases)。
 
 ### 2。拍张快照
 

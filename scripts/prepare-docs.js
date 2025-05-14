@@ -17,6 +17,8 @@ const skipManuals = args.find(arg => arg === '--skip-manuals');
 const docsBranch = args.find(arg => arg.startsWith('--docs-branch='));
 const docsBranchName = docsBranch ? docsBranch.split('=')[1] : 'main'; // new-docs
 
+console.log('Doc branch:', docsBranchName);
+
 
 const prepareDocs = async() => {
     const startTime = Date.now();

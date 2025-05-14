@@ -42,6 +42,7 @@ const unzip = async (zipPath, unzipDir) => {
     } catch (err) {
         throw new Error(`Error processing entry: ${err.message}`);
     } finally {
+        console.log('Done unzipping');
         await zipFile.close();
     }
 }

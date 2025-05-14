@@ -43,7 +43,7 @@ API 노드의 실제 하드웨어 요구 사항은 트랜잭션 처리량, 클�
 
 ## 소프트웨어 요구 사항
 
-API 노드를 설정하려면 먼저 앤텔로프를 설치해야 합니다. [도약](https://github.com/AntelopeIO/leap) 소프트웨어.설치할 Leap 버전은 노드를 EOS 테스트넷에 배포할지 EOS 메인넷에 배포할지에 따라 다릅니다.
+API 노드를 설정하려면 먼저 앤텔로프를 설치해야 합니다. [도약](https://github.com/AntelopeIO/spring) 소프트웨어.설치할 Leap 버전은 노드를 EOS 테스트넷에 배포할지 EOS 메인넷에 배포할지에 따라 다릅니다.
 
 > ℹ️ **메인넷의 Leap 소프트웨어 vs. 테스트넷**  
 > EOS 테스트넷은 일반적으로 최신 Leap 버전을 실행하며, 일반적으로 출시 직후의 최신 버전을 실행합니다.EOS 메인넷은 안정성과 보안을 위해 일반적으로 이전의 안정 릴리스 버전의 Leap 소프트웨어를 사용합니다.
@@ -60,7 +60,7 @@ API 노드를 설정하려면 먼저 앤텔로프를 설치해야 합니다. [�
 
 API 노드의 경우 배포하려는 EOS 네트워크에서 대부분의 다른 API 노드가 사용하는 것과 동일한 Leap 버전을 사용하는 것이 좋습니다.여기에서 특정 버전의 Leap 바이너리를 선택할 수 있습니다.
 
-* https://github.com/AntelopeIO/leap/tags
+* https://github.com/AntelopeIO/spring/tags
 
 Leap 소프트웨어를 설치한 후 아래 구성 섹션으로 진행하십시오.
 

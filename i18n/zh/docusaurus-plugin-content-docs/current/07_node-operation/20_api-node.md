@@ -43,7 +43,7 @@ API 节点的实际硬件要求因交易吞吐量、客户端请求、可用带�
 
 ## 软件要求
 
-要设置 API 节点，请先安装 Antelope [跳跃](https://github.com/AntelopeIO/leap) 软件。要安装的 Leap 版本取决于您将节点部署在 EOS 测试网还是 EOS 主网上。
+要设置 API 节点，请先安装 Antelope [跳跃](https://github.com/AntelopeIO/spring) 软件。要安装的 Leap 版本取决于您将节点部署在 EOS 测试网还是 EOS 主网上。
 
 > ℹ️ **主网上的 Leap 软件与测试网的对比**  
 > EOS测试网通常运行最新的Leap版本，通常是发布后不久的最新版本。为了稳定性和安全性，EOS主网通常会使用Leap软件的先前稳定发行版本。
@@ -60,7 +60,7 @@ API 节点的实际硬件要求因交易吞吐量、客户端请求、可用带�
 
 对于您的 API 节点，您可能需要使用大多数其他 API 节点在要部署的 EOS 网络上使用的相同 Leap 版本。您可以在此处为特定版本选择 Leap 二进制文件：
 
-* https://github.com/AntelopeIO/leap/tags
+* https://github.com/AntelopeIO/spring/tags
 
 安装 Leap 软件后，进入下面的配置部分。
 

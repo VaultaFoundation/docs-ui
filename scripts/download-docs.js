@@ -34,7 +34,7 @@ const downloadDocs = async (branch) => {
 
     // find "docs" subdir
     const files = fs.readdirSync(unzipDir);
-    const docsDir = files.find(f => f.startsWith("vaultafoundation-docs-"));
+    const docsDir = files.find(f => f.startsWith("VaultaFoundation-docs-"));
     processDocs(docsDir, "native", "docs");
     processDocs(docsDir, "evm", "evm");
     processDocs(docsDir, "images", "static/images");

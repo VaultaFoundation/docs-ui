@@ -36,12 +36,12 @@ RAM에 저장해야 합니다.여기에는 계정 잔고, 계약 코드 및 계�
 
 <br/>
 
-* [멀티 인덱스 RAM 바이트 오버헤드](https://github.com/AntelopeIO/leap/blob/f6643e434e8dc304bba742422dd036a6fbc1f039/libraries/chain/include/eosio/chain/contract_table_objects.hpp#L240)
-* [인덱스 RAM 바이트당 행당 오버헤드](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L109)
-* [고정 오버헤드 공유 벡터 RAM 바이트](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L108)
-* [계정당 오버헤드 RAM 바이트](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L110)
-* [세트 코드 RAM 바이트 멀티플라이어](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L111)
-* [RAM 사용량 업데이트 기능](https://github.com/AntelopeIO/leap/blob/9f0679bd0a42d6c24a966bb79de6d8c0591872a5/libraries/chain/apply_context.cpp#L725)
+* [멀티 인덱스 RAM 바이트 오버헤드](https://github.com/AntelopeIO/spring/blob/f6643e434e8dc304bba742422dd036a6fbc1f039/libraries/chain/include/eosio/chain/contract_table_objects.hpp#L240)
+* [인덱스 RAM 바이트당 행당 오버헤드](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L109)
+* [고정 오버헤드 공유 벡터 RAM 바이트](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L108)
+* [계정당 오버헤드 RAM 바이트](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L110)
+* [세트 코드 RAM 바이트 멀티플라이어](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L111)
+* [RAM 사용량 업데이트 기능](https://github.com/AntelopeIO/spring/blob/9f0679bd0a42d6c24a966bb79de6d8c0591872a5/libraries/chain/apply_context.cpp#L725)
 
 </details>
 
@@ -71,10 +71,10 @@ CPU는 블록체인 계정에 처리 능력을 제공하는 시스템 리소스�
 
 트랜잭션을 실행하는 계정의 경우 블록체인은 각 트랜잭션이 실행되기 전에 각 블록의 나머지 리소스를 계산하고 업데이트합니다.트랜잭션이 실행될 준비가 되면 블록체인은 지불자 계정에 트랜잭션 실행을 감당할 수 있는 충분한 CPU가 있는지 여부를 결정합니다.현재 블록을 적극적으로 구축하는 노드는 필요한 CPU를 계산하기 위해 트랜잭션 실행 시간을 측정합니다.계정에 충분한 CPU가 있으면 트랜잭션이 실행되고, 그렇지 않으면 트랜잭션이 거부됩니다.기술 세부 정보는 다음 링크를 참조하십시오.
 
-* [CPU 구성 변수입니다.](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L66)
-* [트랜잭션 초기화](https://github.com/AntelopeIO/leap/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1559)
-* [트랜잭션 CPU 빌링](https://github.com/AntelopeIO/leap/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1577)
-* [트랜잭션의 CPU 사용량 확인](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/transaction_context.cpp#L381)
+* [CPU 구성 변수입니다.](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L66)
+* [트랜잭션 초기화](https://github.com/AntelopeIO/spring/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1559)
+* [트랜잭션 CPU 빌링](https://github.com/AntelopeIO/spring/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1577)
+* [트랜잭션의 CPU 사용량 확인](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/transaction_context.cpp#L381)
 
 </details>
 
@@ -93,10 +93,10 @@ NET은 트랜잭션에서 사용하는 네트워크 대역폭을 기반으로 �
 
 <br/>
 
-* [NET 구성 변수는 다음과 같습니다.](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L57)
-* [트랜잭션 초기화](https://github.com/AntelopeIO/leap/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1559)
-* [트랜젝션 넷 빌링](https://github.com/AntelopeIO/leap/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1577)
-* [트랜잭션의 NET 사용량 확인](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/transaction_context.cpp#L376)
+* [NET 구성 변수는 다음과 같습니다.](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L57)
+* [트랜잭션 초기화](https://github.com/AntelopeIO/spring/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1559)
+* [트랜젝션 넷 빌링](https://github.com/AntelopeIO/spring/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1577)
+* [트랜잭션의 NET 사용량 확인](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/transaction_context.cpp#L376)
 
 </details>
 

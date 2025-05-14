@@ -2,7 +2,7 @@
 title: 리프 5.0 업그레이드 가이드
 ---
 
-5.0 릴리스 노트를 보려면 클릭하십시오. [이리](https://github.com/AntelopeIO/leap/releases/tag/v5.0.0-rc2).
+5.0 릴리스 노트를 보려면 클릭하십시오. [이리](https://github.com/AntelopeIO/spring/releases/tag/v5.0.0-rc2).
 
 ## 지원 중단 및 삭제
 
@@ -17,7 +17,7 @@ Leap v5.0.0부터 `v1/chain/get_block_header_state` 더 이상 사용되지 않�
 
 다음은 우분투의 스냅샷에서 다시 시작하는 예제 단계입니다.
 - 최신 릴리즈 다운로드
- - Head to a [리프 릴리즈](https://github.com/AntelopeIO/leap/releases) 최신 버전을 다운로드하려면
+ - Head to a [리프 릴리즈](https://github.com/AntelopeIO/spring/releases) 최신 버전을 다운로드하려면
 - 새 스냅샷 생성
  - `curl -X POST http://127.0.0.1:8888/v1/producer/create_snapshot`
       curl이 새로 생성된 스냅샷 파일의 파일 이름을 포함하는 JSON 응답과 함께 반환될 때까지 기다리십시오.

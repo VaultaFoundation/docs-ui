@@ -24,9 +24,9 @@ title: 일반 업그레이드 가이드
 
 ### 1.바이너리 다운로드/빌드
 
-소스에서 빌드하고 설치하려는 경우, 의 지침을 따를 수 있습니다. [읽어보기](https://github.com/AntelopeIO/leap#build-and-install-from-source).
+소스에서 빌드하고 설치하려는 경우, 의 지침을 따를 수 있습니다. [읽어보기](https://github.com/AntelopeIO/spring#build-and-install-from-source).
 
-바이너리를 사용하려면 에서 다운로드할 수 있습니다. [릴리스 페이지](https://github.com/AntelopeIO/leap/releases).
+바이너리를 사용하려면 에서 다운로드할 수 있습니다. [릴리스 페이지](https://github.com/AntelopeIO/spring/releases).
 
 ### 2.스냅샷 만들기
 

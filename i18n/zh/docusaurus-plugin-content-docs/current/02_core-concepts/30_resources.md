@@ -36,12 +36,12 @@ RAM 就像在计算机中一样，是一种有限的资源。它是一个快速�
 
 <br/>
 
-* [多索引 RAM 字节开销](https://github.com/AntelopeIO/leap/blob/f6643e434e8dc304bba742422dd036a6fbc1f039/libraries/chain/include/eosio/chain/contract_table_objects.hpp#L240)
-* [每个索引 RAM 字节每行的开销](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L109)
-* [修复了共享矢量 RAM 字节的开销](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L108)
-* [每个账户 RAM 字节的开销](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L110)
-* [设置代码 RAM 字节乘数](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L111)
-* [RAM 使用情况更新功能](https://github.com/AntelopeIO/leap/blob/9f0679bd0a42d6c24a966bb79de6d8c0591872a5/libraries/chain/apply_context.cpp#L725)
+* [多索引 RAM 字节开销](https://github.com/AntelopeIO/spring/blob/f6643e434e8dc304bba742422dd036a6fbc1f039/libraries/chain/include/eosio/chain/contract_table_objects.hpp#L240)
+* [每个索引 RAM 字节每行的开销](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L109)
+* [修复了共享矢量 RAM 字节的开销](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L108)
+* [每个账户 RAM 字节的开销](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L110)
+* [设置代码 RAM 字节乘数](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L111)
+* [RAM 使用情况更新功能](https://github.com/AntelopeIO/spring/blob/9f0679bd0a42d6c24a966bb79de6d8c0591872a5/libraries/chain/apply_context.cpp#L725)
 
 </details>
 
@@ -71,10 +71,10 @@ CPU 是一种为区块链账户提供处理能力的系统资源。当交易在�
 
 对于执行交易的账户，区块链会在执行每笔交易之前计算并更新每个区块的剩余资源。当交易准备好执行时，区块链会决定付款人账户是否有足够的CPU来完成交易的执行。为了计算必要的 CPU，主动构建当前区块的节点会测量执行事务的时间。如果账户有足够的 CPU，则会执行交易；否则交易将被拒绝。有关技术详情，请参阅以下链接：
 
-* [CPU 配置变量](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L66)
-* [交易初始化](https://github.com/AntelopeIO/leap/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1559)
-* [交易 CPU 计费](https://github.com/AntelopeIO/leap/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1577)
-* [检查交易的 CPU 使用情况](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/transaction_context.cpp#L381)
+* [CPU 配置变量](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L66)
+* [交易初始化](https://github.com/AntelopeIO/spring/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1559)
+* [交易 CPU 计费](https://github.com/AntelopeIO/spring/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1577)
+* [检查交易的 CPU 使用情况](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/transaction_context.cpp#L381)
 
 </details>
 
@@ -93,10 +93,10 @@ NET 是一种根据交易使用的网络带宽消耗的资源。
 
 <br/>
 
-* [NET 配置变量](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L57)
-* [交易初始化](https://github.com/AntelopeIO/leap/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1559)
-* [交易净账单](https://github.com/AntelopeIO/leap/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1577)
-* [检查交易的净使用情况](https://github.com/AntelopeIO/leap/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/transaction_context.cpp#L376)
+* [NET 配置变量](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/include/eosio/chain/config.hpp#L57)
+* [交易初始化](https://github.com/AntelopeIO/spring/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1559)
+* [交易净账单](https://github.com/AntelopeIO/spring/blob/e55669c42dfe4ac112e3072186f3a449936c0c61/libraries/chain/controller.cpp#L1577)
+* [检查交易的净使用情况](https://github.com/AntelopeIO/spring/blob/a4c29608472dd195d36d732052784aadc3a779cb/libraries/chain/transaction_context.cpp#L376)
 
 </details>
 
