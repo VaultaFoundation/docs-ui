@@ -41,7 +41,7 @@ dune --start <NODE_NAME>
 >
 > 노드 설정 프로세스가 끝날 때 오류가 표시될 수 있습니다.
 > 그럴 경우 이 가이드를 참조하여 일반적인 오류를 해결하거나 당사로 문의할 수 있습니다.
-> [텔레그램 채널](https://t.me/antelopedevs) 도움을 청해.
+> [텔레그램 채널](https://t.me/vaultadevelopers) 도움을 청해.
 
 시스템에서 EOS 노드 목록을 볼 수 있습니다.
 

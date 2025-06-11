@@ -26,7 +26,7 @@ export const JoinCommunity = () => {
           {/*<a href="https://discord.gg/XjVqej4uT5" target="_blank" rel="noopener noreferrer">*/}
           {/*  <img className={styles.icons} src={useBaseUrl("/icons/discord-icon.svg")} alt="Discord" />*/}
           {/*</a>*/}
-          <a href="https://t.me/antelopedevs" target="_blank" rel="noopener noreferrer">
+          <a href="https://t.me/vaultadevelopers" target="_blank" rel="noopener noreferrer">
             <img className={styles.icons} src={useBaseUrl("/icons/telegram-icon.svg")} alt="Discord" />
           </a>
         </section>

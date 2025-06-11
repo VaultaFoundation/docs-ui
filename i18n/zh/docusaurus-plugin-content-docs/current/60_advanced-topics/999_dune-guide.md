@@ -41,7 +41,7 @@ dune --start <NODE_NAME>
 >
 > 在节点设置过程结束时，您可能会看到错误。
 > 如果你这样做，你可以参考本指南来解决常见错误，或者通过我们的
-> [电报频道](https://t.me/antelopedevs) 寻求帮助。
+> [电报频道](https://t.me/vaultadevelopers) 寻求帮助。
 
 你可以看到系统上的 EOS 节点列表：
 
