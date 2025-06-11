@@ -8,7 +8,7 @@ const redocusaurusSpecs = require('./redocusaurus.specs.js');
 // @ts-ignore
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'EOS Developer Documentation',
+  title: 'Vaulta Developer Documentation',
   tagline: 'Documentation for Developing on EOS Blockchain',
   url: 'https://docs.eosnetwork.com/',
   baseUrl: '/',
